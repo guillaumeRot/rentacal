@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Header = async () => {
   return (
-    <header className="w-full border-b border-border">
+    <header className="w-full border-b border-border bg-popover">
       <Layout>
         <div className="mx-auto">
           <Link href="/">
