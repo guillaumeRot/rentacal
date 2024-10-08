@@ -9,3 +9,7 @@ export const LayoutTitle = twx.h1((props) => [`text-4xl font-bold`]);
 export const LayoutDescription = twx.p((props) => [
   `text-lg text-muted-foreground`,
 ]);
+
+export const CardLayout = twx.div((props) => [
+  `border-2 rounded-xl p-12 w-2/4 mx-auto bg-popover`,
+]);
