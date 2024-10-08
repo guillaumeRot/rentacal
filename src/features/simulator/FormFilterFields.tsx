@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { redirect } from "next/navigation";
+import { MdEuroSymbol } from "react-icons/md";
 
 const FormSchema = z.object({
   prix_achat: z.number(),
@@ -44,6 +46,7 @@ export function FormFilterFields() {
     //   ),
     // });
     console.log(data);
+    redirect("/result");
   }
 
   return (
@@ -58,9 +61,18 @@ export function FormFilterFields() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Prix d&apos;achat</FormLabel>
-              <FormControl>
-                <Input placeholder="150 000 €" {...field} />
-              </FormControl>
+              <div className="flex">
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="150 000"
+                    {...field}
+                    className="mr-2"
+                    onChange={(event) => field.onChange(+event.target.value)}
+                  />
+                </FormControl>
+                <MdEuroSymbol className="relative top-2" size={20} />
+              </div>
               <FormMessage />
             </FormItem>
           )}
@@ -78,7 +90,11 @@ export function FormFilterFields() {
                   max={25}
                   step={1}
                   defaultValue={[value]}
-                  onValueChange={onChange}
+                  // onValueChange={onChange}
+                  onValueChange={(value) => {
+                    onChange(value[0]);
+                  }}
+                  // onChange={(event) => field.onChange(+event.target.value)}
                 />
               </FormControl>
               <FormMessage />
@@ -98,7 +114,11 @@ export function FormFilterFields() {
                   max={10}
                   step={0.1}
                   defaultValue={[value]}
-                  onValueChange={onChange}
+                  // onValueChange={onChange}
+                  onValueChange={(value) => {
+                    onChange(value[0]);
+                  }}
+                  // onChange={(event) => field.onChange(+event.target.value)}
                 />
               </FormControl>
               <FormMessage />
@@ -111,10 +131,19 @@ export function FormFilterFields() {
           name="loyers_total"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Loyers total</FormLabel>
-              <FormControl>
-                <Input placeholder="500 €" {...field} />
-              </FormControl>
+              <FormLabel>Somme des loyers</FormLabel>
+              <div className="flex">
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="500 €"
+                    {...field}
+                    className="mr-2"
+                    onChange={(event) => field.onChange(+event.target.value)}
+                  />
+                </FormControl>
+                <MdEuroSymbol className="relative top-2" size={20} />
+              </div>
               <FormMessage />
             </FormItem>
           )}

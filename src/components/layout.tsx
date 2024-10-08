@@ -11,5 +11,5 @@ export const LayoutDescription = twx.p((props) => [
 ]);
 
 export const CardLayout = twx.div((props) => [
-  `border-2 rounded-xl p-12 w-2/4 mx-auto bg-popover`,
+  `border-2 rounded-xl p-12 w-2/4 min-w-96 mx-auto bg-popover`,
 ]);
