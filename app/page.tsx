@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <Layout className="max-w-5xl">
+      <Layout>
         <Link
           href="/simulator"
           className="mx-auto bg-accent text-accent-foreground px-4 py-3 rounded-xl"

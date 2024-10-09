@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { FormFilterFields } from "./FormFilterFields";
+import { FormFilterFields } from "../simulator/FormFilterFields";
 
-export const FilterFields = async () => {
+export const ResultFilters = async () => {
   return (
-    <Card className="border-2 rounded-xl py-8 w-2/4 min-w-96 mx-auto">
+    <Card className="border-2 rounded-xl py-8 w-1/3">
       <CardContent className="grid gap-4">
         <FormFilterFields />
       </CardContent>

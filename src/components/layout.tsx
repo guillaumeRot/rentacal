@@ -1,11 +1,9 @@
 import { twx } from "@/lib/twx";
 
 export const Layout = twx.div((props) => [
-  `w-full flex-col py-6 flex gap-4 mx-auto px-4`,
+  `max-w-5xl w-full flex-col py-6 flex gap-4 mx-auto px-4`,
 ]);
 
-export const LayoutTitle = twx.h1((props) => [`text-4xl font-bold`]);
-
-export const LayoutDescription = twx.p((props) => [
-  `text-lg text-muted-foreground`,
+export const LayoutResult = twx.div((props) => [
+  `max-w-6xl w-full flex py-6 gap-4 px-4 mx-auto`,
 ]);

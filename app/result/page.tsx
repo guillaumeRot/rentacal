@@ -1,21 +1,26 @@
-import { Layout } from "@/components/layout";
+import { LayoutResult } from "@/components/layout";
 import { Header } from "@/features/Header";
+import { RentabiliteBrute } from "@/features/result/RentabiliteBrute";
+import { RentabiliteNette } from "@/features/result/RentabiliteNette";
+import { ResultFilters } from "@/features/result/ResultFilters";
+import { SommePret } from "@/features/result/SommePret";
+import { TabResultat } from "@/features/result/TabResultat";
 
 export default function Result() {
   return (
     <div>
       <Header />
-      <Layout className="max-w-6xl">
-        <div id="results">
-          <div id="rentabilites">
-            <div id="renta_brut"></div>
-            <div id="renta_net"></div>
+      <LayoutResult>
+        <div id="results" className="flex flex-col gap-4 w-2/3">
+          <div id="rentabilites" className="flex gap-4 w-full">
+            <RentabiliteBrute />
+            <RentabiliteNette />
           </div>
-          <div id="somme_pret"></div>
-          <div id="tableau"></div>
+          <SommePret />
+          <TabResultat />
         </div>
-        <div id="filters"></div>
-      </Layout>
+        <ResultFilters />
+      </LayoutResult>
     </div>
   );
 }

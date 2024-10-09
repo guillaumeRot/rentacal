@@ -6,7 +6,7 @@ export default function Simulator() {
   return (
     <div>
       <Header />
-      <Layout className="max-w-5xl">
+      <Layout>
         <FilterFields />
       </Layout>
     </div>
