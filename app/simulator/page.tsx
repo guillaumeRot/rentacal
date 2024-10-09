@@ -4,9 +4,9 @@ import { FilterFields } from "@/features/simulator/FilterFields";
 
 export default function Simulator() {
   return (
-    <div className="bg-secondary">
+    <div>
       <Header />
-      <Layout>
+      <Layout className="max-w-5xl">
         <FilterFields />
       </Layout>
     </div>

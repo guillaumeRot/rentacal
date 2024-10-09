@@ -49,6 +49,11 @@ export function FormFilterFields() {
     // });
     console.log(data);
     router.push("/result");
+    // router.push("/result", { pathname: "/result", query: { filters: data } });
+    // router.push({
+    //   pathname: "/result",
+    //   query: data,
+    // });
   }
 
   return (
