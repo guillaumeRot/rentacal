@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { MdEuroSymbol } from "react-icons/md";
 
 const FormSchema = z.object({
@@ -26,6 +26,8 @@ const FormSchema = z.object({
 });
 
 export function FormFilterFields() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -46,7 +48,7 @@ export function FormFilterFields() {
     //   ),
     // });
     console.log(data);
-    redirect("/result");
+    router.push("/result");
   }
 
   return (
