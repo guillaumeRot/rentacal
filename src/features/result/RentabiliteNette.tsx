@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const RentabiliteNette = async () => {
+export const RentabiliteNette = () => {
   return (
     <Card className="border-2 rounded-xl w-2/4 max-h-32">
       <CardHeader>

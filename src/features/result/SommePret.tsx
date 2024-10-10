@@ -1,7 +1,7 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
-export const SommePret = async () => {
+export const SommePret = () => {
   return (
     <Card className="border-2 rounded-xl py-8 w-full max-h-32">
       <CardContent className="grid gap-4 flex h-full">

@@ -48,6 +48,7 @@ export function FormFilterFields() {
     //   ),
     // });
     console.log(data);
+    localStorage.setItem("data", JSON.stringify(data));
     router.push("/result");
     // router.push("/result", { pathname: "/result", query: { filters: data } });
     // router.push({
