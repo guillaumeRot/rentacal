@@ -1,9 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,12 +11,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
-import { DataSchema } from "../result/simulateur.schema";
+import { z } from "zod";
+import { DataSchema, DataType } from "./simulateur.schema";
 
-export function FormFilterFields() {
-  const router = useRouter();
+export type ResultFormFilterFieldsProps = {
+  onSubmit: (values: DataType) => void;
+};
+
+export function ResultFormFilterFields({
+  onSubmit,
+}: ResultFormFilterFieldsProps) {
+  // const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof DataSchema>>({
     resolver: zodResolver(DataSchema),
@@ -32,19 +36,23 @@ export function FormFilterFields() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof DataSchema>) {
-    console.log(data);
-    localStorage.setItem("prixAchat", data.prixAchat.toString());
-    localStorage.setItem("dureePret", data.dureePret.toString());
-    localStorage.setItem("tauxPret", data.tauxPret.toString());
-    localStorage.setItem("loyersTotal", data.loyersTotal.toString());
-    router.push("/result");
-  }
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   console.log("TEST GUI 50 - handleSubmit:", form.getValues());
+  //   onSubmit(form.getValues());
+  // };
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(async (values: DataType) => {
+          // await mutation.mutateAsync(values);
+          console.log("TEST GUI 50 - handleSubmit:", values);
+          onSubmit(values);
+        })}
+        // onSubmit={handleSubmit(async (values: DataType) => {
+        //   await mutation.mutateAsync(values);
+        // })}
+        // onSubmit={handleSubmit}
         className="w-2/3 space-y-6 mx-auto"
       >
         <FormField

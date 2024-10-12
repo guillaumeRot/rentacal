@@ -1,12 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { FormFilterFields } from "../simulator/FormFilterFields";
+import {
+  ResultFormFilterFields,
+  ResultFormFilterFieldsProps,
+} from "./ResultFormFilterFields";
+import { DataType } from "./simulateur.schema";
 
-export const ResultFilters = () => {
+export function ResultFilters({ onSubmit }: ResultFormFilterFieldsProps) {
   return (
     <Card className="border-2 rounded-xl py-8 w-1/3">
       <CardContent className="grid gap-4">
-        <FormFilterFields />
+        <ResultFormFilterFields
+          onSubmit={(values: DataType) => onSubmit(values)}
+        />
       </CardContent>
     </Card>
   );
-};
+}
