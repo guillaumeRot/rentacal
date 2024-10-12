@@ -56,7 +56,7 @@ export const SimulationResult = () => {
       <div id="results" className="flex flex-col gap-4 w-2/3">
         <div id="rentabilites" className="flex gap-4 w-full">
           <RentabiliteBrute rentabiliteBrute={result.data?.rentabiliteBrute} />
-          <RentabiliteNette />
+          <RentabiliteNette rentabiliteNette={result.data?.rentabiliteNette} />
         </div>
         <SommePret />
         <TabResultat />

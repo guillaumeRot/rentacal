@@ -1,12 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const RentabiliteNette = () => {
+export type RentabiliteNetteProps = {
+  rentabiliteNette?: number;
+};
+
+export const RentabiliteNette = (props: RentabiliteNetteProps) => {
   return (
     <Card className="border-2 rounded-xl w-2/4 max-h-32">
       <CardHeader>
-        <CardTitle>Rentabilité brute</CardTitle>
+        <CardTitle>Rentabilité Nette</CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-4 text-4xl">10,8 %</CardContent>
+      <CardContent className="grid gap-4 text-4xl">
+        {props.rentabiliteNette} %
+      </CardContent>
     </Card>
   );
 };
