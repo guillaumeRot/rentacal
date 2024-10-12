@@ -2,7 +2,7 @@
 
 import { LayoutResult } from "@/components/layout";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RentabiliteBrute } from "./RentabiliteBrute";
 import { RentabiliteNette } from "./RentabiliteNette";
 import { ResultFilters } from "./ResultFilters";
@@ -14,41 +14,18 @@ import { DataType } from "./simulateur.schema";
 export const SimulationResult = () => {
   const queryClient = useQueryClient();
 
-  const [filtersValues, setFiltersValues] = useState({
-    prixAchat: 0,
-    dureePret: 0,
-    tauxPret: 0,
-    loyersTotal: 0,
-  });
+  // Fonction qui lit localStorage une seule fois à l'initialisation du state
+  const getInitialValue = () => {
+    const filterValues = localStorage.getItem("filterValues"); // Récupère la valeur stockée
+    return filterValues ? JSON.parse(filterValues) : 0; // Parse si elle existe, sinon 0
+  };
 
-  useEffect(() => {
-    // Au chargement, récupérer le nombre stocké dans localStorage
-    const prixAchat = localStorage.getItem("prixAchat");
-    const dureePret = localStorage.getItem("dureePret");
-    const tauxPret = localStorage.getItem("tauxPret");
-    const loyersTotal = localStorage.getItem("loyersTotal");
-
-    console.log("TEST GUI 2 - useEffect:", prixAchat);
-
-    if (prixAchat && dureePret && tauxPret && loyersTotal) {
-      // setPrixAchat(parseInt(prixAchat, 10));
-      setFiltersValues({
-        prixAchat: parseInt(prixAchat, 10),
-        dureePret: parseInt(dureePret, 10),
-        tauxPret: parseInt(tauxPret, 10),
-        loyersTotal: parseInt(loyersTotal, 10),
-      });
-
-      console.log("TEST GUI 3 - useEffect:", prixAchat);
-    }
-  }, []);
+  const [filtersValues, setFiltersValues] = useState(getInitialValue); // Initialise le state
 
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
-      console.log("TEST GUI 1 - useQuery:", filtersValues);
       const res = await calculRentabilite({
-        // prixAchat: 150000,
         prixAchat: filtersValues.prixAchat,
         dureePret: filtersValues.dureePret,
         tauxPret: filtersValues.tauxPret,
@@ -62,41 +39,17 @@ export const SimulationResult = () => {
   });
 
   const handleFormSubmit = async (values: DataType) => {
-    // mutation.mutate(newValues); // Envoie les nouvelles données à l'API
-    console.log("TEST GUI 5 - onSubmit", values);
-    // mutation.mutate(values);
     await mutation.mutateAsync(values);
-    // setFiltersValues(values);
-    // console.log("TEST GUI 6 - onSubmit", filtersValues);
-    // queryClient.invalidateQueries();
-    // console.log("TEST GUI 7 - onSubmit", filtersValues);
   };
 
   const mutation = useMutation({
     mutationFn: async (values: DataType) => {
-      console.log("TEST GUI 10 - useMutation:", values);
-      // onSubmit(values);
       setFiltersValues(values);
     },
     onSuccess: () => {
-      console.log("TEST GUI 15 - useMutation, OnSuccess:", filtersValues);
       queryClient.invalidateQueries();
     },
   });
-
-  // const mutation = useMutation({
-  //   onSuccess: (values: DataType) => {
-  //     console.log("TEST GUI 11 - useMutation:");
-  //     // queryClient.invalidateQueries();
-  //   },
-  // });
-
-  // const mutation = useMutation(values, {
-  //   onSuccess: () => {
-  //     // Invalide les requêtes 'data' pour rafraîchir les données après le post
-  //     queryClient.invalidateQueries();
-  //   },
-  // });
 
   return (
     <LayoutResult>
@@ -108,7 +61,7 @@ export const SimulationResult = () => {
         <SommePret />
         <TabResultat />
       </div>
-      <ResultFilters onSubmit={handleFormSubmit} />
+      <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
     </LayoutResult>
   );
 };

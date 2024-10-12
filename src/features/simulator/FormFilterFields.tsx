@@ -33,11 +33,11 @@ export function FormFilterFields() {
   });
 
   function onSubmit(data: z.infer<typeof DataSchema>) {
-    console.log(data);
     localStorage.setItem("prixAchat", data.prixAchat.toString());
     localStorage.setItem("dureePret", data.dureePret.toString());
     localStorage.setItem("tauxPret", data.tauxPret.toString());
     localStorage.setItem("loyersTotal", data.loyersTotal.toString());
+    localStorage.setItem("filterValues", JSON.stringify(data));
     router.push("/result");
   }
 

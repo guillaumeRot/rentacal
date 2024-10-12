@@ -19,40 +19,24 @@ import { DataSchema, DataType } from "./simulateur.schema";
 
 export type ResultFormFilterFieldsProps = {
   onSubmit: (values: DataType) => void;
+  filterValues: DataType;
 };
 
 export function ResultFormFilterFields({
   onSubmit,
+  filterValues,
 }: ResultFormFilterFieldsProps) {
-  // const queryClient = useQueryClient();
-
   const form = useForm<z.infer<typeof DataSchema>>({
     resolver: zodResolver(DataSchema),
-    defaultValues: {
-      prixAchat: 100000,
-      dureePret: 15,
-      tauxPret: 1,
-      loyersTotal: 500,
-    },
+    defaultValues: filterValues,
   });
-
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   console.log("TEST GUI 50 - handleSubmit:", form.getValues());
-  //   onSubmit(form.getValues());
-  // };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values: DataType) => {
-          // await mutation.mutateAsync(values);
-          console.log("TEST GUI 50 - handleSubmit:", values);
           onSubmit(values);
         })}
-        // onSubmit={handleSubmit(async (values: DataType) => {
-        //   await mutation.mutateAsync(values);
-        // })}
-        // onSubmit={handleSubmit}
         className="w-2/3 space-y-6 mx-auto"
       >
         <FormField
