@@ -1,5 +1,11 @@
 "use client";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,17 +21,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
-import { DataSchema, DataType } from "./simulateur.schema";
+import { DataSchema, DataType } from "./result/simulateur.schema";
 
-export type ResultFormFilterFieldsProps = {
+export type FormFilterFieldsProps = {
   onSubmit: (values: DataType) => void;
   filterValues: DataType;
 };
 
-export function ResultFormFilterFields({
+export function FormFilterFields({
   onSubmit,
   filterValues,
-}: ResultFormFilterFieldsProps) {
+}: FormFilterFieldsProps) {
   const form = useForm<z.infer<typeof DataSchema>>({
     resolver: zodResolver(DataSchema),
     defaultValues: filterValues,
@@ -74,11 +80,9 @@ export function ResultFormFilterFields({
                   max={25}
                   step={1}
                   defaultValue={[value]}
-                  // onValueChange={onChange}
                   onValueChange={(value) => {
                     onChange(value[0]);
                   }}
-                  // onChange={(event) => field.onChange(+event.target.value)}
                 />
               </FormControl>
               <FormMessage />
@@ -98,11 +102,9 @@ export function ResultFormFilterFields({
                   max={10}
                   step={0.1}
                   defaultValue={[value]}
-                  // onValueChange={onChange}
                   onValueChange={(value) => {
                     onChange(value[0]);
                   }}
-                  // onChange={(event) => field.onChange(+event.target.value)}
                 />
               </FormControl>
               <FormMessage />
@@ -120,7 +122,7 @@ export function ResultFormFilterFields({
                 <FormControl>
                   <Input
                     type="number"
-                    placeholder="500 €"
+                    placeholder="500"
                     {...field}
                     className="mr-2"
                     onChange={(event) => field.onChange(+event.target.value)}
@@ -132,6 +134,38 @@ export function ResultFormFilterFields({
             </FormItem>
           )}
         />
+
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Plus de critères</AccordionTrigger>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="fraisNotaire"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Frais de notaires</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="500 €"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         <Button
           type="submit"

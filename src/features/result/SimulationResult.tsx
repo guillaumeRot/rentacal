@@ -25,11 +25,13 @@ export const SimulationResult = () => {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
+      console.log("TEST GUI");
       const res = await calculRentabilite({
         prixAchat: filtersValues.prixAchat,
         dureePret: filtersValues.dureePret,
         tauxPret: filtersValues.tauxPret,
         loyersTotal: filtersValues.loyersTotal,
+        fraisNotaire: filtersValues.fraisNotaire,
       });
 
       const r = res?.data;
