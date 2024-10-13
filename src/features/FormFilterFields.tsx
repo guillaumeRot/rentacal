@@ -142,23 +142,20 @@ export function FormFilterFields({
               <FormField
                 control={form.control}
                 name="fraisNotaire"
-                render={({ field }) => (
+                render={({ field: { value, onChange } }) => (
                   <FormItem>
-                    <FormLabel>Frais de notaires</FormLabel>
-                    <div className="flex">
-                      <FormControl>
-                        <Input
-                          type="number"
-                          placeholder="500 €"
-                          {...field}
-                          className="mr-2"
-                          onChange={(event) =>
-                            field.onChange(+event.target.value)
-                          }
-                        />
-                      </FormControl>
-                      <MdEuroSymbol className="relative top-2" size={20} />
-                    </div>
+                    <FormLabel>Frais de notaire - {value} %</FormLabel>
+                    <FormControl>
+                      <Slider
+                        min={0}
+                        max={20}
+                        step={0.1}
+                        defaultValue={[value]}
+                        onValueChange={(value) => {
+                          onChange(value[0]);
+                        }}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
