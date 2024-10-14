@@ -10,6 +10,7 @@ export const calculRentabilite = action
     return {
       rentabiliteBrute: getRentabiliteBrute(parsedInput.parsedInput).toFixed(2),
       rentabiliteNette: getRentabiliteNette(parsedInput.parsedInput).toFixed(2),
+      montantPret: getMontantPret(parsedInput.parsedInput),
     };
   });
 
@@ -18,8 +19,23 @@ function getRentabiliteBrute(values: DataType) {
 }
 
 function getRentabiliteNette(values: DataType) {
-  let montantFraisNotaire = values.prixAchat * (values.fraisNotaire / 100);
+  let montantFraisNotaire = getMontantFraisNotaires(
+    values.prixAchat,
+    values.fraisNotaire
+  );
   return (
     ((values.loyersTotal * 12) / (values.prixAchat + montantFraisNotaire)) * 100
   );
+}
+
+function getMontantPret(values: DataType) {
+  return (
+    values.prixAchat +
+    values.montantTravaux +
+    getMontantFraisNotaires(values.prixAchat, values.fraisNotaire)
+  );
+}
+
+function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
+  return prixAchat * (fraisNotaire / 100);
 }

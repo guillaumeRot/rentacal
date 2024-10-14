@@ -7,7 +7,7 @@ export const FraisBancaire = () => {
         <CardHeader>
           <CardTitle>Frais bancaires</CardTitle>
         </CardHeader>
-        <CardContent className="grid text-2xl">57 000 €</CardContent>
+        <CardContent className="grid text-2xl">TODO €</CardContent>
       </CardContent>
     </Card>
   );

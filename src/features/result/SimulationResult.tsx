@@ -65,7 +65,7 @@ export const SimulationResult = () => {
           <RentabiliteNette rentabiliteNette={result.data?.rentabiliteNette} />
         </div>
         <div className="flex gap-8">
-          <MontantPret />
+          <MontantPret montantPret={result.data?.montantPret} />
           <FraisBancaire />
           <CoutPret />
         </div>
