@@ -33,6 +33,9 @@ export const SimulationResult = () => {
         tauxPret: filtersValues.tauxPret,
         loyersTotal: filtersValues.loyersTotal,
         fraisNotaire: filtersValues.fraisNotaire,
+        montantTravaux: filtersValues.montantTravaux,
+        impotsFoncier: filtersValues.impotsFoncier,
+        chargesCopro: filtersValues.chargesCopro,
       });
 
       const r = res?.data;

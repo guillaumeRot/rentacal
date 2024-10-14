@@ -6,6 +6,9 @@ export const DataSchema = z.object({
   tauxPret: z.number(),
   loyersTotal: z.number(),
   fraisNotaire: z.number(),
+  montantTravaux: z.number(),
+  impotsFoncier: z.number(),
+  chargesCopro: z.number(),
 });
 export type DataType = z.infer<typeof DataSchema>;
 

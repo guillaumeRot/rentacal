@@ -14,7 +14,10 @@ export const FilterFields = () => {
     dureePret: 15,
     tauxPret: 1,
     loyersTotal: 500,
-    fraisNotaire: 8,
+    fraisNotaire: 0,
+    montantTravaux: 0,
+    impotsFoncier: 0,
+    chargesCopro: 0,
   };
 
   function onSubmit(data: z.infer<typeof DataSchema>) {

@@ -73,7 +73,7 @@ export function FormFilterFields({
           name="dureePret"
           render={({ field: { value, onChange } }) => (
             <FormItem>
-              <FormLabel>Durée du prêt - {value} an(s)</FormLabel>
+              <FormLabel>Durée du prêt : {value} an(s)</FormLabel>
               <FormControl>
                 <Slider
                   min={1}
@@ -95,7 +95,7 @@ export function FormFilterFields({
           name="tauxPret"
           render={({ field: { value, onChange } }) => (
             <FormItem>
-              <FormLabel>Taux du prêt - {value} %</FormLabel>
+              <FormLabel>Taux du prêt : {value} %</FormLabel>
               <FormControl>
                 <Slider
                   min={0}
@@ -136,7 +136,7 @@ export function FormFilterFields({
         />
 
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
+          <AccordionItem value="plusCriteres">
             <AccordionTrigger>Plus de critères</AccordionTrigger>
             <AccordionContent>
               <FormField
@@ -144,7 +144,7 @@ export function FormFilterFields({
                 name="fraisNotaire"
                 render={({ field: { value, onChange } }) => (
                   <FormItem>
-                    <FormLabel>Frais de notaire - {value} %</FormLabel>
+                    <FormLabel>Frais de notaire : {value} %</FormLabel>
                     <FormControl>
                       <Slider
                         min={0}
@@ -156,6 +156,84 @@ export function FormFilterFields({
                         }}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="montantTravaux"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Montant des travaux</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="5000"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="impotsFoncier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Impots foncier</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="1000"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="chargesCopro"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Charges de copropriété</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="500"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
