@@ -11,6 +11,7 @@ export const calculRentabilite = action
       rentabiliteBrute: getRentabiliteBrute(parsedInput.parsedInput).toFixed(2),
       rentabiliteNette: getRentabiliteNette(parsedInput.parsedInput).toFixed(2),
       montantPret: getMontantPret(parsedInput.parsedInput),
+      resultatsMensuel: getResultatsMensuel(parsedInput.parsedInput),
     };
   });
 
@@ -38,4 +39,27 @@ function getMontantPret(values: DataType) {
 
 function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
   return prixAchat * (fraisNotaire / 100);
+}
+
+function getResultatsMensuel(values: DataType) {
+  return [
+    {
+      annee: 1,
+      mois: "Janvier",
+      pretRestant: 150000,
+      interetsPret: 565,
+      pretAvecInterets: 165000,
+      Mensualite: 765,
+      resultat: "+ 255 €",
+    },
+    {
+      annee: 2,
+      mois: "Janvier",
+      pretRestant: 145000,
+      interetsPret: 550,
+      pretAvecInterets: 162000,
+      Mensualite: 763,
+      resultat: "+ 258 €",
+    },
+  ];
 }

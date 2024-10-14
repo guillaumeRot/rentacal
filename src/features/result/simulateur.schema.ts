@@ -17,3 +17,14 @@ export const ResultSchema = z.object({
   rentabiliteNette: z.string(),
   montantPret: z.number(),
 });
+
+export const ResultatMensuel = z.object({
+  annee: z.number(),
+  mois: z.string(),
+  pretRestant: z.number(),
+  interetsPret: z.number(),
+  pretAvecInterets: z.number(),
+  Mensualite: z.number(),
+  resultat: z.string(),
+});
+export type ResultatMensuelType = z.infer<typeof ResultatMensuel>;

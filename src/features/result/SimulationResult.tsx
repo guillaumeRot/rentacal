@@ -69,7 +69,7 @@ export const SimulationResult = () => {
           <FraisBancaire />
           <CoutPret />
         </div>
-        <TabResultat />
+        <TabResultat resultatsMensuel={result.data?.resultatsMensuel} />
       </div>
       <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
     </LayoutResult>
