@@ -10,5 +10,6 @@ export const DataSchema = z.object({
 export type DataType = z.infer<typeof DataSchema>;
 
 export const ResultSchema = z.object({
-  rentabiliteBrute: z.number(),
+  rentabiliteBrute: z.string(),
+  rentabiliteNette: z.string(),
 });

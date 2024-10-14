@@ -7,7 +7,7 @@ export function ResultFilters({
   filterValues,
 }: FormFilterFieldsProps) {
   return (
-    <Card className="border-2 rounded-xl py-8 w-1/3">
+    <Card className="rounded-xl py-8 w-1/3">
       <CardContent className="grid gap-4">
         <FormFilterFields
           onSubmit={(values: DataType) => onSubmit(values)}

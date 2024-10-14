@@ -3,10 +3,12 @@
 import { LayoutResult } from "@/components/layout";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { CoutPret } from "./CoutPret";
+import { FraisBancaire } from "./FraisBancaire";
+import { MontantPret } from "./MontantPret";
 import { RentabiliteBrute } from "./RentabiliteBrute";
 import { RentabiliteNette } from "./RentabiliteNette";
 import { ResultFilters } from "./ResultFilters";
-import { SommePret } from "./SommePret";
 import { TabResultat } from "./TabResultat";
 import { calculRentabilite } from "./simulateur.action";
 import { DataType } from "./simulateur.schema";
@@ -25,7 +27,6 @@ export const SimulationResult = () => {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
-      console.log("TEST GUI");
       const res = await calculRentabilite({
         prixAchat: filtersValues.prixAchat,
         dureePret: filtersValues.dureePret,
@@ -55,12 +56,16 @@ export const SimulationResult = () => {
 
   return (
     <LayoutResult>
-      <div id="results" className="flex flex-col gap-4 w-2/3">
-        <div id="rentabilites" className="flex gap-4 w-full">
+      <div id="results" className="flex flex-col gap-8 w-2/3">
+        <div id="rentabilites" className="flex gap-8 w-full">
           <RentabiliteBrute rentabiliteBrute={result.data?.rentabiliteBrute} />
           <RentabiliteNette rentabiliteNette={result.data?.rentabiliteNette} />
         </div>
-        <SommePret />
+        <div className="flex gap-8">
+          <MontantPret />
+          <FraisBancaire />
+          <CoutPret />
+        </div>
         <TabResultat />
       </div>
       <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />

@@ -5,5 +5,5 @@ export const Layout = twx.div((props) => [
 ]);
 
 export const LayoutResult = twx.div((props) => [
-  `max-w-6xl w-full flex py-6 gap-4 px-4 mx-auto`,
+  `max-w-6xl w-full flex py-6 gap-8 px-4 mx-auto`,
 ]);
