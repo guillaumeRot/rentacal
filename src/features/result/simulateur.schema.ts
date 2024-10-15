@@ -21,10 +21,9 @@ export const ResultSchema = z.object({
 export const ResultatMensuel = z.object({
   annee: z.number(),
   mois: z.string(),
-  pretRestant: z.number(),
-  interetsPret: z.number(),
-  pretAvecInterets: z.number(),
-  Mensualite: z.number(),
+  pretRestant: z.string(),
+  interetsPret: z.string(),
+  Mensualite: z.string(),
   resultat: z.string(),
 });
 export type ResultatMensuelType = z.infer<typeof ResultatMensuel>;

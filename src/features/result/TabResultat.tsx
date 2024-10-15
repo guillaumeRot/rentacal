@@ -25,7 +25,6 @@ export const TabResultat = (props: TabResultatProps) => {
                 <TableHead>Mois</TableHead>
                 <TableHead>Prêt restant</TableHead>
                 <TableHead>Intêrets</TableHead>
-                <TableHead>Prêt avec intêrets</TableHead>
                 <TableHead>Mensualité</TableHead>
                 <TableHead>Résultat</TableHead>
               </TableRow>
@@ -35,11 +34,10 @@ export const TabResultat = (props: TabResultatProps) => {
                 <TableRow key={resultat.annee + "_" + resultat.mois}>
                   <TableCell>{resultat.annee}</TableCell>
                   <TableCell>{resultat.mois}</TableCell>
-                  <TableCell>{resultat.pretRestant}</TableCell>
-                  <TableCell>{resultat.interetsPret}</TableCell>
-                  <TableCell>{resultat.pretAvecInterets}</TableCell>
-                  <TableCell>{resultat.Mensualite}</TableCell>
-                  <TableCell>{resultat.resultat}</TableCell>
+                  <TableCell>{resultat.pretRestant} €</TableCell>
+                  <TableCell>{resultat.interetsPret} €</TableCell>
+                  <TableCell>{resultat.Mensualite} €</TableCell>
+                  <TableCell>{resultat.resultat} €</TableCell>
                 </TableRow>
               ))}
             </TableBody>

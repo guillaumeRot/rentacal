@@ -3,6 +3,38 @@
 import { action } from "@/lib/safe-actions";
 import { DataSchema, DataType, ResultSchema } from "./simulateur.schema";
 
+// const mapSchema = z.record(z.number(), z.string());
+//
+// const mapMoisByIndex = mapSchema.safeParse({
+//   1: "Janvier",
+//   2: "Février",
+//   3: "Mars",
+//   4: "Avril",
+//   5: "Mai",
+//   6: "Juin",
+//   7: "Juillet",
+//   8: "Août",
+//   9: "Septembre",
+//   10: "Octobre",
+//   11: "Novembre",
+//   12: "Décembre",
+// });
+
+const mapMoisByIndex: Record<number, string> = {
+  1: "Janvier",
+  2: "Février",
+  3: "Mars",
+  4: "Avril",
+  5: "Mai",
+  6: "Juin",
+  7: "Juillet",
+  8: "Août",
+  9: "Septembre",
+  10: "Octobre",
+  11: "Novembre",
+  12: "Décembre",
+};
+
 export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
@@ -42,24 +74,53 @@ function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
 }
 
 function getResultatsMensuel(values: DataType) {
-  return [
-    {
-      annee: 1,
-      mois: "Janvier",
-      pretRestant: 150000,
-      interetsPret: 565,
-      pretAvecInterets: 165000,
-      Mensualite: 765,
-      resultat: "+ 255 €",
-    },
-    {
-      annee: 2,
-      mois: "Janvier",
-      pretRestant: 145000,
-      interetsPret: 550,
-      pretAvecInterets: 162000,
-      Mensualite: 763,
-      resultat: "+ 258 €",
-    },
-  ];
+  let resultatsMensuel = [];
+  let pretRestant = values.prixAchat;
+  let pretRembourse = 0;
+  for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
+    for (let cptMois = 1; cptMois <= 12; cptMois++) {
+      let mensualite = getMensualite(values);
+      let interetsPret = getMontantInteretsMensuel(
+        pretRestant,
+        getTauxInteretMensuel(values.tauxPret)
+      );
+
+      resultatsMensuel.push({
+        annee: cptAnnee,
+        mois: mapMoisByIndex[cptMois],
+        pretRestant: pretRestant.toFixed(2),
+        interetsPret: interetsPret.toFixed(2),
+        Mensualite: mensualite.toFixed(2),
+        resultat: (values.loyersTotal - mensualite).toFixed(2),
+      });
+
+      pretRembourse = mensualite - interetsPret;
+      pretRestant = pretRestant - pretRembourse;
+    }
+  }
+  return resultatsMensuel;
+}
+
+function getTauxInteretMensuel(tauxInteretAnnuel: number) {
+  return tauxInteretAnnuel / (12 * 100);
+}
+
+function getMontantInteretsMensuel(
+  pretRestant: number,
+  tauxInteretsMensuel: number
+) {
+  return pretRestant * tauxInteretsMensuel;
+}
+
+function getNbMensualites(nbAnnuites: number) {
+  return nbAnnuites * 12;
+}
+
+function getMensualite(values: DataType) {
+  let tauxInteretMensuel = getTauxInteretMensuel(values.tauxPret);
+  let nbMensualites = getNbMensualites(values.dureePret);
+  return (
+    (values.prixAchat * tauxInteretMensuel) /
+    (1 - Math.pow(1 + tauxInteretMensuel, -nbMensualites))
+  );
 }
