@@ -59,19 +59,19 @@ export const SimulationResult = () => {
 
   return (
     <LayoutResult>
-      <div id="results" className="flex flex-col gap-8 w-2/3">
-        <div id="rentabilites" className="flex gap-8 w-full">
+      <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
+      <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-2/3">
+        <div id="rentabilites" className="flex gap-y-8 gap-x-3 w-full">
           <RentabiliteBrute rentabiliteBrute={result.data?.rentabiliteBrute} />
           <RentabiliteNette rentabiliteNette={result.data?.rentabiliteNette} />
         </div>
-        <div className="flex gap-8">
+        <div className="flex gap-y-8 gap-x-3">
           <MontantPret montantPret={result.data?.montantPret} />
           <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
           <CoutPret coutPret={result.data?.coutPret} />
         </div>
         <TabResultat resultatsMensuel={result.data?.resultatsMensuel} />
       </div>
-      <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
     </LayoutResult>
   );
 };

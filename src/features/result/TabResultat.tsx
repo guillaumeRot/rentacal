@@ -16,7 +16,7 @@ export type TabResultatProps = {
 export const TabResultat = (props: TabResultatProps) => {
   if (props.resultatsMensuel) {
     return (
-      <Card className="rounded-xl py-8 w-full h-full">
+      <Card className="rounded-3xl py-8 w-full h-full">
         <CardContent className="grid gap-4">
           <Table>
             <TableHeader>
@@ -66,7 +66,7 @@ export const TabResultat = (props: TabResultatProps) => {
   }
 
   return (
-    <Card className="rounded-xl py-8 w-full h-full">
+    <Card className="rounded-3xl py-8 w-full h-full">
       <CardContent className="grid gap-4">
         <Table>
           <TableHeader>

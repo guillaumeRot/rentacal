@@ -6,7 +6,7 @@ export type FraisBancaireProps = {
 
 export const FraisBancaire = (props: FraisBancaireProps) => {
   return (
-    <Card className="rounded-xl w-full max-h-32">
+    <Card className="rounded-3xl w-full max-h-32">
       <CardHeader>
         <CardTitle>Frais bancaires</CardTitle>
       </CardHeader>
