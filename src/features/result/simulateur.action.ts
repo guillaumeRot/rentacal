@@ -1,24 +1,12 @@
 "use server";
 
 import { action } from "@/lib/safe-actions";
-import { DataSchema, DataType, ResultSchema } from "./simulateur.schema";
-
-// const mapSchema = z.record(z.number(), z.string());
-//
-// const mapMoisByIndex = mapSchema.safeParse({
-//   1: "Janvier",
-//   2: "Février",
-//   3: "Mars",
-//   4: "Avril",
-//   5: "Mai",
-//   6: "Juin",
-//   7: "Juillet",
-//   8: "Août",
-//   9: "Septembre",
-//   10: "Octobre",
-//   11: "Novembre",
-//   12: "Décembre",
-// });
+import {
+  DataSchema,
+  DataType,
+  ResultatMensuelType,
+  ResultSchema,
+} from "./simulateur.schema";
 
 const mapMoisByIndex: Record<number, string> = {
   1: "Janvier",
@@ -35,6 +23,10 @@ const mapMoisByIndex: Record<number, string> = {
   12: "Décembre",
 };
 
+let resultatsMensuel: ResultatMensuelType[] = [];
+let montantPret: number = 0;
+let sommeFraisBancaire: number = 0;
+
 export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
@@ -44,6 +36,8 @@ export const calculRentabilite = action
       rentabiliteNette: getRentabiliteNette(parsedInput.parsedInput).toFixed(2),
       montantPret: getMontantPret(parsedInput.parsedInput),
       resultatsMensuel: getResultatsMensuel(parsedInput.parsedInput),
+      fraisBancaires: getSommeFraisBancaires(resultatsMensuel).toFixed(2),
+      coutPret: getCoutPret(montantPret, sommeFraisBancaire).toFixed(2),
     };
   });
 
@@ -62,11 +56,11 @@ function getRentabiliteNette(values: DataType) {
 }
 
 function getMontantPret(values: DataType) {
-  return (
+  montantPret =
     values.prixAchat +
     values.montantTravaux +
-    getMontantFraisNotaires(values.prixAchat, values.fraisNotaire)
-  );
+    getMontantFraisNotaires(values.prixAchat, values.fraisNotaire);
+  return montantPret;
 }
 
 function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
@@ -74,7 +68,6 @@ function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
 }
 
 function getResultatsMensuel(values: DataType) {
-  let resultatsMensuel = [];
   let pretRestant = values.prixAchat;
   let pretRembourse = 0;
   for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
@@ -123,4 +116,16 @@ function getMensualite(values: DataType) {
     (values.prixAchat * tauxInteretMensuel) /
     (1 - Math.pow(1 + tauxInteretMensuel, -nbMensualites))
   );
+}
+
+function getSommeFraisBancaires(resultatsMensuel: ResultatMensuelType[]) {
+  sommeFraisBancaire = resultatsMensuel.reduce(
+    (accumulator, product) => accumulator + parseFloat(product.interetsPret),
+    0
+  );
+  return sommeFraisBancaire;
+}
+
+function getCoutPret(montantPret: number, fraisBancaire: number) {
+  return montantPret + fraisBancaire;
 }

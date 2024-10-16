@@ -1,10 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
   Table,
   TableBody,
   TableCell,
@@ -26,7 +21,7 @@ export const TabResultat = (props: TabResultatProps) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead />
+                {/* <TableHead /> */}
                 <TableHead>Année</TableHead>
                 <TableHead>Mois</TableHead>
                 <TableHead>Prêt restant</TableHead>
@@ -37,31 +32,31 @@ export const TabResultat = (props: TabResultatProps) => {
             </TableHeader>
             <TableBody>
               {props.resultatsMensuel.map((resultat) => (
-                <Collapsible id={resultat.annee + "_" + resultat.mois} asChild>
-                  <>
-                    <TableRow>
-                      <CollapsibleTrigger>
-                        <TableCell>test</TableCell>
-                      </CollapsibleTrigger>
-                      <TableCell>{resultat.annee}</TableCell>
-                      <TableCell>{resultat.mois}</TableCell>
-                      <TableCell>{resultat.pretRestant} €</TableCell>
-                      <TableCell>{resultat.interetsPret} €</TableCell>
-                      <TableCell>{resultat.Mensualite} €</TableCell>
-                      <TableCell>{resultat.resultat} €</TableCell>
-                    </TableRow>
-                    <CollapsibleContent>
-                      <TableRow key={resultat.annee + "_" + resultat.mois}>
-                        <TableCell>{resultat.annee}</TableCell>
-                        <TableCell>{resultat.mois}</TableCell>
-                        <TableCell>{resultat.pretRestant} €</TableCell>
-                        <TableCell>{resultat.interetsPret} €</TableCell>
-                        <TableCell>{resultat.Mensualite} €</TableCell>
-                        <TableCell>{resultat.resultat} €</TableCell>
-                      </TableRow>
-                    </CollapsibleContent>
-                  </>
-                </Collapsible>
+                // <Collapsible id={resultat.annee + "_" + resultat.mois} asChild>
+                //   <>
+                <TableRow>
+                  {/* <CollapsibleTrigger>
+                    <TableCell>test</TableCell>
+                  </CollapsibleTrigger> */}
+                  <TableCell>{resultat.annee}</TableCell>
+                  <TableCell>{resultat.mois}</TableCell>
+                  <TableCell>{resultat.pretRestant} €</TableCell>
+                  <TableCell>{resultat.interetsPret} €</TableCell>
+                  <TableCell>{resultat.Mensualite} €</TableCell>
+                  <TableCell>{resultat.resultat} €</TableCell>
+                </TableRow>
+                //     <CollapsibleContent>
+                //       <TableRow key={resultat.annee + "_" + resultat.mois}>
+                //         <TableCell>{resultat.annee}</TableCell>
+                //         <TableCell>{resultat.mois}</TableCell>
+                //         <TableCell>{resultat.pretRestant} €</TableCell>
+                //         <TableCell>{resultat.interetsPret} €</TableCell>
+                //         <TableCell>{resultat.Mensualite} €</TableCell>
+                //         <TableCell>{resultat.resultat} €</TableCell>
+                //       </TableRow>
+                //     </CollapsibleContent>
+                //   </>
+                // </Collapsible>
               ))}
             </TableBody>
           </Table>
