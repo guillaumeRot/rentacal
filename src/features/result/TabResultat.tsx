@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { MontantFormat } from "../MontantFormat";
 import { ResultatMensuelType } from "./simulateur.schema";
 
 export type TabResultatProps = {
@@ -34,16 +35,26 @@ export const TabResultat = (props: TabResultatProps) => {
               {props.resultatsMensuel.map((resultat) => (
                 // <Collapsible id={resultat.annee + "_" + resultat.mois} asChild>
                 //   <>
-                <TableRow>
+                <TableRow key={resultat.annee + "_" + resultat.mois}>
                   {/* <CollapsibleTrigger>
                     <TableCell>test</TableCell>
                   </CollapsibleTrigger> */}
-                  <TableCell>{resultat.annee}</TableCell>
+                  <TableCell className="text-center">
+                    {resultat.annee}
+                  </TableCell>
                   <TableCell>{resultat.mois}</TableCell>
-                  <TableCell>{resultat.pretRestant} €</TableCell>
-                  <TableCell>{resultat.interetsPret} €</TableCell>
-                  <TableCell>{resultat.Mensualite} €</TableCell>
-                  <TableCell>{resultat.resultat} €</TableCell>
+                  <TableCell>
+                    <MontantFormat value={resultat.pretRestant} />
+                  </TableCell>
+                  <TableCell>
+                    <MontantFormat value={resultat.interetsPret} />
+                  </TableCell>
+                  <TableCell>
+                    <MontantFormat value={resultat.mensualite} />
+                  </TableCell>
+                  <TableCell>
+                    <MontantFormat value={resultat.resultat} />
+                  </TableCell>
                 </TableRow>
                 //     <CollapsibleContent>
                 //       <TableRow key={resultat.annee + "_" + resultat.mois}>

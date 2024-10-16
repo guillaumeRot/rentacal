@@ -12,18 +12,21 @@ export const DataSchema = z.object({
 });
 export type DataType = z.infer<typeof DataSchema>;
 
-export const ResultSchema = z.object({
-  rentabiliteBrute: z.string(),
-  rentabiliteNette: z.string(),
-  montantPret: z.number(),
-});
-
 export const ResultatMensuel = z.object({
   annee: z.number(),
   mois: z.string(),
-  pretRestant: z.string(),
-  interetsPret: z.string(),
-  Mensualite: z.string(),
-  resultat: z.string(),
+  pretRestant: z.number(),
+  interetsPret: z.number(),
+  mensualite: z.number(),
+  resultat: z.number(),
 });
 export type ResultatMensuelType = z.infer<typeof ResultatMensuel>;
+
+export const ResultSchema = z.object({
+  rentabiliteBrute: z.number(),
+  rentabiliteNette: z.number(),
+  montantPret: z.number(),
+  resultatsMensuel: z.array(ResultatMensuel),
+  fraisBancaires: z.number(),
+  coutPret: z.number(),
+});

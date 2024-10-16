@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MontantFormat } from "../MontantFormat";
 
 export type MontantPretProps = {
   montantPret?: number;
@@ -10,7 +11,9 @@ export const MontantPret = (props: MontantPretProps) => {
       <CardHeader>
         <CardTitle>Montant du prêt</CardTitle>
       </CardHeader>
-      <CardContent className="text-2xl">{props.montantPret} €</CardContent>
+      <CardContent className="text-2xl">
+        <MontantFormat value={props.montantPret} />
+      </CardContent>
     </Card>
   );
 };

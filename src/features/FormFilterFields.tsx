@@ -53,6 +53,7 @@ export function FormFilterFields({
               <FormLabel>Prix d&apos;achat</FormLabel>
               <div className="flex">
                 <FormControl>
+                  {/* <MontantInputMask {...field} /> */}
                   <Input
                     type="number"
                     placeholder="150 000"

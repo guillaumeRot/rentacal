@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MontantFormat } from "../MontantFormat";
 
 export type CoutPretProps = {
-  coutPret?: string;
+  coutPret?: number;
 };
 
 export const CoutPret = (props: CoutPretProps) => {
@@ -10,7 +11,9 @@ export const CoutPret = (props: CoutPretProps) => {
       <CardHeader>
         <CardTitle>Coût du prêt</CardTitle>
       </CardHeader>
-      <CardContent className="grid text-2xl">{props.coutPret} €</CardContent>
+      <CardContent className="grid text-2xl">
+        <MontantFormat value={props.coutPret} />
+      </CardContent>
     </Card>
   );
 };

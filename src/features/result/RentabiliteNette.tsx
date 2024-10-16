@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IoWalletOutline } from "react-icons/io5";
+import { PourcentageFormat } from "../PourcentageFormat";
 
 export type RentabiliteNetteProps = {
-  rentabiliteNette?: string;
+  rentabiliteNette?: number;
 };
 
 export const RentabiliteNette = (props: RentabiliteNetteProps) => {
@@ -12,7 +13,7 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
         <CardTitle>Rentabilité Nette</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4 text-4xl flex font-extrabold text-secondary-foreground">
-        <span className="w-3/4">{props.rentabiliteNette} %</span>
+        <PourcentageFormat value={props.rentabiliteNette} className="w-3/4" />
         <IoWalletOutline />
       </CardContent>
     </Card>
