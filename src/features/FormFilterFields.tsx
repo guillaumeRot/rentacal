@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
-import { DataSchema, DataType } from "./result/simulateur.schema";
+import { DataSchema, DataType } from "./simulateur/simulateur.schema";
 
 export type FormFilterFieldsProps = {
   onSubmit: (values: DataType) => void;

@@ -1,5 +1,5 @@
 import { Header } from "@/features/Header";
-import { SimulationResult } from "@/features/result/SimulationResult";
+import { SimulationResult } from "@/features/simulateur/SimulationResult";
 
 export default function Result() {
   return (
