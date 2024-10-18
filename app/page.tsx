@@ -17,15 +17,7 @@ export default function Home() {
             width={150}
             height={150}
             alt="rentacal logo"
-            className="mx-auto"
-          />
-
-          <Image
-            src="/background.png"
-            width={150}
-            height={150}
-            alt="rentacal logo"
-            className="mx-auto"
+            className="mx-auto mt-32 bg-white"
           />
 
           <Section className="text-center flex flex-row items-center py-16">
