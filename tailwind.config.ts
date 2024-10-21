@@ -83,6 +83,9 @@ const config: Config = {
       backgroundImage: {
         hero: "url('/background.png')",
       },
+      fontFamily: {
+        poppins: ["Poppins"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
