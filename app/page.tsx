@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout";
 import { Section } from "@/features/landing/Section";
+import VideoPresentation from "@/features/landing/VideoPresentation";
 import Image from "next/image";
 import Link from "next/link";
 import { IoArrowForwardCircle } from "react-icons/io5";
@@ -34,10 +35,11 @@ export default function Home() {
           </Section>
 
           <div>
-            <Layout className="mx-auto w-full max-w-screen-xl flex flex-row justify-center text-center px-8 pt-3 text-primary-foreground text-xl leading-8 font-rubik">
-              RentaCal permet de calculer la rentabilité locative brute et nette
-              d'un bien, <br />
-              mais aussi les frais bancaires et le cout d'un pret immobilier.
+            <Layout className="mx-auto w-full max-w-screen-xl flex flex-row justify-center text-center px-8 pt-3 text-primary-foreground text-lg leading-8 font-rubik">
+              RentaCal permet d'évaluer la rentabilité de votre projet
+              immobilier en quelques clics. Simulez vos revenus locatifs et vos
+              charges en toute simplicité. Prenez des décisions éclairées pour
+              optimiser vos investissements.
             </Layout>
           </div>
 
@@ -48,6 +50,8 @@ export default function Home() {
             Accéder au simulateur
             <IoArrowForwardCircle size={25} className="ml-3" />
           </Link>
+
+          <VideoPresentation />
         </Layout>
       </div>
     </>
