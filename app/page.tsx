@@ -35,11 +35,9 @@ export default function Home() {
           </Section>
 
           <div>
-            <Layout className="mx-auto w-full max-w-screen-xl flex flex-row justify-center text-center px-8 pt-3 text-primary-foreground text-sm lg:text-lg leading-8 font-rubik">
-              RentaCal permet d'évaluer la rentabilité de votre projet
-              immobilier en quelques clics. Simulez vos revenus locatifs et vos
-              charges en toute simplicité. Prenez des décisions éclairées pour
-              optimiser vos investissements.
+            <Layout className="mx-auto w-full max-w-screen-xl flex flex-row justify-center text-center px-8 lg:px-28 pt-3 text-primary-foreground text-sm lg:text-lg leading-8 font-rubik">
+              Simulez vos revenus locatifs et vos charges en toute simplicité.
+              Prenez des décisions éclairées pour optimiser vos investissements.
             </Layout>
           </div>
 
