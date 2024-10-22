@@ -64,7 +64,10 @@ export const SimulationResult = () => {
     <LayoutResult>
       <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
       <div id="results" className="flex flex-col gap-y-8 gap-x-3 lg:w-2/3">
-        <div id="rentabilites" className="flex gap-y-8 gap-x-3 w-full">
+        <div
+          id="rentabilites"
+          className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
+        >
           <RentabiliteBrute rentabiliteBrute={result.data?.rentabiliteBrute} />
           <RentabiliteNette rentabiliteNette={result.data?.rentabiliteNette} />
         </div>

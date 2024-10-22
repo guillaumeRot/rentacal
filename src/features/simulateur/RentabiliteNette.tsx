@@ -8,7 +8,7 @@ export type RentabiliteNetteProps = {
 
 export const RentabiliteNette = (props: RentabiliteNetteProps) => {
   return (
-    <Card className="rounded-3xl w-2/4 max-h-32">
+    <Card className="rounded-3xl lg:w-2/4 max-h-32">
       <CardHeader>
         <CardTitle>Rentabilité Nette</CardTitle>
       </CardHeader>
