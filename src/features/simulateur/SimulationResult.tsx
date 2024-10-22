@@ -16,13 +16,16 @@ import { DataType } from "./simulateur.schema";
 export const SimulationResult = () => {
   const queryClient = useQueryClient();
 
-  // Fonction qui lit localStorage une seule fois à l'initialisation du state
-  const getInitialValue = () => {
-    const filterValues = localStorage.getItem("filterValues"); // Récupère la valeur stockée
-    return filterValues ? JSON.parse(filterValues) : 0; // Parse si elle existe, sinon 0
-  };
-
-  const [filtersValues, setFiltersValues] = useState(getInitialValue); // Initialise le state
+  const [filtersValues, setFiltersValues] = useState({
+    prixAchat: 100000,
+    dureePret: 15,
+    tauxPret: 1,
+    loyersTotal: 500,
+    fraisNotaire: 0,
+    montantTravaux: 0,
+    impotsFoncier: 0,
+    chargesCopro: 0,
+  }); // Initialise le state
 
   const result = useQuery({
     queryKey: ["result"],
