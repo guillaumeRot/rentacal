@@ -37,11 +37,10 @@ export default function Home() {
             <Layout className="mx-auto w-full max-w-screen-xl flex flex-row justify-center text-center px-8 pt-3 text-primary-foreground text-xl leading-8 font-rubik">
               RentaCal permet de calculer la rentabilité locative brute et nette
               d'un bien, <br />
-              mais aussi les frais bancaire et le cout d'un pret immobilier.
+              mais aussi les frais bancaires et le cout d'un pret immobilier.
             </Layout>
           </div>
 
-          {/* <Button className="max-w-60"> */}
           <Link
             href="/simulateur"
             className="mx-auto bg-accent text-accent-foreground px-8 py-4 rounded-full font-poppins text-base flex hover:bg-[rgba(85,137,195,1)]"
@@ -49,7 +48,6 @@ export default function Home() {
             Accéder au simulateur
             <IoArrowForwardCircle size={25} className="ml-3" />
           </Link>
-          {/* </Button> */}
         </Layout>
       </div>
     </>
