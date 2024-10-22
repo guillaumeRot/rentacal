@@ -12,7 +12,7 @@ export const RentabiliteBrute = (props: RentabiliteBruteProps) => {
       <CardHeader>
         <CardTitle>Rentabilité brute</CardTitle>
       </CardHeader>
-      <CardContent className="gap-4 text-4xl flex font-extrabold text-secondary-foreground">
+      <CardContent className="gap-4 text-2xl lg:text-4xl flex font-extrabold text-secondary-foreground">
         <PourcentageFormat value={props.rentabiliteBrute} className="w-3/4" />
         <IoTrendingUpOutline />
       </CardContent>

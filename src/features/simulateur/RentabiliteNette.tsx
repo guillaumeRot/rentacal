@@ -12,7 +12,7 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
       <CardHeader>
         <CardTitle>Rentabilité Nette</CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-4 text-4xl flex font-extrabold text-secondary-foreground">
+      <CardContent className="grid gap-4 text-2xl lg:text-4xl flex font-extrabold text-secondary-foreground">
         <PourcentageFormat value={props.rentabiliteNette} className="w-3/4" />
         <IoWalletOutline />
       </CardContent>

@@ -11,7 +11,7 @@ export const CoutPret = (props: CoutPretProps) => {
       <CardHeader>
         <CardTitle>Coût du prêt</CardTitle>
       </CardHeader>
-      <CardContent className="grid text-2xl">
+      <CardContent className="grid text-xl lg:text-2xl">
         <MontantFormat value={props.coutPret} />
       </CardContent>
     </Card>

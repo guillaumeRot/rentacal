@@ -11,7 +11,7 @@ export const FraisBancaire = (props: FraisBancaireProps) => {
       <CardHeader>
         <CardTitle>Frais bancaires</CardTitle>
       </CardHeader>
-      <CardContent className="grid text-2xl">
+      <CardContent className="grid text-xl lg:text-2xl">
         <MontantFormat value={props.fraisBancaire} />
       </CardContent>
     </Card>
