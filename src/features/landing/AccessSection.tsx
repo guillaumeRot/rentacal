@@ -31,7 +31,7 @@ export const AccessSection = (props: AccessSectionProps) => {
   const mutation = useMutation({
     mutationFn: async (values: AccessType) => {
       console.log("TEST GUI 2:", values);
-      const { data, serverError } = await insertMail(values);
+      const res = await insertMail(values);
       // if (serverError || !data) {
       //   toast.error(serverError);
       //   return;
