@@ -37,12 +37,6 @@ export const AccessSection = (props: AccessSectionProps) => {
       const res = await insertMail(values);
       router.push("/simulateur");
       router.refresh();
-      // redirect("/simulateur");
-      // if (serverError || !data) {
-      //   toast.error(serverError);
-      //   return;
-      // }
-      // await queryClient.invalidateQueries();
     },
   });
 
@@ -50,15 +44,10 @@ export const AccessSection = (props: AccessSectionProps) => {
     <div className="mx-auto w-1/2 px-8 py-4">
       <Form {...form}>
         <form
-          //   onSubmit={async (values) => {
-          //   await mutation.mutateAsync(values);
-          // }}
           onSubmit={form.handleSubmit(async (values: AccessType) => {
             console.log("TEST GUI:", values);
             await mutation.mutateAsync(values);
-            // onSubmit(values);
           })}
-          // className="w-2/3 space-y-6 mx-auto"
         >
           <FormField
             control={form.control}
@@ -72,7 +61,6 @@ export const AccessSection = (props: AccessSectionProps) => {
                     <Input
                       placeholder=""
                       {...field}
-                      // className="mr-2"
                       onChange={(event) => field.onChange(event.target.value)}
                     />
                   </FormControl>
@@ -85,27 +73,12 @@ export const AccessSection = (props: AccessSectionProps) => {
           <Button
             type="submit"
             className="bg-accent text-accent-foreground mx-auto px-8 py-6 mt-4 rounded-full font-poppins text-base flex hover:bg-[rgba(85,137,195,1)]"
-            // className="w-full bg-accent text-accent-foreground"
           >
-            {/* <Link
-            type="submit"
-            href="/simulateur"
-            className="bg-accent text-accent-foreground px-8 py-4 rounded-full font-poppins text-base flex hover:bg-[rgba(85,137,195,1)]"
-          > */}
             Accéder au simulateur
             <IoArrowForwardCircle size={25} className="ml-3" />
-            {/* </Link> */}
           </Button>
         </form>
       </Form>
-
-      {/* <Link
-        href="/simulateur"
-        className="bg-accent text-accent-foreground px-8 py-4 rounded-full font-poppins text-base flex hover:bg-[rgba(85,137,195,1)]"
-      >
-        Accéder au simulateur
-        <IoArrowForwardCircle size={25} className="ml-3" />
-      </Link> */}
     </div>
   );
 };
