@@ -34,3 +34,8 @@ export const ResultSchema = z.object({
   fraisBancaires: z.number(),
   coutPret: z.number(),
 });
+
+export const AccessSchema = z.object({
+  email: z.string().optional(),
+});
+export type AccessType = z.infer<typeof AccessSchema>;
