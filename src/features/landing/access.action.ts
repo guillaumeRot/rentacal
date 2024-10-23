@@ -16,18 +16,13 @@ import { AccessSchema } from "../simulateur/simulateur.schema";
 export const insertMail = action
   .schema(AccessSchema)
   .action(async ({ parsedInput: { email } }) => {
-    // if (username === "johndoe" && password === "123456") {
-    //   return {
-    //     success: "Successfully logged in",
-    //   };
-    // }
-
-    // return { failure: "Incorrect credentials" };
-    console.log("TEST GUI 3:", email);
-    const user = await prisma.utilisateur.create({
-      data: {
-        email: email,
-      },
-    });
-    return user;
+    if (email) {
+      console.log("TEST GUI 3:", email);
+      const user = await prisma.utilisateur.create({
+        data: {
+          email: email,
+        },
+      });
+      return user;
+    }
   });
