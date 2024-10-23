@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { IoArrowForwardCircle } from "react-icons/io5";
 import { z } from "zod";
@@ -23,6 +24,8 @@ export type AccessSectionProps = {
 };
 
 export const AccessSection = (props: AccessSectionProps) => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof AccessSchema>>({
     resolver: zodResolver(AccessSchema),
     defaultValues: props.defaultValues,
@@ -32,6 +35,9 @@ export const AccessSection = (props: AccessSectionProps) => {
     mutationFn: async (values: AccessType) => {
       console.log("TEST GUI 2:", values);
       const res = await insertMail(values);
+      router.push("/simulateur");
+      router.refresh();
+      // redirect("/simulateur");
       // if (serverError || !data) {
       //   toast.error(serverError);
       //   return;
