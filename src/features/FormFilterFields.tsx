@@ -56,10 +56,12 @@ export function FormFilterFields({
                   {/* <MontantInputMask {...field} /> */}
                   <Input
                     type="number"
-                    placeholder="150 000"
+                    placeholder="0"
                     {...field}
                     className="mr-2"
-                    onChange={(event) => field.onChange(+event.target.value)}
+                    onChange={(event) =>
+                      field.onChange(parseFloat(event.target.value))
+                    }
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />
@@ -123,10 +125,12 @@ export function FormFilterFields({
                 <FormControl>
                   <Input
                     type="number"
-                    placeholder="500"
+                    placeholder="0"
                     {...field}
                     className="mr-2"
-                    onChange={(event) => field.onChange(+event.target.value)}
+                    onChange={(event) =>
+                      field.onChange(parseFloat(event.target.value))
+                    }
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />

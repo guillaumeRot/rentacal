@@ -1,10 +1,14 @@
 import { z } from "zod";
 
 export const DataSchema = z.object({
-  prixAchat: z.number(),
+  prixAchat: z.number({
+    message: "Renseignez un nombre valide",
+  }),
   dureePret: z.number(),
   tauxPret: z.number(),
-  loyersTotal: z.number(),
+  loyersTotal: z.number({
+    message: "Renseignez un nombre valide",
+  }),
   fraisNotaire: z.number(),
   montantTravaux: z.number(),
   impotsFoncier: z.number(),
