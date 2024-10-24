@@ -33,10 +33,9 @@ export const AccessSection = (props: AccessSectionProps) => {
 
   const mutation = useMutation({
     mutationFn: async (values: AccessType) => {
-      console.log("TEST GUI 2:", values);
-      const res = await insertMail(values);
       router.push("/simulateur");
       router.refresh();
+      await insertMail(values);
     },
   });
 
@@ -45,7 +44,6 @@ export const AccessSection = (props: AccessSectionProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (values: AccessType) => {
-            console.log("TEST GUI:", values);
             await mutation.mutateAsync(values);
           })}
         >
