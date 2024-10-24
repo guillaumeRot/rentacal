@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Rentacal",
-  description: "Calculater de rentabilité immobilière",
+  description: "Calculateur de rentabilité immobilière",
   // metadataBase: new URL(getServerUrl()),
 };
 
