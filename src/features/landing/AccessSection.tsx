@@ -33,17 +33,17 @@ export const AccessSection = (props: AccessSectionProps) => {
 
   const mutation = useMutation({
     mutationFn: async (values: AccessType) => {
-      router.push("/simulateur");
-      router.refresh();
       await insertMail(values);
     },
   });
 
   return (
-    <div className="mx-auto w-1/2 px-8 py-4">
+    <div className="mx-auto w-full lg:w-1/2 px-8 py-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (values: AccessType) => {
+            router.push("/simulateur");
+            router.refresh();
             await mutation.mutateAsync(values);
           })}
         >
