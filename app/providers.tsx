@@ -20,7 +20,13 @@ export const Providers = (props: ProvidersProps) => {
     >
       <QueryClientProvider client={queryClient}>
         <Toaster />
+        {/* <SidebarProvider>
+          <AppSidebar /> */}
+        {/* <main> */}
+        {/* <SidebarTrigger /> */}
         {props.children}
+        {/* </main>
+        </SidebarProvider> */}
       </QueryClientProvider>
     </ThemeProvider>
     // </SessionProvider>
