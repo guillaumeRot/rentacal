@@ -1,17 +1,16 @@
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Header } from "@/features/Header";
+import { RentaCalSidebar } from "@/features/RentaCalSidebar";
 import { SimulationResult } from "@/features/simulateur/SimulationResult";
 
 export default function Result() {
   return (
-    // <SidebarProvider>
-    //   <AppSidebar />
-    //   <main>
-    //    <SidebarTrigger />
-    <div>
-      <Header />
-      <SimulationResult />
-    </div>
-    // </main>
-    //</SidebarProvider>
+    <SidebarProvider>
+      <RentaCalSidebar />
+      <div className="w-screen">
+        <Header />
+        <SimulationResult />
+      </div>
+    </SidebarProvider>
   );
 }
