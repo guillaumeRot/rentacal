@@ -64,12 +64,6 @@ export const SimulationResult = () => {
     <LayoutResult>
       <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
       <div id="results" className="flex flex-col gap-y-8 gap-x-3 lg:w-2/3">
-        {/* <Link
-          href={"/suggestion"}
-          className="bg-accent text-accent-foreground mx-auto px-8 py-4 rounded-full font-poppins text-base flex hover:bg-[rgba(85,137,195,1)]"
-        >
-          Faire une suggestion
-        </Link> */}
         <div
           id="rentabilites"
           className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
