@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -12,6 +13,8 @@ import { ResultatMensuelType } from "./simulateur.schema";
 
 export type TabResultatProps = {
   resultatsMensuel?: ResultatMensuelType[];
+  mensualites?: number;
+  cashflowBrut?: number;
 };
 
 export const TabResultat = (props: TabResultatProps) => {
@@ -19,6 +22,20 @@ export const TabResultat = (props: TabResultatProps) => {
     return (
       <Card className="rounded-3xl py-8 w-full h-full">
         <CardContent className="grid gap-4">
+          <div className="flex">
+            <Badge variant="outline" className="w-1/2 mx-14">
+              <span className="mx-auto text-base">
+                Mensualités :&nbsp;
+                <MontantFormat value={props.mensualites} />
+              </span>
+            </Badge>
+            <Badge variant="outline" className="w-1/2 mx-14">
+              <span className="mx-auto text-base">
+                Cashflow brut :&nbsp;
+                <MontantFormat value={props.cashflowBrut} />
+              </span>
+            </Badge>
+          </div>
           <Table>
             <TableHeader>
               <TableRow>
@@ -27,8 +44,6 @@ export const TabResultat = (props: TabResultatProps) => {
                 <TableHead>Mois</TableHead>
                 <TableHead>Prêt restant</TableHead>
                 <TableHead>Intêrets</TableHead>
-                <TableHead>Mensualité</TableHead>
-                <TableHead>Résultat</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -48,12 +63,6 @@ export const TabResultat = (props: TabResultatProps) => {
                   </TableCell>
                   <TableCell>
                     <MontantFormat value={resultat.interetsPret} />
-                  </TableCell>
-                  <TableCell>
-                    <MontantFormat value={resultat.mensualite} />
-                  </TableCell>
-                  <TableCell>
-                    <MontantFormat value={resultat.resultat} />
                   </TableCell>
                 </TableRow>
                 //     <CollapsibleContent>

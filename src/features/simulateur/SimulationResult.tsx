@@ -76,7 +76,11 @@ export const SimulationResult = () => {
           <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
           <CoutPret coutPret={result.data?.coutPret} />
         </div>
-        <TabResultat resultatsMensuel={result.data?.resultatsMensuel} />
+        <TabResultat
+          resultatsMensuel={result.data?.resultatsMensuel}
+          mensualites={result.data?.mensualites}
+          cashflowBrut={result.data?.cashflowBrut}
+        />
       </div>
     </LayoutResult>
   );

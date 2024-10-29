@@ -21,8 +21,6 @@ export const ResultatMensuel = z.object({
   mois: z.string(),
   pretRestant: z.number(),
   interetsPret: z.number(),
-  mensualite: z.number(),
-  resultat: z.number(),
 });
 export type ResultatMensuelType = z.infer<typeof ResultatMensuel>;
 
@@ -31,6 +29,8 @@ export const ResultSchema = z.object({
   rentabiliteNette: z.number(),
   montantPret: z.number(),
   resultatsMensuel: z.array(ResultatMensuel),
+  mensualites: z.number(),
+  cashflowBrut: z.number(),
   fraisBancaires: z.number(),
   coutPret: z.number(),
 });

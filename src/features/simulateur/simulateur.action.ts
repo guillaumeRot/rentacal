@@ -31,11 +31,17 @@ export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
   .action(async (parsedInput) => {
+    let mensualites = getMensualite(parsedInput.parsedInput);
     return {
       rentabiliteBrute: getRentabiliteBrute(parsedInput.parsedInput),
       rentabiliteNette: getRentabiliteNette(parsedInput.parsedInput),
       montantPret: getMontantPret(parsedInput.parsedInput),
-      resultatsMensuel: getResultatsMensuel(parsedInput.parsedInput),
+      resultatsMensuel: getResultatsMensuel(
+        parsedInput.parsedInput,
+        mensualites
+      ),
+      mensualites: mensualites,
+      cashflowBrut: parsedInput.parsedInput.loyersTotal - mensualites,
       fraisBancaires: getSommeFraisBancaires(resultatsMensuel),
       coutPret: getCoutPret(montantPret, sommeFraisBancaire),
     };
@@ -67,13 +73,12 @@ function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
   return prixAchat * (fraisNotaire / 100);
 }
 
-function getResultatsMensuel(values: DataType) {
+function getResultatsMensuel(values: DataType, mensualites: number) {
   resultatsMensuel = [];
   let pretRestant = values.prixAchat;
   let pretRembourse = 0;
   for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
-      const mensualite = getMensualite(values);
       const interetsPret = getMontantInteretsMensuel(
         pretRestant,
         getTauxInteretMensuel(values.tauxPret)
@@ -84,11 +89,9 @@ function getResultatsMensuel(values: DataType) {
         mois: mapMoisByIndex[cptMois],
         pretRestant: pretRestant,
         interetsPret: interetsPret,
-        mensualite: mensualite,
-        resultat: values.loyersTotal - mensualite,
       });
 
-      pretRembourse = mensualite - interetsPret;
+      pretRembourse = mensualites - interetsPret;
       pretRestant = pretRestant - pretRembourse;
     }
   }
