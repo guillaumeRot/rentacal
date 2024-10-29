@@ -23,13 +23,13 @@ export const TabResultat = (props: TabResultatProps) => {
       <Card className="rounded-3xl py-8 w-full h-full">
         <CardContent className="grid gap-4">
           <div className="flex">
-            <Badge variant="outline" className="w-1/2 mx-14">
+            <Badge variant="outline" className="w-1/2 mx-4 lg:mx-14">
               <span className="mx-auto text-base">
                 Mensualités :&nbsp;
                 <MontantFormat value={props.mensualites} />
               </span>
             </Badge>
-            <Badge variant="outline" className="w-1/2 mx-14">
+            <Badge variant="outline" className="w-1/2 mx-4 lg:mx-14">
               <span className="mx-auto text-base">
                 Cashflow brut :&nbsp;
                 <MontantFormat value={props.cashflowBrut} />
