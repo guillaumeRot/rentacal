@@ -53,7 +53,6 @@ export function FormFilterFields({
               <FormLabel>Prix d&apos;achat</FormLabel>
               <div className="flex">
                 <FormControl>
-                  {/* <MontantInputMask {...field} /> */}
                   <Input
                     type="number"
                     placeholder="0"
@@ -181,7 +180,7 @@ export function FormFilterFields({
                           {...field}
                           className="mr-2"
                           onChange={(event) =>
-                            field.onChange(+event.target.value)
+                            field.onChange(parseFloat(event.target.value))
                           }
                         />
                       </FormControl>
@@ -207,7 +206,7 @@ export function FormFilterFields({
                           {...field}
                           className="mr-2"
                           onChange={(event) =>
-                            field.onChange(+event.target.value)
+                            field.onChange(parseFloat(event.target.value))
                           }
                         />
                       </FormControl>
@@ -233,7 +232,7 @@ export function FormFilterFields({
                           {...field}
                           className="mr-2"
                           onChange={(event) =>
-                            field.onChange(+event.target.value)
+                            field.onChange(parseFloat(event.target.value))
                           }
                         />
                       </FormControl>

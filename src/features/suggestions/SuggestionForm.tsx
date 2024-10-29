@@ -13,9 +13,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
-import { SuggestionSchema } from "./suggestion.schema";
+import { sendSuggestion } from "./suggestion.action";
+import { SuggestionSchema, SuggestionType } from "./suggestion.schema";
 
 // export type SuggestionFormProps = {
 //   onSubmit: (values: DataType) => void;
@@ -81,17 +84,25 @@ export function SuggestionForm() {
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: async (values: SuggestionType) => {
+      const res = await sendSuggestion(values);
+    },
+    onError: () => {
+      toast.error("Une erreur est survenue lors de l'envoi");
+    },
+    onSuccess: () => {
+      toast.success("Merci pour votre suggestion !");
+    },
+  });
+
   return (
     <LayoutResult>
       <Form {...form}>
         <form
-          // onSubmit={form.handleSubmit(async (values: SuggestionType) => {
-          //   onSubmit(values);
-          // })}
-          onSubmit={async (values) => {
-            console.log("TEST GUI");
-            // await mutation.mutateAsync(values);
-          }}
+          onSubmit={form.handleSubmit(async (values: SuggestionType) => {
+            await mutation.mutateAsync(values);
+          })}
           className="w-2/3 space-y-6 mx-auto"
         >
           <FormField

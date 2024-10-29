@@ -1,4 +1,4 @@
-import { Home } from "lucide-react";
+import { Home, Inbox } from "lucide-react";
 
 import {
   Sidebar,
@@ -18,11 +18,11 @@ const items = [
     url: "/simulateur",
     icon: Home,
   },
-  // {
-  //   title: "Suggestion",
-  //   url: "/suggestion",
-  //   icon: Inbox,
-  // },
+  {
+    title: "Suggestion",
+    url: "/suggestion",
+    icon: Inbox,
+  },
 ];
 
 export function RentaCalSidebar() {
