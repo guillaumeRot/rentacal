@@ -197,7 +197,7 @@ export function FormFilterFields({
                 name="impotsFoncier"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Impots foncier</FormLabel>
+                    <FormLabel>Impots fonciers</FormLabel>
                     <div className="flex">
                       <FormControl>
                         <Input

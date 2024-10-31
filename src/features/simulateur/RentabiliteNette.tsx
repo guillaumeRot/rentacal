@@ -13,11 +13,21 @@ export type RentabiliteNetteProps = {
 export const RentabiliteNette = (props: RentabiliteNetteProps) => {
   const [open, setOpen] = useState(false);
 
+  let bgColor = "#22C55E";
+  if ((props.rentabiliteNette ?? 0) < 4) {
+    bgColor = "#DC2626";
+  } else if ((props.rentabiliteNette ?? 0) < 7) {
+    bgColor = "#F59E0B";
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Card className="rounded-3xl lg:w-2/4 max-h-36">
+      <Card
+        className="rounded-3xl lg:w-2/4 max-h-36 text-white"
+        style={{ backgroundColor: `${bgColor}` }}
+      >
         <CardHeader className="relative">
-          <CardTitle>Rentabilité Nette</CardTitle>
+          <CardTitle className="text-black">Rentabilité nette</CardTitle>
           <DialogTrigger asChild>
             <Link
               href="#"
@@ -28,12 +38,12 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
             >
               <BsQuestionCircleFill
                 size={18}
-                className="absolute top-6 right-6 text-blue-800"
+                className="absolute top-6 right-6"
               />
             </Link>
           </DialogTrigger>
         </CardHeader>
-        <CardContent className="grid gap-4 text-2xl lg:text-4xl font-extrabold text-secondary-foreground">
+        <CardContent className="grid gap-4 text-2xl lg:text-4xl font-semibold">
           <div className="flex">
             <PourcentageFormat
               value={props.rentabiliteNette}

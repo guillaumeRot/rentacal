@@ -57,7 +57,9 @@ function getRentabiliteNette(values: DataType) {
     values.fraisNotaire
   );
   return (
-    ((values.loyersTotal * 12) / (values.prixAchat + montantFraisNotaire)) * 100
+    ((values.loyersTotal * 12 - values.impotsFoncier - values.chargesCopro) /
+      (values.prixAchat + montantFraisNotaire)) *
+    100
   );
 }
 
