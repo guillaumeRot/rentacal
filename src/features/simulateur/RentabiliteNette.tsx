@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Link from "next/link";
 import { useState } from "react";
+import { BsQuestionCircleFill } from "react-icons/bs";
 import { IoWalletOutline } from "react-icons/io5";
 import { PourcentageFormat } from "../PourcentageFormat";
 
@@ -14,9 +15,23 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Card className="rounded-3xl lg:w-2/4 max-h-40">
-        <CardHeader>
+      <Card className="rounded-3xl lg:w-2/4 max-h-36">
+        <CardHeader className="relative">
           <CardTitle>Rentabilité Nette</CardTitle>
+          <DialogTrigger asChild>
+            <Link
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(true);
+              }}
+            >
+              <BsQuestionCircleFill
+                size={18}
+                className="absolute top-6 right-6 text-blue-800"
+              />
+            </Link>
+          </DialogTrigger>
         </CardHeader>
         <CardContent className="grid gap-4 text-2xl lg:text-4xl font-extrabold text-secondary-foreground">
           <div className="flex">
@@ -26,18 +41,6 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
             />
             <IoWalletOutline />
           </div>
-          <DialogTrigger asChild>
-            <Link
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(true);
-              }}
-              className="text-xs text-black underline"
-            >
-              Plus de détails...
-            </Link>
-          </DialogTrigger>
         </CardContent>
       </Card>
 
@@ -46,7 +49,7 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
         <p>Règle de calcul:</p>
         <p>
           R = (loyers annuel - frais notaires - impots foncier - charges copro)
-          / prix achat
+          x 100 / prix achat
         </p>
 
         <button
