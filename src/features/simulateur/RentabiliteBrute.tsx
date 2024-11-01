@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { MathJax } from "better-react-mathjax";
 import Link from "next/link";
 import { useState } from "react";
 import { BsQuestionCircleFill } from "react-icons/bs";
@@ -55,10 +57,29 @@ export const RentabiliteBrute = (props: RentabiliteBruteProps) => {
         </CardContent>
       </Card>
 
-      <DialogContent className="sm:max-w-[425px] p-4">
-        <h2 className="text-lg font-bold">Rentabilité brute</h2>
-        <p>Règle de calcul:</p>
-        <p>R = loyers annuel x 100 / prix achat</p>
+      <DialogContent className="sm:max-w-[425px] p-4 text-justify">
+        <DialogTitle className="text-lg font-bold">
+          Rentabilité brute
+        </DialogTitle>
+        <p>
+          La rentabilité brute d'un investissement immobilier locatif se calcule
+          en pourcentage, et elle mesure le rendement annuel de l'investissement
+          sans tenir compte des charges, impôts, et autres frais. La formule est
+          la suivante :
+        </p>
+        <MathJax className="text-xl mx-auto">
+          {
+            "\\(\\text{R} = \\frac{\\text{Loyers annuels} \\times 100}{\\text{Prix d'achat}} \\)"
+          }
+        </MathJax>
+        <p>Où :</p>
+        <ul className="list-disc pl-4 pt-2">
+          <li>Loyer annuel est la somme des loyers perçus sur une année.</li>
+          <li>
+            Prix d'achat du bien inclut le coût total d'acquisition, y compris
+            les frais d'achat (comme les frais de notaire).
+          </li>
+        </ul>
 
         <button
           onClick={() => setOpen(false)}

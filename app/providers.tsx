@@ -3,6 +3,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/features/theme/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MathJaxContext } from "better-react-mathjax";
 import { PropsWithChildren } from "react";
 
 const queryClient = new QueryClient();
@@ -20,7 +21,7 @@ export const Providers = (props: ProvidersProps) => {
     >
       <QueryClientProvider client={queryClient}>
         <Toaster />
-        {props.children}
+        <MathJaxContext>{props.children}</MathJaxContext>
       </QueryClientProvider>
     </ThemeProvider>
     // </SessionProvider>
