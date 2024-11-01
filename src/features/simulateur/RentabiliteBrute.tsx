@@ -37,7 +37,7 @@ export const RentabiliteBrute = (props: RentabiliteBruteProps) => {
               }}
             >
               <BsQuestionCircleFill
-                size={18}
+                size={25}
                 className="absolute top-6 right-6"
               />
             </Link>

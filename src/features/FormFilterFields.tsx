@@ -43,7 +43,7 @@ export function FormFilterFields({
         onSubmit={form.handleSubmit(async (values: DataType) => {
           onSubmit(values);
         })}
-        className="w-2/3 space-y-6 mx-auto"
+        className="space-y-6"
       >
         <FormField
           control={form.control}
@@ -197,7 +197,7 @@ export function FormFilterFields({
                 name="impotsFoncier"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Impots fonciers</FormLabel>
+                    <FormLabel>Impôts fonciers</FormLabel>
                     <div className="flex">
                       <FormControl>
                         <Input
