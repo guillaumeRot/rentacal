@@ -1,13 +1,13 @@
 import { Layout } from "@/components/layout";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import Image from "next/image";
 import Link from "next/link";
+import { SidebarTrigger } from "./theme/SidebarTrigger";
 
 export const Header = () => {
   return (
-    <header className="w-full border-b border-border bg-popover">
+    <header className="w-full border-b border-border bg-popover flex">
       <SidebarTrigger />
-      <Layout>
+      <Layout className="pb-2 pt-2">
         <div className="mx-auto">
           <Link href="/">
             <Image
