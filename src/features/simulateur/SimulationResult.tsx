@@ -19,6 +19,7 @@ export const SimulationResult = () => {
 
   const [filtersValues, setFiltersValues] = useState({
     prixAchat: 100000,
+    fraisAgence: 0,
     dureePret: 15,
     tauxPret: 1,
     loyersTotal: 500,
@@ -26,13 +27,14 @@ export const SimulationResult = () => {
     montantTravaux: 0,
     impotsFoncier: 0,
     chargesCopro: 0,
-  }); // Initialise le state
+  });
 
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
       const res = await calculRentabilite({
         prixAchat: filtersValues.prixAchat,
+        fraisAgence: filtersValues.fraisAgence,
         dureePret: filtersValues.dureePret,
         tauxPret: filtersValues.tauxPret,
         loyersTotal: filtersValues.loyersTotal,

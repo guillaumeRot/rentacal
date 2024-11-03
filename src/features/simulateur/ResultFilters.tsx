@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormFilterFields, FormFilterFieldsProps } from "../FormFilterFields";
+import { FormFilterFields, FormFilterFieldsProps } from "./FormFilterFields";
 import { DataType } from "./simulateur.schema";
 
 export function ResultFilters({

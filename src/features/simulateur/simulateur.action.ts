@@ -34,9 +34,15 @@ export const calculRentabilite = action
     let mensualites = getMensualite(parsedInput.parsedInput);
     let montantPret = getMontantPret(parsedInput.parsedInput);
     return {
-      rentabiliteBrute: getRentabiliteBrute(parsedInput.parsedInput),
-      rentabiliteNette: getRentabiliteNette(parsedInput.parsedInput),
-      montantPret: getMontantPret(parsedInput.parsedInput),
+      rentabiliteBrute: getRentabiliteBrute(
+        parsedInput.parsedInput.loyersTotal,
+        montantPret
+      ),
+      rentabiliteNette: getRentabiliteNette(
+        parsedInput.parsedInput,
+        montantPret
+      ),
+      montantPret: montantPret,
       resultatsMensuel: getResultatsMensuel(
         parsedInput.parsedInput,
         mensualites,
@@ -49,18 +55,14 @@ export const calculRentabilite = action
     };
   });
 
-function getRentabiliteBrute(values: DataType) {
-  return ((values.loyersTotal * 12) / values.prixAchat) * 100;
+function getRentabiliteBrute(loyersTotal: number, montantPret: number) {
+  return ((loyersTotal * 12) / montantPret) * 100;
 }
 
-function getRentabiliteNette(values: DataType) {
-  const montantFraisNotaire = getMontantFraisNotaires(
-    values.prixAchat,
-    values.fraisNotaire
-  );
+function getRentabiliteNette(values: DataType, montantPret: number) {
   return (
     ((values.loyersTotal * 12 - values.impotsFoncier - values.chargesCopro) /
-      (values.prixAchat + montantFraisNotaire)) *
+      montantPret) *
     100
   );
 }
@@ -69,13 +71,14 @@ function getMontantPret(values: DataType) {
   montantPret =
     values.prixAchat +
     values.montantTravaux +
-    getMontantFraisNotaires(values.prixAchat, values.fraisNotaire);
+    values.fraisAgence +
+    values.fraisNotaire;
   return montantPret;
 }
 
-function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
-  return prixAchat * (fraisNotaire / 100);
-}
+// function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
+//   return prixAchat * (fraisNotaire / 100);
+// }
 
 function getResultatsMensuel(
   values: DataType,

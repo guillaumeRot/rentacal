@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
-import { DataSchema, DataType } from "./simulateur/simulateur.schema";
+import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsProps = {
   onSubmit: (values: DataType) => void;
@@ -119,7 +119,7 @@ export function FormFilterFields({
           name="loyersTotal"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Somme des loyers</FormLabel>
+              <FormLabel>Somme des loyers mensuel</FormLabel>
               <div className="flex">
                 <FormControl>
                   <Input
@@ -146,20 +146,46 @@ export function FormFilterFields({
               <FormField
                 control={form.control}
                 name="fraisNotaire"
-                render={({ field: { value, onChange } }) => (
+                render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Frais de notaire : {value} %</FormLabel>
+                    <FormLabel>Frais de notaire</FormLabel>
                     <FormControl>
-                      <Slider
-                        min={0}
-                        max={20}
-                        step={0.1}
-                        defaultValue={[value]}
-                        onValueChange={(value) => {
-                          onChange(value[0]);
-                        }}
+                      <Input
+                        type="number"
+                        placeholder="0"
+                        {...field}
+                        className="mr-2"
+                        onChange={(event) =>
+                          field.onChange(parseFloat(event.target.value))
+                        }
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="fraisAgence"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Frais d'agence</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="0"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) =>
+                            field.onChange(parseFloat(event.target.value))
+                          }
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
