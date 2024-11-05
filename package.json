@@ -55,6 +55,7 @@
     "next-auth": "^5.0.0-beta.22",
     "next-safe-action": "^7.9.3",
     "next-themes": "^0.3.0",
+    "nextjs-google-analytics": "^2.3.7",
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
