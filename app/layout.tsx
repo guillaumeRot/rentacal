@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={cn(inter.className, "h-full")}>
         <Providers>{children}</Providers>
+        <GoogleAnalytics gaId="G-CJ6SFG2EWQ" />
       </body>
     </html>
   );
