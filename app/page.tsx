@@ -7,16 +7,14 @@ import VideoPresentation from "@/features/landing/VideoPresentation";
 
 export default function Home() {
   return (
-    <>
-      <div>
-        <Layout>
-          <HeaderSection />
-          <TitleSection />
-          <SubtitleSection />
-          <AccessSection />
-          <VideoPresentation />
-        </Layout>
-      </div>
-    </>
+    <div>
+      <Layout>
+        <HeaderSection />
+        <TitleSection />
+        <SubtitleSection />
+        <AccessSection />
+        <VideoPresentation />
+      </Layout>
+    </div>
   );
 }

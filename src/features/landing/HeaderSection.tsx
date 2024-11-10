@@ -13,10 +13,9 @@ export const HeaderSection = () => {
       <div className="justify-self-end">
         <Link
           href={"/login"}
-          className="w-1/2 bg-accent text-accent-foreground px-8 py-2 rounded-full text-sm hover:bg-[rgba(85,137,195,1)]"
+          className="w-1/2 bg-accent text-accent-foreground px-6 py-2 rounded-full text-sm hover:bg-[rgba(85,137,195,1)]"
         >
           Se connecter
-          {/* <IoArrowForwardCircle size={25} className="ml-3" /> */}
         </Link>
       </div>
     </div>
