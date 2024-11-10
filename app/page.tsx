@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { AccessSection } from "@/features/landing/AccessSection";
-import { LogoSection } from "@/features/landing/LogoSection";
+import { HeaderSection } from "@/features/landing/HeaderSection";
 import { SubtitleSection } from "@/features/landing/SubtitleSection";
 import { TitleSection } from "@/features/landing/TitleSection";
 import VideoPresentation from "@/features/landing/VideoPresentation";
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <div>
         <Layout>
-          <LogoSection />
+          <HeaderSection />
           <TitleSection />
           <SubtitleSection />
           <AccessSection />
