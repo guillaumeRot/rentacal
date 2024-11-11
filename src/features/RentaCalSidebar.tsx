@@ -1,4 +1,6 @@
-import { Home, Inbox } from "lucide-react";
+"use client";
+
+import { Home, Inbox, LogOut } from "lucide-react";
 
 import {
   Sidebar,
@@ -10,6 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { singOutAction } from "./auth/auth.action";
 
 // Menu items.
 const items = [
@@ -43,6 +46,19 @@ export function RentaCalSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem key="logout">
+                <SidebarMenuButton
+                  onClick={() => {
+                    singOutAction();
+                  }}
+                  asChild
+                >
+                  <a href="/">
+                    <LogOut size={16} className="mr-2" />
+                    <span>Logout</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
