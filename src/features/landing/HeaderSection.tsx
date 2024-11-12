@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { LoggedInButton } from "../auth/LoggedInButton";
+import { SignInButton } from "../auth/SignInButton";
 
 export const HeaderSection = () => {
   return (
@@ -11,13 +13,7 @@ export const HeaderSection = () => {
         alt="rentacal logo"
       />
       <div className="justify-self-end">
-        <LoggedInButton />
-        {/* <Link
-          href={"/login"}
-          className="w-1/2 bg-accent text-accent-foreground px-6 py-2 rounded-full text-sm hover:bg-[rgba(85,137,195,1)]"
-        >
-          Se connecter
-        </Link> */}
+        <SignInButton />
       </div>
     </div>
   );

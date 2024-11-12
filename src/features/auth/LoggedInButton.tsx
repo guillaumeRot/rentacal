@@ -1,6 +1,5 @@
 import { currentUser } from "@/auth/current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { SignInButton } from "./SignInButton";
 
 export const LoggedInButton = async () => {
@@ -11,9 +10,10 @@ export const LoggedInButton = async () => {
   }
 
   return (
-    <Button variant="outline" size="sm">
+    // <Button variant="outline" size="sm">
+    <>
       {/* {user.plan === "PREMIUM" ? <Star size={14} className="mr-2" /> : null} */}
-      <Avatar className="size-6">
+      <Avatar className="size-12">
         <AvatarFallback>{user.name?.[0]}</AvatarFallback>
         {user.image ? (
           <AvatarImage
@@ -22,6 +22,7 @@ export const LoggedInButton = async () => {
           />
         ) : null}
       </Avatar>
-    </Button>
+    </>
+    // </Button>
   );
 };

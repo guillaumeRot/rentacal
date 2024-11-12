@@ -7,7 +7,7 @@ export function SidebarTrigger() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <button onClick={toggleSidebar} className="pl-2">
+    <button onClick={toggleSidebar} className="pl-4">
       <GiHamburgerMenu size={25} />
     </button>
   );
