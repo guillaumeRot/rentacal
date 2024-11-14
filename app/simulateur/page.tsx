@@ -5,7 +5,7 @@ import { SimulationResult } from "@/features/simulateur/SimulationResult";
 
 export default function Result() {
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <RentaCalSidebar />
       <div className="w-screen">
         <Header />
