@@ -26,4 +26,7 @@ export const {
       return `${baseUrl}/simulateur`;
     },
   },
+  pages: {
+    signIn: "/auth/signin",
+  },
 });
