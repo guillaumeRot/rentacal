@@ -1,7 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Header } from "@/features/Header";
+import { Parametres } from "@/features/parametres/Parametres";
 import { RentaCalSidebar } from "@/features/RentaCalSidebar";
-import { SimulationResult } from "@/features/simulateur/SimulationResult";
 
 export default function Result() {
   return (
@@ -9,7 +9,7 @@ export default function Result() {
       <RentaCalSidebar />
       <div className="w-screen">
         <Header />
-        <SimulationResult />
+        <Parametres />
       </div>
     </SidebarProvider>
   );
