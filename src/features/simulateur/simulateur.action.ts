@@ -72,7 +72,8 @@ function getMontantPret(values: DataType) {
     values.prixAchat +
     values.montantTravaux +
     values.fraisAgence +
-    values.fraisNotaire;
+    values.fraisNotaire -
+    values.apport;
   return montantPret;
 }
 

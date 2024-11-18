@@ -22,6 +22,9 @@ export const DataSchema = z.object({
   chargesCopro: z.number({
     message: "Renseignez un nombre valide",
   }),
+  apport: z.number({
+    message: "Renseignez un nombre valide",
+  }),
 });
 export type DataType = z.infer<typeof DataSchema>;
 

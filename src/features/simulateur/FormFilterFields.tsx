@@ -58,9 +58,13 @@ export function FormFilterFields({
                     placeholder="0"
                     {...field}
                     className="mr-2"
-                    onChange={(event) =>
-                      field.onChange(parseFloat(event.target.value))
-                    }
+                    onChange={(event) => {
+                      if (event.target.value == "") {
+                        field.onChange("");
+                      } else {
+                        field.onChange(parseFloat(event.target.value));
+                      }
+                    }}
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />
@@ -127,9 +131,13 @@ export function FormFilterFields({
                     placeholder="0"
                     {...field}
                     className="mr-2"
-                    onChange={(event) =>
-                      field.onChange(parseFloat(event.target.value))
-                    }
+                    onChange={(event) => {
+                      if (event.target.value == "") {
+                        field.onChange("");
+                      } else {
+                        field.onChange(parseFloat(event.target.value));
+                      }
+                    }}
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />
@@ -149,17 +157,24 @@ export function FormFilterFields({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Frais de notaire</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="0"
-                        {...field}
-                        className="mr-2"
-                        onChange={(event) =>
-                          field.onChange(parseFloat(event.target.value))
-                        }
-                      />
-                    </FormControl>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="0"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -179,9 +194,13 @@ export function FormFilterFields({
                           placeholder="0"
                           {...field}
                           className="mr-2"
-                          onChange={(event) =>
-                            field.onChange(parseFloat(event.target.value))
-                          }
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
                         />
                       </FormControl>
                       <MdEuroSymbol className="relative top-2" size={20} />
@@ -205,9 +224,13 @@ export function FormFilterFields({
                           placeholder="5000"
                           {...field}
                           className="mr-2"
-                          onChange={(event) =>
-                            field.onChange(parseFloat(event.target.value))
-                          }
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
                         />
                       </FormControl>
                       <MdEuroSymbol className="relative top-2" size={20} />
@@ -231,9 +254,13 @@ export function FormFilterFields({
                           placeholder="1000"
                           {...field}
                           className="mr-2"
-                          onChange={(event) =>
-                            field.onChange(parseFloat(event.target.value))
-                          }
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
                         />
                       </FormControl>
                       <MdEuroSymbol className="relative top-2" size={20} />
@@ -257,9 +284,43 @@ export function FormFilterFields({
                           placeholder="500"
                           {...field}
                           className="mr-2"
-                          onChange={(event) =>
-                            field.onChange(parseFloat(event.target.value))
-                          }
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
+                        />
+                      </FormControl>
+                      <MdEuroSymbol className="relative top-2" size={20} />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </AccordionContent>
+            <AccordionContent>
+              <FormField
+                control={form.control}
+                name="apport"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Apport</FormLabel>
+                    <div className="flex">
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="10000"
+                          {...field}
+                          className="mr-2"
+                          onChange={(event) => {
+                            if (event.target.value == "") {
+                              field.onChange("");
+                            } else {
+                              field.onChange(parseFloat(event.target.value));
+                            }
+                          }}
                         />
                       </FormControl>
                       <MdEuroSymbol className="relative top-2" size={20} />
