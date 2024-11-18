@@ -31,8 +31,8 @@ export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
   .action(async (parsedInput) => {
-    let mensualites = getMensualite(parsedInput.parsedInput);
     let montantPret = getMontantPret(parsedInput.parsedInput);
+    let mensualites = getMensualite(parsedInput.parsedInput, montantPret);
     return {
       rentabiliteBrute: getRentabiliteBrute(
         parsedInput.parsedInput.loyersTotal,
@@ -125,11 +125,11 @@ function getNbMensualites(nbAnnuites: number) {
   return nbAnnuites * 12;
 }
 
-function getMensualite(values: DataType) {
+function getMensualite(values: DataType, montantPret: number) {
   const tauxInteretMensuel = getTauxInteretMensuel(values.tauxPret);
   const nbMensualites = getNbMensualites(values.dureePret);
   return (
-    (values.prixAchat * tauxInteretMensuel) /
+    (montantPret * tauxInteretMensuel) /
     (1 - Math.pow(1 + tauxInteretMensuel, -nbMensualites))
   );
 }
