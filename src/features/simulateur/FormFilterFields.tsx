@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -333,12 +332,12 @@ export function FormFilterFields({
           </AccordionItem>
         </Accordion>
 
-        <Button
+        {/* <Button
           type="submit"
           className="w-full bg-accent text-accent-foreground"
         >
           Calculer ma rentabilité
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );
