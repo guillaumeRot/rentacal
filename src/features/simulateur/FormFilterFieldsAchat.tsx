@@ -16,22 +16,31 @@ import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsAchatProps = {
-  onChange: (values: DataType) => void;
   filterValues: DataType;
+  onChange: (updatedValues: Partial<DataType>) => void;
 };
 
 export function FormFilterFieldsAchat({
-  onChange,
   filterValues,
+  onChange,
 }: FormFilterFieldsAchatProps) {
   const form = useForm<z.infer<typeof DataSchema>>({
     resolver: zodResolver(DataSchema),
     defaultValues: filterValues,
   });
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const numericValue = !isNaN(Number(value)) ? Number(value) : value;
+    onChange({ [name]: numericValue }); // Appelle la fonction parent
+  };
+
   return (
     <Form {...form}>
       <form
+        // onSubmit={form.handleSubmit(async (values: DataType) => {
+        //   onSubmit(values); // Toujours soumettre lorsque nécessaire
+        // })}
         // onChange={}
         // onSubmit={form.handleSubmit(async (values: DataType) => {
         //   onSubmit(values);
@@ -51,13 +60,14 @@ export function FormFilterFieldsAchat({
                     placeholder="0"
                     {...field}
                     className="mr-2"
-                    onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
-                    }}
+                    // onChange={(event) => {
+                    //   if (event.target.value == "") {
+                    //     field.onChange("");
+                    //   } else {
+                    //     field.onChange(parseFloat(event.target.value));
+                    //   }
+                    // }}
+                    onChange={handleChange}
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />

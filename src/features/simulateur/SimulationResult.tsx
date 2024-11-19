@@ -52,8 +52,16 @@ export const SimulationResult = () => {
     enabled: !!filtersValues,
   });
 
-  const handleFormSubmit = async (values: DataType) => {
-    await mutation.mutateAsync(values);
+  // const handleFormSubmit = async (values: DataType) => {
+  //   await mutation.mutateAsync(values);
+  // };
+
+  const handleFormChange = (updatedValues: Partial<typeof filtersValues>) => {
+    setFiltersValues((prevValues) => ({
+      ...prevValues,
+      ...updatedValues,
+    }));
+    console.log("Parent updated values:", updatedValues);
   };
 
   const mutation = useMutation({
@@ -67,7 +75,7 @@ export const SimulationResult = () => {
 
   return (
     <LayoutResultWithFilters>
-      <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
+      <ResultFilters onChange={handleFormChange} filterValues={filtersValues} />
       <LayoutResult>
         <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
           <div>

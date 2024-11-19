@@ -5,27 +5,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormFilterFieldsProps } from "./FormFilterFields";
 import { FormFilterFieldsAchat } from "./FormFilterFieldsAchat";
 import { FormFilterFieldsFinancement } from "./FormFilterFieldsFinancement";
 import { FormFilterFieldsRevenusDepenses } from "./FormFilterFieldsRevenusDepenses";
 import { FormFilterFieldsTravauxMobilier } from "./FormFilterFieldsTravauxMobilier";
 import { DataType } from "./simulateur.schema";
 
-export function ResultFilters({
-  onSubmit,
-  filterValues,
-}: FormFilterFieldsProps) {
+export type ResultFiltersProps = {
+  onChange: (updatedValues: Partial<DataType>) => void;
+  filterValues: DataType;
+};
+
+export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
   return (
     <Accordion
       type="single"
       collapsible
       defaultValue="filtres"
-      className="w-full h-full"
+      className="w-full"
     >
-      <AccordionItem value="filtres" className="h-full">
+      <AccordionItem value="filtres">
         <AccordionTrigger>Afficher les filtres</AccordionTrigger>
-        <AccordionContent className="h-full">
+        <AccordionContent>
           <Card className="rounded-3xl p-5 h-full">
             <CardContent className="flex flex-col lg:flex-row gap-y-4 gap-x-3 p-0 h-full">
               <Card className="rounded-3xl h-full flex-grow mx-auto">
@@ -34,8 +35,8 @@ export function ResultFilters({
                 </CardHeader>
                 <CardContent className="grid">
                   <FormFilterFieldsAchat
-                    onChange={(values: DataType) => onSubmit(values)}
                     filterValues={filterValues}
+                    onChange={onChange}
                   />
                 </CardContent>
               </Card>
@@ -45,7 +46,7 @@ export function ResultFilters({
                 </CardHeader>
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsRevenusDepenses
-                    onChange={(values: DataType) => onSubmit(values)}
+                    onChange={onChange}
                     filterValues={filterValues}
                   />
                 </CardContent>
@@ -56,7 +57,7 @@ export function ResultFilters({
                 </CardHeader>
                 <CardContent className="grid gap-4 h-full">
                   <FormFilterFieldsTravauxMobilier
-                    onChange={(values: DataType) => onSubmit(values)}
+                    onChange={onChange}
                     filterValues={filterValues}
                   />
                 </CardContent>
@@ -67,7 +68,7 @@ export function ResultFilters({
                 </CardHeader>
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsFinancement
-                    onChange={(values: DataType) => onSubmit(values)}
+                    onChange={onChange}
                     filterValues={filterValues}
                   />
                 </CardContent>

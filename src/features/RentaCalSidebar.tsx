@@ -35,7 +35,7 @@ export function RentaCalSidebar() {
   // }
 
   const session = useSession();
-  console.log("TEST GUI 3:", session);
+  // console.log("TEST GUI 3:", session);
 
   // if (session.data?.user) {
   //   return <a href="/products">App</a>;
