@@ -7,7 +7,7 @@ export function ResultFilters({
   filterValues,
 }: FormFilterFieldsProps) {
   return (
-    <Card className="rounded-3xl py-8 lg:w-1/3 h-full">
+    <Card className="rounded-3xl py-8 h-full">
       <CardHeader className="w-2/3 mx-auto">
         <CardTitle>Filtres</CardTitle>
       </CardHeader>
