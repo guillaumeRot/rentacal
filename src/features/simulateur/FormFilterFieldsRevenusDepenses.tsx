@@ -43,7 +43,7 @@ export function FormFilterFieldsRevenusDepenses({
           name="loyersTotal"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Somme des loyers mensuel</FormLabel>
+              <FormLabel>Somme des loyers mensuels</FormLabel>
               <div className="flex">
                 <FormControl>
                   <Input
