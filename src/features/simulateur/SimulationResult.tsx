@@ -33,6 +33,7 @@ export const SimulationResult = () => {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
+      console.log("TEST GUI 10:", filtersValues);
       const res = await calculRentabilite({
         prixAchat: filtersValues.prixAchat,
         fraisAgence: filtersValues.fraisAgence,
@@ -45,6 +46,7 @@ export const SimulationResult = () => {
         chargesCopro: filtersValues.chargesCopro,
         apport: filtersValues.apport,
       });
+      console.log("TEST GUI 11:", res);
 
       const r = res?.data;
       return r;
@@ -56,20 +58,30 @@ export const SimulationResult = () => {
   //   await mutation.mutateAsync(values);
   // };
 
-  const handleFormChange = (updatedValues: Partial<typeof filtersValues>) => {
-    setFiltersValues((prevValues) => ({
-      ...prevValues,
-      ...updatedValues,
-    }));
+  const handleFormChange = async (
+    updatedValues: Partial<typeof filtersValues>
+  ) => {
+    console.log("Parent old values:", filtersValues);
     console.log("Parent updated values:", updatedValues);
+    const newValues = {
+      ...filtersValues,
+      ...updatedValues,
+    };
+    setFiltersValues(newValues);
+    console.log("Parent new values:", newValues);
+    await mutation.mutateAsync(newValues);
   };
 
   const mutation = useMutation({
     mutationFn: async (values: DataType) => {
+      console.log("TEST GUI 1:", values);
       setFiltersValues(values);
+      console.log("TEST GUI 2:", values);
     },
     onSuccess: () => {
+      console.log("TEST GUI 3");
       queryClient.invalidateQueries();
+      console.log("TEST GUI 4");
     },
   });
 

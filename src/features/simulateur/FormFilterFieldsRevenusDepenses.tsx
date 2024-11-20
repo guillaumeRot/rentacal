@@ -16,7 +16,7 @@ import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsRevenusDepensesProps = {
-  onChange: (values: DataType) => void;
+  onChange: (updatedValues: Partial<DataType>) => void;
   filterValues: DataType;
 };
 
@@ -29,14 +29,15 @@ export function FormFilterFieldsRevenusDepenses({
     defaultValues: filterValues,
   });
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const numericValue = !isNaN(Number(value)) ? Number(value) : value;
+    onChange({ [name]: numericValue });
+  };
+
   return (
     <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(async (values: DataType) => {
-        //   onSubmit(values);
-        // })}
-        className="space-y-3"
-      >
+      <form className="space-y-3">
         <FormField
           control={form.control}
           name="loyersTotal"
@@ -51,11 +52,8 @@ export function FormFilterFieldsRevenusDepenses({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>
@@ -80,11 +78,8 @@ export function FormFilterFieldsRevenusDepenses({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>
@@ -109,11 +104,8 @@ export function FormFilterFieldsRevenusDepenses({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>

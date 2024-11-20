@@ -32,21 +32,12 @@ export function FormFilterFieldsAchat({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const numericValue = !isNaN(Number(value)) ? Number(value) : value;
-    onChange({ [name]: numericValue }); // Appelle la fonction parent
+    onChange({ [name]: numericValue });
   };
 
   return (
     <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(async (values: DataType) => {
-        //   onSubmit(values); // Toujours soumettre lorsque nécessaire
-        // })}
-        // onChange={}
-        // onSubmit={form.handleSubmit(async (values: DataType) => {
-        //   onSubmit(values);
-        // })}
-        className="space-y-3"
-      >
+      <form className="space-y-3">
         <FormField
           control={form.control}
           name="prixAchat"
@@ -60,14 +51,10 @@ export function FormFilterFieldsAchat({
                     placeholder="0"
                     {...field}
                     className="mr-2"
-                    // onChange={(event) => {
-                    //   if (event.target.value == "") {
-                    //     field.onChange("");
-                    //   } else {
-                    //     field.onChange(parseFloat(event.target.value));
-                    //   }
-                    // }}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                      field.onChange(event);
+                      handleChange(event);
+                    }}
                   />
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />
@@ -91,11 +78,8 @@ export function FormFilterFieldsAchat({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>
@@ -120,11 +104,8 @@ export function FormFilterFieldsAchat({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>

@@ -17,7 +17,7 @@ import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsFinancementProps = {
-  onChange: (values: DataType) => void;
+  onChange: (updatedValues: Partial<DataType>) => void;
   filterValues: DataType;
 };
 
@@ -30,14 +30,19 @@ export function FormFilterFieldsFinancement({
     defaultValues: filterValues,
   });
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const numericValue = !isNaN(Number(value)) ? Number(value) : value;
+    onChange({ [name]: numericValue });
+  };
+
+  const handleSliderChange = (name: keyof DataType, value: number) => {
+    onChange({ [name]: value });
+  };
+
   return (
     <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(async (values: DataType) => {
-        //   onSubmit(values);
-        // })}
-        className="space-y-3"
-      >
+      <form className="space-y-3">
         <FormField
           control={form.control}
           name="dureePret"
@@ -52,6 +57,7 @@ export function FormFilterFieldsFinancement({
                   defaultValue={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
+                    handleSliderChange("dureePret", value[0]);
                   }}
                 />
               </FormControl>
@@ -74,6 +80,7 @@ export function FormFilterFieldsFinancement({
                   defaultValue={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
+                    handleSliderChange("dureePret", value[0]);
                   }}
                 />
               </FormControl>
@@ -96,11 +103,8 @@ export function FormFilterFieldsFinancement({
                     {...field}
                     className="mr-2"
                     onChange={(event) => {
-                      if (event.target.value == "") {
-                        field.onChange("");
-                      } else {
-                        field.onChange(parseFloat(event.target.value));
-                      }
+                      field.onChange(event);
+                      handleChange(event);
                     }}
                   />
                 </FormControl>
