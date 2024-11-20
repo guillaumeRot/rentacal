@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutResult } from "@/components/layout";
+import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { CoutPret } from "./CoutPret";
@@ -52,8 +52,22 @@ export const SimulationResult = () => {
     enabled: !!filtersValues,
   });
 
-  const handleFormSubmit = async (values: DataType) => {
-    await mutation.mutateAsync(values);
+  // const handleFormSubmit = async (values: DataType) => {
+  //   await mutation.mutateAsync(values);
+  // };
+
+  const handleFormChange = async (
+    updatedValues: Partial<typeof filtersValues>
+  ) => {
+    console.log("Parent old values:", filtersValues);
+    console.log("Parent updated values:", updatedValues);
+    const newValues = {
+      ...filtersValues,
+      ...updatedValues,
+    };
+    setFiltersValues(newValues);
+    console.log("Parent new values:", newValues);
+    await mutation.mutateAsync(newValues);
   };
 
   const mutation = useMutation({
@@ -66,34 +80,36 @@ export const SimulationResult = () => {
   });
 
   return (
-    <LayoutResult>
-      <ResultFilters onSubmit={handleFormSubmit} filterValues={filtersValues} />
-      <div id="results" className="flex flex-col gap-y-8 gap-x-3 lg:w-2/3">
-        <div>
-          <div
-            id="rentabilites"
-            className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
-          >
-            <RentabiliteBrute
-              rentabiliteBrute={result.data?.rentabiliteBrute}
-            />
-            <RentabiliteNette
-              rentabiliteNette={result.data?.rentabiliteNette}
-            />
+    <LayoutResultWithFilters>
+      <ResultFilters onChange={handleFormChange} filterValues={filtersValues} />
+      <LayoutResult>
+        <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
+          <div>
+            <div
+              id="rentabilites"
+              className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
+            >
+              <RentabiliteBrute
+                rentabiliteBrute={result.data?.rentabiliteBrute}
+              />
+              <RentabiliteNette
+                rentabiliteNette={result.data?.rentabiliteNette}
+              />
+            </div>
+            <LegendeRentabilite />
           </div>
-          <LegendeRentabilite />
+          <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
+            <MontantPret montantPret={result.data?.montantPret} />
+            <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
+            <CoutPret coutPret={result.data?.coutPret} />
+          </div>
+          <TabResultat
+            resultatsMensuel={result.data?.resultatsMensuel}
+            mensualites={result.data?.mensualites}
+            cashflowBrut={result.data?.cashflowBrut}
+          />
         </div>
-        <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
-          <MontantPret montantPret={result.data?.montantPret} />
-          <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
-          <CoutPret coutPret={result.data?.coutPret} />
-        </div>
-        <TabResultat
-          resultatsMensuel={result.data?.resultatsMensuel}
-          mensualites={result.data?.mensualites}
-          cashflowBrut={result.data?.cashflowBrut}
-        />
-      </div>
-    </LayoutResult>
+      </LayoutResult>
+    </LayoutResultWithFilters>
   );
 };
