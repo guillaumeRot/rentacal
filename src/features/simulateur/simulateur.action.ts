@@ -31,7 +31,6 @@ export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
   .action(async (parsedInput) => {
-    console.log("TEST GUI 20:", parsedInput);
     let montantPret = getMontantPret(parsedInput.parsedInput);
     let mensualites = getMensualite(parsedInput.parsedInput, montantPret);
     return {
