@@ -37,8 +37,6 @@ export function FormFilterFieldsFinancement({
   };
 
   const handleSliderChange = (name: keyof DataType, value: number) => {
-    console.log("TEST GUI 2:", name);
-    console.log("TEST GUI 3:", value);
     onChange({ [name]: value });
   };
 
