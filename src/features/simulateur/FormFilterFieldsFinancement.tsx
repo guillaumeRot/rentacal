@@ -37,6 +37,8 @@ export function FormFilterFieldsFinancement({
   };
 
   const handleSliderChange = (name: keyof DataType, value: number) => {
+    console.log("TEST GUI 2:", name);
+    console.log("TEST GUI 3:", value);
     onChange({ [name]: value });
   };
 
@@ -80,7 +82,7 @@ export function FormFilterFieldsFinancement({
                   defaultValue={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
-                    handleSliderChange("dureePret", value[0]);
+                    handleSliderChange("tauxPret", value[0]);
                   }}
                 />
               </FormControl>

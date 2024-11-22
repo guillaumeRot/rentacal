@@ -111,6 +111,7 @@ function getResultatsMensuel(
 }
 
 function getTauxInteretMensuel(tauxInteretAnnuel: number) {
+  console.log("TEST GUI:", tauxInteretAnnuel);
   return tauxInteretAnnuel / (12 * 100);
 }
 
