@@ -56,21 +56,14 @@ export const SimulationResult = () => {
     enabled: !!filtersValues,
   });
 
-  // const handleFormSubmit = async (values: DataType) => {
-  //   await mutation.mutateAsync(values);
-  // };
-
   const handleFormChange = async (
     updatedValues: Partial<typeof filtersValues>
   ) => {
-    console.log("Parent old values:", filtersValues);
-    console.log("Parent updated values:", updatedValues);
     const newValues = {
       ...filtersValues,
       ...updatedValues,
     };
     setFiltersValues(newValues);
-    console.log("Parent new values:", newValues);
     await mutation.mutateAsync(newValues);
   };
 
