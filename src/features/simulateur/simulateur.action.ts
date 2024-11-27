@@ -36,11 +36,13 @@ export const calculRentabilite = action
     return {
       rentabiliteBrute: getRentabiliteBrute(
         parsedInput.parsedInput.loyersTotal,
-        montantPret
+        montantPret,
+        parsedInput.parsedInput.nbMoisLocParAn
       ),
       rentabiliteNette: getRentabiliteNette(
         parsedInput.parsedInput,
-        montantPret
+        montantPret,
+        parsedInput.parsedInput.nbMoisLocParAn
       ),
       montantPret: montantPret,
       resultatsMensuel: getResultatsMensuel(
@@ -55,13 +57,23 @@ export const calculRentabilite = action
     };
   });
 
-function getRentabiliteBrute(loyersTotal: number, montantPret: number) {
-  return ((loyersTotal * 12) / montantPret) * 100;
+function getRentabiliteBrute(
+  loyersTotal: number,
+  montantPret: number,
+  nbMoisLocParAn: number
+) {
+  return ((loyersTotal * nbMoisLocParAn) / montantPret) * 100;
 }
 
-function getRentabiliteNette(values: DataType, montantPret: number) {
+function getRentabiliteNette(
+  values: DataType,
+  montantPret: number,
+  nbMoisLocParAn: number
+) {
   return (
-    ((values.loyersTotal * 12 - values.impotsFoncier - values.chargesCopro) /
+    ((values.loyersTotal * nbMoisLocParAn -
+      values.impotsFoncier -
+      values.chargesCopro) /
       montantPret) *
     100
   );
@@ -77,10 +89,6 @@ function getMontantPret(values: DataType) {
     values.apport;
   return montantPret;
 }
-
-// function getMontantFraisNotaires(prixAchat: number, fraisNotaire: number) {
-//   return prixAchat * (fraisNotaire / 100);
-// }
 
 function getResultatsMensuel(
   values: DataType,

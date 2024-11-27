@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
@@ -33,6 +34,10 @@ export function FormFilterFieldsRevenusDepenses({
     const { name, value } = event.target;
     const numericValue = !isNaN(Number(value)) ? Number(value) : value;
     onChange({ [name]: numericValue });
+  };
+
+  const handleSliderChange = (name: keyof DataType, value: number) => {
+    onChange({ [name]: value });
   };
 
   return (
@@ -111,6 +116,29 @@ export function FormFilterFieldsRevenusDepenses({
                 </FormControl>
                 <MdEuroSymbol className="relative top-2" size={20} />
               </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="nbMoisLocParAn"
+          render={({ field: { value, onChange } }) => (
+            <FormItem>
+              <FormLabel>{value} mois de location / an</FormLabel>
+              <FormControl>
+                <Slider
+                  min={0}
+                  max={12}
+                  step={1}
+                  defaultValue={[value]}
+                  onValueChange={(value) => {
+                    onChange(value[0]);
+                    handleSliderChange("nbMoisLocParAn", value[0]);
+                  }}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

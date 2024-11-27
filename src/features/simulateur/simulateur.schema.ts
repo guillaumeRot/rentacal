@@ -12,6 +12,7 @@ export const DataSchema = z.object({
   loyersTotal: z.number({
     message: "Renseignez un nombre valide",
   }),
+  nbMoisLocParAn: z.number(),
   fraisNotaire: z.number({
     message: "Renseignez un nombre valide",
   }),
