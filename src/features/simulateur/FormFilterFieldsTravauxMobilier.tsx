@@ -64,9 +64,9 @@ export function FormFilterFieldsTravauxMobilier({
           )}
         />
 
-        {/* <FormField
+        <FormField
           control={form.control}
-          name="montantTravaux"
+          name="montantMobilier"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Montant du mobilier</FormLabel>
@@ -88,7 +88,7 @@ export function FormFilterFieldsTravauxMobilier({
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />
       </form>
     </Form>
   );

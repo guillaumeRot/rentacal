@@ -16,6 +16,9 @@ export const DataSchema = z.object({
   montantTravaux: z.number({
     message: "Renseignez un nombre valide",
   }),
+  montantMobilier: z.number({
+    message: "Renseignez un nombre valide",
+  }),
   impotsFoncier: z.number({
     message: "Renseignez un nombre valide",
   }),
