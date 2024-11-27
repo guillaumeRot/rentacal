@@ -29,6 +29,7 @@ export const SimulationResult = () => {
     impotsFoncier: 0,
     chargesCopro: 0,
     apport: 0,
+    tauxAssurancePret: 0,
   });
 
   const result = useQuery({
@@ -46,6 +47,7 @@ export const SimulationResult = () => {
         impotsFoncier: filtersValues.impotsFoncier,
         chargesCopro: filtersValues.chargesCopro,
         apport: filtersValues.apport,
+        tauxAssurancePret: filtersValues.tauxAssurancePret,
       });
 
       const r = res?.data;

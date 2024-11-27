@@ -91,6 +91,29 @@ export function FormFilterFieldsFinancement({
 
         <FormField
           control={form.control}
+          name="tauxAssurancePret"
+          render={({ field: { value, onChange } }) => (
+            <FormItem>
+              <FormLabel>Assurance du prêt : {value} %</FormLabel>
+              <FormControl>
+                <Slider
+                  min={0}
+                  max={10}
+                  step={0.1}
+                  defaultValue={[value]}
+                  onValueChange={(value) => {
+                    onChange(value[0]);
+                    handleSliderChange("tauxAssurancePret", value[0]);
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="apport"
           render={({ field }) => (
             <FormItem>

@@ -12,7 +12,9 @@ export const DataSchema = z.object({
   loyersTotal: z.number({
     message: "Renseignez un nombre valide",
   }),
-  fraisNotaire: z.number(),
+  fraisNotaire: z.number({
+    message: "Renseignez un nombre valide",
+  }),
   montantTravaux: z.number({
     message: "Renseignez un nombre valide",
   }),
@@ -28,6 +30,7 @@ export const DataSchema = z.object({
   apport: z.number({
     message: "Renseignez un nombre valide",
   }),
+  tauxAssurancePret: z.number(),
 });
 export type DataType = z.infer<typeof DataSchema>;
 

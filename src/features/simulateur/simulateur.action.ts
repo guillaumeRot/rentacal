@@ -129,9 +129,14 @@ function getNbMensualites(nbAnnuites: number) {
 function getMensualite(values: DataType, montantPret: number) {
   const tauxInteretMensuel = getTauxInteretMensuel(values.tauxPret);
   const nbMensualites = getNbMensualites(values.dureePret);
+  const montantAssuranceMensuel = getMontantAssuranceMensuel(
+    values.tauxAssurancePret,
+    montantPret
+  );
   return (
     (montantPret * tauxInteretMensuel) /
-    (1 - Math.pow(1 + tauxInteretMensuel, -nbMensualites))
+      (1 - Math.pow(1 + tauxInteretMensuel, -nbMensualites)) +
+    montantAssuranceMensuel
   );
 }
 
@@ -145,4 +150,11 @@ function getSommeFraisBancaires(resultatsMensuel: ResultatMensuelType[]) {
 
 function getCoutPret(montantPret: number, fraisBancaire: number) {
   return montantPret + fraisBancaire;
+}
+
+function getMontantAssuranceMensuel(
+  tauxAssurance: number,
+  montantPret: number
+) {
+  return (montantPret * (tauxAssurance / 100)) / 12;
 }
