@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -13,10 +14,12 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "next-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
+import { getParametresByUser } from "./parametres.action";
+import { ParametresType } from "./parametres.schema";
 
 export type ParametresParDefautProps = {
   user: User;
@@ -33,6 +36,7 @@ export const ParamSchema = z.object({
 });
 
 export function ParametresParDefaut({ user }: ParametresParDefautProps) {
+  const userId = user.id;
   const [paramValues, setParamValues] = useState({
     dureePret: 15,
     tauxPret: 1,
@@ -40,6 +44,42 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
     tauxAssurancePret: 0,
     nbMoisLocParAn: 12,
   });
+  const [hasFetched, setHasFetched] = useState(false);
+  useEffect(() => {
+    const fetchParameters = async () => {
+      if (!userId || hasFetched) {
+        return;
+      }
+
+      try {
+        const parametres = (await getParametresByUser({
+          userId,
+        })) as unknown as ParametresType;
+
+        if (parametres) {
+          setParamValues((prev) => ({
+            ...prev,
+            dureePret: parametres.dureePret ?? prev.dureePret,
+            tauxPret: parametres.tauxPret ?? prev.tauxPret,
+            apport: parametres.apport ?? prev.apport,
+            tauxAssurancePret:
+              parametres.assurancePret ?? prev.tauxAssurancePret,
+            nbMoisLocParAn: parametres.nbMoisLocParAn ?? prev.nbMoisLocParAn,
+          }));
+          setHasFetched(true);
+          console.log("TEST GUI 1:", parametres);
+          console.log("TEST GUI 2:", paramValues);
+        }
+      } catch (error) {
+        console.error(
+          "Impossible de récupérer les paramètres de l'utilisateur:",
+          error
+        );
+      }
+    };
+
+    fetchParameters();
+  }, [userId, hasFetched]);
 
   const form = useForm<z.infer<typeof ParamSchema>>({
     resolver: zodResolver(ParamSchema),
@@ -47,7 +87,7 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
   });
 
   return (
-    <div className="h-screen w-full mx-auto max-w-3xl mt-14">
+    <div className="h-screen w-full mx-auto max-w-3xl mt-4">
       {user?.image && user?.name ? (
         <div className="flex flex-col gap-y-8">
           <h1 className="text-2xl">Paramètres par défaut</h1>
@@ -196,6 +236,16 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                 </Form>
               </CardContent>
             </Card>
+          </div>
+          <div className="mx-auto">
+            <Button
+              className="bg-accent text-accent-foreground px-6 py-2 rounded-full font-normal text-sm hover:bg-[rgba(85,137,195,1)]"
+              onClick={() => {
+                // signInAction();
+              }}
+            >
+              Enregistrer
+            </Button>
           </div>
         </div>
       ) : (

@@ -51,6 +51,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  parametre     Parametre?
 
   @@map("users")
 }
@@ -62,4 +63,16 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model Parametre {
+  id              String @id @default(uuid())
+  userId          String @unique
+  user            User   @relation(fields: [userId], references: [id])
+
+  nbMoisLocParAn  Int?
+  dureePret       Int?
+  tauxPret        Float?
+  assurancePret   Float?
+  apport          Int?
 }
