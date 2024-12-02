@@ -57,23 +57,33 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
+      console.log("TEST GUI:", userId);
+
       const parametres = (
         await getParametresByUser({
           userId,
         })
       )?.data as unknown as ParametresType;
 
+      console.log("TEST GUI 2:", parametres);
+
       if (parametres) {
-        setParamValues((prev) => ({
-          ...prev,
-          id: parametres.id ?? prev.id,
-          userId: parametres.userId ?? prev.userId,
-          dureePret: parametres.dureePret ?? prev.dureePret,
-          tauxPret: parametres.tauxPret ?? prev.tauxPret,
-          apport: parametres.apport ?? prev.apport,
-          assurancePret: parametres.assurancePret ?? prev.assurancePret,
-          nbMoisLocParAn: parametres.nbMoisLocParAn ?? prev.nbMoisLocParAn,
-        }));
+        const updatedValues = {
+          ...paramValues,
+          id: parametres.id ?? paramValues.id,
+          userId: parametres.userId ?? paramValues.userId,
+          dureePret: parametres.dureePret ?? paramValues.dureePret,
+          tauxPret: parametres.tauxPret ?? paramValues.tauxPret,
+          apport: parametres.apport ?? paramValues.apport,
+          assurancePret: parametres.assurancePret ?? paramValues.assurancePret,
+          nbMoisLocParAn:
+            parametres.nbMoisLocParAn ?? paramValues.nbMoisLocParAn,
+        };
+
+        setParamValues(updatedValues);
+        console.log("TEST GUI 3:", updatedValues);
+        console.log("TEST GUI 4:", paramValues);
+        form.reset(updatedValues);
       }
 
       return parametres;
@@ -129,9 +139,13 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               min={0}
                               max={12}
                               step={1}
-                              defaultValue={[value]}
+                              value={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
+                                setParamValues((prev) => ({
+                                  ...prev,
+                                  nbMoisLocParAn: value[0],
+                                }));
                               }}
                             />
                           </FormControl>
@@ -161,9 +175,13 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               min={1}
                               max={25}
                               step={1}
-                              defaultValue={[value]}
+                              value={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
+                                setParamValues((prev) => ({
+                                  ...prev,
+                                  dureePret: value[0],
+                                }));
                               }}
                             />
                           </FormControl>
@@ -183,9 +201,13 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               min={0}
                               max={10}
                               step={0.1}
-                              defaultValue={[value]}
+                              value={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
+                                setParamValues((prev) => ({
+                                  ...prev,
+                                  tauxPret: value[0],
+                                }));
                               }}
                             />
                           </FormControl>
@@ -205,9 +227,13 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               min={0}
                               max={10}
                               step={0.1}
-                              defaultValue={[value]}
+                              value={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
+                                setParamValues((prev) => ({
+                                  ...prev,
+                                  assurancePret: value[0],
+                                }));
                               }}
                             />
                           </FormControl>
@@ -219,7 +245,7 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                     <FormField
                       control={form.control}
                       name="apport"
-                      render={({ field }) => (
+                      render={({ field: { value, onChange } }) => (
                         <FormItem>
                           <FormLabel>Apport</FormLabel>
                           <div className="flex">
@@ -227,10 +253,16 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               <Input
                                 type="number"
                                 placeholder="10000"
-                                {...field}
                                 className="mr-2"
+                                value={value}
                                 onChange={(event) => {
-                                  field.onChange(event);
+                                  const newValue =
+                                    Number(event.target.value) || 0;
+                                  onChange(newValue);
+                                  setParamValues((prev) => ({
+                                    ...prev,
+                                    apport: newValue,
+                                  }));
                                 }}
                               />
                             </FormControl>

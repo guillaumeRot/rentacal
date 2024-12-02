@@ -1,8 +1,11 @@
 "use client";
 
+import { currentUser } from "@/auth/current-user";
 import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { getParametresByUser } from "../parametres/parametres.action";
+import { ParametresType } from "../parametres/parametres.schema";
 import { CoutPret } from "./CoutPret";
 import { FraisBancaire } from "./FraisBancaire";
 import { LegendeRentabilite } from "./LegendeRentabilites";
@@ -36,6 +39,25 @@ export const SimulationResult = () => {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
+      const user = await currentUser();
+      const userId = user?.id ?? "0";
+      const parametres = (
+        await getParametresByUser({
+          userId,
+        })
+      )?.data as unknown as ParametresType;
+
+      if (parametres) {
+        setFiltersValues((prev) => ({
+          ...prev,
+          dureePret: parametres.dureePret ?? prev.dureePret,
+          tauxPret: parametres.tauxPret ?? prev.tauxPret,
+          apport: parametres.apport ?? prev.apport,
+          assurancePret: parametres.assurancePret ?? prev.tauxAssurancePret,
+          nbMoisLocParAn: parametres.nbMoisLocParAn ?? prev.nbMoisLocParAn,
+        }));
+      }
+
       const res = await calculRentabilite({
         prixAchat: filtersValues.prixAchat,
         fraisAgence: filtersValues.fraisAgence,
