@@ -39,3 +39,37 @@ export const getParametresByUser = action
       throw new Error("Erreur lors de la récupération des paramètres.");
     }
   });
+
+export const updateParametres = action
+  .schema(ParametresSchema)
+  .action(async (parsedInput) => {
+    try {
+      const {
+        id,
+        userId,
+        nbMoisLocParAn,
+        dureePret,
+        tauxPret,
+        assurancePret,
+        apport,
+      } = parsedInput.parsedInput;
+
+      // Mise à jour des paramètres dans la base de données
+      await prisma.parametre.update({
+        where: { id },
+        data: {
+          userId,
+          nbMoisLocParAn,
+          dureePret,
+          tauxPret,
+          assurancePret,
+          apport,
+        },
+      });
+
+      console.log(`Paramètres mis à jour pour id: ${id}`);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour des paramètres :", error);
+      throw new Error("Impossible de mettre à jour les paramètres.");
+    }
+  });

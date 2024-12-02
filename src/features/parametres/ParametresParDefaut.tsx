@@ -13,12 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { User } from "next-auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
-import { getParametresByUser } from "./parametres.action";
+import { getParametresByUser, updateParametres } from "./parametres.action";
 import { ParametresType } from "./parametres.schema";
 
 export type ParametresParDefautProps = {
@@ -32,58 +33,76 @@ export const ParamSchema = z.object({
   apport: z.number({
     message: "Renseignez un nombre valide",
   }),
-  tauxAssurancePret: z.number(),
+  assurancePret: z.number(),
 });
 
 export function ParametresParDefaut({ user }: ParametresParDefautProps) {
   const userId = user.id;
-  const [paramValues, setParamValues] = useState({
+  const queryClient = useQueryClient();
+
+  if (!userId) {
+    return;
+  }
+
+  const [paramValues, setParamValues] = useState<ParametresType>({
+    id: "0",
+    userId: userId,
     dureePret: 15,
     tauxPret: 1,
     apport: 0,
-    tauxAssurancePret: 0,
+    assurancePret: 1,
     nbMoisLocParAn: 12,
   });
-  const [hasFetched, setHasFetched] = useState(false);
-  useEffect(() => {
-    const fetchParameters = async () => {
-      if (!userId || hasFetched) {
-        return;
-      }
 
-      try {
-        const parametres = (await getParametresByUser({
+  const result = useQuery({
+    queryKey: ["result"],
+    queryFn: async () => {
+      const parametres = (
+        await getParametresByUser({
           userId,
-        })) as unknown as ParametresType;
+        })
+      )?.data as unknown as ParametresType;
 
-        if (parametres) {
-          setParamValues((prev) => ({
-            ...prev,
-            dureePret: parametres.dureePret ?? prev.dureePret,
-            tauxPret: parametres.tauxPret ?? prev.tauxPret,
-            apport: parametres.apport ?? prev.apport,
-            tauxAssurancePret:
-              parametres.assurancePret ?? prev.tauxAssurancePret,
-            nbMoisLocParAn: parametres.nbMoisLocParAn ?? prev.nbMoisLocParAn,
-          }));
-          setHasFetched(true);
-          console.log("TEST GUI 1:", parametres);
-          console.log("TEST GUI 2:", paramValues);
-        }
-      } catch (error) {
-        console.error(
-          "Impossible de récupérer les paramètres de l'utilisateur:",
-          error
-        );
+      if (parametres) {
+        setParamValues((prev) => ({
+          ...prev,
+          id: parametres.id ?? prev.id,
+          userId: parametres.userId ?? prev.userId,
+          dureePret: parametres.dureePret ?? prev.dureePret,
+          tauxPret: parametres.tauxPret ?? prev.tauxPret,
+          apport: parametres.apport ?? prev.apport,
+          assurancePret: parametres.assurancePret ?? prev.assurancePret,
+          nbMoisLocParAn: parametres.nbMoisLocParAn ?? prev.nbMoisLocParAn,
+        }));
       }
-    };
 
-    fetchParameters();
-  }, [userId, hasFetched]);
+      return parametres;
+    },
+    enabled: !!paramValues,
+  });
 
   const form = useForm<z.infer<typeof ParamSchema>>({
     resolver: zodResolver(ParamSchema),
     defaultValues: paramValues,
+  });
+
+  const onParamSubmit = async (updatedValues: ParametresType) => {
+    const newValues = {
+      ...paramValues,
+      ...updatedValues,
+    };
+    setParamValues(newValues);
+    await updateParametres(newValues);
+    await mutation.mutateAsync(newValues);
+  };
+
+  const mutation = useMutation({
+    mutationFn: async (values: ParametresType) => {
+      setParamValues(values);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
   });
 
   return (
@@ -113,7 +132,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               defaultValue={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
-                                // handleSliderChange("nbMoisLocParAn", value[0]);
                               }}
                             />
                           </FormControl>
@@ -146,7 +164,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               defaultValue={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
-                                // handleSliderChange("dureePret", value[0]);
                               }}
                             />
                           </FormControl>
@@ -169,7 +186,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               defaultValue={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
-                                // handleSliderChange("tauxPret", value[0]);
                               }}
                             />
                           </FormControl>
@@ -180,7 +196,7 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
 
                     <FormField
                       control={form.control}
-                      name="tauxAssurancePret"
+                      name="assurancePret"
                       render={({ field: { value, onChange } }) => (
                         <FormItem>
                           <FormLabel>Assurance du prêt : {value} %</FormLabel>
@@ -192,10 +208,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                               defaultValue={[value]}
                               onValueChange={(value) => {
                                 onChange(value[0]);
-                                // handleSliderChange(
-                                //   "tauxAssurancePret",
-                                //   value[0]
-                                // );
                               }}
                             />
                           </FormControl>
@@ -219,7 +231,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
                                 className="mr-2"
                                 onChange={(event) => {
                                   field.onChange(event);
-                                  // handleChange(event);
                                 }}
                               />
                             </FormControl>
@@ -241,7 +252,15 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
             <Button
               className="bg-accent text-accent-foreground px-6 py-2 rounded-full font-normal text-sm hover:bg-[rgba(85,137,195,1)]"
               onClick={() => {
-                // signInAction();
+                const updatedValues = form.getValues();
+
+                const valuesWithUserInfo = {
+                  ...updatedValues,
+                  id: paramValues.id,
+                  userId: paramValues.userId,
+                };
+
+                onParamSubmit(valuesWithUserInfo);
               }}
             >
               Enregistrer
