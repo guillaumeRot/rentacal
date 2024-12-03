@@ -10,26 +10,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsFinancementProps = {
   onChange: (updatedValues: Partial<DataType>) => void;
-  filterValues: DataType;
+  form: UseFormReturn<z.infer<typeof DataSchema>>;
 };
 
 export function FormFilterFieldsFinancement({
   onChange,
-  filterValues,
+  form,
 }: FormFilterFieldsFinancementProps) {
-  const form = useForm<z.infer<typeof DataSchema>>({
-    resolver: zodResolver(DataSchema),
-    defaultValues: filterValues,
-  });
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const numericValue = !isNaN(Number(value)) ? Number(value) : value;
@@ -54,7 +48,7 @@ export function FormFilterFieldsFinancement({
                   min={1}
                   max={25}
                   step={1}
-                  defaultValue={[value]}
+                  value={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
                     handleSliderChange("dureePret", value[0]);
@@ -77,7 +71,7 @@ export function FormFilterFieldsFinancement({
                   min={0}
                   max={10}
                   step={0.1}
-                  defaultValue={[value]}
+                  value={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
                     handleSliderChange("tauxPret", value[0]);
@@ -100,7 +94,7 @@ export function FormFilterFieldsFinancement({
                   min={0}
                   max={10}
                   step={0.1}
-                  defaultValue={[value]}
+                  value={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
                     handleSliderChange("tauxAssurancePret", value[0]);

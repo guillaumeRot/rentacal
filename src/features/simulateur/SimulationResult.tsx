@@ -1,8 +1,14 @@
 "use client";
 
 import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { User } from "next-auth";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { getParametresByUser } from "../parametres/parametres.action";
+import { ParametresType } from "../parametres/parametres.schema";
 import { CoutPret } from "./CoutPret";
 import { FraisBancaire } from "./FraisBancaire";
 import { LegendeRentabilite } from "./LegendeRentabilites";
@@ -12,9 +18,14 @@ import { RentabiliteNette } from "./RentabiliteNette";
 import { ResultFilters } from "./ResultFilters";
 import { TabResultat } from "./TabResultat";
 import { calculRentabilite } from "./simulateur.action";
-import { DataType } from "./simulateur.schema";
+import { DataSchema, DataType } from "./simulateur.schema";
 
-export const SimulationResult = () => {
+export type ParametresParDefautProps = {
+  user: User | null;
+};
+
+export function SimulationResult({ user }: ParametresParDefautProps) {
+  const userId = user?.id ?? "0";
   const queryClient = useQueryClient();
 
   const [filtersValues, setFiltersValues] = useState({
@@ -31,6 +42,37 @@ export const SimulationResult = () => {
     apport: 0,
     tauxAssurancePret: 0,
     nbMoisLocParAn: 12,
+  });
+
+  const parametres = useQuery({
+    queryKey: ["parametres"],
+    queryFn: async () => {
+      const parametres = (
+        await getParametresByUser({
+          userId,
+        })
+      )?.data as unknown as ParametresType;
+
+      console.log("TEST GUI 1:", parametres);
+      if (parametres) {
+        const updatedValues = {
+          ...filtersValues,
+          dureePret: parametres.dureePret ?? filtersValues.dureePret,
+          tauxPret: parametres.tauxPret ?? filtersValues.tauxPret,
+          apport: parametres.apport ?? filtersValues.apport,
+          tauxAssurancePret:
+            parametres.assurancePret ?? filtersValues.tauxAssurancePret,
+          nbMoisLocParAn:
+            parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
+        };
+        console.log("TEST GUI 2:", parametres);
+
+        setFiltersValues(updatedValues);
+        form.reset(updatedValues);
+      }
+      return parametres;
+    },
+    enabled: !!filtersValues,
   });
 
   const result = useQuery({
@@ -74,13 +116,18 @@ export const SimulationResult = () => {
       setFiltersValues(values);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({ queryKey: ["result"] });
     },
+  });
+
+  const form = useForm<z.infer<typeof DataSchema>>({
+    resolver: zodResolver(DataSchema),
+    defaultValues: filtersValues,
   });
 
   return (
     <LayoutResultWithFilters>
-      <ResultFilters onChange={handleFormChange} filterValues={filtersValues} />
+      <ResultFilters onChange={handleFormChange} form={form} />
       <LayoutResult>
         <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
           <div>
@@ -111,4 +158,4 @@ export const SimulationResult = () => {
       </LayoutResult>
     </LayoutResultWithFilters>
   );
-};
+}

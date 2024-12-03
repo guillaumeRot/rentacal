@@ -1,13 +1,20 @@
-"use client";
+import { currentUser } from "@/auth/current-user";
+import { AvatarName } from "./AvatarName";
+import { ParametresParDefaut } from "./ParametresParDefaut";
 
-export const Parametres = () => {
+export const Parametres = async () => {
+  const user = await currentUser();
+
   return (
-    <div className="h-screen w-full mx-auto text-center p-20">
-      <span className="text-3xl mx-auto">Patience...</span>
-      <br />
-      <span className="text-3xl mx-auto">
-        Vous pourrez bientôt configurer votre compte !
-      </span>
+    <div className="h-screen w-full mx-auto max-w-3xl mt-14">
+      {user?.image && user?.name ? (
+        <div className="flex flex-col gap-y-8">
+          <AvatarName imageUrl={user.image} name={user.name} />
+          <ParametresParDefaut user={user} />
+        </div>
+      ) : (
+        <p>Paramètres non disponibles</p>
+      )}
     </div>
   );
 };
