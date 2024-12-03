@@ -15,7 +15,8 @@ import CookieConsent from "@/features/theme/CookieConsent";
 // export default function Result() {
 // export default function Result({ user }: { user: User | null }) {
 // export const Parametres = async () => {
-export const Result = async () => {
+// export const Result = async () => {
+export default async function Result() {
   const user = await currentUser();
 
   return (
@@ -28,5 +29,4 @@ export const Result = async () => {
       </div>
     </SidebarProvider>
   );
-};
-export default Result;
+}
