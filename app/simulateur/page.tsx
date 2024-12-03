@@ -5,7 +5,7 @@ import { RentaCalSidebar } from "@/features/RentaCalSidebar";
 import { SimulationResult } from "@/features/simulateur/SimulationResult";
 import CookieConsent from "@/features/theme/CookieConsent";
 
-export const Result = async () => {
+export default async function Result() {
   const user = await currentUser();
 
   return (
@@ -18,5 +18,4 @@ export const Result = async () => {
       </div>
     </SidebarProvider>
   );
-};
-export default Result;
+}
