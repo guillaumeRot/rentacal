@@ -5,16 +5,6 @@ import { RentaCalSidebar } from "@/features/RentaCalSidebar";
 import { SimulationResult } from "@/features/simulateur/SimulationResult";
 import CookieConsent from "@/features/theme/CookieConsent";
 
-// export const getResultProps = async () => {
-//   const user = await currentUser();
-//   return {
-//     props: { user },
-//   };
-// };
-
-// export default function Result() {
-// export default function Result({ user }: { user: User | null }) {
-// export const Parametres = async () => {
 export const Result = async () => {
   const user = await currentUser();
 
