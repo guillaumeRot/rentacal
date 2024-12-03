@@ -18,6 +18,7 @@ import { User } from "next-auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
+import { toast } from "sonner";
 import { z } from "zod";
 import { getParametresByUser, updateParametres } from "./parametres.action";
 import { ParametresType } from "./parametres.schema";
@@ -57,15 +58,11 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
-      console.log("TEST GUI:", userId);
-
       const parametres = (
         await getParametresByUser({
           userId,
         })
       )?.data as unknown as ParametresType;
-
-      console.log("TEST GUI 2:", parametres);
 
       if (parametres) {
         const updatedValues = {
@@ -81,8 +78,6 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
         };
 
         setParamValues(updatedValues);
-        console.log("TEST GUI 3:", updatedValues);
-        console.log("TEST GUI 4:", paramValues);
         form.reset(updatedValues);
       }
 
@@ -104,6 +99,7 @@ export function ParametresParDefaut({ user }: ParametresParDefautProps) {
     setParamValues(newValues);
     await updateParametres(newValues);
     await mutation.mutateAsync(newValues);
+    toast.success("Les paramètres ont bien été sauvegardés !");
   };
 
   const mutation = useMutation({

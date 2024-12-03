@@ -9,26 +9,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsTravauxMobilierProps = {
   onChange: (updatedValues: Partial<DataType>) => void;
-  filterValues: DataType;
+  form: UseFormReturn<z.infer<typeof DataSchema>>;
 };
 
 export function FormFilterFieldsTravauxMobilier({
   onChange,
-  filterValues,
+  form,
 }: FormFilterFieldsTravauxMobilierProps) {
-  const form = useForm<z.infer<typeof DataSchema>>({
-    resolver: zodResolver(DataSchema),
-    defaultValues: filterValues,
-  });
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const numericValue = !isNaN(Number(value)) ? Number(value) : value;

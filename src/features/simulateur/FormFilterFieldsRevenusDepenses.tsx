@@ -10,26 +10,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export type FormFilterFieldsRevenusDepensesProps = {
   onChange: (updatedValues: Partial<DataType>) => void;
-  filterValues: DataType;
+  form: UseFormReturn<z.infer<typeof DataSchema>>;
 };
 
 export function FormFilterFieldsRevenusDepenses({
   onChange,
-  filterValues,
+  form,
 }: FormFilterFieldsRevenusDepensesProps) {
-  const form = useForm<z.infer<typeof DataSchema>>({
-    resolver: zodResolver(DataSchema),
-    defaultValues: filterValues,
-  });
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const numericValue = !isNaN(Number(value)) ? Number(value) : value;
@@ -132,7 +126,7 @@ export function FormFilterFieldsRevenusDepenses({
                   min={0}
                   max={12}
                   step={1}
-                  defaultValue={[value]}
+                  value={[value]}
                   onValueChange={(value) => {
                     onChange(value[0]);
                     handleSliderChange("nbMoisLocParAn", value[0]);

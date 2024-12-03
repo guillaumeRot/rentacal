@@ -5,18 +5,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { UseFormReturn } from "react-hook-form";
+import { z } from "zod";
 import { FormFilterFieldsAchat } from "./FormFilterFieldsAchat";
 import { FormFilterFieldsFinancement } from "./FormFilterFieldsFinancement";
 import { FormFilterFieldsRevenusDepenses } from "./FormFilterFieldsRevenusDepenses";
 import { FormFilterFieldsTravauxMobilier } from "./FormFilterFieldsTravauxMobilier";
-import { DataType } from "./simulateur.schema";
+import { DataSchema, DataType } from "./simulateur.schema";
 
 export type ResultFiltersProps = {
   onChange: (updatedValues: Partial<DataType>) => void;
-  filterValues: DataType;
+  form: UseFormReturn<z.infer<typeof DataSchema>>;
 };
 
-export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
+export function ResultFilters({ onChange, form }: ResultFiltersProps) {
   return (
     <Accordion
       type="single"
@@ -34,10 +36,7 @@ export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
                   <CardTitle>Achat</CardTitle>
                 </CardHeader>
                 <CardContent className="grid">
-                  <FormFilterFieldsAchat
-                    filterValues={filterValues}
-                    onChange={onChange}
-                  />
+                  <FormFilterFieldsAchat form={form} onChange={onChange} />
                 </CardContent>
               </Card>
               <Card className="rounded-3xl h-full flex-grow mx-auto">
@@ -47,7 +46,7 @@ export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsRevenusDepenses
                     onChange={onChange}
-                    filterValues={filterValues}
+                    form={form}
                   />
                 </CardContent>
               </Card>
@@ -58,7 +57,7 @@ export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
                 <CardContent className="grid gap-4 h-full">
                   <FormFilterFieldsTravauxMobilier
                     onChange={onChange}
-                    filterValues={filterValues}
+                    form={form}
                   />
                 </CardContent>
               </Card>
@@ -69,7 +68,7 @@ export function ResultFilters({ onChange, filterValues }: ResultFiltersProps) {
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsFinancement
                     onChange={onChange}
-                    filterValues={filterValues}
+                    form={form}
                   />
                 </CardContent>
               </Card>
