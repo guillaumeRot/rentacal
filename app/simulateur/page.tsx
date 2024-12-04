@@ -1,5 +1,6 @@
 import { currentUser } from "@/auth/current-user";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Footer } from "@/features/Footer";
 import { Header } from "@/features/Header";
 import { RentaCalSidebar } from "@/features/RentaCalSidebar";
 import { SimulationResult } from "@/features/simulateur/SimulationResult";
@@ -15,6 +16,7 @@ export default async function Result() {
         <Header />
         <SimulationResult user={user} />
         <CookieConsent variant="small" />
+        <Footer />
       </div>
     </SidebarProvider>
   );
