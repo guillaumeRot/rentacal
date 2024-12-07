@@ -5,7 +5,6 @@ import { MathJax } from "better-react-mathjax";
 import Link from "next/link";
 import { useState } from "react";
 import { BsQuestionCircleFill } from "react-icons/bs";
-import { IoTrendingUpOutline } from "react-icons/io5";
 import { PourcentageFormat } from "../PourcentageFormat";
 
 export type RentabiliteBruteProps = {
@@ -15,21 +14,21 @@ export type RentabiliteBruteProps = {
 export const RentabiliteBrute = (props: RentabiliteBruteProps) => {
   const [open, setOpen] = useState(false);
 
-  let bgColor = "#22C55E";
+  let color = "#22C55E";
   if ((props.rentabiliteBrute ?? 0) < 4) {
-    bgColor = "#DC2626";
+    color = "#DC2626";
   } else if ((props.rentabiliteBrute ?? 0) < 7) {
-    bgColor = "#F59E0B";
+    color = "#F59E0B";
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Card
-        className="rounded-3xl lg:w-2/4 max-h-36 text-white"
-        style={{ backgroundColor: `${bgColor}` }}
+        className="rounded-3xl lg:w-2/4 max-h-36"
+        style={{ borderColor: `${color}`, color: `${color}` }}
       >
         <CardHeader className="relative">
-          <CardTitle className="text-black">Rentabilité brute</CardTitle>
+          <CardTitle>Rentabilité brute</CardTitle>
           <DialogTrigger asChild>
             <Link
               href="#"
@@ -46,13 +45,13 @@ export const RentabiliteBrute = (props: RentabiliteBruteProps) => {
           </DialogTrigger>
         </CardHeader>
 
-        <CardContent className="gap-4 grid text-2xl lg:text-4xl font-semibold">
+        <CardContent className="gap-4 grid text-2xl lg:text-4xl font-bold">
           <div className="flex">
             <PourcentageFormat
               value={props.rentabiliteBrute}
               className="w-3/4"
             />
-            <IoTrendingUpOutline />
+            {/* <IoTrendingUpOutline /> */}
           </div>
         </CardContent>
       </Card>
