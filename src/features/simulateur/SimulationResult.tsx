@@ -53,7 +53,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
         })
       )?.data as unknown as ParametresType;
 
-      console.log("TEST GUI 1:", parametres);
       if (parametres) {
         const updatedValues = {
           ...filtersValues,
@@ -65,8 +64,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
           nbMoisLocParAn:
             parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
         };
-        console.log("TEST GUI 2:", parametres);
-
         setFiltersValues(updatedValues);
         form.reset(updatedValues);
       }
@@ -150,7 +147,7 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
             <CoutPret coutPret={result.data?.coutPret} />
           </div>
           <TabResultat
-            resultatsMensuel={result.data?.resultatsMensuel}
+            resultatsGlobal={result.data?.resultatsGlobal}
             mensualites={result.data?.mensualites}
             cashflowBrut={result.data?.cashflowBrut}
           />

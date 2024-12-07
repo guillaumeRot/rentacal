@@ -44,7 +44,7 @@ export const RentabiliteNette = (props: RentabiliteNetteProps) => {
             </Link>
           </DialogTrigger>
         </CardHeader>
-        <CardContent className="grid gap-4 text-2xl lg:text-4xl font-semibold">
+        <CardContent className="grid gap-4 text-2xl lg:text-4xl font-bold">
           <div className="flex">
             <PourcentageFormat
               value={props.rentabiliteNette}

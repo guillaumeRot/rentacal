@@ -4,7 +4,7 @@ import { action } from "@/lib/safe-actions";
 import {
   DataSchema,
   DataType,
-  ResultatMensuelType,
+  ResultatGlobalType,
   ResultSchema,
 } from "./simulateur.schema";
 
@@ -23,7 +23,7 @@ const mapMoisByIndex: Record<number, string> = {
   12: "Décembre",
 };
 
-let resultatsMensuel: ResultatMensuelType[] = [];
+let resultatsGlobal: ResultatGlobalType[] = [];
 let montantPret: number = 0;
 let sommeFraisBancaire: number = 0;
 
@@ -45,14 +45,14 @@ export const calculRentabilite = action
         parsedInput.parsedInput.nbMoisLocParAn
       ),
       montantPret: montantPret,
-      resultatsMensuel: getResultatsMensuel(
+      resultatsGlobal: getResultatsGlobal(
         parsedInput.parsedInput,
         mensualites,
         montantPret
       ),
       mensualites: mensualites,
       cashflowBrut: parsedInput.parsedInput.loyersTotal - mensualites,
-      fraisBancaires: getSommeFraisBancaires(resultatsMensuel),
+      fraisBancaires: getSommeFraisBancaires(resultatsGlobal),
       coutPret: getCoutPret(montantPret, sommeFraisBancaire),
     };
   });
@@ -90,15 +90,17 @@ function getMontantPret(values: DataType) {
   return montantPret;
 }
 
-function getResultatsMensuel(
+function getResultatsGlobal(
   values: DataType,
   mensualites: number,
   montantPret: number
 ) {
-  resultatsMensuel = [];
+  resultatsGlobal = [];
   let pretRestant = montantPret;
   let pretRembourse = 0;
   for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
+    let resultatsMensuel = [];
+
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
       const interetsPret = getMontantInteretsMensuel(
         pretRestant,
@@ -115,8 +117,16 @@ function getResultatsMensuel(
       pretRembourse = mensualites - interetsPret;
       pretRestant = pretRestant - pretRembourse;
     }
+
+    resultatsGlobal.push({
+      annee: resultatsMensuel[0].annee,
+      mois: resultatsMensuel[0].mois,
+      pretRestant: resultatsMensuel[0].pretRestant,
+      interetsPret: resultatsMensuel[0].interetsPret,
+      resultatsMensuel: resultatsMensuel,
+    });
   }
-  return resultatsMensuel;
+  return resultatsGlobal;
 }
 
 function getTauxInteretMensuel(tauxInteretAnnuel: number) {
@@ -148,7 +158,7 @@ function getMensualite(values: DataType, montantPret: number) {
   );
 }
 
-function getSommeFraisBancaires(resultatsMensuel: ResultatMensuelType[]) {
+function getSommeFraisBancaires(resultatsMensuel: ResultatGlobalType[]) {
   sommeFraisBancaire = resultatsMensuel.reduce(
     (accumulator, product) => accumulator + product.interetsPret,
     0
