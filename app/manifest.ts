@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Calculez votre rentabilité en quelques secondes",
     start_url: "/",
     display: "standalone",
-    background_color: "#FFFFFF",
-    theme_color: "#FFFFFF",
+    background_color: "#FAFDFF",
+    theme_color: "#FAFDFF",
     icons: [
       {
         src: "/icon-192x192.png",
