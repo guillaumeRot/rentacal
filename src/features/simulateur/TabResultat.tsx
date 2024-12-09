@@ -77,83 +77,39 @@ export const TabResultat = (props: TabResultatProps) => {
               </TableRow>
             </TableHeader>
 
-            {props.resultatsGlobal.map((resultat) => (
-              <Collapsible
-                id={resultat.annee + "_" + resultat.mois}
-                key={resultat.annee + "_" + resultat.mois}
-                asChild
-              >
-                {/* <> */}
-                {/* <div>TEST 1</div> */}
-                {/* <React.Fragment key={resultat.annee + "_" + resultat.mois}> */}
-                <TableBody>
-                  <TableRow
-                    key={resultat.annee + "_" + resultat.mois + "_row"}
-                    // onClick={() => toggleRow(resultat.annee)}
-                  >
-                    <CollapsibleTrigger asChild>
-                      <TableCell>{resultat.annee}</TableCell>
-                    </CollapsibleTrigger>
-                    <TableCell>{resultat.mois}</TableCell>
-                    <TableCell>
-                      <MontantFormat value={resultat.pretRestant} />
-                    </TableCell>
-                    <TableCell>
-                      <MontantFormat value={resultat.interetsPret} />
-                    </TableCell>
-                  </TableRow>
-                  <CollapsibleContent asChild>
-                    <Table>
-                      {resultat.resultatsMensuel.map((resultatMensuel) => (
-                        <TableRow
-                          key={
-                            resultatMensuel.annee +
-                            "_" +
-                            resultatMensuel.mois +
-                            "_mensuel"
-                          }
-                        >
-                          <TableCell>{resultatMensuel.annee}</TableCell>
-                          <TableCell>{resultatMensuel.mois}</TableCell>
-                          <TableCell>
-                            <MontantFormat
-                              value={resultatMensuel.pretRestant}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <MontantFormat
-                              value={resultatMensuel.interetsPret}
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </Table>
-                  </CollapsibleContent>
-
-                  {/* {openRows[resultat.annee] && (
-                        <CollapsibleContent asChild>
-                          <TableRow
-                            key={
-                              resultat.annee + "_" + resultat.mois + "_content"
-                            }
-                          >
-                            <TableCell>{resultat.annee}</TableCell>
-                            <TableCell>{resultat.mois}</TableCell>
-                            <TableCell>
-                              <MontantFormat value={resultat.pretRestant} />
-                            </TableCell>
-                            <TableCell>
-                              <MontantFormat value={resultat.interetsPret} />
-                            </TableCell>
-                          </TableRow>
-                        </CollapsibleContent>
-                      )} */}
-                </TableBody>
-                {/* </React.Fragment> */}
-                {/* </> */}
-              </Collapsible>
-            ))}
-            {/* </TableBody> */}
+            <TableBody>
+              {props.resultatsGlobal.map((resultat) => (
+                // <TableRow>
+                <Collapsible
+                  id={resultat.annee + "_" + resultat.mois}
+                  key={resultat.annee + "_" + resultat.mois}
+                  asChild
+                >
+                  <>
+                    <TableRow>
+                      <TableCell>
+                        <CollapsibleTrigger>
+                          {resultat.annee}
+                        </CollapsibleTrigger>
+                      </TableCell>
+                      <TableCell>{resultat.mois}</TableCell>
+                      <TableCell>
+                        <MontantFormat value={resultat.pretRestant} />
+                      </TableCell>
+                      <TableCell>
+                        <MontantFormat value={resultat.interetsPret} />
+                      </TableCell>
+                    </TableRow>
+                    <CollapsibleContent>
+                      <TableRow>
+                        <TableCell colSpan={4}>TEST GUI</TableCell>
+                      </TableRow>
+                    </CollapsibleContent>
+                  </>
+                </Collapsible>
+                // </TableRow>
+              ))}
+            </TableBody>
           </Table>
         </CardContent>
       </Card>
