@@ -67,50 +67,76 @@ export const TabResultat = (props: TabResultatProps) => {
               </span>
             </Badge>
           </div>
-          <Table>
-            <TableHeader>
+          <div>
+            <Table className="w-full">
+              {/* <TableHeader>
               <TableRow>
                 <TableHead>Année</TableHead>
                 <TableHead>Mois</TableHead>
                 <TableHead>Prêt restant</TableHead>
                 <TableHead>Intêrets</TableHead>
               </TableRow>
-            </TableHeader>
+            </TableHeader> */}
 
-            <TableBody>
-              {props.resultatsGlobal.map((resultat) => (
-                // <TableRow>
-                <Collapsible
-                  id={resultat.annee + "_" + resultat.mois}
-                  key={resultat.annee + "_" + resultat.mois}
-                  asChild
-                >
-                  <>
-                    <TableRow>
-                      <TableCell>
-                        <CollapsibleTrigger>
-                          {resultat.annee}
+              <TableBody className="w-full">
+                {props.resultatsGlobal.map((resultat) => (
+                  // <TableRow>
+                  <Collapsible
+                    id={resultat.annee + "_" + resultat.mois}
+                    key={resultat.annee + "_" + resultat.mois}
+                    className="w-full"
+                  >
+                    <TableRow className="w-full">
+                      <TableCell className="w-full col-span-full">
+                        <CollapsibleTrigger className="w-full">
+                          <div className="w-full flex flex-row">
+                            <div className="items-center w-1/3">
+                              Année : {resultat.annee}
+                            </div>
+                            <div className="w-1/3 items-center">
+                              Intêrets remboursés: xxx €
+                            </div>
+                            <div className="w-1/3 items-center">
+                              Montant du prêt restant: xxx €
+                            </div>
+                          </div>
                         </CollapsibleTrigger>
                       </TableCell>
-                      <TableCell>{resultat.mois}</TableCell>
-                      <TableCell>
-                        <MontantFormat value={resultat.pretRestant} />
-                      </TableCell>
-                      <TableCell>
-                        <MontantFormat value={resultat.interetsPret} />
-                      </TableCell>
                     </TableRow>
-                    <CollapsibleContent>
-                      <TableRow>
-                        <TableCell colSpan={4}>TEST GUI</TableCell>
-                      </TableRow>
+
+                    <CollapsibleContent className="w-full">
+                      <Table>
+                        <TableBody>
+                          {resultat.resultatsMensuel.map((resultatMensuel) => (
+                            <TableRow
+                              key={
+                                resultatMensuel.annee +
+                                "_" +
+                                resultatMensuel.mois +
+                                "_row"
+                              }
+                            >
+                              <TableCell>{resultatMensuel.mois}</TableCell>
+                              <TableCell>
+                                <MontantFormat
+                                  value={resultatMensuel.pretRestant}
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <MontantFormat
+                                  value={resultatMensuel.interetsPret}
+                                />
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
                     </CollapsibleContent>
-                  </>
-                </Collapsible>
-                // </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                  </Collapsible>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     );
