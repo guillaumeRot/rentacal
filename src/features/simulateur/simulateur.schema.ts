@@ -41,7 +41,14 @@ export const ResultatMensuel = z.object({
   pretRestant: z.number(),
   interetsPret: z.number(),
 });
-export type ResultatMensuelType = z.infer<typeof ResultatMensuel>;
+export const ResultatGlobal = z.object({
+  annee: z.number(),
+  mois: z.string(),
+  pretRestant: z.number(),
+  interetsPret: z.number(),
+  resultatsMensuel: z.array(ResultatMensuel),
+});
+export type ResultatGlobalType = z.infer<typeof ResultatGlobal>;
 
 export const ResultSchema = z.object({
   rentabiliteBrute: z.number(),
