@@ -1,11 +1,12 @@
 "use client";
 
+import { Layout } from "@/components/layout";
 import Image from "next/image";
 import { SignInButton } from "../auth/SignInButton";
 
 export const HeaderSection = () => {
   return (
-    <div className="mt-6 mb-20 grid grid-cols-2">
+    <Layout className="mt-6 mb-20 grid grid-cols-2">
       <Image
         src="/icon_title.png"
         width={150}
@@ -15,6 +16,6 @@ export const HeaderSection = () => {
       <div className="justify-self-end">
         <SignInButton />
       </div>
-    </div>
+    </Layout>
   );
 };
