@@ -9,9 +9,9 @@ const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 class VideoPresentation extends Component {
   render() {
     return (
-      <Section className="player-wrapper mt-10">
+      <Section className="player-wrapper mt-10 rounded-3xl	">
         <ReactPlayer
-          className="react-player fixed-bottom mx-auto"
+          className="react-player fixed-bottom mx-auto rounded-3xl overflow-hidden	"
           url="/rentacal_presentation.mp4"
           width="90%"
           height="90%"
