@@ -25,7 +25,7 @@ export const TabResultat = (props: TabResultatProps) => {
           <div className="flex">
             <Badge variant="outline" className="w-1/2 mx-4 lg:mx-14">
               <span className="mx-auto text-base">
-                Mensualités :&nbsp;
+                Mensualités hors assurance:&nbsp;
                 <MontantFormat value={props.mensualites} />
               </span>
             </Badge>
