@@ -1,3 +1,9 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -9,10 +15,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MontantFormat } from "../MontantFormat";
-import { ResultatMensuelType } from "./simulateur.schema";
+import { ResultatGlobalType } from "./simulateur.schema";
 
 export type TabResultatProps = {
-  resultatsMensuel?: ResultatMensuelType[];
+  resultatsMensuel?: ResultatGlobalType[];
   mensualites?: number;
   cashflowBrut?: number;
 };
@@ -36,50 +42,54 @@ export const TabResultat = (props: TabResultatProps) => {
               </span>
             </Badge>
           </div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {/* <TableHead /> */}
-                <TableHead>Année</TableHead>
-                <TableHead>Mois</TableHead>
-                <TableHead>Prêt restant</TableHead>
-                <TableHead>Intêrets</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {props.resultatsMensuel.map((resultat) => (
-                // <Collapsible id={resultat.annee + "_" + resultat.mois} asChild>
-                //   <>
-                <TableRow key={resultat.annee + "_" + resultat.mois}>
-                  {/* <CollapsibleTrigger>
-                    <TableCell>test</TableCell>
-                  </CollapsibleTrigger> */}
-                  <TableCell className="text-center">
-                    {resultat.annee}
-                  </TableCell>
-                  <TableCell>{resultat.mois}</TableCell>
-                  <TableCell>
-                    <MontantFormat value={resultat.pretRestant} />
-                  </TableCell>
-                  <TableCell>
-                    <MontantFormat value={resultat.interetsPret} />
-                  </TableCell>
-                </TableRow>
-                //     <CollapsibleContent>
-                //       <TableRow key={resultat.annee + "_" + resultat.mois}>
-                //         <TableCell>{resultat.annee}</TableCell>
-                //         <TableCell>{resultat.mois}</TableCell>
-                //         <TableCell>{resultat.pretRestant} €</TableCell>
-                //         <TableCell>{resultat.interetsPret} €</TableCell>
-                //         <TableCell>{resultat.Mensualite} €</TableCell>
-                //         <TableCell>{resultat.resultat} €</TableCell>
-                //       </TableRow>
-                //     </CollapsibleContent>
-                //   </>
-                // </Collapsible>
-              ))}
-            </TableBody>
-          </Table>
+
+          <Accordion type="single" collapsible className="w-full">
+            {props.resultatsMensuel.map((resultat) => (
+              <AccordionItem
+                key={`${resultat.annee}`}
+                value={`item-${resultat.annee}`}
+              >
+                <AccordionTrigger>Année : {resultat.annee}</AccordionTrigger>
+
+                <AccordionContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Année</TableHead>
+                        <TableHead>Mois</TableHead>
+                        <TableHead>Prêt restant</TableHead>
+                        <TableHead>Intêrets</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {resultat.resultatsMensuel.map((resultatMensuel) => (
+                        <TableRow
+                          key={
+                            resultatMensuel.annee + "_" + resultatMensuel.mois
+                          }
+                        >
+                          <TableCell className="text-center">
+                            {resultatMensuel.annee}
+                          </TableCell>
+                          <TableCell>{resultatMensuel.mois}</TableCell>
+                          <TableCell>
+                            <MontantFormat
+                              value={resultatMensuel.pretRestant}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <MontantFormat
+                              value={resultatMensuel.interetsPret}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </CardContent>
       </Card>
     );
