@@ -97,34 +97,7 @@ export const TabResultat = (props: TabResultatProps) => {
 
   return (
     <Card className="rounded-3xl py-8 w-full h-full">
-      <CardContent className="grid gap-4">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Année</TableHead>
-              <TableHead>Mois</TableHead>
-              <TableHead>Prêt restant</TableHead>
-              <TableHead>Intêrets</TableHead>
-              <TableHead>Prêt avec intêrets</TableHead>
-              <TableHead>Mensualité</TableHead>
-              <TableHead>Résultat</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {/* {props.resultatsMensuel.map((resultat) => (
-              <TableRow key={resultat.annee + "_" + resultat.mois}>
-                <TableCell>{resultat.annee}</TableCell>
-                <TableCell>{resultat.mois}</TableCell>
-                <TableCell>{resultat.pretRestant}</TableCell>
-                <TableCell>{resultat.interetsPret}</TableCell>
-                <TableCell>{resultat.pretAvecInterets}</TableCell>
-                <TableCell>{resultat.Mensualite}</TableCell>
-                <TableCell>{resultat.resultat}</TableCell>
-              </TableRow>
-            ))} */}
-          </TableBody>
-        </Table>
-      </CardContent>
+      <CardContent className="grid gap-4">Pas de résultats</CardContent>
     </Card>
   );
 };
