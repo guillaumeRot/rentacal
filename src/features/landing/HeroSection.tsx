@@ -2,18 +2,8 @@ import Link from "next/link";
 
 export const HeroSection = () => {
   return (
-    // <Section className="text-center flex flex-row items-center">
-    //   <Layout className="text-4xl lg:text-6xl font-poppins font-semibold">
-    //     <div className="flex md:flex-row flex-col justify-center">
-    //       <span>Calculez votre&nbsp;</span>
-    //       <span className="text-secondary-foreground">rentabilité</span>
-    //     </div>
-    //     <span className="pt-4">en quelques secondes</span>
-    //   </Layout>
-    // </Section>
-
     <section>
-      <div className="custom-screen py-28 text-gray-600 font-poppins">
+      <div className="custom-screen pt-28 text-gray-600 font-poppins">
         <div className="space-y-5 max-w-4xl mx-auto text-center">
           <h1 className="text-4xl text-gray-800 font-semibold mx-auto sm:text-6xl">
             Calculez votre{" "}
