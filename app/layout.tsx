@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,8 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={cn(inter.className, "h-full")}>
+    // <Html className='scroll-smooth' lang='en' suppressHydrationWarning>
+    //   <Head />
+    //   <body className='md:overflow-visible'>
+    //     <Main />
+    //     <NextScript />
+    //   </body>
+    // </Html>
+
+    <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
+      <body className={`cn(inter.className, "h-full") md:overflow-visible`}>
         <Providers>{children}</Providers>
         <GoogleAnalytics gaId="G-CJ6SFG2EWQ" />
       </body>
