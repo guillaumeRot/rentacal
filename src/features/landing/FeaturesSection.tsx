@@ -4,7 +4,7 @@ import ctaImage from "../../../public/Cover.jpg";
 
 export const FeaturesSection = () => {
   return (
-    <section id="cta" className="py-16 pb-0">
+    <section id="features" className="py-16 pb-0">
       <h1 className="flex md:flex-row flex-col justify-center text-2xl lg:text-4xl font-poppins font-semibold px-4">
         Démontrez la fiabilité de votre projet
       </h1>

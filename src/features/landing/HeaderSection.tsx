@@ -1,17 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const HeaderSection = () => {
   const [state, setState] = useState(false);
-  const router = useRouter();
 
   const navigation = [
-    { title: "Features", path: "#features" },
-    { title: "Our toolkit", path: "#toolkit" },
-    { title: "Testimonials", path: "#testimonials" },
+    { title: "Fonctionnalités", path: "#features" },
+    { title: "FAQ", path: "#faq" },
   ];
 
   useEffect(() => {

@@ -11,7 +11,7 @@ import { Component } from "react";
 export default class FAQSection extends Component {
   render() {
     return (
-      <section className="py-16">
+      <section id="faq" className="py-16">
         <div className="custom-screen">
           <div className="max-w-4xl mx-auto">
             <h1 className="flex flex-col text-5xl text-center sm:text-4xl font-poppins font-semibold px-4">
