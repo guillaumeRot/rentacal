@@ -5,7 +5,7 @@ import ctaImage from "../../../public/Cover.jpg";
 export const FeaturesSection = () => {
   return (
     <section id="cta" className="py-16 pb-0">
-      <h1 className="flex md:flex-row flex-col justify-center text-3xl lg:text-5xl font-poppins font-semibold px-4">
+      <h1 className="flex md:flex-row flex-col justify-center text-2xl lg:text-4xl font-poppins font-semibold px-4">
         Démontrez la fiabilité de votre projet
       </h1>
       <p className="flex md:flex-row flex-col text-primary-foreground justify-center text-sm lg:text-lg font-rubik mt-6 px-4 text-center pb-10">
@@ -26,12 +26,12 @@ export const FeaturesSection = () => {
             <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Renseignez les coûts d'acquisition
             </h2>
-            <p className="mt-3 text-gray-600 text-xl">
+            <p className="mt-3 text-gray-600 text-md">
               L'occasion de tester votre rentabilité suite à votre négociation à
               l'achat !
             </p>
-            <p className="mt-6 text-xl">Vous pouvez renseigner :</p>
-            <ul className="mt-4 flex flex-col gap-2 text-xl">
+            <p className="mt-6 text-md">Vous pouvez renseigner :</p>
+            <ul className="mt-4 flex flex-col gap-2 text-md">
               <li className="flex items-center gap-2">
                 <span>
                   <HiArrowRightCircle size={28} className="text-blue-900" />
@@ -60,12 +60,12 @@ export const FeaturesSection = () => {
             <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Déclarez les revenus et dépenses prévisionnels
             </h2>
-            <p className="mt-3 text-gray-600 text-xl">
+            <p className="mt-3 text-gray-600 text-md">
               Estimez les loyers que vous pourrez reçevoir et les charges que
               vous devrez dépenser, et obtenez votre cashflow mensuel !
             </p>
-            <p className="mt-6 text-xl">Vous pouvez renseigner :</p>
-            <ul className="mt-4 flex flex-col gap-2 text-xl">
+            <p className="mt-6 text-md">Vous pouvez renseigner :</p>
+            <ul className="mt-4 flex flex-col gap-2 text-md">
               <li className="flex items-center gap-2">
                 <span>
                   <HiArrowRightCircle size={28} className="text-blue-900" />
@@ -114,12 +114,12 @@ export const FeaturesSection = () => {
             <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Sans oublier les travaux et le mobilier
             </h2>
-            <p className="mt-3 text-gray-600 text-xl">
+            <p className="mt-3 text-gray-600 text-md">
               En attente de négociation, cela peut vous orienter dans le montant
               net vendeur
             </p>
-            <p className="mt-6 text-xl">Vous pouvez renseigner :</p>
-            <ul className="mt-4 flex flex-col gap-2 text-xl">
+            <p className="mt-6 text-md">Vous pouvez renseigner :</p>
+            <ul className="mt-4 flex flex-col gap-2 text-md">
               <li className="flex items-center gap-2">
                 <span>
                   <HiArrowRightCircle size={28} className="text-blue-900" />
@@ -142,12 +142,12 @@ export const FeaturesSection = () => {
             <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Simuler votre financement de crédit
             </h2>
-            <p className="mt-3 text-gray-600 text-xl">
+            <p className="mt-3 text-gray-600 text-md">
               En attente d'une offre bancaire, vous pourrez simuler votre
               financement
             </p>
-            <p className="mt-6 text-xl">Vous pouvez renseigner :</p>
-            <ul className="mt-4 flex flex-col gap-2 text-xl">
+            <p className="mt-6 text-md">Vous pouvez renseigner :</p>
+            <ul className="mt-4 flex flex-col gap-2 text-md">
               <li className="flex items-center gap-2">
                 <span>
                   <HiArrowRightCircle size={28} className="text-blue-900" />
