@@ -1,3 +1,5 @@
+import CTASection from "@/features/landing/CTASection";
+import FAQSection from "@/features/landing/FAQSection";
 import { FeaturesSection } from "@/features/landing/FeaturesSection";
 import { GradientWrapper } from "@/features/landing/GradientWrapper";
 import { HeaderSection } from "@/features/landing/HeaderSection";
@@ -15,6 +17,8 @@ export default function Home() {
         {/* <Features />
         <ToolKit /> */}
       </GradientWrapper>
+      <CTASection />
+      <FAQSection />
     </>
     // <div>
     //   <Layout>
