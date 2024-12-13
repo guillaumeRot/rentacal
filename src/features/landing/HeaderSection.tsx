@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { signInAction } from "../auth/auth.action";
 
 export const HeaderSection = () => {
   const [state, setState] = useState(false);
@@ -111,7 +112,10 @@ export const HeaderSection = () => {
               <li>
                 <div className="flex items-center justify-center gap-x-3 font-medium text-sm mt-5">
                   <Link
-                    href="https://buy.stripe.com/dR6bLR9Mg1vvcMweV7"
+                    href="#"
+                    onClick={() => {
+                      signInAction();
+                    }}
                     className="py-2.5 px-4 text-center rounded-lg duration-150 text-white text-bold text-md bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
                   >
                     Se connecter

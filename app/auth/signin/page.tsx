@@ -10,7 +10,7 @@ export default function SignIn() {
   return (
     <div>
       <Image
-        src="/icon_title.png"
+        src="/rentacal_icon_title.png"
         width={300}
         height={300}
         alt="rentacal logo"
