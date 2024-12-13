@@ -5,13 +5,12 @@ import ctaImage from "../../../public/Cover.jpg";
 export const FeaturesSection = () => {
   return (
     <section id="features" className="py-16 pb-0">
-      <h1 className="flex md:flex-row flex-col justify-center text-2xl lg:text-4xl font-poppins font-semibold px-4">
-        Démontrez la fiabilité de votre projet
+      <h1 className="flex flex-col text-center mx-auto text-2xl lg:text-4xl font-poppins font-semibold px-4 max-w-5xl">
+        Simplifiez vos calculs, Maximisez vos profits !
       </h1>
-      <p className="flex md:flex-row flex-col text-primary-foreground justify-center text-sm lg:text-lg font-rubik mt-6 px-4 text-center pb-10">
-        Renseignez les informations concernant votre investissement immobilier,
-        <br />
-        et consultez vos résultats en quelques secondes
+      <p className="flex flex-col mx-auto text-primary-foreground text-center text-sm lg:text-lg font-rubik mt-6 px-4 pb-10 max-w-5xl">
+        Analysez la rentabilité locative instantanément, sans tableurs
+        compliqués.
       </p>
       <div className="custom-screen shadow-sm pt-20">
         <div className="items-center gap-x-12 lg:flex">

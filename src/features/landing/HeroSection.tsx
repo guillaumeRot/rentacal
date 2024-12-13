@@ -18,12 +18,12 @@ export const HeroSection = () => {
             Découvrez la rentabilité réelle de votre projet immobilier en
             quelques clics et investissez intelligemment
           </p>
-          <div className="flex items-center justify-center gap-x-3 font-medium text-sm">
+          <div className="flex items-center justify-center gap-x-3 font-medium text-sm pt-4">
             <Link
               href="/simulateur"
               className="py-2.5 px-4 text-center rounded-lg duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
             >
-              Accéder au simulateur gratuitement
+              Simulez votre rentabilité maintenant !
             </Link>
           </div>
         </div>
