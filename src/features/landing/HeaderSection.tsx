@@ -52,7 +52,7 @@ export const HeaderSection = () => {
             <Link href="/">
               <img
                 src="rentacal_icon_title.png"
-                width={220}
+                width={180}
                 height={150}
                 alt="Rentacal logo"
               />
