@@ -1,6 +1,7 @@
 import CTASection from "@/features/landing/CTASection";
 import FAQSection from "@/features/landing/FAQSection";
 import { FeaturesSection } from "@/features/landing/FeaturesSection";
+import { FooterSection } from "@/features/landing/FooterSection";
 import { GradientWrapper } from "@/features/landing/GradientWrapper";
 import { HeaderSection } from "@/features/landing/HeaderSection";
 import { HeroSection } from "@/features/landing/HeroSection";
@@ -14,20 +15,10 @@ export default function Home() {
       <VideoSection />
       <GradientWrapper>
         <FeaturesSection />
-        {/* <Features />
-        <ToolKit /> */}
       </GradientWrapper>
       <CTASection />
       <FAQSection />
+      <FooterSection />
     </>
-    // <div>
-    //   <Layout>
-
-    //     {/* <TitleSection />
-    //     <SubtitleSection />
-    //     <AccessSection />
-    //     <VideoPresentation /> */}
-    //   </Layout>
-    // </div>
   );
 }
