@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Component } from "react";
+import { signInAction } from "../auth/auth.action";
 
 export default class CTASection extends Component {
   render() {
@@ -20,7 +21,10 @@ export default class CTASection extends Component {
 
             <div className="flex items-center justify-center gap-x-3 font-medium text-sm mt-5">
               <Link
-                href="/simulateur"
+                href="#"
+                onClick={() => {
+                  signInAction();
+                }}
                 className="py-2.5 px-4 text-center rounded-lg duration-150 text-sky-600 text-bold text-lg bg-white mb-5 hover:ring ring-transparent ring-offset-2 transition"
               >
                 Essayez Rentacal gratuitement !

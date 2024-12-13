@@ -5,7 +5,7 @@ export default function Result() {
     <div className="p-14">
       <h1 className="text-4xl mb-8">
         <Image
-          src="/icon_title.png"
+          src="/rentacal_icon_title.png"
           width={250}
           height={250}
           alt="rentacal logo"

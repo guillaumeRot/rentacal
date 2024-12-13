@@ -53,7 +53,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
         })
       )?.data as unknown as ParametresType;
 
-      console.log("TEST GUI 1:", parametres);
       if (parametres) {
         const updatedValues = {
           ...filtersValues,

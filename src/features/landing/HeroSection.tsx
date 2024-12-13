@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { signInAction } from "../auth/auth.action";
 
 export const HeroSection = () => {
   return (
@@ -20,7 +21,10 @@ export const HeroSection = () => {
           </p>
           <div className="flex items-center justify-center gap-x-3 font-medium text-sm pt-4">
             <Link
-              href="/simulateur"
+              href="#"
+              onClick={() => {
+                signInAction();
+              }}
               className="py-2.5 px-4 text-center rounded-lg duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
             >
               Simulez votre rentabilité !

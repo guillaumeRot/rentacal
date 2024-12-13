@@ -11,7 +11,7 @@ export const LegendeRentabilite = () => {
   return (
     <div
       id="legendeRentabilites"
-      className="flex gap-y-8 gap-x-6 w-full flex-col lg:flex-row text-sm mt-3"
+      className="flex gap-y-8 gap-x-6 w-full flex-col lg:flex-row text-sm mt-3 justify-center"
     >
       <span className="flex gap-x-2">
         <FaCircle size={18} color="#DC2626" />
