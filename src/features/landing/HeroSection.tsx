@@ -23,7 +23,7 @@ export const HeroSection = () => {
               href="/simulateur"
               className="py-2.5 px-4 text-center rounded-lg duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
             >
-              Simulez votre rentabilité maintenant !
+              Simulez votre rentabilité !
             </Link>
           </div>
         </div>
