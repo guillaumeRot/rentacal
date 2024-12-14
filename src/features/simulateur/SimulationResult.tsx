@@ -64,7 +64,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
           nbMoisLocParAn:
             parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
         };
-        console.log("TEST GUI 2:", parametres);
 
         setFiltersValues(updatedValues);
         form.reset(updatedValues);
