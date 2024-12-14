@@ -1,7 +1,13 @@
-import { LoggedInButton } from "./auth/LoggedInButton";
+"use client";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useSession } from "next-auth/react";
 import { SidebarTrigger } from "./theme/SidebarTrigger";
 
-export const Header = () => {
+export default function Header() {
+  const session = useSession();
+  const name = session.data?.user?.name ?? "";
+
   return (
     <div>
       <link
@@ -25,13 +31,23 @@ export const Header = () => {
       <link rel="manifest" href="/site.webmanifest" />
       <header className="w-full border-b border-border bg-popover flex">
         <SidebarTrigger />
-        <div className="grid grid-cols-3 grow pb-3 pt-3 px-14 items-center">
-          <h1 className="text-3xl font-poppins font-medium">Bonjour !</h1>
-          <div className="justify-self-end grid items-center col-start-3">
-            <LoggedInButton />
+        <div className="grid grid-cols-4 grow py-5 items-center max-w-6xl mx-auto px-4">
+          <h1 className="text-3xl font-poppins font-medium col-span-3">
+            Bonjour {name} !
+          </h1>
+          <div className="justify-self-end grid items-center col-start-4">
+            <Avatar className="size-12">
+              <AvatarFallback>{name}</AvatarFallback>
+              {session.data?.user?.image ? (
+                <AvatarImage
+                  src={session.data?.user?.image}
+                  alt={`${session.data?.user?.name ?? "-"}'s profile picture`}
+                />
+              ) : null}
+            </Avatar>
           </div>
         </div>
       </header>
     </div>
   );
-};
+}

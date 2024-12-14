@@ -1,4 +1,5 @@
-import { currentUser } from "@/auth/current-user";
+"use client";
+
 import CTASection from "@/features/landing/CTASection";
 import FAQSection from "@/features/landing/FAQSection";
 import { FeaturesSection } from "@/features/landing/FeaturesSection";
@@ -7,13 +8,13 @@ import { GradientWrapper } from "@/features/landing/GradientWrapper";
 import { HeaderSection } from "@/features/landing/HeaderSection";
 import { HeroSection } from "@/features/landing/HeroSection";
 import VideoSection from "@/features/landing/VideoSection";
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const user = await currentUser();
-  console.log("test gui:", user);
+export default function Home() {
+  const session = useSession();
 
-  if (user) {
+  if (session.data?.user) {
     redirect(`/simulateur`);
   } else {
     return (

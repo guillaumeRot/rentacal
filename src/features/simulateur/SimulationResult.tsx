@@ -3,7 +3,7 @@
 import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -20,12 +20,9 @@ import { TabResultat } from "./TabResultat";
 import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 
-export type ParametresParDefautProps = {
-  user: User | null;
-};
-
-export function SimulationResult({ user }: ParametresParDefautProps) {
-  const userId = user?.id ?? "0";
+export default function SimulationResult() {
+  const session = useSession();
+  const userId = session.data?.user?.id ?? "0";
   const queryClient = useQueryClient();
 
   const [filtersValues, setFiltersValues] = useState({

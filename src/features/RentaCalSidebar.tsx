@@ -20,31 +20,7 @@ import Link from "next/link";
 import { singOutAction } from "./auth/auth.action";
 
 export function RentaCalSidebar() {
-  // const user = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: async () => {
-  //     console.log("TEST GUI");
-  //     const user = await currentUser();
-  //     console.log("TEST GUI 2:", user);
-
-  //     // const r = res?.data;
-  //     return user;
-  //   },
-  // });
-  // const user = await currentUser();
-
-  // if (!user) {
-  //   return <SignInButton />;
-  // }
-
   const session = useSession();
-  // console.log("TEST GUI 3:", session);
-
-  // if (session.data?.user) {
-  //   return <a href="/products">App</a>;
-  // } else {
-  //   return <SignInButton />;
-  // }
 
   return (
     <Sidebar>

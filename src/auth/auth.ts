@@ -22,6 +22,9 @@ export const {
   ],
   adapter: PrismaAdapter(prisma),
   callbacks: {
+    session({ session, token }) {
+      return session;
+    },
     async redirect({ url, baseUrl }) {
       return `${baseUrl}/simulateur`;
     },
