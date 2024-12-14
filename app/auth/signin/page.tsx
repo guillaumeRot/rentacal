@@ -3,10 +3,31 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 
 export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+      redirect: false, // Pas de redirection automatique après l'authentification
+      email,
+      password,
+    });
+
+    if (res?.error) {
+      console.error("Erreur de connexion:", res.error);
+    } else {
+      console.log("Connexion réussie");
+      // Vous pouvez rediriger l'utilisateur ou effectuer d'autres actions
+    }
+  };
+
   return (
     <div>
       <Image
@@ -44,6 +65,31 @@ export default function SignIn() {
                   Continuer avec LinkedIn
                 </span>
               </button>
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type="submit">Se connecter</button>
+                </form>
+              </div>
             </div>
           </CardContent>
         </Card>
