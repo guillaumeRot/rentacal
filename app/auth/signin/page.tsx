@@ -18,12 +18,6 @@ export default function SignIn() {
       email,
       password,
     });
-
-    if (res?.error) {
-      console.error("Erreur de connexion:", res.error);
-    } else {
-      console.log("Connexion réussie");
-    }
   };
 
   return (

@@ -22,15 +22,9 @@ export function RentaCalSidebar() {
   const session = useSession();
 
   async function signOutAction() {
-    try {
-      await signOut({
-        redirectTo: "/", // Page vers laquelle rediriger l'utilisateur après déconnexion
-      });
-      // await signOut();
-      alert("Inscription réussie !");
-    } catch (error: any) {
-      alert(error.message);
-    }
+    await signOut({
+      redirectTo: "/",
+    });
   }
 
   return (

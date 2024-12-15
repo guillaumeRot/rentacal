@@ -10,6 +10,7 @@ export const HeaderSection = () => {
   const navigation = [
     { title: "Fonctionnalités", path: "#features" },
     { title: "FAQ", path: "#faq" },
+    { title: "S'inscrire", path: "/auth/signup" },
   ];
 
   useEffect(() => {

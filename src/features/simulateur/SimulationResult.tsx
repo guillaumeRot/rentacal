@@ -22,7 +22,6 @@ import { DataSchema, DataType } from "./simulateur.schema";
 
 export default function SimulationResult() {
   const session = useSession();
-  console.log("Dans SimulationResult:", session);
   const userId = session.data?.user?.id ?? "0";
   const queryClient = useQueryClient();
 

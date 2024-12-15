@@ -3,7 +3,7 @@
 import { signIn, signOut } from "@/auth/auth";
 import { prisma } from "@/prisma";
 import bcrypt from "bcrypt";
-import { revalidatePath } from "next/cache";
+import { AuthType } from "./auth.schema";
 
 export const singOutAction = async () => {
   await signOut({
@@ -15,33 +15,30 @@ export const signInAction = async () => {
   await signIn();
 };
 
-export async function registerUser(data: FormData) {
-  const email = data.get("email") as string;
-  const password = data.get("password") as string;
-
-  if (!email || !password) {
+export async function registerUser(data: AuthType) {
+  if (!data.email || !data.password) {
     throw new Error("Email et mot de passe requis.");
   }
 
   // Vérifier si l'utilisateur existe déjà
-  const existingUser = await prisma.user.findUnique({ where: { email } });
+  const existingUser = await prisma.user.findUnique({
+    where: { email: data.email },
+  });
   if (existingUser) {
     throw new Error("Cet email est déjà enregistré.");
   }
 
   // Hacher le mot de passe
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(data.password, 10);
 
   // Créer un nouvel utilisateur
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
-      email,
+      email: data.email,
+      name: data.name,
       password: hashedPassword,
     },
   });
-
-  // Optionnel : Révalider la page actuelle après inscription
-  revalidatePath("/");
 }
 
 export async function findUserByEmail(email: string) {

@@ -11,7 +11,6 @@ import { redirect } from "next/navigation";
 
 export default function Result() {
   const session = useSession();
-  console.log("Page simulateur:", session);
 
   if (!session.data?.user) {
     redirect(`/`);
