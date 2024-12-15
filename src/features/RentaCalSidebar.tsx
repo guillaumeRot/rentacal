@@ -90,11 +90,12 @@ export function RentaCalSidebar() {
             <SidebarMenuItem key="logout">
               <SidebarMenuButton
                 onClick={() => {
+                  console.log("test gui 100");
                   singOutAction();
                 }}
                 asChild
               >
-                <a href="/">
+                <a href="#">
                   <LogOut size={16} className="mr-2" />
                   <span>Déconnexion</span>
                 </a>

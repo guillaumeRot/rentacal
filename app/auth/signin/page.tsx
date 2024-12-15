@@ -15,7 +15,6 @@ export default function SignIn() {
     e.preventDefault();
 
     const res = await signIn("credentials", {
-      redirect: false, // Pas de redirection automatique après l'authentification
       email,
       password,
     });
@@ -24,7 +23,6 @@ export default function SignIn() {
       console.error("Erreur de connexion:", res.error);
     } else {
       console.log("Connexion réussie");
-      // Vous pouvez rediriger l'utilisateur ou effectuer d'autres actions
     }
   };
 

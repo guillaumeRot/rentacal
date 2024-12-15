@@ -60,7 +60,8 @@ export const {
         );
 
         console.log("Utilisateur authentifié", user);
-        return { id: user.id, email: user.email, token }; // Retourner un utilisateur et un token
+
+        return user;
       },
     }),
   ],
