@@ -30,7 +30,7 @@ export const {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("test gui 50:", credentials);
+        console.log("Dans authorize:", credentials);
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -68,11 +68,11 @@ export const {
   adapter: PrismaAdapter(prisma),
   callbacks: {
     jwt({ token, user }) {
-      console.log("test gui 20:", token);
+      console.log("Dans JWT:", token);
       return token;
     },
     session({ session, token }) {
-      console.log("test gui 30:", session);
+      console.log("Dans Session:", session);
       return session;
     },
     async redirect({ url, baseUrl }) {

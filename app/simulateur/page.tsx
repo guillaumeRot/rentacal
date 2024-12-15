@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 
 export default function Result() {
   const session = useSession();
-  console.log("test gui 2:", session);
+  console.log("Page simulateur:", session);
 
   if (!session.data?.user) {
     redirect(`/`);

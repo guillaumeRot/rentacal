@@ -14,13 +14,24 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { singOutAction } from "./auth/auth.action";
 
 export function RentaCalSidebar() {
   const session = useSession();
+
+  async function signOutAction() {
+    try {
+      await signOut({
+        redirectTo: "/", // Page vers laquelle rediriger l'utilisateur après déconnexion
+      });
+      // await signOut();
+      alert("Inscription réussie !");
+    } catch (error: any) {
+      alert(error.message);
+    }
+  }
 
   return (
     <Sidebar>
@@ -88,13 +99,7 @@ export function RentaCalSidebar() {
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem key="logout">
-              <SidebarMenuButton
-                onClick={() => {
-                  console.log("test gui 100");
-                  singOutAction();
-                }}
-                asChild
-              >
+              <SidebarMenuButton onClick={signOutAction} asChild>
                 <a href="#">
                   <LogOut size={16} className="mr-2" />
                   <span>Déconnexion</span>

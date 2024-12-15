@@ -6,7 +6,9 @@ import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
 
 export const singOutAction = async () => {
-  await signOut();
+  await signOut({
+    redirectTo: "/", // Page vers laquelle rediriger l'utilisateur après déconnexion
+  });
 };
 
 export const signInAction = async () => {
