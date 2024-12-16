@@ -25,7 +25,7 @@ export default class CTASection extends Component {
                 onClick={() => {
                   signInAction();
                 }}
-                className="py-2.5 px-4 text-center rounded-lg duration-150 text-sky-600 text-bold text-lg bg-white mb-5 hover:ring ring-transparent ring-offset-2 transition"
+                className="py-3 px-6 text-center rounded-full duration-150 text-sky-600 text-bold text-lg bg-white mb-5 hover:ring ring-transparent ring-offset-2 transition"
               >
                 Essayez Rentacal gratuitement !
               </Link>

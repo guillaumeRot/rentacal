@@ -27,7 +27,7 @@ export const HeroSection = () => {
               onClick={() => {
                 signInAction();
               }}
-              className="py-2.5 px-4 text-center rounded-lg duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
+              className="py-3 px-6 text-center rounded-full duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
             >
               Simulez votre rentabilité !
             </Link>
