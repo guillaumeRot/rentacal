@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { HiArrowRightCircle } from "react-icons/hi2";
-import ctaImage from "../../../public/Cover.jpg";
 
 export const FeaturesSection = () => {
   return (
@@ -16,9 +15,12 @@ export const FeaturesSection = () => {
         <div className="items-center gap-x-12 lg:flex">
           <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
             <Image
-              src={ctaImage}
-              className="rounded-lg md:max-w-lg"
-              alt="Create Successful Business Models with Our IT Solutions"
+              src="/filtres-rentacal.png"
+              layout="responsive"
+              width={100}
+              height={75}
+              className="w-full h-auto rounded-lg md:max-w-lg"
+              alt="Analysez la rentabilité locative instantanément"
             />
           </div>
           <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
@@ -56,6 +58,16 @@ export const FeaturesSection = () => {
       </div>
       <div className="custom-screen shadow-sm pt-20">
         <div className="items-center gap-x-12 lg:flex">
+          <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
+            <Image
+              src="/resultats-rentacal.png"
+              layout="responsive"
+              width={100}
+              height={75}
+              className="w-full h-auto rounded-lg md:max-w-lg"
+              alt="Entrez les détails de votre projet immobilier"
+            />
+          </div>
           <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
             <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Obtenez une analyse détaillée de la rentabilité locative.
@@ -89,60 +101,6 @@ export const FeaturesSection = () => {
                 </span>
                 Graphiques et visualisations pour comprendre vos résultats en un
                 clin d’œil.
-              </li>
-            </ul>
-          </div>
-          <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
-            <Image
-              src={ctaImage}
-              className="rounded-lg md:max-w-lg"
-              alt="Create Successful Business Models with Our IT Solutions"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="custom-screen shadow-sm pt-20">
-        <div className="items-center gap-x-12 lg:flex">
-          <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
-            <Image
-              src={ctaImage}
-              className="rounded-lg md:max-w-lg"
-              alt="Create Successful Business Models with Our IT Solutions"
-            />
-          </div>
-          <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
-            <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Comparez différents scénarios pour optimiser vos investissements.
-            </h2>
-            <p className="mt-3 text-gray-600 text-md">
-              Testez plusieurs options et identifiez rapidement le scénario le
-              plus rentable pour votre projet immobilier.
-            </p>
-            <ul className="mt-4 flex flex-col gap-2 text-md">
-              <li className="flex items-center gap-2">
-                <span>
-                  <HiArrowRightCircle size={28} className="text-blue-900" />
-                </span>
-                Comparaison multi-projets sur une même interface.
-              </li>
-              <li className="flex items-center gap-2">
-                <span>
-                  <HiArrowRightCircle size={28} className="text-blue-900" />
-                </span>
-                Scénarios de simulation illimités (ex. : acheter avec ou sans
-                travaux).
-              </li>
-              <li className="flex items-center gap-2">
-                <span>
-                  <HiArrowRightCircle size={28} className="text-blue-900" />
-                </span>
-                Optimisation des choix financiers (apport, durée d’emprunt).
-              </li>
-              <li className="flex items-center gap-2">
-                <span>
-                  <HiArrowRightCircle size={28} className="text-blue-900" />
-                </span>
-                Recommandations personnalisées pour améliorer la rentabilité.
               </li>
             </ul>
           </div>
