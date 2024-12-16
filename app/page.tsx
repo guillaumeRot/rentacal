@@ -7,7 +7,6 @@ import { FooterSection } from "@/features/landing/FooterSection";
 import { GradientWrapper } from "@/features/landing/GradientWrapper";
 import { HeaderSection } from "@/features/landing/HeaderSection";
 import { HeroSection } from "@/features/landing/HeroSection";
-import VideoSection from "@/features/landing/VideoSection";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
@@ -21,7 +20,7 @@ export default function Home() {
       <>
         <HeaderSection />
         <HeroSection />
-        <VideoSection />
+        {/* <VideoSection /> */}
         <GradientWrapper>
           <FeaturesSection />
         </GradientWrapper>
