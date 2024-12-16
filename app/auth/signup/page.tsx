@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { registerUser } from "@/features/auth/auth.action";
-import { AuthSchema, AuthType } from "@/features/auth/auth.schema";
+import { SignupSchema, SignupType } from "@/features/auth/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export default function SignUp() {
-  const handleSubmit = async (formData: AuthType) => {
+  const handleSubmit = async (formData: SignupType) => {
     await registerUser(formData);
     await signIn("credentials", {
       email: formData.email,
@@ -29,14 +29,14 @@ export default function SignUp() {
     });
   };
 
-  const [accountValues, setAccountValues] = useState<AuthType>({
+  const [accountValues, setAccountValues] = useState<SignupType>({
     email: "",
     name: "",
     password: "",
   });
 
-  const form = useForm<z.infer<typeof AuthSchema>>({
-    resolver: zodResolver(AuthSchema),
+  const form = useForm<z.infer<typeof SignupSchema>>({
+    resolver: zodResolver(SignupSchema),
     defaultValues: accountValues,
   });
 

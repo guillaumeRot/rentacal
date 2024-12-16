@@ -1,8 +1,14 @@
 import { z } from "zod";
 
-export const AuthSchema = z.object({
+export const SignupSchema = z.object({
   email: z.string(),
   name: z.string(),
   password: z.string(),
 });
-export type AuthType = z.infer<typeof AuthSchema>;
+export type SignupType = z.infer<typeof SignupSchema>;
+
+export const SigninSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+export type SigninType = z.infer<typeof SigninSchema>;

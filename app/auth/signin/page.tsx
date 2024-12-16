@@ -1,24 +1,43 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { SigninSchema, SigninType } from "@/features/auth/auth.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaLinkedin } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const res = await signIn("credentials", {
-      email,
-      password,
+  const handleSubmit = async (formData: SigninType) => {
+    await signIn("credentials", {
+      email: formData.email,
+      password: formData.password,
     });
   };
+
+  const [accountValues, setAccountValues] = useState<SigninType>({
+    email: "",
+    password: "",
+  });
+
+  const form = useForm<z.infer<typeof SigninSchema>>({
+    resolver: zodResolver(SigninSchema),
+    defaultValues: accountValues,
+  });
 
   return (
     <div>
@@ -32,7 +51,9 @@ export default function SignIn() {
       <div className="flex items-center justify-center mx-auto">
         <Card className="rounded-3xl px-8">
           <CardHeader>
-            <CardTitle className="text-2xl">Connexion</CardTitle>
+            <CardTitle className="text-3xl text-center mb-5">
+              Connexion
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
@@ -58,29 +79,75 @@ export default function SignIn() {
                 </span>
               </button>
               <div>
-                <form onSubmit={handleSubmit}>
-                  <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
+                <Form {...form}>
+                  <form
+                    className="space-y-3"
+                    onSubmit={form.handleSubmit(handleSubmit)}
+                  >
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field: { value, onChange } }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <div className="flex">
+                            <FormControl>
+                              <Input
+                                type="text"
+                                placeholder=""
+                                className="mr-2"
+                                value={value}
+                                onChange={(event) => {
+                                  const newValue = event.target.value || "";
+                                  onChange(newValue);
+                                  // setAccountValues((prev) => ({
+                                  //   ...prev,
+                                  //   email: newValue,
+                                  // }));
+                                }}
+                              />
+                            </FormControl>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field: { value, onChange } }) => (
+                        <FormItem>
+                          <FormLabel>Mot de passe</FormLabel>
+                          <div className="flex">
+                            <FormControl>
+                              <Input
+                                type="text"
+                                placeholder=""
+                                className="mr-2"
+                                value={value}
+                                onChange={(event) => {
+                                  const newValue = event.target.value || "";
+                                  onChange(newValue);
+                                  // setAccountValues((prev) => ({
+                                  //   ...prev,
+                                  //   password: newValue,
+                                  // }));
+                                }}
+                              />
+                            </FormControl>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <button type="submit">Se connecter</button>
-                </form>
+                    <Button
+                      className="mx-auto block px-6 py-2 rounded-full text-sm text-semibold bg-blue-900 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
+                      type="submit"
+                    >
+                      <span className="text-white">Se connecter</span>
+                    </Button>
+                  </form>
+                </Form>
               </div>
             </div>
           </CardContent>

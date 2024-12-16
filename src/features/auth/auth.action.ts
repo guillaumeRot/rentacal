@@ -3,7 +3,7 @@
 import { signIn, signOut } from "@/auth/auth";
 import { prisma } from "@/prisma";
 import bcrypt from "bcrypt";
-import { AuthType } from "./auth.schema";
+import { SignupType } from "./auth.schema";
 
 export const singOutAction = async () => {
   await signOut({
@@ -15,7 +15,7 @@ export const signInAction = async () => {
   await signIn();
 };
 
-export async function registerUser(data: AuthType) {
+export async function registerUser(data: SignupType) {
   if (!data.email || !data.password) {
     throw new Error("Email et mot de passe requis.");
   }
