@@ -1,20 +1,33 @@
-import { Layout } from "@/components/layout";
-import { AccessSection } from "@/features/landing/AccessSection";
+"use client";
+
+import CTASection from "@/features/landing/CTASection";
+import FAQSection from "@/features/landing/FAQSection";
+import { FeaturesSection } from "@/features/landing/FeaturesSection";
+import { FooterSection } from "@/features/landing/FooterSection";
+import { GradientWrapper } from "@/features/landing/GradientWrapper";
 import { HeaderSection } from "@/features/landing/HeaderSection";
-import { SubtitleSection } from "@/features/landing/SubtitleSection";
-import { TitleSection } from "@/features/landing/TitleSection";
-import VideoPresentation from "@/features/landing/VideoPresentation";
+import { HeroSection } from "@/features/landing/HeroSection";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div>
-      <Layout>
+  const session = useSession();
+
+  if (session.data?.user) {
+    redirect(`/simulateur`);
+  } else {
+    return (
+      <>
         <HeaderSection />
-        <TitleSection />
-        <SubtitleSection />
-        <AccessSection />
-        <VideoPresentation />
-      </Layout>
-    </div>
-  );
+        <HeroSection />
+        {/* <VideoSection /> */}
+        <GradientWrapper>
+          <FeaturesSection />
+        </GradientWrapper>
+        <CTASection />
+        <FAQSection />
+        <FooterSection />
+      </>
+    );
+  }
 }

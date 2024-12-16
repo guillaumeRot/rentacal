@@ -9,45 +9,38 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useSession } from "next-auth/react";
-import { singOutAction } from "./auth/auth.action";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function RentaCalSidebar() {
-  // const user = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: async () => {
-  //     console.log("TEST GUI");
-  //     const user = await currentUser();
-  //     console.log("TEST GUI 2:", user);
-
-  //     // const r = res?.data;
-  //     return user;
-  //   },
-  // });
-  // const user = await currentUser();
-
-  // if (!user) {
-  //   return <SignInButton />;
-  // }
-
   const session = useSession();
-  // console.log("TEST GUI 3:", session);
 
-  // if (session.data?.user) {
-  //   return <a href="/products">App</a>;
-  // } else {
-  //   return <SignInButton />;
-  // }
+  async function signOutAction() {
+    await signOut({
+      redirectTo: "/",
+    });
+  }
 
   return (
     <Sidebar>
+      <SidebarHeader className="py-4">
+        <Link href="/" className="mx-auto col-start-2">
+          <Image
+            src="/rentacal_icon_title.png"
+            width={150}
+            height={150}
+            alt="rentacal logo"
+          />
+        </Link>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>RentaCal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="Simulateur">
@@ -55,14 +48,6 @@ export function RentaCalSidebar() {
                   <a href="/simulateur">
                     <Home />
                     <span>Simulateur</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem key="Suggestion">
-                <SidebarMenuButton asChild>
-                  <a href="/suggestion">
-                    <Inbox />
-                    <span>Suggestion</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -87,19 +72,29 @@ export function RentaCalSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
+        <SidebarGroup>
+          <SidebarGroupLabel>Feedback</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem key="Suggestion">
+                <SidebarMenuButton asChild>
+                  <a href="/suggestion">
+                    <Inbox />
+                    <span>Suggestion</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       {session.data?.user && (
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem key="logout">
-              <SidebarMenuButton
-                onClick={() => {
-                  singOutAction();
-                }}
-                asChild
-              >
-                <a href="/">
+              <SidebarMenuButton onClick={signOutAction} asChild>
+                <a href="#">
                   <LogOut size={16} className="mr-2" />
                   <span>Déconnexion</span>
                 </a>

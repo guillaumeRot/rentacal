@@ -3,7 +3,7 @@
 import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -20,12 +20,9 @@ import { TabResultat } from "./TabResultat";
 import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 
-export type ParametresParDefautProps = {
-  user: User | null;
-};
-
-export function SimulationResult({ user }: ParametresParDefautProps) {
-  const userId = user?.id ?? "0";
+export default function SimulationResult() {
+  const session = useSession();
+  const userId = session.data?.user?.id ?? "0";
   const queryClient = useQueryClient();
 
   const [filtersValues, setFiltersValues] = useState({
@@ -53,7 +50,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
         })
       )?.data as unknown as ParametresType;
 
-      console.log("TEST GUI 1:", parametres);
       if (parametres) {
         const updatedValues = {
           ...filtersValues,
@@ -65,7 +61,6 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
           nbMoisLocParAn:
             parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
         };
-        console.log("TEST GUI 2:", parametres);
 
         setFiltersValues(updatedValues);
         form.reset(updatedValues);
@@ -126,36 +121,38 @@ export function SimulationResult({ user }: ParametresParDefautProps) {
   });
 
   return (
-    <LayoutResultWithFilters>
-      <ResultFilters onChange={handleFormChange} form={form} />
-      <LayoutResult>
-        <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
-          <div>
-            <div
-              id="rentabilites"
-              className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
-            >
-              <RentabiliteBrute
-                rentabiliteBrute={result.data?.rentabiliteBrute}
-              />
-              <RentabiliteNette
-                rentabiliteNette={result.data?.rentabiliteNette}
-              />
+    <div className="bg-white">
+      <LayoutResultWithFilters>
+        <ResultFilters onChange={handleFormChange} form={form} />
+        <LayoutResult>
+          <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
+            <div>
+              <div
+                id="rentabilites"
+                className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
+              >
+                <RentabiliteBrute
+                  rentabiliteBrute={result.data?.rentabiliteBrute}
+                />
+                <RentabiliteNette
+                  rentabiliteNette={result.data?.rentabiliteNette}
+                />
+              </div>
+              <LegendeRentabilite />
             </div>
-            <LegendeRentabilite />
+            <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
+              <MontantPret montantPret={result.data?.montantPret} />
+              <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
+              <CoutPret coutPret={result.data?.coutPret} />
+            </div>
+            <TabResultat
+              resultatsMensuel={result.data?.resultatsMensuel}
+              mensualites={result.data?.mensualites}
+              cashflowBrut={result.data?.cashflowBrut}
+            />
           </div>
-          <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
-            <MontantPret montantPret={result.data?.montantPret} />
-            <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
-            <CoutPret coutPret={result.data?.coutPret} />
-          </div>
-          <TabResultat
-            resultatsMensuel={result.data?.resultatsMensuel}
-            mensualites={result.data?.mensualites}
-            cashflowBrut={result.data?.cashflowBrut}
-          />
-        </div>
-      </LayoutResult>
-    </LayoutResultWithFilters>
+        </LayoutResult>
+      </LayoutResultWithFilters>
+    </div>
   );
 }

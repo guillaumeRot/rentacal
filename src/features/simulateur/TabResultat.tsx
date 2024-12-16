@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -26,8 +26,13 @@ export type TabResultatProps = {
 export const TabResultat = (props: TabResultatProps) => {
   if (props.resultatsMensuel) {
     return (
-      <Card className="rounded-3xl py-8 w-full h-full">
-        <CardContent className="grid gap-4">
+      <Card className="rounded-3xl w-full h-full border-amber-800">
+        <CardHeader>
+          <CardTitle className="text-amber-800">
+            Tableau d'amortissement
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4 py-8">
           <div className="flex">
             <Badge variant="outline" className="w-1/2 mx-4 lg:mx-14">
               <span className="mx-auto text-base">

@@ -7,11 +7,11 @@ export type CoutPretProps = {
 
 export const CoutPret = (props: CoutPretProps) => {
   return (
-    <Card className="rounded-3xl w-full max-h-32">
+    <Card className="rounded-3xl w-full max-h-32 border-blue-600">
       <CardHeader>
-        <CardTitle>Coût du prêt</CardTitle>
+        <CardTitle className="text-blue-600">Coût du prêt</CardTitle>
       </CardHeader>
-      <CardContent className="grid text-xl lg:text-2xl">
+      <CardContent className="grid text-xl lg:text-2xl font-medium">
         <MontantFormat value={props.coutPret} />
       </CardContent>
     </Card>

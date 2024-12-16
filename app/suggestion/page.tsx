@@ -1,6 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Footer } from "@/features/Footer";
-import { Header } from "@/features/Header";
+import Header from "@/features/Header";
 import { RentaCalSidebar } from "@/features/RentaCalSidebar";
 import { SuggestionForm } from "@/features/suggestions/SuggestionForm";
 

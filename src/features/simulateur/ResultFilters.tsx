@@ -27,21 +27,25 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
       className="w-full"
     >
       <AccordionItem value="filtres">
-        <AccordionTrigger>Afficher les filtres</AccordionTrigger>
+        <AccordionTrigger className="text-gray-600">
+          Afficher les filtres
+        </AccordionTrigger>
         <AccordionContent>
           <Card className="rounded-3xl p-5 h-full">
             <CardContent className="flex flex-col lg:flex-row gap-y-4 gap-x-3 p-0 h-full">
-              <Card className="rounded-3xl h-full flex-grow mx-auto">
+              <Card className="rounded-3xl h-full flex-grow mx-auto border-green-600">
                 <CardHeader>
-                  <CardTitle>Achat</CardTitle>
+                  <CardTitle className="text-green-600">Achat</CardTitle>
                 </CardHeader>
                 <CardContent className="grid">
                   <FormFilterFieldsAchat form={form} onChange={onChange} />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto">
+              <Card className="rounded-3xl h-full flex-grow mx-auto border-red-600">
                 <CardHeader>
-                  <CardTitle>Revenus et dépenses</CardTitle>
+                  <CardTitle className="text-red-600">
+                    Revenus et dépenses
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsRevenusDepenses
@@ -50,9 +54,11 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto">
+              <Card className="rounded-3xl h-full flex-grow mx-auto border-yellow-600">
                 <CardHeader>
-                  <CardTitle>Travaux et mobilier</CardTitle>
+                  <CardTitle className="text-yellow-600">
+                    Travaux et mobilier
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-4 h-full">
                   <FormFilterFieldsTravauxMobilier
@@ -61,9 +67,9 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto">
+              <Card className="rounded-3xl h-full flex-grow mx-auto border-purple-600">
                 <CardHeader>
-                  <CardTitle>Financement</CardTitle>
+                  <CardTitle className="text-purple-600">Financement</CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-4">
                   <FormFilterFieldsFinancement
