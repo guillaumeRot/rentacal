@@ -125,7 +125,7 @@ export default function SignUp() {
                       <div className="flex">
                         <FormControl>
                           <Input
-                            type="text"
+                            type="password"
                             placeholder=""
                             className="mr-2"
                             value={value}
