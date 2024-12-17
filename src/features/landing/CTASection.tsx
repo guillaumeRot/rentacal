@@ -10,7 +10,7 @@ export default class CTASection extends Component {
       <section className="py-16 bg-gradient-to-r from-blue-900 via-sky-600 to-blue-900">
         <div className="custom-screen">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="flex md:flex-row flex-col justify-center text-5xl sm:text-4xl font-poppins font-semibold px-4">
+            <h1 className="flex md:flex-row flex-col justify-center text-4xl sm:text-5xl font-poppins font-semibold px-4">
               Prenez le contrôle de vos investissements immobiliers !
             </h1>
             <p className="flex md:flex-row flex-col justify-center text-sm lg:text-lg font-rubik mt-6 px-4 text-center pb-10">
