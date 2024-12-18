@@ -83,6 +83,10 @@ export default function RootLayout({
         name="apple-mobile-web-app-status-bar-style"
         content="black-translucent"
       />
+      <meta
+        name="google-site-verification"
+        content="G1YkKpuhjDX5Qd__p-y-2W3p1nO5AEqwiZj8tYf30o0"
+      />
       <link rel="manifest" href="/site.webmanifest" />
       <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
         <body className={`cn(inter.className, "h-full") md:overflow-visible`}>
