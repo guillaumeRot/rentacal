@@ -105,11 +105,11 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
             <div className="mt-4 mb-4 min-h-50">
               {this.steps[currentStep].component}
             </div>
-            <div className="navigation-buttons">
+            <div className="flex justify-between mt-5">
               <button
                 onClick={this.handlePrevious}
                 disabled={currentStep === 0}
-                className="btn-previous"
+                className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#6c757d] text-white"
               >
                 Précédent
               </button>
@@ -117,12 +117,15 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
               {currentStep === this.steps.length - 1 ? (
                 <button
                   onClick={() => this.props.onSubmit(this.state.formData)}
-                  className="btn-submit"
+                  className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#007bff] text-white"
                 >
                   Soumettre
                 </button>
               ) : (
-                <button onClick={this.handleNext} className="btn-next">
+                <button
+                  onClick={this.handleNext}
+                  className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#007bff] text-white"
+                >
                   Suivant
                 </button>
               )}
