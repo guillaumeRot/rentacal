@@ -33,7 +33,7 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
         <AccordionContent>
           <Card className="rounded-3xl p-5 h-full">
             <CardContent className="flex flex-col lg:flex-row gap-y-4 gap-x-3 p-0 h-full">
-              <Card className="rounded-3xl h-full flex-grow mx-auto border-green-600">
+              <Card className="rounded-3xl h-full grow mx-auto border-green-600">
                 <CardHeader>
                   <CardTitle className="text-green-600">Achat</CardTitle>
                 </CardHeader>
@@ -41,7 +41,7 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   <FormFilterFieldsAchat form={form} onChange={onChange} />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto border-red-600">
+              <Card className="rounded-3xl h-full grow mx-auto border-red-600">
                 <CardHeader>
                   <CardTitle className="text-red-600">
                     Revenus et dépenses
@@ -54,7 +54,7 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto border-yellow-600">
+              <Card className="rounded-3xl h-full grow mx-auto border-yellow-600">
                 <CardHeader>
                   <CardTitle className="text-yellow-600">
                     Travaux et mobilier
@@ -67,7 +67,7 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   />
                 </CardContent>
               </Card>
-              <Card className="rounded-3xl h-full flex-grow mx-auto border-purple-600">
+              <Card className="rounded-3xl h-full grow mx-auto border-purple-600">
                 <CardHeader>
                   <CardTitle className="text-purple-600">Financement</CardTitle>
                 </CardHeader>

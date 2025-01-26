@@ -102,7 +102,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
                 </div>
               ))}
             </div>
-            <div className="mt-4 mb-4 min-h-200">
+            <div className="mt-4 mb-4 min-h-50">
               {this.steps[currentStep].component}
             </div>
             <div className="navigation-buttons">
