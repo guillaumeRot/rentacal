@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { MultiStepFilters } from "../../../features/simulateur/MultiStepFilters";
 import { getParametresByUser } from "../parametres/parametres.action";
 import { ParametresType } from "../parametres/parametres.schema";
 import { CoutPret } from "./CoutPret";
@@ -106,6 +107,11 @@ export default function SimulationResult() {
     await mutation.mutateAsync(newValues);
   };
 
+  const handleSubmit = (data: any) => {
+    console.log("Données du formulaire:", data);
+    // Traitez les données comme vous le souhaitez
+  };
+
   const mutation = useMutation({
     mutationFn: async (values: DataType) => {
       setFiltersValues(values);
@@ -123,6 +129,7 @@ export default function SimulationResult() {
   return (
     <div className="bg-white">
       <LayoutResultWithFilters>
+        <MultiStepFilters onSubmit={handleSubmit} />
         <ResultFilters onChange={handleFormChange} form={form} />
         <LayoutResult>
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
