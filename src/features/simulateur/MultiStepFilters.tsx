@@ -20,7 +20,9 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
       title: "Achat",
       component: (
         <div className="step-content">
-          <h2>Préférences</h2>
+          <h2 className="text-lg lg:text-xl text-center">
+            Dépenses liées à l'achat
+          </h2>
           {/* Ajoutez vos champs de formulaire ici */}
         </div>
       ),
@@ -29,7 +31,9 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
       title: "Revenus et dépenses",
       component: (
         <div className="step-content">
-          <h2>Confirmation</h2>
+          <h2 className="text-lg lg:text-xl text-center">
+            Revenus et dépenses réguliers
+          </h2>
           {/* Ajoutez vos champs de formulaire ici */}
         </div>
       ),
@@ -38,7 +42,9 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
       title: "Travaux et mobilier",
       component: (
         <div className="step-content">
-          <h2>Confirmation</h2>
+          <h2 className="text-lg lg:text-xl text-center">
+            Coût des travaux et du mobilier
+          </h2>
           {/* Ajoutez vos champs de formulaire ici */}
         </div>
       ),
@@ -47,23 +53,17 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
       title: "Financement",
       component: (
         <div className="step-content">
-          <h2>Confirmation</h2>
+          <h2 className="text-lg lg:text-xl text-center">
+            Informations relatives au crédit
+          </h2>
           {/* Ajoutez vos champs de formulaire ici */}
         </div>
       ),
     },
   ];
 
-  handleNext = () => {
-    if (this.state.currentStep < this.steps.length - 1) {
-      this.setState({ currentStep: this.state.currentStep + 1 });
-    }
-  };
-
-  handlePrevious = () => {
-    if (this.state.currentStep > 0) {
-      this.setState({ currentStep: this.state.currentStep - 1 });
-    }
+  setCurrentStep = (index: number) => {
+    this.setState({ currentStep: index });
   };
 
   render() {
@@ -71,23 +71,16 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
 
     return (
       <Card className="rounded-3xl w-full border-blue-600">
-        {/* <CardHeader>
-        <CardTitle className="text-blue-600">Frais bancaires</CardTitle>
-      </CardHeader> */}
         <CardContent className="grid text-sm lg:text-md font-medium">
           <div className="w-full mx-auto p-4">
             <div className="flex justify-between mb-6">
               {this.steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`flex-1 text-center p-2 border-b border-solid ${
+                  onClick={() => this.setCurrentStep(index)}
+                  className={`flex-1 text-center p-2 border-b border-solid cursor-pointer ${
                     index === currentStep ? "border-blue-600 text-blue-600" : ""
-                  }
-                         ${
-                           index < currentStep
-                             ? "completed border-green-600 text-green-600"
-                             : ""
-                         }`}
+                  }`}
                 >
                   {step.title}
                 </div>
@@ -98,28 +91,11 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
             </div>
             <div className="flex justify-between mt-5">
               <button
-                onClick={this.handlePrevious}
-                disabled={currentStep === 0}
-                className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#6c757d] text-white"
+                onClick={() => this.props.onSubmit(this.state.formData)}
+                className="cursor-pointer text-white mx-auto py-2 px-4 text-center rounded-full duration-150 text-white text-md bg-blue-900 mb-5 hover:bg-blue-800 hover:ring-3 ring-transparent ring-offset-2 transition"
               >
-                Précédent
+                Soumettre
               </button>
-
-              {currentStep === this.steps.length - 1 ? (
-                <button
-                  onClick={() => this.props.onSubmit(this.state.formData)}
-                  className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#007bff] text-white"
-                >
-                  Soumettre
-                </button>
-              ) : (
-                <button
-                  onClick={this.handleNext}
-                  className="px-6 py-2 border-none rounded-sm cursor-pointer bg-[#007bff] text-white"
-                >
-                  Suivant
-                </button>
-              )}
             </div>
           </div>
         </CardContent>
