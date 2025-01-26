@@ -17,15 +17,6 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
 
   steps = [
     {
-      title: "Mode",
-      component: (
-        <div className="mt-4 mb-4">
-          <h2 className="text-lg lg:text-xl text-center">Mode de simulation</h2>
-          {/* Ajoutez vos champs de formulaire ici */}
-        </div>
-      ),
-    },
-    {
       title: "Achat",
       component: (
         <div className="step-content">
