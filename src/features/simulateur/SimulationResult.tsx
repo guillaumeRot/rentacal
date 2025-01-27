@@ -129,7 +129,7 @@ export default function SimulationResult() {
   return (
     <div className="bg-white">
       <LayoutResultWithFilters>
-        <MultiStepFilters onSubmit={handleSubmit} />
+        <MultiStepFilters onSubmit={handleSubmit} form={form} />
         <ResultFilters onChange={handleFormChange} form={form} />
         <LayoutResult>
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">

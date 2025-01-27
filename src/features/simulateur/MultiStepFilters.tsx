@@ -1,8 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
+import { UseFormReturn } from "react-hook-form";
+import { z } from "zod";
+import { FormFilterFieldsAchat } from "./FormFilterFieldsAchat";
+import { DataSchema } from "./simulateur.schema";
 
 interface MultiStepFiltersProps {
   onSubmit: (data: any) => void;
+  form: UseFormReturn<z.infer<typeof DataSchema>>;
 }
 
 export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
@@ -23,7 +28,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Dépenses liées à l'achat
           </h2>
-          {/* Ajoutez vos champs de formulaire ici */}
+          <FormFilterFieldsAchat onChange={() => {}} form={this.props.form} />
         </div>
       ),
     },
@@ -50,7 +55,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
       ),
     },
     {
-      title: "Financement",
+      title: "Emprunt",
       component: (
         <div className="step-content">
           <h2 className="text-lg lg:text-xl text-center">
@@ -78,7 +83,8 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
                 <div
                   key={index}
                   onClick={() => this.setCurrentStep(index)}
-                  className={`flex-1 text-center p-4 border-b border-solid cursor-pointer ${
+                  className={`flex-1 text-center p-2 lg:p-4 border-b border-solid cursor-pointer text-xs lg:text-sm
+                  ${
                     index === currentStep
                       ? "border-blue-700 bg-blue-700 text-white rounded-t-3xl"
                       : "border-blue-700 text-blue-800"
@@ -88,7 +94,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
                 </div>
               ))}
             </div>
-            <div className="mt-10 mb-4 min-h-70 text-blue-800">
+            <div className="mt-10 mb-4 min-h-50">
               {this.steps[currentStep].component}
             </div>
             <div className="flex justify-between mt-5">
@@ -99,6 +105,11 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
                 Calculer
               </button>
             </div>
+            {/* <div className="flex justify-between mb-6">
+              <div className="flex-1 text-center p-3 lg:p-8 border-t border-solid text-sm lg:text-xl border-blue-700">
+                Résumé
+              </div>
+            </div> */}
           </div>
         </CardContent>
       </Card>
