@@ -70,31 +70,33 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     const { currentStep } = this.state;
 
     return (
-      <Card className="rounded-3xl w-full border-blue-600">
-        <CardContent className="grid text-sm lg:text-md font-medium">
-          <div className="w-full mx-auto p-4">
+      <Card className="rounded-3xl w-full border-blue-700">
+        <CardContent className="grid text-sm lg:text-md font-medium p-0">
+          <div className="w-full mx-auto">
             <div className="flex justify-between mb-6">
               {this.steps.map((step, index) => (
                 <div
                   key={index}
                   onClick={() => this.setCurrentStep(index)}
-                  className={`flex-1 text-center p-2 border-b border-solid cursor-pointer ${
-                    index === currentStep ? "border-blue-600 text-blue-600" : ""
+                  className={`flex-1 text-center p-4 border-b border-solid cursor-pointer ${
+                    index === currentStep
+                      ? "border-blue-700 bg-blue-700 text-white rounded-t-3xl"
+                      : "border-blue-700 text-blue-800"
                   }`}
                 >
                   {step.title}
                 </div>
               ))}
             </div>
-            <div className="mt-4 mb-4 min-h-50">
+            <div className="mt-10 mb-4 min-h-70 text-blue-800">
               {this.steps[currentStep].component}
             </div>
             <div className="flex justify-between mt-5">
               <button
                 onClick={() => this.props.onSubmit(this.state.formData)}
-                className="cursor-pointer text-white mx-auto py-2 px-4 text-center rounded-full duration-150 text-white text-md bg-blue-900 mb-5 hover:bg-blue-800 hover:ring-3 ring-transparent ring-offset-2 transition"
+                className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
               >
-                Soumettre
+                Calculer
               </button>
             </div>
           </div>
