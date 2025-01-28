@@ -2,7 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { SidebarTrigger } from "./theme/SidebarTrigger";
 
 export default function Header() {
@@ -13,16 +12,19 @@ export default function Header() {
     <div>
       <header className="w-full border-b border-border bg-popover flex">
         <SidebarTrigger />
-        <div className="grid grid-cols-4 grow py-5 items-center max-w-6xl mx-auto px-4">
+        {/* <div className="py-5 w-full"> */}
+        <div className="grid grid-cols-4 grow py-4 items-center max-w-6xl mx-auto pr-10">
           {/* <h1 className="text-3xl font-poppins font-medium col-span-3">
-            Bonjour {name} !
+            <span>Simula</span>
+            <span className="text-blue-800">teur</span>
           </h1> */}
-          <Image
+          {/* <Image
+            className="mx-auto pr-10"
             src="/rentacal_icon_title.png"
-            width={180}
-            height={180}
+            width={200}
+            height={200}
             alt="rentacal logo"
-          />
+          /> */}
           <div className="justify-self-end grid items-center col-start-4">
             <Avatar className="size-12">
               <AvatarFallback>{name}</AvatarFallback>
