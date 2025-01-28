@@ -129,6 +129,7 @@ export default function SimulationResult() {
   return (
     <div className="bg-white">
       <LayoutResultWithFilters>
+        <h1 className="text-2xl my-4">1 - Renseignez vos informations</h1>
         <MultiStepFilters onSubmit={handleSubmit} form={form} />
         <ResultFilters onChange={handleFormChange} form={form} />
         <LayoutResult>

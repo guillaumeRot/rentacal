@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { FormFilterFieldsAchat } from "./FormFilterFieldsAchat";
+import { FormFilterAchat } from "./FormFilterAchat";
 import { DataSchema } from "./simulateur.schema";
 
 interface MultiStepFiltersProps {
@@ -28,7 +28,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Dépenses liées à l'achat
           </h2>
-          <FormFilterFieldsAchat onChange={() => {}} form={this.props.form} />
+          <FormFilterAchat onChange={() => {}} form={this.props.form} />
         </div>
       ),
     },

@@ -7,7 +7,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { FormFilterFieldsAchat } from "./FormFilterFieldsAchat";
+import { FormFilterAchat } from "./FormFilterAchat";
 import { FormFilterFieldsFinancement } from "./FormFilterFieldsFinancement";
 import { FormFilterFieldsRevenusDepenses } from "./FormFilterFieldsRevenusDepenses";
 import { FormFilterFieldsTravauxMobilier } from "./FormFilterFieldsTravauxMobilier";
@@ -38,7 +38,7 @@ export function ResultFilters({ onChange, form }: ResultFiltersProps) {
                   <CardTitle className="text-green-600">Achat</CardTitle>
                 </CardHeader>
                 <CardContent className="grid">
-                  <FormFilterFieldsAchat form={form} onChange={onChange} />
+                  <FormFilterAchat form={form} onChange={onChange} />
                 </CardContent>
               </Card>
               <Card className="rounded-3xl h-full grow mx-auto border-red-600">
