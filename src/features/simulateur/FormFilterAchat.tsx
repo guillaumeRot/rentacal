@@ -95,7 +95,7 @@ export class FormFilterAchat extends React.Component<FormFilterAchatProps> {
   render() {
     return (
       <Form {...this.props.form}>
-        <form className="justify-between mx-auto py-10 px-30 flex flex-row">
+        <form className="justify-between mx-auto py-10 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row">
           {this.fields.map((field, index) => (
             <FieldAchatComponent
               key={index}
