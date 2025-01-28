@@ -75,44 +75,42 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     const { currentStep } = this.state;
 
     return (
-      <Card className="rounded-3xl w-full border-blue-700">
-        <CardContent className="grid text-sm lg:text-md font-medium p-0">
-          <div className="w-full mx-auto">
-            <div className="flex justify-between mb-6">
-              {this.steps.map((step, index) => (
-                <div
-                  key={index}
-                  onClick={() => this.setCurrentStep(index)}
-                  className={`flex-1 text-center p-2 lg:p-4 border-b border-solid cursor-pointer text-xs lg:text-sm
+      <>
+        <div className="flex flex-row bg-blue-50 p-2 rounded-3xl">
+          {this.steps.map((step, index) => (
+            <div
+              key={index}
+              onClick={() => this.setCurrentStep(index)}
+              className={`flex-1 text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
                   ${
                     index === currentStep
-                      ? "border-blue-700 bg-blue-700 text-white rounded-t-3xl"
-                      : "border-blue-700 text-blue-800"
+                      ? "border-blue-700 bg-blue-700 text-white rounded-3xl"
+                      : "border-blue-700 text-gray-600"
                   }`}
-                >
-                  {step.title}
-                </div>
-              ))}
+            >
+              {step.title}
             </div>
-            <div className="mt-10 mb-4 min-h-50">
-              {this.steps[currentStep].component}
-            </div>
-            <div className="flex justify-between mt-5">
-              <button
-                onClick={() => this.props.onSubmit(this.state.formData)}
-                className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
-              >
-                Calculer
-              </button>
-            </div>
-            {/* <div className="flex justify-between mb-6">
-              <div className="flex-1 text-center p-3 lg:p-8 border-t border-solid text-sm lg:text-xl border-blue-700">
-                Résumé
+          ))}
+        </div>
+
+        <Card className="rounded-3xl w-full border-2">
+          <CardContent className="grid text-sm lg:text-md font-medium p-0">
+            <div className="w-full mx-auto">
+              <div className="mt-10 mb-4 min-h-50">
+                {this.steps[currentStep].component}
               </div>
-            </div> */}
-          </div>
-        </CardContent>
-      </Card>
+              <div className="flex justify-between mt-5">
+                <button
+                  onClick={() => this.props.onSubmit(this.state.formData)}
+                  className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
+                >
+                  Calculer
+                </button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </>
     );
   }
 }
