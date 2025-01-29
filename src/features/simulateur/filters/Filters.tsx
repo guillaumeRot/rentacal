@@ -85,22 +85,24 @@ export class Filters extends React.Component<FiltersProps> {
 
     return (
       <>
-        <div className="flex flex-row bg-blue-50 p-2 rounded-3xl">
-          {this.steps.map((step, index) => (
-            <div
-              key={index}
-              onClick={() => this.setCurrentStep(index)}
-              className={`flex-1 flex items-center justify-center text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
+        <Card className="rounded-3xl w-full border-2 p-1">
+          <CardContent className="flex flex-row rounded-3xl">
+            {this.steps.map((step, index) => (
+              <div
+                key={index}
+                onClick={() => this.setCurrentStep(index)}
+                className={`flex-1 flex items-center justify-center text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
                   ${
                     index === currentStep
                       ? "border-blue-700 bg-blue-700 text-white rounded-3xl"
                       : "border-blue-700 text-gray-600"
                   }`}
-            >
-              {step.title}
-            </div>
-          ))}
-        </div>
+              >
+                {step.title}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
 
         <Card className="rounded-3xl w-full border-2">
           <CardContent className="grid text-sm lg:text-md font-medium p-0">

@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <div>
-      <header className="w-full border-b border-border bg-popover flex">
+      <header className="fixed w-full border-b border-border bg-popover flex">
         <div className="w-full flex shadow-b">
           <SidebarTrigger />
           {/* <div className="py-5 w-full"> */}

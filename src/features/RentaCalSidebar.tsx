@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Inbox, LogOut, Settings } from "lucide-react";
+import { Home, Inbox, LogOut } from "lucide-react";
 
 import {
   Sidebar,
@@ -33,7 +33,7 @@ export function RentaCalSidebar({
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="py-8 mx-auto">
+      <SidebarHeader className="py-4 mx-auto">
         <Image
           src={
             open || openMobile
@@ -53,7 +53,10 @@ export function RentaCalSidebar({
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="Simulateur">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  asChild
+                  className="[&>svg]:size-6 mx-auto group-data-[collapsible=icon]:size-10!"
+                >
                   <a href="/simulateur">
                     <Home />
                     <span>Simulateur</span>
@@ -64,7 +67,7 @@ export function RentaCalSidebar({
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {session.data?.user && (
+        {/* {session.data?.user && (
           <SidebarGroup>
             <SidebarGroupLabel>Mon compte</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -80,13 +83,17 @@ export function RentaCalSidebar({
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-        )}
+        )} */}
+
         <SidebarGroup>
           <SidebarGroupLabel>Feedback</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="Suggestion">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  asChild
+                  className="[&>svg]:size-6 mx-auto group-data-[collapsible=icon]:size-10!"
+                >
                   <a href="/suggestion">
                     <Inbox />
                     <span>Suggestion</span>

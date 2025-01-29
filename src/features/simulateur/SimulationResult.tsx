@@ -15,9 +15,9 @@ import { LegendeRentabilite } from "./LegendeRentabilites";
 import { MontantPret } from "./MontantPret";
 import { RentabiliteBrute } from "./RentabiliteBrute";
 import { RentabiliteNette } from "./RentabiliteNette";
-import { ResultFilters } from "./ResultFilters";
 import { TabResultat } from "./TabResultat";
 import { Filters } from "./filters/Filters";
+import { Rentabilites } from "./rentabilites/Rentabilites";
 import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 
@@ -133,7 +133,8 @@ export default function SimulationResult() {
           1 - Renseignez vos informations
         </h1>
         <Filters onSubmit={handleSubmit} form={form} />
-        <ResultFilters onChange={handleFormChange} form={form} />
+        <Rentabilites />
+        {/* <ResultFilters onChange={handleFormChange} form={form} /> */}
         <LayoutResult>
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
             <div>
