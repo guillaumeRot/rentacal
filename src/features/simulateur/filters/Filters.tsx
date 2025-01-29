@@ -4,6 +4,7 @@ import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { DataSchema } from "../simulateur.schema";
 import { FormFilterAchat } from "./FormFilterAchat";
+import { FormFilterFinancement } from "./FormFilterFinancement";
 import { FormFilterRevenusDepenses } from "./FormFilterRevenusDepenses";
 import { FormFilterTravauxMobilier } from "./FormFilterTravauxMobilier";
 
@@ -69,7 +70,7 @@ export class Filters extends React.Component<FiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Informations relatives au crédit
           </h2>
-          {/* Ajoutez vos champs de formulaire ici */}
+          <FormFilterFinancement onChange={() => {}} form={this.props.form} />
         </div>
       ),
     },
