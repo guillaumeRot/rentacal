@@ -5,13 +5,14 @@ import { z } from "zod";
 import { DataSchema } from "../simulateur.schema";
 import { FormFilterAchat } from "./FormFilterAchat";
 import { FormFilterRevenusDepenses } from "./FormFilterRevenusDepenses";
+import { FormFilterTravauxMobilier } from "./FormFilterTravauxMobilier";
 
-interface MultiStepFiltersProps {
+interface FiltersProps {
   onSubmit: (data: any) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
 }
 
-export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
+export class Filters extends React.Component<FiltersProps> {
   state = {
     currentStep: 0,
     formData: {
@@ -54,7 +55,10 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Coût des travaux et du mobilier
           </h2>
-          {/* Ajoutez vos champs de formulaire ici */}
+          <FormFilterTravauxMobilier
+            onChange={() => {}}
+            form={this.props.form}
+          />
         </div>
       ),
     },
