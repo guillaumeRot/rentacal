@@ -13,6 +13,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -28,11 +29,13 @@ export function RentaCalSidebar({
     });
   }
 
+  const { open } = useSidebar();
+
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="py-4">
+      <SidebarHeader className="py-4 mx-auto">
         <Image
-          src="/icon-512x512.png"
+          src={open ? "/rentacal_icon_title.png" : "/icon-512x512.png"}
           width={200}
           height={200}
           alt="rentacal logo"
