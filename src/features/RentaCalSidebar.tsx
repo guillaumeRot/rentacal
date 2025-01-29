@@ -29,13 +29,17 @@ export function RentaCalSidebar({
     });
   }
 
-  const { open } = useSidebar();
+  const { open, openMobile } = useSidebar();
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="py-4 mx-auto">
         <Image
-          src={open ? "/rentacal_icon_title.png" : "/icon-512x512.png"}
+          src={
+            open || openMobile
+              ? "/rentacal_icon_title.png"
+              : "/icon-512x512.png"
+          }
           width={200}
           height={200}
           alt="rentacal logo"

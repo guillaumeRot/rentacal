@@ -85,7 +85,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
             <div
               key={index}
               onClick={() => this.setCurrentStep(index)}
-              className={`flex-1 text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
+              className={`flex-1 flex items-center justify-center text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
                   ${
                     index === currentStep
                       ? "border-blue-700 bg-blue-700 text-white rounded-3xl"
