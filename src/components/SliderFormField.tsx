@@ -2,7 +2,6 @@
 
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
-import { MdEuroSymbol } from "react-icons/md";
 import { z } from "zod";
 import { DataSchema, DataType } from "../features/simulateur/simulateur.schema";
 import {
@@ -12,7 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import { Input } from "./ui/input";
+import { Slider } from "./ui/slider";
 
 type FormFieldType = {
   slug: string;
@@ -20,17 +19,15 @@ type FormFieldType = {
   description: string;
 };
 
-type InputFormFieldProps = {
+type SliderFormFieldProps = {
   onChange: (updatedValues: Partial<DataType>) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
   currentField: FormFieldType;
 };
 
-export class InputFormField extends React.Component<InputFormFieldProps> {
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    const numericValue = !isNaN(Number(value)) ? Number(value) : value;
-    this.props.onChange({ [name]: numericValue });
+export class SliderFormField extends React.Component<SliderFormFieldProps> {
+  handleSliderChange = (name: keyof DataType, value: number) => {
+    this.props.onChange({ [name]: value });
   };
 
   render() {
@@ -38,26 +35,27 @@ export class InputFormField extends React.Component<InputFormFieldProps> {
       <FormField
         control={this.props.form.control}
         name={this.props.currentField.slug as keyof DataType}
-        render={({ field }) => (
+        render={({ field: { value, onChange } }) => (
           <FormItem>
-            <FormLabel>{this.props.currentField.label}</FormLabel>
-            <div className="flex mt-3">
+            <FormLabel>
+              {value} {this.props.currentField.label}
+            </FormLabel>
+            <div className="flex mt-5">
               <FormControl>
-                <Input
-                  type="number"
-                  placeholder="0"
-                  {...field}
-                  className="mr-2"
-                  onChange={(event) => {
-                    field.onChange(event);
-                    this.handleChange(event);
+                <Slider
+                  min={0}
+                  max={12}
+                  step={1}
+                  value={[value]}
+                  onValueChange={(value) => {
+                    onChange(value[0]);
+                    this.handleSliderChange(
+                      this.props.currentField.slug as keyof DataType,
+                      value[0]
+                    );
                   }}
                 />
               </FormControl>
-              <MdEuroSymbol
-                className="relative top-2 text-blue-700"
-                size={25}
-              />
             </div>
             <FormMessage />
             <div className="text-xs text-gray-500 mt-2">

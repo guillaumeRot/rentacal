@@ -25,7 +25,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     {
       title: "Achat",
       component: (
-        <div className="step-content">
+        <div>
           <h2 className="text-lg lg:text-xl text-center">
             Dépenses liées à l'achat
           </h2>
@@ -36,7 +36,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     {
       title: "Revenus et dépenses",
       component: (
-        <div className="step-content">
+        <div>
           <h2 className="text-lg lg:text-xl text-center">
             Revenus et dépenses réguliers
           </h2>
@@ -50,7 +50,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     {
       title: "Travaux et mobilier",
       component: (
-        <div className="step-content">
+        <div>
           <h2 className="text-lg lg:text-xl text-center">
             Coût des travaux et du mobilier
           </h2>
@@ -61,7 +61,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
     {
       title: "Emprunt",
       component: (
-        <div className="step-content">
+        <div>
           <h2 className="text-lg lg:text-xl text-center">
             Informations relatives au crédit
           </h2>

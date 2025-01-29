@@ -13,5 +13,5 @@ export const LayoutResultWithFilters = twx.div((props) => [
 ]);
 
 export const FormFilters = twx.form((props) => [
-  `justify-between mx-auto mt-10 py-5 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row`,
+  `justify-between mx-auto my-5 lg:my-10 py-5 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row`,
 ]);

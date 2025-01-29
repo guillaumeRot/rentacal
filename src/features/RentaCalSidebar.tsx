@@ -45,7 +45,6 @@ export function RentaCalSidebar({
           alt="rentacal logo"
         />
       </SidebarHeader>
-      {/* <SidebarContent className="px-8 mt-8"> */}
       <SidebarContent
         className={`mt-8
           ${open || openMobile ? "px-8" : ""}`}
