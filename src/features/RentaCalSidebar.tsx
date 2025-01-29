@@ -16,9 +16,10 @@ import {
 } from "@/components/ui/sidebar";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 
-export function RentaCalSidebar() {
+export function RentaCalSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   const session = useSession();
 
   async function signOutAction() {
@@ -28,16 +29,14 @@ export function RentaCalSidebar() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="py-4">
-        <Link href="/" className="mx-auto col-start-2">
-          <Image
-            src="/rentacal_icon_title.png"
-            width={150}
-            height={150}
-            alt="rentacal logo"
-          />
-        </Link>
+        <Image
+          src="/icon-512x512.png"
+          width={200}
+          height={200}
+          alt="rentacal logo"
+        />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
