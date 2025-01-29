@@ -2,8 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
+import { DataSchema } from "../simulateur.schema";
 import { FormFilterAchat } from "./FormFilterAchat";
-import { DataSchema } from "./simulateur.schema";
+import { FormFilterRevenusDepenses } from "./FormFilterRevenusDepenses";
 
 interface MultiStepFiltersProps {
   onSubmit: (data: any) => void;
@@ -39,7 +40,10 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Revenus et dépenses réguliers
           </h2>
-          {/* Ajoutez vos champs de formulaire ici */}
+          <FormFilterRevenusDepenses
+            onChange={() => {}}
+            form={this.props.form}
+          />
         </div>
       ),
     },
@@ -99,7 +103,7 @@ export class MultiStepFilters extends React.Component<MultiStepFiltersProps> {
               <div className="mt-10 mb-4 min-h-50">
                 {this.steps[currentStep].component}
               </div>
-              <div className="flex justify-between mt-5">
+              <div className="flex justify-between">
                 <button
                   onClick={() => this.props.onSubmit(this.state.formData)}
                   className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"

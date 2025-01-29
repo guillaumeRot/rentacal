@@ -13,11 +13,11 @@ import { CoutPret } from "./CoutPret";
 import { FraisBancaire } from "./FraisBancaire";
 import { LegendeRentabilite } from "./LegendeRentabilites";
 import { MontantPret } from "./MontantPret";
-import { MultiStepFilters } from "./MultiStepFilters";
 import { RentabiliteBrute } from "./RentabiliteBrute";
 import { RentabiliteNette } from "./RentabiliteNette";
 import { ResultFilters } from "./ResultFilters";
 import { TabResultat } from "./TabResultat";
+import { MultiStepFilters } from "./filters/MultiStepFilters";
 import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 

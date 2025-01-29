@@ -7,7 +7,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { FormFilterAchat } from "./FormFilterAchat";
+import { FormFilterAchat } from "./filters/FormFilterAchat";
 import { FormFilterFieldsFinancement } from "./FormFilterFieldsFinancement";
 import { FormFilterFieldsRevenusDepenses } from "./FormFilterFieldsRevenusDepenses";
 import { FormFilterFieldsTravauxMobilier } from "./FormFilterFieldsTravauxMobilier";
