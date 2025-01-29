@@ -36,11 +36,11 @@ export class Filters extends React.Component<FiltersProps> {
       ),
     },
     {
-      title: "Revenus et dépenses",
+      title: "Dépenses et revenus",
       component: (
         <div>
           <h2 className="text-lg lg:text-xl text-center">
-            Revenus et dépenses réguliers
+            Dépenses et revenus réguliers
           </h2>
           <FormFilterRevenusDepenses
             onChange={() => {}}

@@ -1,98 +1,36 @@
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
+import { PiSealPercentLight } from "react-icons/pi";
 
-// interface FiltersProps {
-//   onSubmit: (data: any) => void;
-//   form: UseFormReturn<z.infer<typeof DataSchema>>;
-// }
+export type CardRentabiliteProps = {
+  label: string;
+  pourcentage: string;
+};
 
-// export class Filters extends React.Component<FiltersProps> {
+export const CardRentabilite = (props: CardRentabiliteProps) => {
+  return (
+    <Card className="rounded-3xl my-6 mx-14">
+      <CardContent className="py-2 px-4">
+        <div className="p-4 flex flex-raw space-x-10">
+          <div className="flex items-center">
+            <PiSealPercentLight size={50} />
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-lg">{props.label}</h1>
+            <div className="text-3xl font-medium">{props.pourcentage} %</div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 export class Rentabilites extends React.Component {
-  // state = {
-  //   currentStep: 0,
-  //   formData: {
-  //     step1: {},
-  //     step2: {},
-  //     step3: {},
-  //   },
-  // };
-
-  // steps = [
-  //   {
-  //     title: "Achat",
-  //     component: (
-  //       <div>
-  //         <h2 className="text-lg lg:text-xl text-center">
-  //           Dépenses liées à l'achat
-  //         </h2>
-  //         <FormFilterAchat onChange={() => {}} form={this.props.form} />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: "Revenus et dépenses",
-  //     component: (
-  //       <div>
-  //         <h2 className="text-lg lg:text-xl text-center">
-  //           Revenus et dépenses réguliers
-  //         </h2>
-  //         <FormFilterRevenusDepenses
-  //           onChange={() => {}}
-  //           form={this.props.form}
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: "Travaux et mobilier",
-  //     component: (
-  //       <div>
-  //         <h2 className="text-lg lg:text-xl text-center">
-  //           Coût des travaux et du mobilier
-  //         </h2>
-  //         <FormFilterTravauxMobilier
-  //           onChange={() => {}}
-  //           form={this.props.form}
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: "Emprunt",
-  //     component: (
-  //       <div>
-  //         <h2 className="text-lg lg:text-xl text-center">
-  //           Informations relatives au crédit
-  //         </h2>
-  //         <FormFilterFinancement onChange={() => {}} form={this.props.form} />
-  //       </div>
-  //     ),
-  //   },
-  // ];
-
-  // setCurrentStep = (index: number) => {
-  //   this.setState({ currentStep: index });
-  // };
-
   render() {
-    // const { currentStep } = this.state;
-
     return (
       <Card className="rounded-3xl w-full border-2 grid grid-cols-2">
-        <Card className="rounded-3xl m-6 bg-green-200">
-          <CardContent className="p-2">
-            <div className="p-4">
-              <h1>Rentabilité brute</h1>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="rounded-3xl m-6 bg-red-200">
-          <CardContent className="p-2">
-            <div className="p-4">
-              <h1>Rentabilité nette</h1>
-            </div>
-          </CardContent>
-        </Card>
+        <CardRentabilite label="Rentabilité brute" pourcentage="6,58" />
+        <CardRentabilite label="Rentabilité nette" pourcentage="6,49" />
       </Card>
     );
   }

@@ -48,10 +48,9 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
       <Form {...this.props.form}>
         <FormFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
           {this.fields.map((field, index) => (
-            <>
+            <div key={index}>
               {field.type === InputFormField && (
                 <InputFormField
-                  key={index}
                   onChange={this.props.onChange}
                   form={this.props.form}
                   currentField={field}
@@ -59,13 +58,12 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
               )}
               {field.type === SliderFormField && (
                 <SliderFormField
-                  key={index}
                   onChange={this.props.onChange}
                   form={this.props.form}
                   currentField={field}
                 />
               )}
-            </>
+            </div>
           ))}
         </FormFilters>
       </Form>
