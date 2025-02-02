@@ -28,7 +28,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
   }
 
   return (
-    <Card className="rounded-3xl my-6 mx-5">
+    <Card className="rounded-3xl my-2 lg:my-6 mx-5">
       <CardContent className="pt-6 pb-3 px-8">
         <div className="flex flex-col space-y-2">
           <div className="flex">
@@ -70,7 +70,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
 export class Rentabilites extends React.Component {
   render() {
     return (
-      <Card className="rounded-3xl w-full border-2 grid grid-cols-3 bg-blue-50 mb-100">
+      <Card className="rounded-3xl w-full border-2 grid grid-cols-1 lg:grid-cols-3 bg-blue-50 mb-100">
         <CardRentabilite
           label="Rentabilité brute"
           pourcentage="6,58"
