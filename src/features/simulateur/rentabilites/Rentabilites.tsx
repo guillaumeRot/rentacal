@@ -44,7 +44,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
               {props.pourcentage} %
             </Badge>
           </div>
-          <div className="text-xs font-medium text-gray-400 px-4">
+          <div className="text-xs font-medium text-gray-400">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1" className="border-none">
                 <AccordionTrigger className="py-2">
