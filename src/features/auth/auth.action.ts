@@ -5,7 +5,7 @@ import { prisma } from "@/prisma";
 import bcrypt from "bcrypt";
 import { SignupType } from "./auth.schema";
 
-export const singOutAction = async () => {
+export const signOutAction = async () => {
   await signOut({
     redirectTo: "/", // Page vers laquelle rediriger l'utilisateur après déconnexion
   });

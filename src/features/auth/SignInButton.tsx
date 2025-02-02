@@ -1,17 +1,18 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { signInAction } from "./auth.action";
 
 export const SignInButton = () => {
   return (
-    <Button
-      className="bg-accent text-accent-foreground px-6 py-2 rounded-full font-normal text-sm hover:bg-[rgba(85,137,195,1)]"
+    <Link
+      href="#"
       onClick={() => {
         signInAction();
       }}
+      className="font-poppins py-2.5 px-4 text-center rounded-full text-white text-sm bg-blue-700 hover:bg-blue-600"
     >
       Se connecter
-    </Button>
+    </Link>
   );
 };

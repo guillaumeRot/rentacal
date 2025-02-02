@@ -11,10 +11,7 @@ import { getParametresByUser } from "../parametres/parametres.action";
 import { ParametresType } from "../parametres/parametres.schema";
 import { CoutPret } from "./CoutPret";
 import { FraisBancaire } from "./FraisBancaire";
-import { LegendeRentabilite } from "./LegendeRentabilites";
 import { MontantPret } from "./MontantPret";
-import { RentabiliteBrute } from "./RentabiliteBrute";
-import { RentabiliteNette } from "./RentabiliteNette";
 import { TabResultat } from "./TabResultat";
 import { Filters } from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
@@ -68,7 +65,7 @@ export default function SimulationResult() {
       }
       return parametres;
     },
-    enabled: !!filtersValues,
+    enabled: !!filtersValues && !!session?.data,
   });
 
   const result = useQuery({
@@ -127,30 +124,18 @@ export default function SimulationResult() {
   });
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-20">
       <LayoutResultWithFilters>
         <h1 className="text-xl lg:text-2xl my-4">
           1 - Renseignez vos informations
         </h1>
         <Filters onSubmit={handleSubmit} form={form} />
+        <h1 className="text-xl lg:text-2xl my-4">
+          2 - Consulter vos résultats
+        </h1>
         <Rentabilites />
-        {/* <ResultFilters onChange={handleFormChange} form={form} /> */}
         <LayoutResult>
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
-            <div>
-              <div
-                id="rentabilites"
-                className="flex gap-y-8 gap-x-3 w-full flex-col lg:flex-row"
-              >
-                <RentabiliteBrute
-                  rentabiliteBrute={result.data?.rentabiliteBrute}
-                />
-                <RentabiliteNette
-                  rentabiliteNette={result.data?.rentabiliteNette}
-                />
-              </div>
-              <LegendeRentabilite />
-            </div>
             <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
               <MontantPret montantPret={result.data?.montantPret} />
               <FraisBancaire fraisBancaire={result.data?.fraisBancaires} />
