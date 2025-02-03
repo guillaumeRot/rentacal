@@ -3,11 +3,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession } from "next-auth/react";
 import { GoChevronDown } from "react-icons/go";
-import { LoggedInDropdown } from "./LoggedInDropdown";
 import { SignInButton } from "../auth/SignInButton";
+import { LoggedInDropdown } from "./LoggedInDropdown";
 
 export const LoggedInButton = () => {
-  // const user = await currentUser();
   const session = useSession();
   const name = session.data?.user?.name ?? "";
   console.log("TEST GUI:", session);
@@ -18,17 +17,6 @@ export const LoggedInButton = () => {
 
   return (
     <LoggedInDropdown>
-      {/* <Button variant="outline" size="sm"> */}
-      {/* {user.plan === "PREMIUM" ? <Star size={14} className="mr-2" /> : null} */}
-      {/* <Avatar className="size-6">
-          <AvatarFallback>{user.name?.[0]}</AvatarFallback>
-          {user.image ? (
-            <AvatarImage
-              src={user.image}
-              alt={`${user.name ?? "-"}'s profile picture`}
-            />
-          ) : null}
-        </Avatar> */}
       <div className="cursor-pointer flex items-center space-x-4">
         <div className="text-sm">{name}</div>
         <div>
@@ -44,7 +32,6 @@ export const LoggedInButton = () => {
         </div>
         <GoChevronDown />
       </div>
-      {/* </Button> */}
     </LoggedInDropdown>
   );
 };
