@@ -31,7 +31,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
     <Card className="rounded-3xl my-2 lg:my-6 mx-5">
       <CardContent className="pt-6 pb-3 px-8">
         <div className="flex flex-col space-y-2">
-          <div className="flex">
+          <div className="flex text-gray-700">
             <PiSealPercentLight size={25} />
             <div className="flex items-center">
               <h1 className="ml-2 text-sm font-medium">{props.label}</h1>
@@ -39,7 +39,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
           </div>
           <div>
             <Badge
-              className={`text-3xl font-medium rounded-3xl px-4 mt-1 hover:${bgColor} ${bgColor} ${textColor}`}
+              className={`text-2xl lg:text-3xl font-medium rounded-3xl px-4 mt-1 hover:${bgColor} ${bgColor} ${textColor}`}
             >
               {props.pourcentage} %
             </Badge>
@@ -70,7 +70,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
 export class Rentabilites extends React.Component {
   render() {
     return (
-      <Card className="rounded-3xl w-full border-2 grid grid-cols-1 lg:grid-cols-3 bg-blue-50 mb-100">
+      <Card className="rounded-3xl w-full border-2 grid grid-cols-1 lg:grid-cols-3 bg-blue-50">
         <CardRentabilite
           label="Rentabilité brute"
           pourcentage="6,58"

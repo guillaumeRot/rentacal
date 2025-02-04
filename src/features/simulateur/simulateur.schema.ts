@@ -65,3 +65,10 @@ export const AccessSchema = z.object({
   email: z.string().optional(),
 });
 export type AccessType = z.infer<typeof AccessSchema>;
+
+export const FeedbackSchema = z.object({
+  email: z.string(),
+  name: z.string(),
+  feedback: z.string(),
+});
+export type FeedbackType = z.infer<typeof FeedbackSchema>;
