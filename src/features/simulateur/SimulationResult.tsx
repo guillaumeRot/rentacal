@@ -13,7 +13,7 @@ import { CoutPret } from "./CoutPret";
 import { FraisBancaire } from "./FraisBancaire";
 import { MontantPret } from "./MontantPret";
 import { TabResultat } from "./TabResultat";
-import Example from "./banque/Banque";
+import { Component } from "./banque/Banque";
 import { Filters } from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
 import { calculRentabilite } from "./simulateur.action";
@@ -135,7 +135,7 @@ export default function SimulationResult() {
           2 - Consulter vos résultats
         </h1>
         <Rentabilites />
-        <Example />
+        <Component />
         <LayoutResult>
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
             <div className="flex gap-y-8 gap-x-3 flex-col lg:flex-row">
