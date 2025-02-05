@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from "react";
 import { PiSealPercentLight } from "react-icons/pi";
 
@@ -29,22 +29,26 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
 
   return (
     <Card className="rounded-3xl my-2 lg:my-6 mx-5">
-      <CardContent className="pt-6 pb-3 px-8">
-        <div className="flex flex-col space-y-2">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>
           <div className="flex text-gray-700">
             <PiSealPercentLight size={25} />
             <div className="flex items-center">
               <h1 className="ml-2 text-sm font-medium">{props.label}</h1>
             </div>
           </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="py-3 px-8">
+        <div className="flex flex-col space-y-2 items-center">
           <div>
             <Badge
-              className={`text-2xl lg:text-3xl font-medium rounded-3xl px-4 mt-1 hover:${bgColor} ${bgColor} ${textColor}`}
+              className={`text-2xl lg:text-3xl font-medium rounded-3xl px-5 py-1 mt-1 hover:${bgColor} ${bgColor} ${textColor}`}
             >
               {props.pourcentage} %
             </Badge>
           </div>
-          <div className="text-xs font-medium text-gray-400">
+          <div className="text-xs font-medium text-gray-400 w-full">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1" className="border-none">
                 <AccordionTrigger className="py-2">

@@ -1,79 +1,70 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import * as React from "react";
-import { Label, Pie, PieChart } from "recharts";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
-  {
-    browser: "montantPret",
-    visitors: 200000,
-    fill: "var(--color-montantPret)",
-  },
-  {
-    browser: "fraisBancaire",
-    visitors: 53600,
-    fill: "var(--color-fraisBancaire)",
-  },
-];
+import { TbPigMoney } from "react-icons/tb";
+import { Label, Pie, PieChart } from "recharts";
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  montantPret: {
-    label: "Montant du prêt",
-    color: "hsl(var(--chart-1))",
-  },
-  fraisBancaire: {
-    label: "Frais bancaire",
-    color: "hsl(var(--chart-2))",
-  },
-} satisfies ChartConfig;
+export type CardBanqueProps = {
+  montantPret: string;
+  fraisBancaires: string;
+  coutPret: string;
+};
 
-export function Component() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
-  }, []);
+export const CardBanque = (props: CardBanqueProps) => {
+  const chartData = [
+    {
+      type: "montantPret",
+      montant: 200000,
+      fill: "var(--color-montantPret)",
+    },
+    {
+      type: "fraisBancaires",
+      montant: 53600,
+      fill: "var(--color-fraisBancaires)",
+    },
+  ];
+
+  const chartConfig = {
+    montantPret: {
+      label: "Montant du prêt",
+      color: "hsl(var(--chart-2))",
+    },
+    fraisBancaires: {
+      label: "Frais bancaires",
+      color: "hsl(var(--chart-1))",
+    },
+  } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-col">
+    <Card className="rounded-3xl my-2 lg:my-6 mx-5 pb-5">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>
+          <div className="flex text-gray-700">
+            <TbPigMoney size={25} />
+            <div className="flex items-center">
+              <h1 className="ml-2 text-sm font-medium">Coût emprunt</h1>
+            </div>
+          </div>
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[350px]"
         >
           <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
-              innerRadius={60}
+              dataKey="montant"
+              nameKey="type"
+              innerRadius={90}
               strokeWidth={5}
             >
               <Label
@@ -88,17 +79,17 @@ export function Component() {
                       >
                         <tspan
                           x={viewBox.cx}
-                          y={viewBox.cy - 20}
+                          y={(viewBox.cy || 0) - 25}
                           className="fill-muted-foreground"
                         >
                           Coût du prêt
                         </tspan>
                         <tspan
                           x={viewBox.cx}
-                          y={viewBox.cy + 4}
-                          className="fill-foreground text-lg font-bold"
+                          y={(viewBox.cy || 0) + 4}
+                          className="fill-foreground text-2xl font-bold"
                         >
-                          10 253 600 €
+                          {props.coutPret} €
                         </tspan>
                       </text>
                     );
@@ -108,15 +99,29 @@ export function Component() {
             </Pie>
           </PieChart>
         </ChartContainer>
+        <Card className="rounded-3xl p-10 m-10 grid grid-cols-2 h-fit">
+          <span className="text-center py-2">Montant Pret</span>
+          <span className="text-center py-2">200 000 €</span>
+          <span className="text-center py-2">Frais Bancaires</span>
+          <span className="text-center py-2">53 600 €</span>
+          <span className="text-center pb-2 pt-6 font-semibold">
+            Coût du prêt
+          </span>
+          <span className="text-center pb-2 pt-6 font-semibold">253 600 €</span>
+        </Card>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
+    </Card>
+  );
+};
+
+export function Banque() {
+  return (
+    <Card className="rounded-3xl w-full border-2 grid grid-cols-1 bg-blue-50">
+      <CardBanque
+        montantPret="200000"
+        fraisBancaires="53600"
+        coutPret="10 253 600"
+      />
     </Card>
   );
 }
