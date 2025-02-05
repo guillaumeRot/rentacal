@@ -4,10 +4,19 @@ import { TrendingUp } from "lucide-react";
 import * as React from "react";
 import { Label, Pie, PieChart } from "recharts";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -66,6 +75,7 @@ export function Component() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
+            <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={chartData}
               dataKey="visitors"
