@@ -9,7 +9,6 @@ import { LoggedInDropdown } from "./LoggedInDropdown";
 export const LoggedInButton = () => {
   const session = useSession();
   const name = session.data?.user?.name ?? "";
-  console.log("TEST GUI:", session);
 
   if (!session.data) {
     return <SignInButton />;

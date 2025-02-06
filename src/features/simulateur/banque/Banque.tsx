@@ -50,11 +50,10 @@ export function Component() {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0 grid grid-cols-2">
-        {/*  items-center" */}
+      <CardContent className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 pb-2 items-center">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[350px]"
+          className="mx-auto aspect-square max-h-[350px] min-w-[350px]"
         >
           <PieChart>
             <ChartLegend content={<ChartLegendContent />} />
@@ -97,7 +96,7 @@ export function Component() {
             </Pie>
           </PieChart>
         </ChartContainer>
-        <Card className="rounded-3xl p-10 m-10 grid grid-cols-2 h-fit">
+        <Card className="rounded-3xl p-4 lg:p-10 m-4 lg:m-10 grid grid-cols-2 h-fit text-sm lg:text-md">
           <span className="text-center py-2">Montant Pret</span>
           <span className="text-center py-2">200 000 €</span>
           <span className="text-center py-2">Frais Bancaires</span>
