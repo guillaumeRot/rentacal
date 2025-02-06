@@ -10,39 +10,36 @@ import {
 import { TbPigMoney } from "react-icons/tb";
 import { Label, Pie, PieChart } from "recharts";
 
-export type CardBanqueProps = {
-  montantPret: string;
-  fraisBancaires: string;
-  coutPret: string;
-};
-
-export const CardBanque = (props: CardBanqueProps) => {
+export function Component() {
   const chartData = [
     {
-      type: "montantPret",
-      montant: 200000,
+      browser: "montantPret",
+      visitors: 200000,
       fill: "var(--color-montantPret)",
     },
     {
-      type: "fraisBancaires",
-      montant: 53600,
-      fill: "var(--color-fraisBancaires)",
+      browser: "fraisBancaire",
+      visitors: 53600,
+      fill: "var(--color-fraisBancaire)",
     },
   ];
 
   const chartConfig = {
+    visitors: {
+      label: "Visitors",
+    },
     montantPret: {
       label: "Montant du prêt",
-      color: "hsl(var(--chart-2))",
-    },
-    fraisBancaires: {
-      label: "Frais bancaires",
       color: "hsl(var(--chart-1))",
+    },
+    fraisBancaire: {
+      label: "Frais bancaire",
+      color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
 
   return (
-    <Card className="rounded-3xl my-2 lg:my-6 mx-5 pb-5">
+    <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>
           <div className="flex text-gray-700">
@@ -53,7 +50,8 @@ export const CardBanque = (props: CardBanqueProps) => {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
+      <CardContent className="flex-1 pb-0">
+        {/*  items-center" */}
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[350px]"
@@ -62,8 +60,8 @@ export const CardBanque = (props: CardBanqueProps) => {
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={chartData}
-              dataKey="montant"
-              nameKey="type"
+              dataKey="visitors"
+              nameKey="browser"
               innerRadius={90}
               strokeWidth={5}
             >
@@ -79,7 +77,7 @@ export const CardBanque = (props: CardBanqueProps) => {
                       >
                         <tspan
                           x={viewBox.cx}
-                          y={(viewBox.cy || 0) - 25}
+                          y={(viewBox.cy || 0) - 20}
                           className="fill-muted-foreground"
                         >
                           Coût du prêt
@@ -89,7 +87,7 @@ export const CardBanque = (props: CardBanqueProps) => {
                           y={(viewBox.cy || 0) + 4}
                           className="fill-foreground text-2xl font-bold"
                         >
-                          {props.coutPret} €
+                          10 253 600 €
                         </tspan>
                       </text>
                     );
@@ -112,16 +110,17 @@ export const CardBanque = (props: CardBanqueProps) => {
       </CardContent>
     </Card>
   );
-};
+}
 
 export function Banque() {
   return (
     <Card className="rounded-3xl w-full border-2 grid grid-cols-1 bg-blue-50">
-      <CardBanque
+      {/* <CardBanque
         montantPret="200000"
         fraisBancaires="53600"
         coutPret="10 253 600"
-      />
+      /> */}
+      <Component />
     </Card>
   );
 }
