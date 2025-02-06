@@ -1,11 +1,13 @@
 "use client";
 
+import { CardContent } from "@/components/ui/card";
 import {
   CardChild,
   CardChildHeader,
   CardParent,
 } from "@/features/theme/CardUtils";
 import { BsGraphUpArrow } from "react-icons/bs";
+import { Component } from "./GraphAmortissement";
 
 // export type CardBanqueProps = {
 //   montantPret: string;
@@ -112,6 +114,9 @@ export function TabAmortissement() {
           icon={<BsGraphUpArrow size={25} />}
           title="Tableau d'amortissement"
         />
+        <CardContent className="flex-1 pb-0">
+          <Component />
+        </CardContent>
       </CardChild>
     </CardParent>
   );
