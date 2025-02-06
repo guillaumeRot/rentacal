@@ -13,21 +13,18 @@ import { Label, Pie, PieChart } from "recharts";
 export function Component() {
   const chartData = [
     {
-      browser: "montantPret",
-      visitors: 200000,
+      type: "montantPret",
+      montant: 200000,
       fill: "var(--color-montantPret)",
     },
     {
-      browser: "fraisBancaire",
-      visitors: 53600,
+      type: "fraisBancaire",
+      montant: 53600,
       fill: "var(--color-fraisBancaire)",
     },
   ];
 
   const chartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
     montantPret: {
       label: "Montant du prêt",
       color: "hsl(var(--chart-1))",
@@ -53,14 +50,14 @@ export function Component() {
       <CardContent className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 pb-2 items-center">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[350px] min-w-[350px]"
+          className="mx-auto aspect-square max-h-[350px] w-full"
         >
           <PieChart>
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey="montant"
+              nameKey="type"
               innerRadius={90}
               strokeWidth={5}
             >
