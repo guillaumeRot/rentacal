@@ -39,7 +39,7 @@ export function Component() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col rounded-3xl my-2 lg:my-6 mx-5">
       <CardHeader className="items-center pb-0">
         <CardTitle>
           <div className="flex text-gray-700">
@@ -50,7 +50,7 @@ export function Component() {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1 pb-0 grid grid-cols-2">
         {/*  items-center" */}
         <ChartContainer
           config={chartConfig}
