@@ -10,7 +10,7 @@ import { z } from "zod";
 import { getParametresByUser } from "../parametres/parametres.action";
 import { ParametresType } from "../parametres/parametres.schema";
 import { TabResultat } from "./TabResultat";
-import { TabAmortissement } from "./amortissement/TabAmortissement";
+import { Amortissement } from "./amortissement/Amortissement";
 import { Banque } from "./banque/Banque";
 import { Filters } from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
@@ -134,7 +134,7 @@ export default function SimulationResult() {
         </h1>
         <Rentabilites />
         <Banque />
-        <TabAmortissement />
+        <Amortissement />
         <LayoutResult className="mt-50">
           <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
             <TabResultat
