@@ -5,7 +5,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import {
+  CardChild,
+  CardChildHeader,
+  CardParent,
+} from "@/features/theme/CardUtils";
 import React from "react";
 import { PiSealPercentLight } from "react-icons/pi";
 
@@ -28,17 +33,11 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
   }
 
   return (
-    <Card className="rounded-3xl my-2 lg:my-6 mx-5">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>
-          <div className="flex text-gray-700">
-            <PiSealPercentLight size={25} />
-            <div className="flex items-center">
-              <h1 className="ml-2 text-sm font-medium">{props.label}</h1>
-            </div>
-          </div>
-        </CardTitle>
-      </CardHeader>
+    <CardChild>
+      <CardChildHeader
+        icon={<PiSealPercentLight size={25} />}
+        title={props.label}
+      />
       <CardContent className="py-3 px-8">
         <div className="flex flex-col space-y-2 items-center">
           <div>
@@ -67,14 +66,14 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </CardChild>
   );
 };
 
 export class Rentabilites extends React.Component {
   render() {
     return (
-      <Card className="rounded-3xl w-full border-2 grid grid-cols-1 lg:grid-cols-3 bg-blue-50">
+      <CardParent className="grid grid-cols-1 lg:grid-cols-3">
         <CardRentabilite
           label="Rentabilité brute"
           pourcentage="6,58"
@@ -96,7 +95,7 @@ export class Rentabilites extends React.Component {
           description="La rentabilité nette-nette résulte de la division entre le prix d'achat et
         les frais annexes dü à l'achat du bien par les revenus annuel."
         />
-      </Card>
+      </CardParent>
     );
   }
 }

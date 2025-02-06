@@ -1,25 +1,36 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
+import {
+  CardChild,
+  CardChildHeader,
+  CardParent,
+} from "@/features/theme/CardUtils";
 import { TbPigMoney } from "react-icons/tb";
 import { Label, Pie, PieChart } from "recharts";
 
-export function Component() {
+export type CardBanqueProps = {
+  montantPret: string;
+  fraisBancaires: string;
+  coutPret: string;
+};
+
+export function CardBanque(props: CardBanqueProps) {
   const chartData = [
     {
       type: "montantPret",
-      montant: 200000,
+      montant: parseFloat(props.montantPret.replace(/,/g, "")),
       fill: "var(--color-montantPret)",
     },
     {
       type: "fraisBancaire",
-      montant: 53600,
+      montant: parseFloat(props.fraisBancaires.replace(/,/g, "")),
       fill: "var(--color-fraisBancaire)",
     },
   ];
@@ -36,17 +47,8 @@ export function Component() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-col rounded-3xl my-2 lg:my-6 mx-5">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>
-          <div className="flex text-gray-700">
-            <TbPigMoney size={25} />
-            <div className="flex items-center">
-              <h1 className="ml-2 text-sm font-medium">Coût emprunt</h1>
-            </div>
-          </div>
-        </CardTitle>
-      </CardHeader>
+    <CardChild className="flex flex-col">
+      <CardChildHeader icon={<TbPigMoney size={25} />} title="Coût emprunt" />
       <CardContent className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 pb-2 items-center">
         <ChartContainer
           config={chartConfig}
@@ -83,7 +85,7 @@ export function Component() {
                           y={(viewBox.cy || 0) + 4}
                           className="fill-foreground text-2xl font-bold"
                         >
-                          10 253 600 €
+                          {props.coutPret} €
                         </tspan>
                       </text>
                     );
@@ -95,28 +97,29 @@ export function Component() {
         </ChartContainer>
         <Card className="rounded-3xl p-4 lg:p-10 m-4 lg:m-10 grid grid-cols-2 h-fit text-sm lg:text-md">
           <span className="text-center py-2">Montant Pret</span>
-          <span className="text-center py-2">200 000 €</span>
+          <span className="text-center py-2">{props.montantPret} €</span>
           <span className="text-center py-2">Frais Bancaires</span>
-          <span className="text-center py-2">53 600 €</span>
+          <span className="text-center py-2">{props.fraisBancaires} €</span>
           <span className="text-center pb-2 pt-6 font-semibold">
             Coût du prêt
           </span>
-          <span className="text-center pb-2 pt-6 font-semibold">253 600 €</span>
+          <span className="text-center pb-2 pt-6 font-semibold">
+            {props.coutPret} €
+          </span>
         </Card>
       </CardContent>
-    </Card>
+    </CardChild>
   );
 }
 
 export function Banque() {
   return (
-    <Card className="rounded-3xl w-full border-2 grid grid-cols-1 bg-blue-50">
-      {/* <CardBanque
-        montantPret="200000"
-        fraisBancaires="53600"
+    <CardParent className="grid grid-cols-1">
+      <CardBanque
+        montantPret="200 000"
+        fraisBancaires="53 600"
         coutPret="10 253 600"
-      /> */}
-      <Component />
-    </Card>
+      />
+    </CardParent>
   );
 }
