@@ -1,11 +1,6 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { CardContent } from "@/components/ui/card";
+import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
 import {
   CardChild,
   CardChildHeader,
@@ -48,21 +43,11 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
             </Badge>
           </div>
           <div className="text-xs font-medium text-gray-400 w-full">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1" className="border-none">
-                <AccordionTrigger className="py-2">
-                  En savoir plus...
-                </AccordionTrigger>
-                <AccordionContent>
-                  {props.description}
-                  <p className="mt-2">
-                    Une rentabilité est considérée comme faible si elle est
+            <AccordionSeeMore
+              description="Une rentabilité est considérée comme faible si elle est
                     inférieure à 4%, moyenne si elle est entre 4% et 7%, et
-                    haute si elle est supérieure à 7%.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                    haute si elle est supérieure à 7%."
+            />
           </div>
         </div>
       </CardContent>

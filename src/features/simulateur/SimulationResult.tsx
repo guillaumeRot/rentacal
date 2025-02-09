@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutResult, LayoutResultWithFilters } from "@/components/layout";
+import { LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { getParametresByUser } from "../parametres/parametres.action";
 import { ParametresType } from "../parametres/parametres.schema";
-import { TabResultat } from "./TabResultat";
 import { Amortissement } from "./amortissement/Amortissement";
 import { Banque } from "./banque/Banque";
 import { Filters } from "./filters/Filters";
@@ -135,15 +134,6 @@ export default function SimulationResult() {
         <Rentabilites />
         <Banque />
         <Amortissement />
-        <LayoutResult className="mt-50">
-          <div id="results" className="flex flex-col gap-y-8 gap-x-3 w-full">
-            <TabResultat
-              resultatsMensuel={result.data?.resultatsMensuel}
-              mensualites={result.data?.mensualites}
-              cashflowBrut={result.data?.cashflowBrut}
-            />
-          </div>
-        </LayoutResult>
       </LayoutResultWithFilters>
     </div>
   );

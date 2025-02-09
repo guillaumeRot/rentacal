@@ -2,6 +2,7 @@
 
 import { InputFormField } from "@/components/InputFormField";
 import { FormFilters } from "@/components/layout";
+import { SelectFormField } from "@/components/SelectFormField";
 import { SliderFormField } from "@/components/SliderFormField";
 import { Form } from "@/components/ui/form";
 import React from "react";
@@ -29,17 +30,23 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
       type: InputFormField,
     },
     {
+      slug: "nbMoisLocParAn",
+      label: "mois de location / an",
+      description:
+        "Correspond à la vacance locative. Utile pour simuler le nombre de mois où le montant des loyers sera perçu sur l'année ",
+      type: SliderFormField,
+    },
+    {
       slug: "chargesCopro",
       label: "Charges de copropriété",
       description: "Le montant des charges dû à la copropriété par année",
       type: InputFormField,
     },
     {
-      slug: "nbMoisLocParAn",
-      label: "mois de location / an",
-      description:
-        "Correspond à la vacance locative. Utile pour simuler le nombre de mois où le montant des loyers sera perçu sur l'année ",
-      type: SliderFormField,
+      slug: "regimeFiscal",
+      label: "Régime fiscal",
+      description: "Le régime fiscal choisi pour déclarer votre investissement",
+      type: SelectFormField,
     },
   ];
 
@@ -58,6 +65,13 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
               )}
               {field.type === SliderFormField && (
                 <SliderFormField
+                  onChange={this.props.onChange}
+                  form={this.props.form}
+                  currentField={field}
+                />
+              )}
+              {field.type === SelectFormField && (
+                <SelectFormField
                   onChange={this.props.onChange}
                   form={this.props.form}
                   currentField={field}
