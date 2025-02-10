@@ -5,6 +5,14 @@ import { FormFilters } from "@/components/layout";
 import { SelectFormField } from "@/components/SelectFormField";
 import { SliderFormField } from "@/components/SliderFormField";
 import { Form } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -47,6 +55,51 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
       label: "Régime fiscal",
       description: "Le régime fiscal choisi pour déclarer votre investissement",
       type: SelectFormField,
+      children: (
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="-" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="lmnpReel">LMNP Réel</SelectItem>
+              <SelectItem value="lmnpMicroBic">LMNP Micro BIC</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
+    },
+    {
+      slug: "tmi",
+      label: "TMI",
+      description: "Le taux marginal d'imposition auquel vous êtes assujetti.",
+      type: SelectFormField,
+      children: (
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="-" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="0">
+                0% - Revenus inférieurs à 10 084€/an
+              </SelectItem>
+              <SelectItem value="11">
+                11% - Revenus inférieurs à 25 710€/an
+              </SelectItem>
+              <SelectItem value="30">
+                30% - Revenus inférieurs à 73 516€/an
+              </SelectItem>
+              <SelectItem value="41">
+                41% - Revenus inférieurs à 158 122€/an
+              </SelectItem>
+              <SelectItem value="45">
+                45% - Revenus supérieurs à 158 122€/an
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ),
     },
   ];
 
@@ -75,7 +128,9 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
                   onChange={this.props.onChange}
                   form={this.props.form}
                   currentField={field}
-                />
+                >
+                  {field.children}
+                </SelectFormField>
               )}
             </div>
           ))}

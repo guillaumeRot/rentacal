@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { DataSchema, DataType } from "../features/simulateur/simulateur.schema";
@@ -11,14 +11,6 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 
 type FormFieldType = {
   slug: string;
@@ -26,13 +18,13 @@ type FormFieldType = {
   description: string;
 };
 
-type SliderFormFieldProps = {
+type SelectFormFieldProps = PropsWithChildren & {
   onChange: (updatedValues: Partial<DataType>) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
   currentField: FormFieldType;
 };
 
-export class SelectFormField extends React.Component<SliderFormFieldProps> {
+export class SelectFormField extends React.Component<SelectFormFieldProps> {
   // handleSliderChange = (name: keyof DataType, value: number) => {
   //   this.props.onChange({ [name]: value });
   // };
@@ -49,7 +41,8 @@ export class SelectFormField extends React.Component<SliderFormFieldProps> {
             </FormLabel>
             <div className="flex mt-5">
               <FormControl>
-                <Select>
+                {this.props.children}
+                {/* <Select>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a fruit" />
                   </SelectTrigger>
@@ -61,7 +54,7 @@ export class SelectFormField extends React.Component<SliderFormFieldProps> {
                       </SelectItem>
                     </SelectGroup>
                   </SelectContent>
-                </Select>
+                </Select> */}
               </FormControl>
             </div>
             <FormMessage />
