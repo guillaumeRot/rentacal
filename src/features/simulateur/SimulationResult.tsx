@@ -2,7 +2,7 @@
 
 import { LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -21,7 +21,7 @@ export default function SimulationResult() {
   const userId = session.data?.user?.id ?? "0";
   const queryClient = useQueryClient();
 
-  const [filtersValues, setFiltersValues] = useState({
+  const [filtersValues, setFiltersValues] = useState<DataType>({
     prixAchat: 100000,
     fraisAgence: 0,
     dureePret: 15,
@@ -35,6 +35,8 @@ export default function SimulationResult() {
     apport: 0,
     tauxAssurancePret: 0,
     nbMoisLocParAn: 12,
+    regimeFiscal: "lmnpMicroBic",
+    tmi: 30,
   });
 
   const parametres = useQuery({
@@ -83,6 +85,8 @@ export default function SimulationResult() {
         apport: filtersValues.apport,
         tauxAssurancePret: filtersValues.tauxAssurancePret,
         nbMoisLocParAn: filtersValues.nbMoisLocParAn,
+        regimeFiscal: filtersValues.regimeFiscal,
+        tmi: filtersValues.tmi,
       });
 
       const r = res?.data;
@@ -91,30 +95,39 @@ export default function SimulationResult() {
     enabled: !!filtersValues,
   });
 
-  const handleFormChange = async (
-    updatedValues: Partial<typeof filtersValues>
-  ) => {
-    const newValues = {
-      ...filtersValues,
-      ...updatedValues,
-    };
-    setFiltersValues(newValues);
-    await mutation.mutateAsync(newValues);
-  };
+  // const handleFormChange = async (
+  //   updatedValues: Partial<typeof filtersValues>
+  // ) => {
+  //   const newValues = {
+  //     ...filtersValues,
+  //     ...updatedValues,
+  //   };
+  //   setFiltersValues(newValues);
+  //   await mutation.mutateAsync(newValues);
+  // };
 
-  const handleSubmit = (data: any) => {
-    console.log("Données du formulaire:", data);
-    // Traitez les données comme vous le souhaitez
-  };
+  // const handleSubmit = () => {
+  //   // const handleSubmit = (updatedValues: Partial<typeof filtersValues>) => {
+  //   // console.log("Données du formulaire:", updatedValues);
+  //   console.log("Données du formulaire 2:", form.formState.defaultValues);
+  //   // Traitez les données comme vous le souhaitez
+  // };
 
-  const mutation = useMutation({
-    mutationFn: async (values: DataType) => {
-      setFiltersValues(values);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["result"] });
-    },
-  });
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof DataSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log("Données du formulaire : ", values);
+  }
+
+  // const mutation = useMutation({
+  //   mutationFn: async (values: DataType) => {
+  //     setFiltersValues(values);
+  //   },
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ["result"] });
+  //   },
+  // });
 
   const form = useForm<z.infer<typeof DataSchema>>({
     resolver: zodResolver(DataSchema),
@@ -127,7 +140,7 @@ export default function SimulationResult() {
         <h1 className="text-xl lg:text-2xl my-4">
           1 - Renseignez vos informations
         </h1>
-        <Filters onSubmit={handleSubmit} form={form} />
+        <Filters onSubmit={onSubmit} form={form} />
         <h1 className="text-xl lg:text-2xl my-4">
           2 - Consulter vos résultats
         </h1>

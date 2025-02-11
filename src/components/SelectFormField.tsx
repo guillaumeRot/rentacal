@@ -40,22 +40,7 @@ export class SelectFormField extends React.Component<SelectFormFieldProps> {
               {value} {this.props.currentField.label}
             </FormLabel>
             <div className="flex mt-5">
-              <FormControl>
-                {this.props.children}
-                {/* <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select a fruit" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="lmnpReel">LMNP Réel</SelectItem>
-                      <SelectItem value="lmnpMicroBic">
-                        LMNP Micro BIC
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select> */}
-              </FormControl>
+              <FormControl>{this.props.children}</FormControl>
             </div>
             <FormMessage />
             <div className="text-xs text-gray-500 mt-2">

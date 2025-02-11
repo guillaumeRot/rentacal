@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -16,11 +17,6 @@ interface FiltersProps {
 export class Filters extends React.Component<FiltersProps> {
   state = {
     currentStep: 0,
-    formData: {
-      step1: {},
-      step2: {},
-      step3: {},
-    },
   };
 
   steps = [
@@ -31,7 +27,10 @@ export class Filters extends React.Component<FiltersProps> {
           <h2 className="text-lg lg:text-xl text-center">
             Dépenses liées à l'achat
           </h2>
-          <FormFilterAchat onChange={() => {}} form={this.props.form} />
+          <FormFilterAchat
+            onChange={this.props.onSubmit}
+            form={this.props.form}
+          />
         </div>
       ),
     },
@@ -43,7 +42,7 @@ export class Filters extends React.Component<FiltersProps> {
             Dépenses et revenus réguliers
           </h2>
           <FormFilterRevenusDepenses
-            onChange={() => {}}
+            onChange={this.props.onSubmit}
             form={this.props.form}
           />
         </div>
@@ -107,17 +106,59 @@ export class Filters extends React.Component<FiltersProps> {
         <Card className="rounded-3xl w-full border-2">
           <CardContent className="grid text-sm lg:text-md font-medium p-0">
             <div className="w-full mx-auto">
-              <div className="mt-10 mb-4 min-h-50">
-                {this.steps[currentStep].component}
-              </div>
-              <div className="flex justify-between">
-                <button
-                  onClick={() => this.props.onSubmit(this.state.formData)}
-                  className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
+              <Form {...this.props.form}>
+                <form
+                  className="space-y-3"
+                  onSubmit={this.props.form.handleSubmit(this.props.onSubmit)}
                 >
-                  Calculer
-                </button>
-              </div>
+                  {/* <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field: { value, onChange } }) => (
+                        <FormItem>
+                          <FormLabel>Mot de passe</FormLabel>
+                          <div className="flex">
+                            <FormControl>
+                              <Input
+                                type="password"
+                                placeholder=""
+                                className="mr-2"
+                                value={value}
+                                onChange={(event) => {
+                                  const newValue = event.target.value || "";
+                                  onChange(newValue);
+                                  setAccountValues((prev) => ({
+                                    ...prev,
+                                    password: newValue,
+                                  }));
+                                }}
+                              />
+                            </FormControl>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    /> */}
+                  {/* <Button
+                      className="mx-auto block px-6 py-2 rounded-full text-sm text-semibold bg-blue-900 hover:bg-blue-800 hover:ring-3 ring-transparent ring-offset-2 transition"
+                      type="submit"
+                    >
+                      <span className="text-white">S'inscrire</span>
+                    </Button> */}
+                  <div className="mt-10 mb-4 min-h-50">
+                    {this.steps[currentStep].component}
+                  </div>
+                  <div className="flex justify-between">
+                    <button
+                      type="submit"
+                      // onClick={() => this.props.onSubmit(this.props.onSubmit)}
+                      className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
+                    >
+                      Calculer
+                    </button>
+                  </div>
+                </form>
+              </Form>
             </div>
           </CardContent>
         </Card>

@@ -32,6 +32,8 @@ export const DataSchema = z.object({
     message: "Renseignez un nombre valide",
   }),
   tauxAssurancePret: z.number(),
+  regimeFiscal: z.string(),
+  tmi: z.number(),
 });
 export type DataType = z.infer<typeof DataSchema>;
 
