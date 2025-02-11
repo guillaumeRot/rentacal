@@ -11,7 +11,8 @@ import { getParametresByUser } from "../parametres/parametres.action";
 import { ParametresType } from "../parametres/parametres.schema";
 import { Amortissement } from "./amortissement/Amortissement";
 import { Banque } from "./banque/Banque";
-import { Filters } from "./filters/Filters";
+// import { Filters } from "./filters/Filters";
+import Filters from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
 import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
@@ -140,7 +141,8 @@ export default function SimulationResult() {
         <h1 className="text-xl lg:text-2xl my-4">
           1 - Renseignez vos informations
         </h1>
-        <Filters onSubmit={onSubmit} form={form} />
+        {/* <Filters onSubmit={onSubmit} form={form} /> */}
+        <Filters />
         <h1 className="text-xl lg:text-2xl my-4">
           2 - Consulter vos résultats
         </h1>

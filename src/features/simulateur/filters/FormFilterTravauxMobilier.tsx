@@ -1,8 +1,7 @@
 "use client";
 
 import { InputFormField } from "@/components/InputFormField";
-import { FormFilters } from "@/components/layout";
-import { Form } from "@/components/ui/form";
+// import { FormFilters } from "@/components/layout";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -31,18 +30,19 @@ export class FormFilterTravauxMobilier extends React.Component<FormFilterTravaux
 
   render() {
     return (
-      <Form {...this.props.form}>
-        <FormFilters className="lg:max-w-4xl">
-          {this.fields.map((field, index) => (
-            <InputFormField
-              key={index}
-              onChange={this.props.onChange}
-              form={this.props.form}
-              currentField={field}
-            />
-          ))}
-        </FormFilters>
-      </Form>
+      <div></div>
+      // <Form {...this.props.form}>
+      //   <FormFilters className="lg:max-w-4xl">
+      //     {this.fields.map((field, index) => (
+      //       <InputFormField
+      //         key={index}
+      //         onChange={this.props.onChange}
+      //         form={this.props.form}
+      //         currentField={field}
+      //       />
+      //     ))}
+      //   </FormFilters>
+      // </Form>
     );
   }
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { InputFormField } from "@/components/InputFormField";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -32,16 +31,17 @@ export class FormFilterAchat extends React.Component<FormFilterAchatProps> {
 
   render() {
     return (
-      <>
-        {this.fields.map((field, index) => (
-          <InputFormField
-            key={index}
-            onChange={this.props.onChange}
-            form={this.props.form}
-            currentField={field}
-          />
-        ))}
-      </>
+      <div></div>
+      // <>
+      //   {this.fields.map((field, index) => (
+      //     <InputFormField
+      //       key={index}
+      //       onChange={this.props.onChange}
+      //       form={this.props.form}
+      //       currentField={field}
+      //     />
+      //   ))}
+      // </>
       // <Form {...this.props.form}>
       // <LayoutFilters>
       // <>

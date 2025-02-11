@@ -1,10 +1,9 @@
 "use client";
 
 import { InputFormField } from "@/components/InputFormField";
-import { FormFilters } from "@/components/layout";
+// import { FormFilters } from "@/components/layout";
 import { SelectFormField } from "@/components/SelectFormField";
 import { SliderFormField } from "@/components/SliderFormField";
-import { Form } from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -105,37 +104,38 @@ export class FormFilterRevenusDepenses extends React.Component<FormFilterRevenus
 
   render() {
     return (
-      <Form {...this.props.form}>
-        <FormFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
-          {this.fields.map((field, index) => (
-            <div key={index}>
-              {field.type === InputFormField && (
-                <InputFormField
-                  onChange={this.props.onChange}
-                  form={this.props.form}
-                  currentField={field}
-                />
-              )}
-              {field.type === SliderFormField && (
-                <SliderFormField
-                  onChange={this.props.onChange}
-                  form={this.props.form}
-                  currentField={field}
-                />
-              )}
-              {field.type === SelectFormField && (
-                <SelectFormField
-                  onChange={this.props.onChange}
-                  form={this.props.form}
-                  currentField={field}
-                >
-                  {field.children}
-                </SelectFormField>
-              )}
-            </div>
-          ))}
-        </FormFilters>
-      </Form>
+      <div></div>
+      // <Form {...this.props.form}>
+      //   <FormFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
+      //     {this.fields.map((field, index) => (
+      //       <div key={index}>
+      //         {field.type === InputFormField && (
+      //           <InputFormField
+      //             onChange={this.props.onChange}
+      //             form={this.props.form}
+      //             currentField={field}
+      //           />
+      //         )}
+      //         {field.type === SliderFormField && (
+      //           <SliderFormField
+      //             onChange={this.props.onChange}
+      //             form={this.props.form}
+      //             currentField={field}
+      //           />
+      //         )}
+      //         {field.type === SelectFormField && (
+      //           <SelectFormField
+      //             onChange={this.props.onChange}
+      //             form={this.props.form}
+      //             currentField={field}
+      //           >
+      //             {field.children}
+      //           </SelectFormField>
+      //         )}
+      //       </div>
+      //     ))}
+      //   </FormFilters>
+      // </Form>
     );
   }
 }
