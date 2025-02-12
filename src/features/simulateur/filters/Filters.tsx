@@ -2,19 +2,21 @@ import { Card, CardContent } from "@/components/ui/card";
 // import React , FormFieldfrom "react";
 import { Button } from "@/components/ui/button";
 // import { FormField } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { DataSchema } from "../simulateur.schema";
+import { FormFilterAchat } from "./FormFilterAchat";
 
 interface FiltersProps {
   onSubmit: (data: any) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
 }
 
-type FormValues = {
-  email: string;
+export type FormValues = {
+  prixAchat: string;
+  fraisNotaires: string;
+  fraisAgence: string;
 };
 
 // export class Filters extends React.Component<FiltersProps> {
@@ -124,12 +126,13 @@ export default function Filters() {
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* <FormField name="email" /> */}
-                <Input
+                {/* <Input
                   id="email"
                   type="email"
                   placeholder="Entrez votre email"
                   {...register("email", { required: "L'email est requis" })}
-                />
+                /> */}
+                <FormFilterAchat register={register} />
                 <Button type="submit">S'inscrire</Button>
               </form>
             </FormProvider>
