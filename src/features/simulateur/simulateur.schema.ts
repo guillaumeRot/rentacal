@@ -74,3 +74,17 @@ export const FeedbackSchema = z.object({
   feedback: z.string(),
 });
 export type FeedbackType = z.infer<typeof FeedbackSchema>;
+
+export const FormFieldSchema = z.object({
+  slug: z.string(),
+  label: z.string(),
+  min: z.number().optional(),
+  max: z.number().optional(),
+  step: z.number().optional(),
+  placeholder: z.string().optional(),
+  value: z.number().optional(),
+  description: z.string(),
+  type: z.enum(["input", "select", "slider"]),
+  inputType: z.enum(["text", "number", "password", "email"]).optional(),
+});
+export type FormFieldType = z.infer<typeof FormFieldSchema>;

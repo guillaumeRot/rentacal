@@ -3,7 +3,11 @@
 import React, { PropsWithChildren } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { DataSchema, DataType } from "../features/simulateur/simulateur.schema";
+import {
+  DataSchema,
+  DataType,
+  FormFieldType,
+} from "../features/simulateur/simulateur.schema";
 import {
   FormControl,
   FormField,
@@ -11,12 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-
-type FormFieldType = {
-  slug: string;
-  label: string;
-  description: string;
-};
 
 type SelectFormFieldProps = PropsWithChildren & {
   onChange: (updatedValues: Partial<DataType>) => void;

@@ -12,6 +12,6 @@ export const LayoutResultWithFilters = twx.div((props) => [
 //   `justify-between mx-auto my-5 lg:my-10 py-5 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row`,
 // ]);
 
-// export const LayoutFilters = twx.div((props) => [
-//   `justify-between mx-auto my-5 lg:my-10 py-5 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row`,
-// ]);
+export const LayoutFilters = twx.div((props) => [
+  `justify-between mx-auto my-5 lg:my-10 py-5 px-10 lg:px-30 flex flex-col space-y-8 lg:flex-row`,
+]);

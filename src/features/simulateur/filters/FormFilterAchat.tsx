@@ -1,69 +1,38 @@
 "use client";
 
 import { InputFormField } from "@/components/InputFormField";
-import { UseFormRegister } from "react-hook-form";
-import { FormValues } from "./Filters";
+import { LayoutFilters } from "@/components/layout";
 
-type FormFilterAchatProps = {
-  // onChange: (updatedValues: Partial<DataType>) => void;
-  // form: UseFormReturn<z.infer<typeof DataSchema>>;
-  register: UseFormRegister<FormValues>;
-};
-
-// export class FormFilterAchat extends React.Component<FormFilterAchatProps> {
-export const FormFilterAchat = (props: FormFilterAchatProps) => {
+export const FormFilterAchat = () => {
   const fields = [
     {
       slug: "prixAchat",
       label: "Prix d'achat",
       description: "Le prix du bien net vendeur",
+      inputType: "number",
+      type: "input",
     },
     {
       slug: "fraisNotaires",
       label: "Frais notaires",
       description: "Les honoraires du notaire",
+      inputType: "number",
+      type: "input",
     },
     {
       slug: "fraisAgence",
       label: "Frais d'agence",
       description: "Les frais de l'agence immobilière",
+      inputType: "number",
+      type: "input",
     },
-  ];
+  ] as const;
 
-  // render() {
   return (
-    // <Input
-    //   id="email"
-    //   type="email"
-    //   placeholder="Entrez votre email"
-    //   {...props.register("email", { required: "L'email est requis" })}
-    // />
-    <div>
+    <LayoutFilters>
       {fields.map((field, index) => (
-        <InputFormField
-          key={index}
-          register={props.register}
-          // onChange={this.props.onChange}
-          // form={this.props.form}
-          currentField={field}
-        />
+        <InputFormField key={index} currentField={field} />
       ))}
-    </div>
-    // <Form {...this.props.form}>
-    // <LayoutFilters>
-    // <>
-    /* {this.fields.map((field, index) => (
-            <InputFormField
-              key={index}
-              onChange={this.props.onChange}
-              form={this.props.form}
-              currentField={field}
-            />
-          ))} */
-    // </>
-    // </LayoutFilters>
-    // {/* </FormFilters> */}
-    // </Form>
+    </LayoutFilters>
   );
-  // }
 };
