@@ -1,6 +1,5 @@
 "use client";
 
-import { LayoutResult } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -97,73 +96,73 @@ export function SuggestionForm() {
   });
 
   return (
-    <LayoutResult>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(async (values: SuggestionType) => {
-            await mutation.mutateAsync(values);
-          })}
-          className="w-2/3 space-y-6 mx-auto"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <div className="flex">
-                  <FormControl>
-                    {/* <MontantInputMask {...field} /> */}
-                    <Input
-                      placeholder="exemple@rentacal.fr"
-                      {...field}
-                      className="mr-2"
-                      onChange={(event) => field.onChange(event.target.value)}
-                    />
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    // <LayoutResult>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(async (values: SuggestionType) => {
+          await mutation.mutateAsync(values);
+        })}
+        className="w-2/3 space-y-6 mx-auto"
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <div className="flex">
+                <FormControl>
+                  {/* <MontantInputMask {...field} /> */}
+                  <Input
+                    placeholder="exemple@rentacal.fr"
+                    {...field}
+                    className="mr-2"
+                    onChange={(event) => field.onChange(event.target.value)}
+                  />
+                </FormControl>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <FormField
-            control={form.control}
-            name="suggestion"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Suggestion</FormLabel>
-                <div className="flex">
-                  <FormControl>
-                    {/* <MontantInputMask {...field} /> */}
-                    <Textarea
-                      placeholder="Ecrivez votre suggestion ici..."
-                      {...field}
-                      className="mr-2"
-                      onChange={(event) => field.onChange(event.target.value)}
-                      rows={10}
-                    />
-                    {/* <Input
+        <FormField
+          control={form.control}
+          name="suggestion"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Suggestion</FormLabel>
+              <div className="flex">
+                <FormControl>
+                  {/* <MontantInputMask {...field} /> */}
+                  <Textarea
+                    placeholder="Ecrivez votre suggestion ici..."
+                    {...field}
+                    className="mr-2"
+                    onChange={(event) => field.onChange(event.target.value)}
+                    rows={10}
+                  />
+                  {/* <Input
                       placeholder="Ecrivez votre suggestion ici..."
                       {...field}
                       className="mr-2"
                       onChange={(event) => field.onChange(event.target.value)}
                     /> */}
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                </FormControl>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <Button
-            type="submit"
-            className="w-full bg-accent text-accent-foreground"
-          >
-            Envoyer ma suggestion
-          </Button>
-        </form>
-      </Form>
-    </LayoutResult>
+        <Button
+          type="submit"
+          className="w-full bg-accent text-accent-foreground"
+        >
+          Envoyer ma suggestion
+        </Button>
+      </form>
+    </Form>
+    // </LayoutResult>
   );
 }
