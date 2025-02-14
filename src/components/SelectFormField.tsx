@@ -1,10 +1,8 @@
 "use client";
 
-import React, { PropsWithChildren } from "react";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import { PropsWithChildren } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 import {
-  DataSchema,
   DataType,
   FormFieldType,
 } from "../features/simulateur/simulateur.schema";
@@ -15,38 +13,66 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 type SelectFormFieldProps = PropsWithChildren & {
-  onChange: (updatedValues: Partial<DataType>) => void;
-  form: UseFormReturn<z.infer<typeof DataSchema>>;
   currentField: FormFieldType;
 };
 
-export class SelectFormField extends React.Component<SelectFormFieldProps> {
+export const SelectFormField = (props: SelectFormFieldProps) => {
   // handleSliderChange = (name: keyof DataType, value: number) => {
   //   this.props.onChange({ [name]: value });
   // };
 
-  render() {
-    return (
-      <FormField
-        control={this.props.form.control}
-        name={this.props.currentField.slug as keyof DataType}
-        render={({ field: { value, onChange } }) => (
-          <FormItem>
-            <FormLabel>
-              {value} {this.props.currentField.label}
-            </FormLabel>
-            <div className="flex mt-5">
-              <FormControl>{this.props.children}</FormControl>
-            </div>
-            <FormMessage />
-            <div className="text-xs text-gray-500 mt-2">
-              {this.props.currentField.description}
-            </div>
-          </FormItem>
-        )}
-      />
-    );
-  }
-}
+  const { register, control } = useFormContext();
+
+  return (
+    <FormField
+      control={control}
+      name={props.currentField.slug as keyof DataType}
+      render={({ field: { value, onChange } }) => (
+        <FormItem>
+          <FormLabel>
+            {value} {props.currentField.label}
+          </FormLabel>
+          <div className="flex mt-5">
+            <FormControl>
+              <Controller
+                name={props.currentField.slug as keyof DataType}
+                control={control}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={props.currentField.select?.placeholder}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {props.currentField.select?.items.map(
+                        (item, itemIndex) => (
+                          <SelectItem key={itemIndex} value={item.slug}>
+                            {item.name}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </div>
+          <FormMessage />
+          <div className="text-xs text-gray-500 mt-2">
+            {props.currentField.description}
+          </div>
+        </FormItem>
+      )}
+    />
+  );
+};

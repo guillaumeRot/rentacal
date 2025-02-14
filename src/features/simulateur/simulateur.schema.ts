@@ -86,5 +86,16 @@ export const FormFieldSchema = z.object({
   description: z.string(),
   type: z.enum(["input", "select", "slider"]),
   inputType: z.enum(["text", "number", "password", "email"]).optional(),
+  select: z
+    .object({
+      placeholder: z.string(),
+      items: z.array(
+        z.object({
+          slug: z.string(),
+          name: z.string(),
+        })
+      ),
+    })
+    .optional(),
 });
 export type FormFieldType = z.infer<typeof FormFieldSchema>;

@@ -32,54 +32,31 @@ export const SliderFormField = (props: SliderFormFieldProps) => {
       name={props.currentField.slug as keyof DataType}
       render={() => (
         <FormItem>
-          <FormLabel>{props.currentField.label}</FormLabel>
-          <div className="flex mt-3">
-            <FormControl>
-              {/* <Input
-                id={props.currentField.slug}
-                type={props.currentField.type}
-                placeholder={props.currentField.placeholder || ""}
-                defaultValue={props.currentField.defaultValue || ""}
-                {...register(props.currentField.slug as keyof DataType)}
-              /> */}
-
-              {/* <Slider
-                id={props.currentField.slug}
-                // min={
-                //   props.currentField.min
-                //     ? Number(props.currentField.min)
-                //     : undefined
-                // }
-                // min={1}
-                // max={props.currentField.max}
-                // step={props.currentField.step}
-                // value={[props.currentField.value]}
-                {...register(props.currentField.slug as keyof DataType, {
-                  min: props.currentField.min,
-                })}
-                // onValueChange={(value) => {
-                //   onChange(value[0]);
-                //   this.handleSliderChange(
-                //     this.props.currentField.slug as keyof DataType,
-                //     value[0]
-                //   );
-                // }}
-              /> */}
-              <Controller
-                name={props.currentField.slug as keyof DataType}
-                control={control}
-                render={({ field }) => (
-                  <Slider
-                    value={[field.value]} // Le slider attend un tableau
-                    onValueChange={(value) => field.onChange(value[0])} // Met à jour le formulaire
-                    min={props.currentField.min}
-                    max={props.currentField.max}
-                    step={props.currentField.step}
-                  />
-                )}
-              />
-            </FormControl>
-          </div>
+          {/* <FormLabel>{props.currentField.label}</FormLabel>
+          <div className="flex mt-3"> */}
+          <FormControl>
+            <Controller
+              name={props.currentField.slug as keyof DataType}
+              control={control}
+              render={({ field }) => (
+                <div>
+                  <FormLabel>
+                    {field.value} {props.currentField.label}
+                  </FormLabel>
+                  <div className="flex mt-3">
+                    <Slider
+                      value={[field.value]} // Le slider attend un tableau
+                      onValueChange={(value) => field.onChange(value[0])} // Met à jour le formulaire
+                      min={props.currentField.min}
+                      max={props.currentField.max}
+                      step={props.currentField.step}
+                    />
+                  </div>
+                </div>
+              )}
+            />
+          </FormControl>
+          {/* </div> */}
           <FormMessage />
           <div className="text-xs text-gray-500 mt-2">
             {props.currentField.description}

@@ -3,7 +3,6 @@
 import { InputFormField } from "@/components/InputFormField";
 import { LayoutFilters } from "@/components/layout";
 import { SelectFormField } from "@/components/SelectFormField";
-// import { FormFilters } from "@/components/layout";
 import { SliderFormField } from "@/components/SliderFormField";
 import { Value } from "@radix-ui/react-select";
 
@@ -31,6 +30,9 @@ export const FormFilterRevenusDepenses = () => {
         "Correspond à la vacance locative. Utile pour simuler le nombre de mois où le montant des loyers sera perçu sur l'année ",
       type: "slider",
       inputType: "number",
+      min: 0,
+      max: 12,
+      step: 1,
     },
     {
       slug: "chargesCopro",
@@ -44,40 +46,36 @@ export const FormFilterRevenusDepenses = () => {
       label: "Régime fiscal",
       description: "Le régime fiscal choisi pour déclarer votre investissement",
       type: "select",
-      min: 1,
-      max: 12,
-      step: 1,
+      select: {
+        placeholder: "Choisir un TMI",
+        items: [
+          { slug: "paris", name: "Paris" },
+          { slug: "lyon", name: "Lyon" },
+        ] as { slug: string; name: string }[],
+      },
     },
     {
       slug: "tmi",
       label: "TMI",
       description: "Le taux marginal d'imposition auquel vous êtes assujetti.",
       type: "select",
-      min: 1,
-      max: 12,
-      step: 1,
+      select: {
+        placeholder: "Choisir un TMI",
+        items: [
+          { slug: "paris2", name: "Paris" },
+          { slug: "lyon2", name: "Lyon" },
+        ] as { slug: string; name: string }[],
+      },
     },
   ] as const;
 
   return (
     <LayoutFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
-      {/* {fields.map((field, index) => (
-        <InputFormField key={index} currentField={field} />
-      ))} */}
       {fields.map((field, index) => (
         <div key={index}>
           {field.type === "input" && <InputFormField currentField={field} />}
           {field.type === "slider" && <SliderFormField currentField={field} />}
           {field.type === "select" && <SelectFormField currentField={field} />}
-          {/* {field.inputType === SelectFormField && (
-            <SelectFormField
-              onChange={this.props.onChange}
-              form={this.props.form}
-              currentField={field}
-            >
-              {field.children}
-            </SelectFormField>
-          )} */}
         </div>
       ))}
     </LayoutFilters>
