@@ -6,7 +6,9 @@ import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { DataSchema, DataType } from "../simulateur.schema";
 import { FormFilterAchat } from "./FormFilterAchat";
+import { FormFilterFinancement } from "./FormFilterFinancement";
 import { FormFilterRevenusDepenses } from "./FormFilterRevenusDepenses";
+import { FormFilterTravauxMobilier } from "./FormFilterTravauxMobilier";
 
 interface FiltersProps {
   onSubmit: (data: any) => void;
@@ -49,10 +51,7 @@ export default function Filters() {
           <h2 className="text-lg lg:text-xl text-center">
             Coût des travaux et du mobilier
           </h2>
-          {/* <FormFilterTravauxMobilier
-            onChange={() => {}}
-            form={this.props.form}
-          /> */}
+          <FormFilterTravauxMobilier />
         </div>
       ),
     },
@@ -63,7 +62,7 @@ export default function Filters() {
           <h2 className="text-lg lg:text-xl text-center">
             Informations relatives au crédit
           </h2>
-          {/* <FormFilterFinancement onChange={() => {}} form={this.props.form} /> */}
+          <FormFilterFinancement />
         </div>
       ),
     },

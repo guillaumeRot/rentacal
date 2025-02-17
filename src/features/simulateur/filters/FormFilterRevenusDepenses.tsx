@@ -4,7 +4,6 @@ import { InputFormField } from "@/components/InputFormField";
 import { LayoutFilters } from "@/components/layout";
 import { SelectFormField } from "@/components/SelectFormField";
 import { SliderFormField } from "@/components/SliderFormField";
-import { Value } from "@radix-ui/react-select";
 
 export const FormFilterRevenusDepenses = () => {
   const fields = [
@@ -14,7 +13,6 @@ export const FormFilterRevenusDepenses = () => {
       description: "Le montant total des loyers perçus par mois",
       type: "input",
       inputType: "number",
-      Value,
     },
     {
       slug: "impotsFoncier",
@@ -47,10 +45,10 @@ export const FormFilterRevenusDepenses = () => {
       description: "Le régime fiscal choisi pour déclarer votre investissement",
       type: "select",
       select: {
-        placeholder: "Choisir un TMI",
+        placeholder: "Choisir un régime fiscale",
         items: [
-          { slug: "paris", name: "Paris" },
-          { slug: "lyon", name: "Lyon" },
+          { slug: "lmnpReel", name: "LMNP Réel" },
+          { slug: "lmnpMicroBIC", name: "LMNP Micro BIC" },
         ] as { slug: string; name: string }[],
       },
     },
@@ -62,8 +60,11 @@ export const FormFilterRevenusDepenses = () => {
       select: {
         placeholder: "Choisir un TMI",
         items: [
-          { slug: "paris2", name: "Paris" },
-          { slug: "lyon2", name: "Lyon" },
+          { slug: "0", name: "0% - Revenu net inférieur à 10 084 €/an" },
+          { slug: "11", name: "11% - Revenu net inférieur à 25 710 €/an" },
+          { slug: "30", name: "30% - Revenu net inférieur à 73 516 €/an" },
+          { slug: "41", name: "41% - Revenu net inférieur à 158 122 €/an" },
+          { slug: "45", name: "45% - Revenu net supérieur à 158 122 €/an" },
         ] as { slug: string; name: string }[],
       },
     },

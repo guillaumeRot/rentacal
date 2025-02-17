@@ -1,71 +1,46 @@
 "use client";
 
 import { InputFormField } from "@/components/InputFormField";
-// import { FormFilters } from "@/components/layout";
+import { LayoutFilters } from "@/components/layout";
 import { SliderFormField } from "@/components/SliderFormField";
-import React from "react";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
-import { DataSchema, DataType } from "../simulateur.schema";
 
-type FormFilterFinancementProps = {
-  onChange: (updatedValues: Partial<DataType>) => void;
-  form: UseFormReturn<z.infer<typeof DataSchema>>;
-};
-
-export class FormFilterFinancement extends React.Component<FormFilterFinancementProps> {
-  fields = [
+export const FormFilterFinancement = () => {
+  const fields = [
     {
       slug: "dureePret",
       label: "Durée du prêt :",
       description: "La durée totale du prêt en année(s)",
-      type: SliderFormField,
+      type: "slider",
     },
     {
       slug: "tauxPret",
       label: "Taux du prêt :",
       description: "Le taux fixe du prêt",
-      type: SliderFormField,
+      type: "slider",
     },
     {
       slug: "tauxAssurancePret",
       label: "Assurance du prêt : ",
       description: "Le taux de l'assurance du prêt",
-      type: SliderFormField,
+      type: "slider",
     },
     {
       slug: "apport",
       label: "Apport",
       description: "L'apport globale pour le financement de l'opération",
-      type: InputFormField,
+      type: "input",
+      inputType: "number",
     },
-  ];
+  ] as const;
 
-  render() {
-    return (
-      <div></div>
-      // <Form {...this.props.form}>
-      //   <FormFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
-      //     {this.fields.map((field, index) => (
-      //       <div key={index}>
-      //         {field.type === InputFormField && (
-      //           <InputFormField
-      //             onChange={this.props.onChange}
-      //             form={this.props.form}
-      //             currentField={field}
-      //           />
-      //         )}
-      //         {field.type === SliderFormField && (
-      //           <SliderFormField
-      //             onChange={this.props.onChange}
-      //             form={this.props.form}
-      //             currentField={field}
-      //           />
-      //         )}
-      //       </div>
-      //     ))}
-      //   </FormFilters>
-      // </Form>
-    );
-  }
-}
+  return (
+    <LayoutFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
+      {fields.map((field, index) => (
+        <div key={index}>
+          {field.type === "input" && <InputFormField currentField={field} />}
+          {field.type === "slider" && <SliderFormField currentField={field} />}
+        </div>
+      ))}
+    </LayoutFilters>
+  );
+};
