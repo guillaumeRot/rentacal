@@ -44,6 +44,11 @@ export const calculRentabilite = action
         montantPret,
         parsedInput.parsedInput.nbMoisLocParAn
       ),
+      rentabiliteNetteNette: getRentabiliteNette(
+        parsedInput.parsedInput,
+        montantPret,
+        parsedInput.parsedInput.nbMoisLocParAn
+      ),
       montantPret: montantPret,
       resultatsMensuel: getResultatsGlobal(
         parsedInput.parsedInput,

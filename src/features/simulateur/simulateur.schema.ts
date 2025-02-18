@@ -55,6 +55,7 @@ export type ResultatGlobalType = z.infer<typeof ResultatGlobal>;
 export const ResultSchema = z.object({
   rentabiliteBrute: z.number(),
   rentabiliteNette: z.number(),
+  rentabiliteNetteNette: z.number(),
   montantPret: z.number(),
   resultatsMensuel: z.array(ResultatMensuel),
   mensualites: z.number(),

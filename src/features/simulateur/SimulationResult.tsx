@@ -2,7 +2,7 @@
 
 import { LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ import { Banque } from "./banque/Banque";
 // import { Filters } from "./filters/Filters";
 import Filters from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
+import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export default function SimulationResult() {
@@ -69,6 +70,7 @@ export default function SimulationResult() {
   // const result = useQuery({
   //   queryKey: ["result"],
   //   queryFn: async () => {
+  //     console.log("TEST GUI 1");
   //     const res = await calculRentabilite({
   //       prixAchat: filtersValues.prixAchat,
   //       fraisAgence: filtersValues.fraisAgence,
@@ -86,6 +88,7 @@ export default function SimulationResult() {
   //       regimeFiscal: filtersValues.regimeFiscal,
   //       tmi: filtersValues.tmi,
   //     });
+  //     console.log("TEST GUI 2");
 
   //     const r = res?.data;
   //     return r;
@@ -104,17 +107,27 @@ export default function SimulationResult() {
   //   await mutation.mutateAsync(newValues);
   // };
 
-  // const handleSubmit = () => {
-  //   // const handleSubmit = (updatedValues: Partial<typeof filtersValues>) => {
-  //   // console.log("Données du formulaire:", updatedValues);
-  //   console.log("Données du formulaire 2:", form.formState.defaultValues);
-  //   // Traitez les données comme vous le souhaitez
+  // const onSubmit = async (values: z.infer<typeof DataSchema>) => {
+  //   console.log("Données du formulaire : ", values);
+  //   await mutation.mutateAsync(values);
   // };
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof DataSchema>) {
+  const result = useQuery({
+    queryKey: ["result"],
+    queryFn: async () => {
+      const res = await calculRentabilite(filtersValues);
+      return res?.data;
+    },
+    enabled: !!filtersValues,
+  });
+
+  const onSubmit = async (values: z.infer<typeof DataSchema>) => {
     console.log("Données du formulaire : ", values);
-  }
+    setFiltersValues(values);
+    const res = await calculRentabilite(values);
+    console.log("Résultat de calculRentabilite : ", res?.data);
+    queryClient.invalidateQueries({ queryKey: ["result"] });
+  };
 
   // const mutation = useMutation({
   //   mutationFn: async (values: DataType) => {
@@ -134,10 +147,6 @@ export default function SimulationResult() {
     formState: { errors },
   } = form;
 
-  // const onSubmit = (data: DataType) => {
-  //   console.log("Form submitted:", data);
-  // };
-
   return (
     <div className="bg-white mt-20">
       <LayoutResultWithFilters>
@@ -148,7 +157,11 @@ export default function SimulationResult() {
         <h1 className="text-xl lg:text-2xl my-4">
           2 - Consulter vos résultats
         </h1>
-        <Rentabilites />
+        <Rentabilites
+          rentabiliteBrute={result.data?.rentabiliteBrute}
+          rentabiliteNette={result.data?.rentabiliteNette}
+          rentabiliteNetteNette={result.data?.rentabiliteNetteNette}
+        />
         <Banque />
         <Amortissement />
       </LayoutResultWithFilters>

@@ -1,17 +1,23 @@
 import { Badge } from "@/components/ui/badge";
 import { CardContent } from "@/components/ui/card";
+import { PourcentageFormat } from "@/features/PourcentageFormat";
 import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
 import {
   CardChild,
   CardChildHeader,
   CardParent,
 } from "@/features/theme/CardUtils";
-import React from "react";
 import { PiSealPercentLight } from "react-icons/pi";
+
+export type RentabilitesProps = {
+  rentabiliteBrute?: number;
+  rentabiliteNette?: number;
+  rentabiliteNetteNette?: number;
+};
 
 export type CardRentabiliteProps = {
   label: string;
-  pourcentage: string;
+  pourcentage: number;
   description: string;
   risk: string;
 };
@@ -39,7 +45,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
             <Badge
               className={`text-2xl lg:text-3xl font-medium rounded-3xl px-5 py-1 mt-1 hover:${bgColor} ${bgColor} ${textColor}`}
             >
-              {props.pourcentage} %
+              <PourcentageFormat value={props.pourcentage} />
             </Badge>
           </div>
           <div className="text-xs font-medium text-gray-400 w-full">
@@ -55,32 +61,30 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
   );
 };
 
-export class Rentabilites extends React.Component {
-  render() {
-    return (
-      <CardParent className="grid grid-cols-1 lg:grid-cols-3">
-        <CardRentabilite
-          label="Rentabilité brute"
-          pourcentage="6,58"
-          risk="low"
-          description="La rentabilité brute résulte de la division entre le prix d'achat et
+export const Rentabilites = (props: RentabilitesProps) => {
+  return (
+    <CardParent className="grid grid-cols-1 lg:grid-cols-3">
+      <CardRentabilite
+        label="Rentabilité brute"
+        pourcentage={props.rentabiliteBrute || 0}
+        risk="low"
+        description="La rentabilité brute résulte de la division entre le prix d'achat et
           les frais annexes dü à l'achat du bien par les revenus annuel."
-        />
-        <CardRentabilite
-          label="Rentabilité nette"
-          pourcentage="6,49"
-          risk="middle"
-          description="La rentabilité nette résulte de la division entre le prix d'achat et
+      />
+      <CardRentabilite
+        label="Rentabilité nette"
+        pourcentage={props.rentabiliteNette || 0}
+        risk="middle"
+        description="La rentabilité nette résulte de la division entre le prix d'achat et
         les frais annexes dü à l'achat du bien par les revenus annuel."
-        />
-        <CardRentabilite
-          label="Rentabilité nette-nette"
-          pourcentage="5,38"
-          risk="high"
-          description="La rentabilité nette-nette résulte de la division entre le prix d'achat et
+      />
+      <CardRentabilite
+        label="Rentabilité nette-nette"
+        pourcentage={props.rentabiliteNetteNette || 0}
+        risk="high"
+        description="La rentabilité nette-nette résulte de la division entre le prix d'achat et
         les frais annexes dü à l'achat du bien par les revenus annuel."
-        />
-      </CardParent>
-    );
-  }
-}
+      />
+    </CardParent>
+  );
+};
