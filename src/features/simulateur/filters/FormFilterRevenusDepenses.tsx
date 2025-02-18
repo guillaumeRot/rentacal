@@ -11,23 +11,23 @@ export const FormFilterRevenusDepenses = () => {
       slug: "loyersTotal",
       label: "Somme des loyers mensuels",
       description: "Le montant total des loyers perçus par mois",
-      type: "input",
-      inputType: "number",
+      component: "input",
+      type: "number",
     },
     {
       slug: "impotsFoncier",
       label: "Impôts fonciers",
       description: "Le montant des impôts fonciers à payer par année",
-      type: "input",
-      inputType: "number",
+      component: "input",
+      type: "number",
     },
     {
       slug: "nbMoisLocParAn",
       label: "mois de location / an",
       description:
         "Correspond à la vacance locative. Utile pour simuler le nombre de mois où le montant des loyers sera perçu sur l'année ",
-      type: "slider",
-      inputType: "number",
+      component: "slider",
+      type: "number",
       min: 0,
       max: 12,
       step: 1,
@@ -36,14 +36,14 @@ export const FormFilterRevenusDepenses = () => {
       slug: "chargesCopro",
       label: "Charges de copropriété",
       description: "Le montant des charges dû à la copropriété par année",
-      type: "input",
-      inputType: "number",
+      component: "input",
+      type: "number",
     },
     {
       slug: "regimeFiscal",
       label: "Régime fiscal",
       description: "Le régime fiscal choisi pour déclarer votre investissement",
-      type: "select",
+      component: "select",
       select: {
         placeholder: "Choisir un régime fiscale",
         items: [
@@ -56,7 +56,7 @@ export const FormFilterRevenusDepenses = () => {
       slug: "tmi",
       label: "TMI",
       description: "Le taux marginal d'imposition auquel vous êtes assujetti.",
-      type: "select",
+      component: "select",
       select: {
         placeholder: "Choisir un TMI",
         items: [
@@ -74,9 +74,15 @@ export const FormFilterRevenusDepenses = () => {
     <LayoutFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
       {fields.map((field, index) => (
         <div key={index}>
-          {field.type === "input" && <InputFormField currentField={field} />}
-          {field.type === "slider" && <SliderFormField currentField={field} />}
-          {field.type === "select" && <SelectFormField currentField={field} />}
+          {field.component === "input" && (
+            <InputFormField currentField={field} />
+          )}
+          {field.component === "slider" && (
+            <SliderFormField currentField={field} />
+          )}
+          {field.component === "select" && (
+            <SelectFormField currentField={field} />
+          )}
         </div>
       ))}
     </LayoutFilters>

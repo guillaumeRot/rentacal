@@ -84,8 +84,7 @@ export const FormFieldSchema = z.object({
   value: z.number().optional(),
   description: z.string(),
   component: z.enum(["input", "select", "slider"]),
-  type: z.string().optional(),
-  // inputType: z.enum(["text", "number", "password", "email"]).optional(),
+  type: z.enum(["text", "number", "password", "email"]).optional(),
   select: z
     .object({
       placeholder: z.string(),

@@ -38,9 +38,7 @@ export const SelectFormField = (props: SelectFormFieldProps) => {
       name={props.currentField.slug as keyof DataType}
       render={({ field: { value, onChange } }) => (
         <FormItem>
-          <FormLabel>
-            {value} {props.currentField.label}
-          </FormLabel>
+          <FormLabel>{props.currentField.label}</FormLabel>
           <div className="flex mt-5">
             <FormControl>
               <Controller
