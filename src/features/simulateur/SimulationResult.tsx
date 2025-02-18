@@ -116,8 +116,6 @@ export default function SimulationResult() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof DataSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log("Données du formulaire : ", values);
   }
 
@@ -134,6 +132,14 @@ export default function SimulationResult() {
     resolver: zodResolver(DataSchema),
     defaultValues: filtersValues,
   });
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = form;
+
+  // const onSubmit = (data: DataType) => {
+  //   console.log("Form submitted:", data);
+  // };
 
   return (
     <div className="bg-white mt-20">
@@ -141,8 +147,7 @@ export default function SimulationResult() {
         <h1 className="text-xl lg:text-2xl my-4">
           1 - Renseignez vos informations
         </h1>
-        {/* <Filters onSubmit={onSubmit} form={form} /> */}
-        <Filters />
+        <Filters form={form} handleSubmit={handleSubmit(onSubmit)} />
         <h1 className="text-xl lg:text-2xl my-4">
           2 - Consulter vos résultats
         </h1>

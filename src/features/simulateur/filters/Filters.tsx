@@ -2,21 +2,20 @@ import { Card, CardContent } from "@/components/ui/card";
 // import React , FormFieldfrom "react";
 // import { FormField } from "@/components/ui/form";
 import { useState } from "react";
-import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
+import { FormProvider, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { DataSchema, DataType } from "../simulateur.schema";
+import { DataSchema } from "../simulateur.schema";
 import { FormFilterAchat } from "./FormFilterAchat";
 import { FormFilterFinancement } from "./FormFilterFinancement";
 import { FormFilterRevenusDepenses } from "./FormFilterRevenusDepenses";
 import { FormFilterTravauxMobilier } from "./FormFilterTravauxMobilier";
 
 interface FiltersProps {
-  onSubmit: (data: any) => void;
+  handleSubmit: (data: any) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
 }
 
-// export class Filters extends React.Component<FiltersProps> {
-export default function Filters() {
+export default function Filters(props: FiltersProps) {
   const [state, setState] = useState({
     currentStep: 0,
   });
@@ -73,16 +72,6 @@ export default function Filters() {
     setState({ currentStep: index });
   };
 
-  const methods = useForm<DataType>();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
-  const onSubmit = (data: DataType) => {
-    console.log("Form submitted:", data);
-  };
-
   return (
     <div>
       <Card className="rounded-3xl w-full border-2 p-1">
@@ -104,19 +93,17 @@ export default function Filters() {
         </CardContent>
       </Card>
 
-      <Card className="rounded-3xl w-full border-2">
+      <Card className="rounded-3xl w-full border-2 mt-2">
         <CardContent className="grid text-sm lg:text-md font-medium p-0">
           <div className="w-full mx-auto">
-            <FormProvider {...methods}>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                {/* <FormFilterAchat register={register} /> */}
+            <FormProvider {...props.form}>
+              <form onSubmit={props.handleSubmit} className="space-y-4">
                 <div className="mt-10 mb-4 min-h-50">
                   {steps[currentStep].component}
                 </div>
                 <div className="flex justify-between">
                   <button
                     type="submit"
-                    // onClick={() => this.props.onSubmit(this.props.onSubmit)}
                     className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
                   >
                     Calculer
@@ -129,5 +116,4 @@ export default function Filters() {
       </Card>
     </div>
   );
-  // }
 }

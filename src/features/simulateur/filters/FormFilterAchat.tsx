@@ -8,28 +8,31 @@ export const FormFilterAchat = () => {
     {
       slug: "prixAchat",
       label: "Prix d'achat",
-      description: "Le prix du bien net vendeur",
-      inputType: "number",
-      type: "input",
+      description:
+        "Le coût du bien que vous achetez, hors frais supplémentaires.",
+      type: "number",
+      component: "input",
     },
     {
       slug: "fraisNotaires",
       label: "Frais notaires",
-      description: "Les honoraires du notaire",
-      inputType: "number",
-      type: "input",
+      description:
+        "Les frais obligatoires pour officialiser l’achat chez le notaire.",
+      type: "number",
+      component: "input",
     },
     {
       slug: "fraisAgence",
       label: "Frais d'agence",
-      description: "Les frais de l'agence immobilière",
-      inputType: "number",
-      type: "input",
+      description:
+        "La commission versée si vous passez par une agence pour acheter.",
+      type: "number",
+      component: "input",
     },
   ] as const;
 
   return (
-    <LayoutFilters>
+    <LayoutFilters className="lg:grid lg:grid-cols-3 lg:gap-x-15 lg:gap-y-3 lg:max-w-6xl">
       {fields.map((field, index) => (
         <InputFormField key={index} currentField={field} />
       ))}

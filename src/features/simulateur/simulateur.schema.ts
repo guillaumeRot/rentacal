@@ -81,11 +81,11 @@ export const FormFieldSchema = z.object({
   min: z.number().optional(),
   max: z.number().optional(),
   step: z.number().optional(),
-  placeholder: z.string().optional(),
   value: z.number().optional(),
   description: z.string(),
-  type: z.enum(["input", "select", "slider"]),
-  inputType: z.enum(["text", "number", "password", "email"]).optional(),
+  component: z.enum(["input", "select", "slider"]),
+  type: z.string().optional(),
+  // inputType: z.enum(["text", "number", "password", "email"]).optional(),
   select: z
     .object({
       placeholder: z.string(),
