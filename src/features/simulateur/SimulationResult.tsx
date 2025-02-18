@@ -115,7 +115,9 @@ export default function SimulationResult() {
   const result = useQuery({
     queryKey: ["result"],
     queryFn: async () => {
+      console.log("TEST GUI 1");
       const res = await calculRentabilite(filtersValues);
+      console.log("TEST GUI 2");
       return res?.data;
     },
     enabled: !!filtersValues,
@@ -142,10 +144,7 @@ export default function SimulationResult() {
     resolver: zodResolver(DataSchema),
     defaultValues: filtersValues,
   });
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { handleSubmit } = form;
 
   return (
     <div className="bg-white mt-20">
