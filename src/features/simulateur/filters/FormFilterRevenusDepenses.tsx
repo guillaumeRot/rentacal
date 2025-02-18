@@ -10,22 +10,21 @@ export const FormFilterRevenusDepenses = () => {
     {
       slug: "loyersTotal",
       label: "Somme des loyers mensuels",
-      description: "Le montant total des loyers perçus par mois",
+      description: "Le total des loyers perçus chaque mois pour ce bien.",
       component: "input",
       type: "number",
     },
     {
       slug: "impotsFoncier",
       label: "Impôts fonciers",
-      description: "Le montant des impôts fonciers à payer par année",
+      description: "La taxe annuelle que vous payez en tant que propriétaire.",
       component: "input",
       type: "number",
     },
     {
       slug: "nbMoisLocParAn",
       label: "mois de location / an",
-      description:
-        "Correspond à la vacance locative. Utile pour simuler le nombre de mois où le montant des loyers sera perçu sur l'année ",
+      description: "La période où le logement est occupé et génère des loyers.",
       component: "slider",
       type: "number",
       min: 0,
@@ -35,14 +34,15 @@ export const FormFilterRevenusDepenses = () => {
     {
       slug: "chargesCopro",
       label: "Charges de copropriété",
-      description: "Le montant des charges dû à la copropriété par année",
+      description:
+        "Les frais liés à l’entretien des parties communes de l’immeuble.",
       component: "input",
       type: "number",
     },
     {
       slug: "regimeFiscal",
       label: "Régime fiscal",
-      description: "Le régime fiscal choisi pour déclarer votre investissement",
+      description: "Le type d’imposition appliqué à vos revenus locatifs.",
       component: "select",
       select: {
         placeholder: "Choisir un régime fiscale",
@@ -55,9 +55,11 @@ export const FormFilterRevenusDepenses = () => {
     {
       slug: "tmi",
       label: "TMI",
-      description: "Le taux marginal d'imposition auquel vous êtes assujetti.",
+      description:
+        "Le taux d’imposition appliqué à la dernière tranche de vos revenus.",
       component: "select",
       select: {
+        value: undefined,
         placeholder: "Choisir un TMI",
         items: [
           { slug: "0", name: "0% - Revenu net inférieur à 10 084 €/an" },

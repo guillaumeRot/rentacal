@@ -2,19 +2,16 @@
 
 import { LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { getParametresByUser } from "../parametres/parametres.action";
-import { ParametresType } from "../parametres/parametres.schema";
 import { Amortissement } from "./amortissement/Amortissement";
 import { Banque } from "./banque/Banque";
 // import { Filters } from "./filters/Filters";
 import Filters from "./filters/Filters";
 import { Rentabilites } from "./rentabilites/Rentabilites";
-import { calculRentabilite } from "./simulateur.action";
 import { DataSchema, DataType } from "./simulateur.schema";
 
 export default function SimulationResult() {
@@ -36,65 +33,65 @@ export default function SimulationResult() {
     apport: 0,
     tauxAssurancePret: 0,
     nbMoisLocParAn: 12,
-    regimeFiscal: "lmnpMicroBic",
-    tmi: 30,
+    regimeFiscal: "lmnpMicroBIC",
+    tmi: "30",
   });
 
-  const parametres = useQuery({
-    queryKey: ["parametres"],
-    queryFn: async () => {
-      const parametres = (
-        await getParametresByUser({
-          userId,
-        })
-      )?.data as unknown as ParametresType;
+  // const parametres = useQuery({
+  //   queryKey: ["parametres"],
+  //   queryFn: async () => {
+  //     const parametres = (
+  //       await getParametresByUser({
+  //         userId,
+  //       })
+  //     )?.data as unknown as ParametresType;
 
-      if (parametres) {
-        const updatedValues = {
-          ...filtersValues,
-          dureePret: parametres.dureePret ?? filtersValues.dureePret,
-          tauxPret: parametres.tauxPret ?? filtersValues.tauxPret,
-          apport: parametres.apport ?? filtersValues.apport,
-          tauxAssurancePret:
-            parametres.assurancePret ?? filtersValues.tauxAssurancePret,
-          nbMoisLocParAn:
-            parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
-        };
+  //     if (parametres) {
+  //       const updatedValues = {
+  //         ...filtersValues,
+  //         dureePret: parametres.dureePret ?? filtersValues.dureePret,
+  //         tauxPret: parametres.tauxPret ?? filtersValues.tauxPret,
+  //         apport: parametres.apport ?? filtersValues.apport,
+  //         tauxAssurancePret:
+  //           parametres.assurancePret ?? filtersValues.tauxAssurancePret,
+  //         nbMoisLocParAn:
+  //           parametres.nbMoisLocParAn ?? filtersValues.nbMoisLocParAn,
+  //       };
 
-        setFiltersValues(updatedValues);
-        form.reset(updatedValues);
-      }
-      return parametres;
-    },
-    enabled: !!filtersValues && !!session?.data,
-  });
+  //       setFiltersValues(updatedValues);
+  //       form.reset(updatedValues);
+  //     }
+  //     return parametres;
+  //   },
+  //   enabled: !!filtersValues && !!session?.data,
+  // });
 
-  const result = useQuery({
-    queryKey: ["result"],
-    queryFn: async () => {
-      const res = await calculRentabilite({
-        prixAchat: filtersValues.prixAchat,
-        fraisAgence: filtersValues.fraisAgence,
-        dureePret: filtersValues.dureePret,
-        tauxPret: filtersValues.tauxPret,
-        loyersTotal: filtersValues.loyersTotal,
-        fraisNotaire: filtersValues.fraisNotaire,
-        montantTravaux: filtersValues.montantTravaux,
-        montantMobilier: filtersValues.montantMobilier,
-        impotsFoncier: filtersValues.impotsFoncier,
-        chargesCopro: filtersValues.chargesCopro,
-        apport: filtersValues.apport,
-        tauxAssurancePret: filtersValues.tauxAssurancePret,
-        nbMoisLocParAn: filtersValues.nbMoisLocParAn,
-        regimeFiscal: filtersValues.regimeFiscal,
-        tmi: filtersValues.tmi,
-      });
+  // const result = useQuery({
+  //   queryKey: ["result"],
+  //   queryFn: async () => {
+  //     const res = await calculRentabilite({
+  //       prixAchat: filtersValues.prixAchat,
+  //       fraisAgence: filtersValues.fraisAgence,
+  //       dureePret: filtersValues.dureePret,
+  //       tauxPret: filtersValues.tauxPret,
+  //       loyersTotal: filtersValues.loyersTotal,
+  //       fraisNotaire: filtersValues.fraisNotaire,
+  //       montantTravaux: filtersValues.montantTravaux,
+  //       montantMobilier: filtersValues.montantMobilier,
+  //       impotsFoncier: filtersValues.impotsFoncier,
+  //       chargesCopro: filtersValues.chargesCopro,
+  //       apport: filtersValues.apport,
+  //       tauxAssurancePret: filtersValues.tauxAssurancePret,
+  //       nbMoisLocParAn: filtersValues.nbMoisLocParAn,
+  //       regimeFiscal: filtersValues.regimeFiscal,
+  //       tmi: filtersValues.tmi,
+  //     });
 
-      const r = res?.data;
-      return r;
-    },
-    enabled: !!filtersValues,
-  });
+  //     const r = res?.data;
+  //     return r;
+  //   },
+  //   enabled: !!filtersValues,
+  // });
 
   // const handleFormChange = async (
   //   updatedValues: Partial<typeof filtersValues>

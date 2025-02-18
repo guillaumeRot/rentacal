@@ -26,11 +26,7 @@ type SelectFormFieldProps = PropsWithChildren & {
 };
 
 export const SelectFormField = (props: SelectFormFieldProps) => {
-  // handleSliderChange = (name: keyof DataType, value: number) => {
-  //   this.props.onChange({ [name]: value });
-  // };
-
-  const { register, control } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <FormField

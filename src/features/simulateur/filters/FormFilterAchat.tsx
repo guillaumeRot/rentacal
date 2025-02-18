@@ -14,7 +14,7 @@ export const FormFilterAchat = () => {
       component: "input",
     },
     {
-      slug: "fraisNotaires",
+      slug: "fraisNotaire",
       label: "Frais notaires",
       description:
         "Les frais obligatoires pour officialiser l’achat chez le notaire.",
