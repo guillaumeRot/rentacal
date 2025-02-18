@@ -8,28 +8,40 @@ export const FormFilterFinancement = () => {
   const fields = [
     {
       slug: "dureePret",
-      label: "Durée du prêt :",
+      sliderLabelPrefix: "Durée du prêt :",
+      sliderLabelSuffix: "an(s)",
       description: "La durée totale du prêt en année(s)",
-      type: "slider",
+      component: "slider",
+      min: 0,
+      max: 30,
+      step: 1,
     },
     {
       slug: "tauxPret",
-      label: "Taux du prêt :",
+      sliderLabelPrefix: "Taux du prêt :",
+      sliderLabelSuffix: "%",
       description: "Le taux fixe du prêt",
-      type: "slider",
+      component: "slider",
+      min: 0,
+      max: 10,
+      step: 0.1,
     },
     {
       slug: "tauxAssurancePret",
-      label: "Assurance du prêt : ",
+      sliderLabelPrefix: "Assurance du prêt : ",
+      sliderLabelSuffix: "%",
       description: "Le taux de l'assurance du prêt",
-      type: "slider",
+      component: "slider",
+      min: 0,
+      max: 10,
+      step: 0.1,
     },
     {
       slug: "apport",
       label: "Apport",
       description: "L'apport globale pour le financement de l'opération",
-      type: "input",
-      inputType: "number",
+      component: "input",
+      type: "number",
     },
   ] as const;
 
@@ -37,8 +49,12 @@ export const FormFilterFinancement = () => {
     <LayoutFilters className="lg:grid lg:grid-cols-2 lg:gap-x-30 lg:gap-y-3 lg:max-w-5xl">
       {fields.map((field, index) => (
         <div key={index}>
-          {field.type === "input" && <InputFormField currentField={field} />}
-          {field.type === "slider" && <SliderFormField currentField={field} />}
+          {field.component === "input" && (
+            <InputFormField currentField={field} />
+          )}
+          {field.component === "slider" && (
+            <SliderFormField currentField={field} />
+          )}
         </div>
       ))}
     </LayoutFilters>

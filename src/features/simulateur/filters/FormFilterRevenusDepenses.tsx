@@ -23,7 +23,7 @@ export const FormFilterRevenusDepenses = () => {
     },
     {
       slug: "nbMoisLocParAn",
-      label: "mois de location / an",
+      sliderLabelSuffix: "mois de location / an",
       description: "La période où le logement est occupé et génère des loyers.",
       component: "slider",
       type: "number",

@@ -77,7 +77,9 @@ export type FeedbackType = z.infer<typeof FeedbackSchema>;
 
 export const FormFieldSchema = z.object({
   slug: z.string(),
-  label: z.string(),
+  label: z.string().optional(),
+  sliderLabelPrefix: z.string().optional(),
+  sliderLabelSuffix: z.string().optional(),
   min: z.number().optional(),
   max: z.number().optional(),
   step: z.number().optional(),

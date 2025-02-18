@@ -33,7 +33,8 @@ export const SliderFormField = (props: SliderFormFieldProps) => {
               render={({ field }) => (
                 <div>
                   <FormLabel>
-                    {field.value} {props.currentField.label}
+                    {props.currentField.sliderLabelPrefix} {field.value}{" "}
+                    {props.currentField.sliderLabelSuffix}
                   </FormLabel>
                   <div className="flex mt-3">
                     <Slider
