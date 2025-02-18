@@ -8,16 +8,16 @@ export const FormFilterTravauxMobilier = () => {
     {
       slug: "montantTravaux",
       label: "Montant des travaux",
-      description: "Le montant total estimés des travaux",
-      type: "input",
-      inputType: "number",
+      description: "Le coût des rénovations ou améliorations du bien.",
+      component: "input",
+      type: "number",
     },
     {
       slug: "montantMobilier",
       label: "Montant du mobilier",
-      description: "Le montant total des meubles et autres appareils",
-      type: "input",
-      inputType: "number",
+      description: "La valeur des meubles achetés pour équiper le logement.",
+      component: "input",
+      type: "number",
     },
   ] as const;
 
