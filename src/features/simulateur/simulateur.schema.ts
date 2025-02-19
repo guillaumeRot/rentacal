@@ -102,3 +102,10 @@ export const FormFieldSchema = z.object({
     .optional(),
 });
 export type FormFieldType = z.infer<typeof FormFieldSchema>;
+
+export const AmortissementSchema = z.object({
+  annee: z.string(),
+  interet: z.number(),
+  pret: z.number(),
+});
+export type AmortissementType = z.infer<typeof AmortissementSchema>;

@@ -164,7 +164,7 @@ export default function SimulationResult() {
           montantPret={result.data?.montantPret}
           fraisBancaires={result.data?.fraisBancaires}
         />
-        <Amortissement />
+        <Amortissement resultatAnnuel={result.data?.resultatsAnnuel || []} />
       </LayoutResultWithFilters>
     </div>
   );

@@ -22,8 +22,6 @@ export type CardRentabiliteProps = {
 };
 
 export const CardRentabilite = (props: CardRentabiliteProps) => {
-  var pourcentage = props.pourcentage;
-
   var risk = "";
   if (props.pourcentage > 7) {
     risk = "low";

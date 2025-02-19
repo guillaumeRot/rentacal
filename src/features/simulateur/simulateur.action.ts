@@ -2,6 +2,7 @@
 
 import { action } from "@/lib/safe-actions";
 import {
+  AmortissementType,
   DataSchema,
   DataType,
   ResultatGlobalType,
@@ -24,6 +25,7 @@ const mapMoisByIndex: Record<number, string> = {
 };
 
 let resultatsGlobal: ResultatGlobalType[] = [];
+let resultatsAnnuel: AmortissementType[] = [];
 let montantPret: number = 0;
 let sommeFraisBancaire: number = 0;
 
@@ -51,6 +53,11 @@ export const calculRentabilite = action
       ),
       montantPret: montantPret,
       resultatsMensuel: getResultatsGlobal(
+        parsedInput.parsedInput,
+        mensualites,
+        montantPret
+      ),
+      resultatsAnnuel: getResultatsAnnuel(
         parsedInput.parsedInput,
         mensualites,
         montantPret
@@ -207,6 +214,42 @@ function getResultatsGlobal(
     });
   }
   return resultatsGlobal;
+}
+
+function getResultatsAnnuel(
+  values: DataType,
+  mensualites: number,
+  montantPret: number
+) {
+  resultatsAnnuel = [];
+  let pretRestant = montantPret;
+  let pretRembourse = 0;
+  for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
+    let interetsAnneeN = 0;
+    let pretRestantFinAnneeN = 0;
+
+    for (let cptMois = 1; cptMois <= 12; cptMois++) {
+      const interetsMensuel = getMontantInteretsMensuel(
+        pretRestant,
+        getTauxInteretMensuel(values.tauxPret)
+      );
+      interetsAnneeN = interetsAnneeN + interetsMensuel;
+
+      pretRembourse = mensualites - interetsMensuel;
+      pretRestant = pretRestant - pretRembourse;
+      if (cptMois == 12) {
+        pretRestantFinAnneeN = pretRestant;
+      }
+    }
+
+    resultatsAnnuel.push({
+      annee: cptAnnee.toString(),
+      interet: interetsAnneeN,
+      pret: pretRestantFinAnneeN,
+    });
+  }
+  console.log("TEST GUI:", resultatsAnnuel);
+  return resultatsAnnuel;
 }
 
 function getTauxInteretMensuel(tauxInteretAnnuel: number) {
