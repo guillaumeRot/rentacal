@@ -105,12 +105,58 @@ function getRentabiliteNetteNette(
     // Prelevements sociaux = 17,2% du revenus net imposable
     var ps = revenuNetImposable * 0.172;
 
-    var revenuNetNetAnnuel = loyersAnnuel - ir - ps;
+    var revenuNetNetAnnuel =
+      loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
 
     var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
     return rentabiliteNetteNette;
+  } else if (values.regimeFiscal == "lmnpReel") {
+    // La part immobilière amortissable est 80% du bien car on enlève la part du terrain (20%)
+    var partImmoAmortissable = montantPret * 0.8;
+
+    // Le taux annuel amortissable pour l'immobilier et les travaux est calculé en fonction de la durée du prêt
+    var tauxAmortissementAnnuel = 1 / values.dureePret;
+    var amortissementImmoAnnuel =
+      partImmoAmortissable * tauxAmortissementAnnuel;
+    var amortissementTravauxAnnuel =
+      values.montantTravaux * tauxAmortissementAnnuel;
+
+    // Le mobilier est amortissable sur 10 ans maximum, soit 10% par an
+    // Si le prêt est inférieur à 10 ans, alors on l'amorti sur la durée du prêt
+    var tauxAmortissementMobilier = 0.1;
+    if (values.dureePret < 10) {
+      tauxAmortissementMobilier = 1 / values.dureePret;
+    }
+    var amortissementMobilierAnnuel =
+      values.montantMobilier * tauxAmortissementMobilier;
+
+    // Amortissement total déductible
+    var amortissementTotal =
+      amortissementImmoAnnuel +
+      amortissementTravauxAnnuel +
+      amortissementMobilierAnnuel;
+
+    var resultatFiscal =
+      loyersAnnuel -
+      values.impotsFoncier -
+      values.chargesCopro -
+      amortissementTotal;
+    if (resultatFiscal < 0) {
+      resultatFiscal = 0;
+    }
+
+    // Impots sur le revenu
+    var ir = (resultatFiscal * Number(values.tmi)) / 100;
+
+    // Prelevements sociaux = 17,2% du résultat fiscal
+    var ps = resultatFiscal * 0.172;
+
+    var revenuNetNetAnnuel =
+      loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
+    var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
+    return rentabiliteNetteNette;
   }
-  return 1;
+  return 0;
 }
 
 function getMontantPret(values: DataType) {
