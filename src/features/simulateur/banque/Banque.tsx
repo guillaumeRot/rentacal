@@ -7,6 +7,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
+import { MontantFormat } from "@/features/MontantFormat";
 import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
 import {
   CardChild,
@@ -14,24 +15,30 @@ import {
   CardParent,
 } from "@/features/theme/CardUtils";
 import { TbPigMoney } from "react-icons/tb";
+import { numericFormatter } from "react-number-format";
 import { Label, Pie, PieChart } from "recharts";
 
+export type BanqueProps = {
+  montantPret?: number;
+  fraisBancaires?: number;
+};
+
 export type CardBanqueProps = {
-  montantPret: string;
-  fraisBancaires: string;
-  coutPret: string;
+  montantPret: number;
+  fraisBancaires: number;
+  coutPret: number;
 };
 
 export function CardBanque(props: CardBanqueProps) {
   const chartData = [
     {
       type: "montantPret",
-      montant: parseFloat(props.montantPret.replace(/,/g, "")),
+      montant: props.montantPret,
       fill: "var(--color-montantPret)",
     },
     {
       type: "fraisBancaire",
-      montant: parseFloat(props.fraisBancaires.replace(/,/g, "")),
+      montant: props.fraisBancaires,
       fill: "var(--color-fraisBancaire)",
     },
   ];
@@ -65,56 +72,69 @@ export function CardBanque(props: CardBanqueProps) {
                 innerRadius={90}
                 strokeWidth={5}
               >
-                <Label
-                  content={({ viewBox }) => {
-                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                      return (
-                        <text
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                        >
-                          <tspan
+                {chartData.map((entry, index) => (
+                  <Label
+                    key={`label-${index}`}
+                    content={({ viewBox }) => {
+                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                        return (
+                          <text
                             x={viewBox.cx}
-                            y={(viewBox.cy || 0) - 20}
-                            className="fill-muted-foreground"
+                            y={viewBox.cy}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
                           >
-                            Coût du prêt
-                          </tspan>
-                          <tspan
-                            x={viewBox.cx}
-                            y={(viewBox.cy || 0) + 4}
-                            className="fill-foreground text-2xl font-bold"
-                          >
-                            {props.coutPret} €
-                          </tspan>
-                        </text>
-                      );
-                    }
-                  }}
-                />
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) - 20}
+                              className="fill-muted-foreground"
+                            >
+                              Coût du prêt
+                            </tspan>
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) + 4}
+                              className="fill-foreground text-2xl font-bold"
+                            >
+                              {numericFormatter(props.coutPret.toString(), {
+                                decimalScale: 2,
+                                decimalSeparator: ",",
+                                thousandSeparator: " ",
+                                fixedDecimalScale: true,
+                                suffix: " €",
+                              })}
+                            </tspan>
+                          </text>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                ))}
               </Pie>
             </PieChart>
           </ChartContainer>
           <Card className="rounded-3xl p-4 lg:p-10 m-4 lg:m-10 grid grid-cols-2 h-fit text-sm lg:text-md">
             <span className="text-center py-2">Montant Pret</span>
-            <span className="text-center py-2">{props.montantPret} €</span>
+            <span className="text-center py-2">
+              <MontantFormat value={props.montantPret} />
+            </span>
             <span className="text-center py-2">Frais Bancaires</span>
-            <span className="text-center py-2">{props.fraisBancaires} €</span>
+            <span className="text-center py-2">
+              <MontantFormat value={props.fraisBancaires} />
+            </span>
             <span className="text-center pb-2 pt-6 font-semibold">
               Coût du prêt
             </span>
             <span className="text-center pb-2 pt-6 font-semibold">
-              {props.coutPret} €
+              <MontantFormat value={props.coutPret} />
             </span>
           </Card>
         </div>
         <div className="text-xs font-medium text-gray-400 w-full px-4 lg:px-10 mt-4">
           <AccordionSeeMore
-            description="Une rentabilité est considérée comme faible si elle est
-                  inférieure à 4%, moyenne si elle est entre 4% et 7%, et haute
-                  si elle est supérieure à 7%."
+            description="Cette section vous permet de visualiser la répartition des coûts liés à votre emprunt immobilier.
+          Le montant du prêt correspond à la somme empruntée pour financer votre achat. Les frais bancaires incluent les frais de dossier et autres charges liées à l’octroi du crédit. Enfin, le coût du prêt représente les intérêts et l’assurance emprunteur sur toute la durée du remboursement. Grâce à ce graphique, vous comprenez en un coup d’œil l’impact du financement sur votre investissement locatif."
           />
         </div>
       </CardContent>
@@ -122,14 +142,14 @@ export function CardBanque(props: CardBanqueProps) {
   );
 }
 
-export function Banque() {
+export const Banque = (props: BanqueProps) => {
   return (
     <CardParent className="grid grid-cols-1">
       <CardBanque
-        montantPret="200 000"
-        fraisBancaires="53 600"
-        coutPret="10 253 600"
+        montantPret={props.montantPret || 0}
+        fraisBancaires={props.fraisBancaires || 0}
+        coutPret={(props.montantPret || 0) + (props.fraisBancaires || 0)}
       />
     </CardParent>
   );
-}
+};

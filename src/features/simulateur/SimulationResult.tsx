@@ -127,8 +127,6 @@ export default function SimulationResult() {
   const onSubmit = async (values: z.infer<typeof DataSchema>) => {
     console.log("Données du formulaire : ", values);
     setFiltersValues(values);
-    // const res = await calculRentabilite(values);
-    // console.log("Résultat de calculRentabilite : ", res?.data);
     result.refetch();
   };
 
@@ -162,7 +160,10 @@ export default function SimulationResult() {
           rentabiliteNette={result.data?.rentabiliteNette}
           rentabiliteNetteNette={result.data?.rentabiliteNetteNette}
         />
-        <Banque />
+        <Banque
+          montantPret={result.data?.montantPret}
+          fraisBancaires={result.data?.fraisBancaires}
+        />
         <Amortissement />
       </LayoutResultWithFilters>
     </div>
