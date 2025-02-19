@@ -34,6 +34,7 @@ export const DataSchema = z.object({
   tauxAssurancePret: z.number(),
   regimeFiscal: z.string(),
   tmi: z.string(),
+  typeLocation: z.string(),
 });
 export type DataType = z.infer<typeof DataSchema>;
 

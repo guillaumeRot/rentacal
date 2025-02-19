@@ -59,7 +59,6 @@ export const FormFilterRevenusDepenses = () => {
         "Le taux d’imposition appliqué à la dernière tranche de vos revenus.",
       component: "select",
       select: {
-        value: undefined,
         placeholder: "Choisir un TMI",
         items: [
           { slug: "0", name: "0% - Revenu net inférieur à 10 084 €/an" },
@@ -67,6 +66,20 @@ export const FormFilterRevenusDepenses = () => {
           { slug: "30", name: "30% - Revenu net inférieur à 73 516 €/an" },
           { slug: "41", name: "41% - Revenu net inférieur à 158 122 €/an" },
           { slug: "45", name: "45% - Revenu net supérieur à 158 122 €/an" },
+        ] as { slug: string; name: string }[],
+      },
+    },
+    {
+      slug: "typeLocation",
+      label: "Type de location",
+      description:
+        "Choisissez si le logement est loué vide ou avec des meubles, ce qui impacte la fiscalité.",
+      component: "select",
+      select: {
+        placeholder: "Choisir un type de location",
+        items: [
+          { slug: "nue", name: "Location nue" },
+          { slug: "meublee", name: "Location meublée" },
         ] as { slug: string; name: string }[],
       },
     },

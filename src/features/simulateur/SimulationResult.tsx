@@ -36,6 +36,7 @@ export default function SimulationResult() {
     nbMoisLocParAn: 12,
     regimeFiscal: "lmnpMicroBIC",
     tmi: "30",
+    typeLocation: "meublee",
   });
 
   // const parametres = useQuery({

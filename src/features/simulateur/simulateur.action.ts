@@ -44,7 +44,7 @@ export const calculRentabilite = action
         montantPret,
         parsedInput.parsedInput.nbMoisLocParAn
       ),
-      rentabiliteNetteNette: getRentabiliteNette(
+      rentabiliteNetteNette: getRentabiliteNetteNette(
         parsedInput.parsedInput,
         montantPret,
         parsedInput.parsedInput.nbMoisLocParAn
@@ -82,6 +82,35 @@ function getRentabiliteNette(
       montantPret) *
     100
   );
+}
+
+function getRentabiliteNetteNette(
+  values: DataType,
+  montantPret: number,
+  nbMoisLocParAn: number
+) {
+  var loyersAnnuel = values.loyersTotal * nbMoisLocParAn;
+  if (values.regimeFiscal == "lmnpMicroBIC") {
+    var revenuNetImposable = 0;
+    if (values.typeLocation == "meublee") {
+      // Abattement de 50%
+      revenuNetImposable = loyersAnnuel * 0.5;
+    } else if (values.typeLocation == "nue") {
+      // Abattement de 30%
+      revenuNetImposable = loyersAnnuel * 0.7;
+    }
+
+    // Impots sur le revenu
+    var ir = (revenuNetImposable * Number(values.tmi)) / 100;
+    // Prelevements sociaux = 17,2% du revenus net imposable
+    var ps = revenuNetImposable * 0.172;
+
+    var revenuNetNetAnnuel = loyersAnnuel - ir - ps;
+
+    var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
+    return rentabiliteNetteNette;
+  }
+  return 1;
 }
 
 function getMontantPret(values: DataType) {
