@@ -22,17 +22,25 @@ export type CardRentabiliteProps = {
 };
 
 export const CardRentabilite = (props: CardRentabiliteProps) => {
-  var risk = "low";
-  if (props.pourcentage < 4) {
+  var pourcentage = props.pourcentage;
+
+  var risk = "";
+  if (props.pourcentage > 7) {
+    risk = "low";
+  } else if (props.pourcentage < 4 && props.pourcentage > 0) {
     risk = "high";
-  } else if (props.pourcentage < 7) {
+  } else if (props.pourcentage < 7 && props.pourcentage > 0) {
     risk = "middle";
   }
 
-  var bgColor = "bg-green-200";
-  var textColor = "text-green-600";
-  var borderColor = "border-green-600";
-  if (risk == "middle") {
+  var bgColor = "bg-white";
+  var textColor = "text-gray-600";
+  var borderColor = "border-gray-600";
+  if (risk == "low") {
+    bgColor = "bg-green-200";
+    textColor = "text-green-600";
+    borderColor = "border-green-600";
+  } else if (risk == "middle") {
     bgColor = "bg-orange-200";
     textColor = "text-orange-600";
     borderColor = "border-orange-600";

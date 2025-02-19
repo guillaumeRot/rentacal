@@ -120,15 +120,15 @@ export default function SimulationResult() {
       console.log("TEST GUI 2");
       return res?.data;
     },
-    enabled: !!filtersValues,
+    enabled: false,
   });
 
   const onSubmit = async (values: z.infer<typeof DataSchema>) => {
     console.log("Données du formulaire : ", values);
     setFiltersValues(values);
-    const res = await calculRentabilite(values);
-    console.log("Résultat de calculRentabilite : ", res?.data);
-    queryClient.invalidateQueries({ queryKey: ["result"] });
+    // const res = await calculRentabilite(values);
+    // console.log("Résultat de calculRentabilite : ", res?.data);
+    result.refetch();
   };
 
   // const mutation = useMutation({
