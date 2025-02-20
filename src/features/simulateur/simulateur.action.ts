@@ -224,9 +224,11 @@ function getResultatsAnnuel(
   resultatsAnnuel = [];
   let pretRestant = montantPret;
   let pretRembourse = 0;
-  for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
+  // for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
+  for (let cptAnnee = 1; cptAnnee <= 30; cptAnnee++) {
     let interetsAnneeN = 0;
     let pretRestantFinAnneeN = 0;
+    let mensualitesAnnuelles = 0;
 
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
       const interetsMensuel = getMontantInteretsMensuel(
@@ -240,12 +242,20 @@ function getResultatsAnnuel(
       if (cptMois == 12) {
         pretRestantFinAnneeN = pretRestant;
       }
+      if (pretRestant > 0) {
+        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
+      }
     }
+
+    let cashflowNetNet = values.loyersTotal * 12 - mensualitesAnnuelles;
 
     resultatsAnnuel.push({
       annee: cptAnnee.toString(),
       interet: interetsAnneeN,
       pret: pretRestantFinAnneeN,
+      loyers: values.loyersTotal * 12,
+      cashflowNetNet: cashflowNetNet,
+      mensualitesAnnuelles: mensualitesAnnuelles,
     });
   }
   console.log("TEST GUI:", resultatsAnnuel);

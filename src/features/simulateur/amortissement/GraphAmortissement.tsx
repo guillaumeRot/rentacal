@@ -15,8 +15,8 @@ import {
 export type DataProps = {
   data: {
     annee: string;
-    interet: number;
-    pret: number;
+    mensualitesAnnuelles: number;
+    cashflowNetNet: number;
   }[];
 };
 
@@ -24,12 +24,12 @@ const chartConfig = {
   visitors: {
     label: "Visitors",
   },
-  pret: {
-    label: "Prêt",
+  cashflowNetNet: {
+    label: "Cashflow",
     color: "hsl(var(--chart-2))",
   },
-  interet: {
-    label: "Intêrets",
+  mensualitesAnnuelles: {
+    label: "Mensualites",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
@@ -44,27 +44,27 @@ export function GraphAmortissement(props: DataProps) {
         >
           <AreaChart data={props.data}>
             <defs>
-              <linearGradient id="fillPret" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillCashflow" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-pret)"
+                  stopColor="var(--color-cashflowNetNet)"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-pret)"
+                  stopColor="var(--color-cashflowNetNet)"
                   stopOpacity={0.1}
                 />
               </linearGradient>
-              <linearGradient id="fillInterets" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillMensualites" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="var(--color-interet)"
+                  stopColor="var(--color-mensualitesAnnuelles)"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="var(--color-interet)"
+                  stopColor="var(--color-mensualitesAnnuelles)"
                   stopOpacity={0.1}
                 />
               </linearGradient>
@@ -92,17 +92,17 @@ export function GraphAmortissement(props: DataProps) {
               }
             />
             <Area
-              dataKey="interet"
+              dataKey="mensualitesAnnuelles"
               type="natural"
-              fill="url(#fillInterets)"
-              stroke="var(--color-interet)"
+              fill="url(#fillMensualites)"
+              stroke="var(--color-mensualitesAnnuelles)"
               stackId="a"
             />
             <Area
-              dataKey="pret"
+              dataKey="cashflowNetNet"
               type="natural"
-              fill="url(#fillPret)"
-              stroke="var(--color-pret)"
+              fill="url(#fillCashflow)"
+              stroke="var(--color-cashflowNetNet)"
               stackId="a"
             />
 
