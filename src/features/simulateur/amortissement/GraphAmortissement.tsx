@@ -11,13 +11,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { AmortissementType } from "../simulateur.schema";
 
 export type DataProps = {
-  data: {
-    annee: string;
-    mensualitesAnnuelles: number;
-    cashflowNetNet: number;
-  }[];
+  data: AmortissementType[];
 };
 
 const chartData = [
@@ -77,7 +74,7 @@ export function GraphAmortissement(props: DataProps) {
     <Card className="m-5">
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
         <ChartContainer config={chartConfig} className="max-h-[350px] w-full">
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={props.data}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="annee"

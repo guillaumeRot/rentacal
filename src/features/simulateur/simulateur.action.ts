@@ -35,6 +35,26 @@ export const calculRentabilite = action
   .action(async (parsedInput) => {
     let montantPret = getMontantPret(parsedInput.parsedInput);
     let mensualites = getMensualite(parsedInput.parsedInput, montantPret);
+
+    let regimeFiscal = parsedInput.parsedInput.regimeFiscal;
+    let rentabiliteNetteNette = 0;
+    let revenuImposable = 0;
+    if (regimeFiscal == "lmnpMicroBIC") {
+      revenuImposable = getRevenuNetImposableMicroBIC(parsedInput.parsedInput);
+      rentabiliteNetteNette = getRentabiliteNetteNetteMicroBIC(
+        parsedInput.parsedInput,
+        montantPret,
+        revenuImposable
+      );
+    } else if (regimeFiscal == "lmnpReel") {
+      revenuImposable = getRevenuFiscalReel(parsedInput.parsedInput);
+      rentabiliteNetteNette = getRentabiliteNetteNetteReel(
+        parsedInput.parsedInput,
+        montantPret,
+        revenuImposable
+      );
+    }
+
     return {
       rentabiliteBrute: getRentabiliteBrute(
         parsedInput.parsedInput.loyersTotal,
@@ -46,11 +66,7 @@ export const calculRentabilite = action
         montantPret,
         parsedInput.parsedInput.nbMoisLocParAn
       ),
-      rentabiliteNetteNette: getRentabiliteNetteNette(
-        parsedInput.parsedInput,
-        montantPret,
-        parsedInput.parsedInput.nbMoisLocParAn
-      ),
+      rentabiliteNetteNette: rentabiliteNetteNette,
       montantPret: montantPret,
       resultatsMensuel: getResultatsGlobal(
         parsedInput.parsedInput,
@@ -60,7 +76,8 @@ export const calculRentabilite = action
       resultatsAnnuel: getResultatsAnnuel(
         parsedInput.parsedInput,
         mensualites,
-        montantPret
+        montantPret,
+        revenuImposable
       ),
       mensualites: mensualites,
       cashflowBrut: parsedInput.parsedInput.loyersTotal - mensualites,
@@ -91,14 +108,19 @@ function getRentabiliteNette(
   );
 }
 
-function getRentabiliteNetteNette(
-  values: DataType,
-  montantPret: number,
-  nbMoisLocParAn: number
-) {
-  var loyersAnnuel = values.loyersTotal * nbMoisLocParAn;
+function getIR(revenuImposable: number, tmi: string) {
+  return (revenuImposable * Number(tmi)) / 100;
+}
+
+function getPS(revenuImposable: number) {
+  return revenuImposable * 0.172;
+}
+
+// Revenus imposable annuel en micro-BIC
+function getRevenuNetImposableMicroBIC(values: DataType) {
+  var revenuNetImposable = 0;
+  var loyersAnnuel = values.loyersTotal * 12;
   if (values.regimeFiscal == "lmnpMicroBIC") {
-    var revenuNetImposable = 0;
     if (values.typeLocation == "meublee") {
       // Abattement de 50%
       revenuNetImposable = loyersAnnuel * 0.5;
@@ -106,64 +128,82 @@ function getRentabiliteNetteNette(
       // Abattement de 30%
       revenuNetImposable = loyersAnnuel * 0.7;
     }
-
-    // Impots sur le revenu
-    var ir = (revenuNetImposable * Number(values.tmi)) / 100;
-    // Prelevements sociaux = 17,2% du revenus net imposable
-    var ps = revenuNetImposable * 0.172;
-
-    var revenuNetNetAnnuel =
-      loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
-
-    var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
-    return rentabiliteNetteNette;
-  } else if (values.regimeFiscal == "lmnpReel") {
-    // La part immobilière amortissable est 80% du bien car on enlève la part du terrain (20%)
-    var partImmoAmortissable = montantPret * 0.8;
-
-    // Le taux annuel amortissable pour l'immobilier et les travaux est calculé en fonction de la durée du prêt
-    var tauxAmortissementAnnuel = 1 / values.dureePret;
-    var amortissementImmoAnnuel =
-      partImmoAmortissable * tauxAmortissementAnnuel;
-    var amortissementTravauxAnnuel =
-      values.montantTravaux * tauxAmortissementAnnuel;
-
-    // Le mobilier est amortissable sur 10 ans maximum, soit 10% par an
-    // Si le prêt est inférieur à 10 ans, alors on l'amorti sur la durée du prêt
-    var tauxAmortissementMobilier = 0.1;
-    if (values.dureePret < 10) {
-      tauxAmortissementMobilier = 1 / values.dureePret;
-    }
-    var amortissementMobilierAnnuel =
-      values.montantMobilier * tauxAmortissementMobilier;
-
-    // Amortissement total déductible
-    var amortissementTotal =
-      amortissementImmoAnnuel +
-      amortissementTravauxAnnuel +
-      amortissementMobilierAnnuel;
-
-    var resultatFiscal =
-      loyersAnnuel -
-      values.impotsFoncier -
-      values.chargesCopro -
-      amortissementTotal;
-    if (resultatFiscal < 0) {
-      resultatFiscal = 0;
-    }
-
-    // Impots sur le revenu
-    var ir = (resultatFiscal * Number(values.tmi)) / 100;
-
-    // Prelevements sociaux = 17,2% du résultat fiscal
-    var ps = resultatFiscal * 0.172;
-
-    var revenuNetNetAnnuel =
-      loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
-    var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
-    return rentabiliteNetteNette;
   }
-  return 0;
+  return revenuNetImposable;
+}
+
+// Resultat fiscal annuel au réel
+function getRevenuFiscalReel(values: DataType) {
+  // La part immobilière amortissable est 80% du bien car on enlève la part du terrain (20%)
+  var partImmoAmortissable = montantPret * 0.8;
+
+  // Le taux annuel amortissable pour l'immobilier et les travaux est calculé en fonction de la durée du prêt
+  var tauxAmortissementAnnuel = 1 / values.dureePret;
+  var amortissementImmoAnnuel = partImmoAmortissable * tauxAmortissementAnnuel;
+  var amortissementTravauxAnnuel =
+    values.montantTravaux * tauxAmortissementAnnuel;
+
+  // Le mobilier est amortissable sur 10 ans maximum, soit 10% par an
+  // Si le prêt est inférieur à 10 ans, alors on l'amorti sur la durée du prêt
+  var tauxAmortissementMobilier = 0.1;
+  if (values.dureePret < 10) {
+    tauxAmortissementMobilier = 1 / values.dureePret;
+  }
+  var amortissementMobilierAnnuel =
+    values.montantMobilier * tauxAmortissementMobilier;
+
+  // Amortissement total déductible
+  var amortissementTotal =
+    amortissementImmoAnnuel +
+    amortissementTravauxAnnuel +
+    amortissementMobilierAnnuel;
+
+  var resultatFiscal =
+    values.loyersTotal * 12 -
+    values.impotsFoncier -
+    values.chargesCopro -
+    amortissementTotal;
+  if (resultatFiscal < 0) {
+    resultatFiscal = 0;
+  }
+  return resultatFiscal;
+}
+
+function getRentabiliteNetteNetteMicroBIC(
+  values: DataType,
+  montantPret: number,
+  revenuNetImposable: number
+) {
+  var loyersAnnuel = values.loyersTotal * values.nbMoisLocParAn;
+  // Impots sur le revenu
+  var ir = getIR(revenuNetImposable, values.tmi);
+  // Prelevements sociaux = 17,2% du revenus net imposable
+  var ps = getPS(revenuNetImposable);
+
+  var revenuNetNetAnnuel =
+    loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
+
+  var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
+  return rentabiliteNetteNette;
+}
+
+function getRentabiliteNetteNetteReel(
+  values: DataType,
+  montantPret: number,
+  resultatFiscal: number
+) {
+  var loyersAnnuel = values.loyersTotal * values.nbMoisLocParAn;
+
+  // Impots sur le revenu
+  var ir = getIR(resultatFiscal, values.tmi);
+
+  // Prelevements sociaux = 17,2% du résultat fiscal
+  var ps = getPS(resultatFiscal);
+
+  var revenuNetNetAnnuel =
+    loyersAnnuel - values.impotsFoncier - values.chargesCopro - ir - ps;
+  var rentabiliteNetteNette = (revenuNetNetAnnuel / montantPret) * 100;
+  return rentabiliteNetteNette;
 }
 
 function getMontantPret(values: DataType) {
@@ -219,7 +259,8 @@ function getResultatsGlobal(
 function getResultatsAnnuel(
   values: DataType,
   mensualites: number,
-  montantPret: number
+  montantPret: number,
+  revenuImposable: number
 ) {
   resultatsAnnuel = [];
   let pretRestant = montantPret;
@@ -248,14 +289,17 @@ function getResultatsAnnuel(
     }
 
     let cashflowNetNet = values.loyersTotal * 12 - mensualitesAnnuelles;
+    let creditAnnuel = 0;
+    if (cptAnnee <= values.dureePret) {
+      creditAnnuel = mensualites * 12;
+    }
 
     resultatsAnnuel.push({
       annee: cptAnnee.toString(),
-      interet: interetsAnneeN,
-      pret: pretRestantFinAnneeN,
-      loyers: values.loyersTotal * 12,
-      cashflowNetNet: cashflowNetNet,
-      mensualitesAnnuelles: mensualitesAnnuelles,
+      pret: creditAnnuel,
+      ps: getPS(revenuImposable),
+      ir: getIR(revenuImposable, values.tmi),
+      cashflow: cashflowNetNet,
     });
   }
   console.log("TEST GUI:", resultatsAnnuel);
