@@ -20,6 +20,14 @@ export type DataProps = {
   }[];
 };
 
+const chartData = [
+  { annee: "1", mensualitesAnnuelles: 3, cashflowNetNet: 2 },
+  { annee: "2", mensualitesAnnuelles: 3, cashflowNetNet: 2 },
+  { annee: "3", mensualitesAnnuelles: 3, cashflowNetNet: 2 },
+  { annee: "4", mensualitesAnnuelles: 1, cashflowNetNet: 4 },
+  { annee: "5", mensualitesAnnuelles: 1, cashflowNetNet: 4 },
+];
+
 const chartConfig = {
   visitors: {
     label: "Visitors",
@@ -43,6 +51,7 @@ export function GraphAmortissement(props: DataProps) {
           className="aspect-auto h-[250px] w-full"
         >
           <AreaChart data={props.data}>
+            {/* <AreaChart data={chartData}> */}
             <defs>
               <linearGradient id="fillCashflow" x1="0" y1="0" x2="0" y2="1">
                 <stop

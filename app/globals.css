@@ -115,7 +115,7 @@ layer(base);
     --primary-foreground: 0 0% 45%;
     --secondary: 212 48% 85%;
     --secondary-foreground: 212 48% 50%;
-    --muted: 211 100% 33.9%;
+    --muted: 0 0% 100%;
     --muted-foreground: 0 0% 3.9%;
     --accent: 212 48% 45%;
     --accent-foreground: 0 0% 100%;
