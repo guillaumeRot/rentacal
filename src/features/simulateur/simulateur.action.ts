@@ -120,14 +120,12 @@ function getPS(revenuImposable: number) {
 function getRevenuNetImposableMicroBIC(values: DataType) {
   var revenuNetImposable = 0;
   var loyersAnnuel = values.loyersTotal * 12;
-  if (values.regimeFiscal == "lmnpMicroBIC") {
-    if (values.typeLocation == "meublee") {
-      // Abattement de 50%
-      revenuNetImposable = loyersAnnuel * 0.5;
-    } else if (values.typeLocation == "nue") {
-      // Abattement de 30%
-      revenuNetImposable = loyersAnnuel * 0.7;
-    }
+  if (values.typeLocation == "meublee") {
+    // Abattement de 50%
+    revenuNetImposable = loyersAnnuel * 0.5;
+  } else if (values.typeLocation == "nue") {
+    // Abattement de 30%
+    revenuNetImposable = loyersAnnuel * 0.7;
   }
   return revenuNetImposable;
 }
@@ -265,33 +263,30 @@ function getResultatsAnnuel(
   resultatsAnnuel = [];
   let pretRestant = montantPret;
   let pretRembourse = 0;
-  // for (let cptAnnee = 1; cptAnnee <= values.dureePret; cptAnnee++) {
   for (let cptAnnee = 1; cptAnnee <= 30; cptAnnee++) {
-    let interetsAnneeN = 0;
-    let pretRestantFinAnneeN = 0;
     let mensualitesAnnuelles = 0;
 
+    console.log("TEST GUI 30:", cptAnnee);
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
+      if (pretRestant > 0) {
+        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
+      } else {
+        // Passage au micro-BIC après crédit car plus interressant
+        revenuImposable = getRevenuNetImposableMicroBIC(values);
+      }
       const interetsMensuel = getMontantInteretsMensuel(
         pretRestant,
         getTauxInteretMensuel(values.tauxPret)
       );
-      interetsAnneeN = interetsAnneeN + interetsMensuel;
-
-      if (pretRestant > 0) {
-        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
-      }
 
       pretRembourse = mensualites - interetsMensuel;
       pretRestant = pretRestant - pretRembourse;
-      if (cptMois == 12) {
-        pretRestantFinAnneeN = pretRestant;
-      }
     }
 
-    console.log("TEST GUI 10:", values.loyersTotal * 12);
-    console.log("TEST GUI 20:", mensualitesAnnuelles);
-    let cashflowNetNet = values.loyersTotal * 12 - mensualitesAnnuelles;
+    let ps = getPS(revenuImposable);
+    let ir = getIR(revenuImposable, values.tmi);
+    let cashflowNetNet =
+      values.loyersTotal * 12 - mensualitesAnnuelles - ps - ir;
     let creditAnnuel = 0;
     if (cptAnnee <= values.dureePret) {
       creditAnnuel = mensualites * 12;
