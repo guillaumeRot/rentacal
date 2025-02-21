@@ -278,16 +278,19 @@ function getResultatsAnnuel(
       );
       interetsAnneeN = interetsAnneeN + interetsMensuel;
 
+      if (pretRestant > 0) {
+        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
+      }
+
       pretRembourse = mensualites - interetsMensuel;
       pretRestant = pretRestant - pretRembourse;
       if (cptMois == 12) {
         pretRestantFinAnneeN = pretRestant;
       }
-      if (pretRestant > 0) {
-        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
-      }
     }
 
+    console.log("TEST GUI 10:", values.loyersTotal * 12);
+    console.log("TEST GUI 20:", mensualitesAnnuelles);
     let cashflowNetNet = values.loyersTotal * 12 - mensualitesAnnuelles;
     let creditAnnuel = 0;
     if (cptAnnee <= values.dureePret) {
@@ -302,7 +305,7 @@ function getResultatsAnnuel(
       cashflow: cashflowNetNet,
     });
   }
-  console.log("TEST GUI:", resultatsAnnuel);
+  // console.log("TEST GUI:", resultatsAnnuel);
   return resultatsAnnuel;
 }
 

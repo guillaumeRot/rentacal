@@ -20,26 +20,6 @@ type InputFormFieldProps = {
 };
 
 export const InputFormField = (props: InputFormFieldProps) => {
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   console.log("TEST GUI 1:", event);
-  //   const { name, value } = event.target;
-  //   console.log("TEST GUI 2:", name);
-  //   console.log("TEST GUI 3:", value);
-  //   const numericValue = !isNaN(Number(value)) ? Number(value) : value;
-  //   console.log("TEST GUI 4:", numericValue);
-  //   // this.props.onChange({ [name]: numericValue });
-  // };
-
-  // function getNumericValue(event) {
-  //   console.log("TEST GUI 1:", event);
-  //   const { name, value } = event.target;
-  //   console.log("TEST GUI 2:", name);
-  //   console.log("TEST GUI 3:", value);
-  //   const numericValue = !isNaN(Number(value)) ? Number(value) : value;
-  //   console.log("TEST GUI 4:", numericValue);
-  //   return numericValue;
-  // }
-
   const { register } = useFormContext();
 
   return (

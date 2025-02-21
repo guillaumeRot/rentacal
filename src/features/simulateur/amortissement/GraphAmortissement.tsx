@@ -86,7 +86,7 @@ export function GraphAmortissement(props: DataProps) {
                 return value + "e année";
               }}
             />
-            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+            <ChartTooltip content={<ChartTooltipContent />} />
             <ChartLegend content={<ChartLegendContent />} />
             <Bar
               dataKey="pret"
