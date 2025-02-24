@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -100,11 +100,11 @@ export function GraphAmortissement(props: DataProps) {
               }
             />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar
+            {/* <Bar
               dataKey="pret"
               stackId="a"
               fill="var(--color-pret)"
-              radius={[0, 0, 4, 4]}
+              radius={[0, 0, 0, 0]}
             />
             <Bar
               dataKey="ps"
@@ -116,14 +116,26 @@ export function GraphAmortissement(props: DataProps) {
               dataKey="ir"
               stackId="a"
               fill="var(--color-ir)"
-              radius={[0, 0, 0, 0]}
-            />
-            <Bar
+              radius={[4, 4, 0, 0]}
+            /> */}
+            {/* <Bar
               dataKey="cashflow"
               stackId="a"
               fill="var(--color-cashflow)"
               radius={[4, 4, 0, 0]}
-            />
+            /> */}
+            <Bar dataKey="cashflow" stackId="b" radius={[4, 4, 0, 0]}>
+              {props.data.map((item) => (
+                <Cell
+                  key={item.annee}
+                  fill={
+                    item.cashflow > 0
+                      ? "hsl(var(--chart-2))"
+                      : "hsl(var(--chart-1))"
+                  }
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>

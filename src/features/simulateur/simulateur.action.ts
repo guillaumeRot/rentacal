@@ -288,9 +288,9 @@ function getResultatsAnnuel(
     let ps = getPS(revenuImposable);
     let ir = getIR(revenuImposable, values.tmi);
     let cashflowNetNet = loyersAnnuel - mensualitesAnnuelles - ps - ir;
-    if (cashflowNetNet < 0) {
-      cashflowNetNet = 0;
-    }
+    // if (cashflowNetNet < 0) {
+    //   cashflowNetNet = 0;
+    // }
 
     let creditAnnuel = 0;
     // On renseigne le montant annuel du crédit pendant la durée du pret
