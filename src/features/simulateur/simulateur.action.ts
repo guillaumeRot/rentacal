@@ -273,7 +273,7 @@ function getResultatsAnnuel(
       if (pretRestant > 0) {
         mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
       } else {
-        // Passage au micro-BIC après crédit car plus interressant
+        // Passage au micro-BIC après crédit car plus interessant
         revenuImposable = getRevenuNetImposableMicroBIC(values, loyersAnnuel);
       }
       const interetsMensuel = getMontantInteretsMensuel(

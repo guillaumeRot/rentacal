@@ -7,14 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { MontantFormat } from "@/features/MontantFormat";
 
 // export type DataProps = {
@@ -42,18 +34,33 @@ import { MontantFormat } from "@/features/MontantFormat";
 const datas = [
   {
     annee: "1",
-    mensuel: [
-      { mois: "Janvier", interet: 250, pret: 260, pretRestant: 90000 },
-      { mois: "Février", interet: 240, pret: 270, pretRestant: 80000 },
-      { mois: "Mars", interet: 230, pret: 280, pretRestant: 70000 },
-    ],
+    loyersAnnuel: 8000,
+    vacanceLocative: 10,
+    pret: 300,
+    ir: 100,
+    ps: 80,
+    pretRestant: 90000,
+    foncier: 1000,
+    copro: 500,
+    amortissementImmo: 500,
+    amortissementTravaux: 100,
+    amortissementMobilier: 50,
+    cashflow: 500,
   },
   {
     annee: "2",
-    mensuel: [
-      { mois: "Janvier", interet: 220, pret: 290, pretRestant: 60000 },
-      { mois: "Février", interet: 210, pret: 300, pretRestant: 50000 },
-    ],
+    loyersAnnuel: 8000,
+    vacanceLocative: 10,
+    pret: 280,
+    ir: 100,
+    ps: 80,
+    pretRestant: 80000,
+    foncier: 1000,
+    copro: 500,
+    amortissementImmo: 500,
+    amortissementTravaux: 100,
+    amortissementMobilier: 50,
+    cashflow: 500,
   },
 ];
 
@@ -67,14 +74,84 @@ export function TabAmortissement() {
               key={`${resultat.annee}`}
               value={`item-${resultat.annee}`}
             >
-              <AccordionTrigger>{resultat.annee}ème année</AccordionTrigger>
+              <AccordionTrigger>
+                <span>{resultat.annee}ème année</span>
+                <span> | Cashflow: {resultat.cashflow} € / an</span>
+              </AccordionTrigger>
 
               <AccordionContent>
-                <Table>
+                <div>
+                  <span className="text-center py-2">Loyers annuels</span>
+                  <span className="text-center py-2">
+                    {resultat.loyersAnnuel}
+                  </span>
+                  <span className="text-center py-2">Sur</span>
+                  <span className="text-center py-2">
+                    {resultat.vacanceLocative}
+                  </span>
+                </div>
+                <div className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
+                  <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-2 h-fit text-sm lg:text-md">
+                    {/* TODO: Faire un pie chart */}
+                    <span className="text-center py-2">
+                      Amortissement immobilier
+                    </span>
+                    <span className="text-center py-2">
+                      {resultat.amortissementImmo}
+                    </span>
+                    <span className="text-center py-2">
+                      Amortissement travaux
+                    </span>
+                    <span className="text-center py-2">
+                      {resultat.amortissementTravaux}
+                    </span>
+                    <span className="text-center py-2">
+                      Amortissement mobilier
+                    </span>
+                    <span className="text-center py-2">
+                      {resultat.amortissementMobilier}
+                    </span>
+                    <span className="text-center pb-2 pt-6 font-semibold">
+                      Amortissement total
+                    </span>
+                    <span className="text-center pb-2 pt-6 font-semibold">
+                      <MontantFormat
+                        value={
+                          resultat.amortissementImmo +
+                          resultat.amortissementTravaux +
+                          resultat.amortissementMobilier
+                        }
+                      />
+                    </span>
+                  </Card>
+                  <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-2 h-fit text-sm lg:text-md">
+                    <span className="text-center py-2">Crédit</span>
+                    <span className="text-center py-2">{resultat.pret}</span>
+                    <span className="text-center py-2">
+                      Impots sur le revenu
+                    </span>
+                    <span className="text-center py-2">{resultat.ir}</span>
+                    <span className="text-center py-2">
+                      Prélèvements sociaux
+                    </span>
+                    <span className="text-center py-2">{resultat.ps}</span>
+                    <span className="text-center pb-2 pt-6 font-semibold">
+                      Total des dépenses
+                    </span>
+                    <span className="text-center pb-2 pt-6 font-semibold">
+                      <MontantFormat
+                        value={resultat.pret + resultat.ir + resultat.ps}
+                      />
+                    </span>
+                  </Card>
+                </div>
+                {/* <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-center">Mois</TableHead>
-                      <TableHead className="text-center">Prêt</TableHead>
+                      <TableHead className="text-center">Année</TableHead>
+                      <TableHead className="text-center">Loyers</TableHead>
+                      <TableHead className="text-center">Crédit</TableHead>
+                      <TableHead className="text-center">Crédit</TableHead>
                       <TableHead className="text-center">Intêrets</TableHead>
                       <TableHead className="text-center">
                         Prêt restant
@@ -82,24 +159,11 @@ export function TabAmortissement() {
                     </TableRow>
                   </TableHeader>
                   <TableBody className="text-center">
-                    {resultat.mensuel.map((resultatMensuel) => (
-                      <TableRow
-                        key={resultat.annee + "_" + resultatMensuel.mois}
-                      >
-                        <TableCell>{resultatMensuel.mois}</TableCell>
-                        <TableCell>
-                          <MontantFormat value={resultatMensuel.pret} />
-                        </TableCell>
-                        <TableCell>
-                          <MontantFormat value={resultatMensuel.interet} />
-                        </TableCell>
-                        <TableCell>
-                          <MontantFormat value={resultatMensuel.pretRestant} />
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    <TableRow key={resultat.annee}>
+                      <TableCell>{resultat.annee}</TableCell>
+                    </TableRow>
                   </TableBody>
-                </Table>
+                </Table> */}
               </AccordionContent>
             </AccordionItem>
           ))}
