@@ -9,8 +9,6 @@ import {
 } from "@/features/theme/CardUtils";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { AmortissementType } from "../simulateur.schema";
-import { Component } from "./Component";
-import { Component2 } from "./Component2";
 import { GraphAmortissement } from "./GraphAmortissement";
 import { TabAmortissement } from "./TabAmortissement";
 
@@ -28,11 +26,8 @@ export const Amortissement = (props: AmortissementProps) => {
           title="Tableau d'amortissement"
         />
         <CardContent className="flex-1 pb-0">
-          {/* <GraphAmortissement data={props.resultatAnnuel} /> */}
-          <GraphAmortissement />
+          <GraphAmortissement data={props.resultatAnnuel} />
           <TabAmortissement />
-          <Component data={props.resultatAnnuel} />
-          <Component2 />
           <div className="text-xs font-medium text-gray-400 w-full px-4 lg:px-10 mt-4">
             <AccordionSeeMore
               description="Une rentabilité est considérée comme faible si elle est

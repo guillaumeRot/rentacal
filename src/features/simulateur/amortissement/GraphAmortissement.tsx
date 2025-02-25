@@ -1,6 +1,7 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import * as React from "react";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -11,111 +12,170 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { AmortissementType } from "../simulateur.schema";
 
-// export type DataProps = {
-//   data: {
-//     annee: string;
-//     mensualitesAnnuelles: number;
-//     cashflowNetNet: number;
-//   }[];
-// };
+export type DataProps = {
+  data: AmortissementType[];
+};
 
-const chartData = [
-  { annee: "1", mensualitesAnnuelles: 300, cashflowNetNet: 50 },
-  { annee: "1", mensualitesAnnuelles: 300, cashflowNetNet: 50 },
-  { annee: "1", mensualitesAnnuelles: 300, cashflowNetNet: 50 },
-];
+// const chartData = [
+//   { annee: "1", pret: 300, ps: 50, ir: 50, cashflow: -200 },
+//   { annee: "2", pret: 300, ps: 50, ir: 50, cashflow: -400 },
+//   { annee: "3", pret: 300, ps: 50, ir: 50, cashflow: -400 },
+//   { annee: "4", pret: 300, ps: 50, ir: 50, cashflow: -400 },
+//   { annee: "5", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "6", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "7", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "8", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "9", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "10", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "11", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "12", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "13", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "14", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "15", pret: 300, ps: 50, ir: 50, cashflow: 100 },
+//   { annee: "16", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "17", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "18", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "19", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "20", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "21", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "22", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "23", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "24", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "25", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "26", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "27", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "28", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "29", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+//   { annee: "30", pret: 0, ps: 100, ir: 100, cashflow: 300 },
+// ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  cashflowNetNet: {
+  cashflow: {
     label: "Cashflow",
     color: "hsl(var(--chart-2))",
   },
-  mensualitesAnnuelles: {
-    label: "Mensualites",
+  pret: {
+    label: "Pret",
     color: "hsl(var(--chart-1))",
+  },
+  ir: {
+    label: "Impôts rev.",
+    color: "hsl(var(--chart-5))",
+  },
+  ps: {
+    label: "Prelev. soc.",
+    color: "hsl(var(--chart-4))",
   },
 } satisfies ChartConfig;
 
-export function GraphAmortissement() {
-  return (
-    <Card className="m-5">
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
-        >
-          <AreaChart data={chartData}>
-            <defs>
-              <linearGradient id="fillCashflow" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-cashflowNetNet)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-cashflowNetNet)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-              <linearGradient id="fillMensualites" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-mensualitesAnnuelles)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-mensualitesAnnuelles)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-            </defs>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="annee"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
-              tickFormatter={(value) => {
-                return value + "e année";
-              }}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    return value + "e année";
-                  }}
-                  indicator="dot"
-                />
-              }
-            />
-            <Area
-              dataKey="mensualitesAnnuelles"
-              type="natural"
-              fill="url(#fillMensualites)"
-              stroke="var(--color-mensualitesAnnuelles)"
-              stackId="a"
-            />
-            <Area
-              dataKey="cashflowNetNet"
-              type="natural"
-              fill="url(#fillCashflow)"
-              stroke="var(--color-cashflowNetNet)"
-              stackId="a"
-            />
+export function GraphAmortissement(props: DataProps) {
+  const [state, setState] = React.useState({
+    currentStep: 0,
+  });
 
-            <ChartLegend content={<ChartLegendContent />} />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+  const steps = [
+    {
+      slug: "cashflow",
+      title: "Cashflow",
+    },
+    {
+      slug: "depenses",
+      title: "Dépenses",
+    },
+  ];
+
+  const { currentStep } = state;
+  const setCurrentStep = (index: number) => {
+    setState({ currentStep: index });
+  };
+
+  return (
+    <div className="m-5">
+      <Card className="rounded-3xl w-full border-2 p-1">
+        <CardContent className="flex flex-row rounded-3xl">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              onClick={() => setCurrentStep(index)}
+              className={`flex-1 flex items-center justify-center text-center p-2 lg:p-3 cursor-pointer text-xs lg:text-sm
+                  ${
+                    index === currentStep
+                      ? "border-blue-700 bg-blue-700 text-white rounded-3xl"
+                      : "border-blue-700 text-gray-600"
+                  }`}
+            >
+              {step.title}
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <Card className="mt-2 rounded-3xl">
+        <CardContent className="px-2 sm:p-6">
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-auto h-[250px] w-full"
+          >
+            <BarChart
+              accessibilityLayer
+              data={props.data}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="annee"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                minTickGap={32}
+                tickFormatter={(value) => {
+                  return value + "e année";
+                }}
+              />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    className="w-[150px]"
+                    labelFormatter={(value) => {
+                      if (value == 1) {
+                        return "1ère année";
+                      }
+                      return value + "e année";
+                    }}
+                  />
+                }
+              />
+              <ChartLegend content={<ChartLegendContent />} />
+              {steps[currentStep].slug == "depenses" && (
+                <Bar dataKey="pret" stackId="a" fill={`var(--color-pret)`} />
+              )}
+              {steps[currentStep].slug == "depenses" && (
+                <Bar dataKey="ir" stackId="a" fill={`var(--color-ir)`} />
+              )}
+              {steps[currentStep].slug == "depenses" && (
+                <Bar
+                  dataKey="ps"
+                  stackId="a"
+                  fill={`var(--color-ps)`}
+                  radius={[4, 4, 0, 0]}
+                />
+              )}
+              {steps[currentStep].slug == "cashflow" && (
+                <Bar
+                  dataKey="cashflow"
+                  stackId="b"
+                  fill={`var(--color-cashflow)`}
+                  radius={[4, 4, 0, 0]}
+                />
+              )}
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
