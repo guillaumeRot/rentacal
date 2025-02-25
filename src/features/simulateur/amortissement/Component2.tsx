@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bar, BarChart, CartesianGrid, Cell, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   Card,
@@ -18,12 +18,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { AmortissementType } from "../simulateur.schema";
-
-export type DataProps = {
-  data: AmortissementType[];
-};
-
 const chartData = [
   { annee: "1", pret: 300, ps: 50, ir: 50, cashflow: -200 },
   { annee: "2", pret: 300, ps: 50, ir: 50, cashflow: -400 },
@@ -58,16 +52,16 @@ const chartData = [
 ];
 
 const chartConfig = {
+  views: {
+    label: "Page Views",
+  },
   cashflow: {
     label: "Cashflow",
-    color: "hsl(var(--chart-2))",
-  },
-  depenses: {
-    label: "Dépenses",
+    color: "hsl(var(--chart-1))",
   },
   pret: {
-    label: "Crédit",
-    color: "hsl(var(--chart-1))",
+    label: "Pret",
+    color: "hsl(var(--chart-2))",
   },
   ir: {
     label: "Impôts rev.",
@@ -79,38 +73,35 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Component(props: DataProps) {
+export function Component2() {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>("cashflow");
 
   const total = React.useMemo(
     () => ({
-      cashflow: props.data.reduce((acc, curr) => acc + curr.cashflow, 0),
-      depenses: props.data.reduce(
-        (acc, curr) => acc + curr.pret + curr.ir + curr.ps,
-        0
-      ),
+      cashflow: chartData.reduce((acc, curr) => acc + curr.cashflow, 0),
+      pret: chartData.reduce((acc, curr) => acc + curr.pret, 0),
     }),
     []
   );
 
   return (
-    <Card className="m-5">
+    <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Line Chart - Interactive</CardTitle>
+          <CardTitle>Bar Chart - Interactive</CardTitle>
           <CardDescription>
             Showing total visitors for the last 3 months
           </CardDescription>
         </div>
         <div className="flex">
-          {["cashflow", "depenses"].map((key) => {
+          {["cashflow", "pret"].map((key) => {
             const chart = key as keyof typeof chartConfig;
             return (
               <button
                 key={chart}
                 data-active={activeChart === chart}
-                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6 cursor-pointer"
+                className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
                 onClick={() => setActiveChart(chart)}
               >
                 <span className="text-xs text-muted-foreground">
@@ -124,9 +115,19 @@ export function Component(props: DataProps) {
           })}
         </div>
       </CardHeader>
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="max-h-[280px] w-full">
-          <BarChart accessibilityLayer data={props.data}>
+      <CardContent className="px-2 sm:p-6">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="annee"
@@ -141,51 +142,38 @@ export function Component(props: DataProps) {
             <ChartTooltip
               content={
                 <ChartTooltipContent
+                  className="w-[150px]"
                   labelFormatter={(value) => {
                     if (value == 1) {
                       return "1ère année";
                     }
                     return value + "e année";
                   }}
-                  indicator="dot"
                 />
               }
             />
             <ChartLegend content={<ChartLegendContent />} />
-            {activeChart == "depenses" && (
-              <Bar dataKey="pret" stackId="a" radius={[0, 0, 0, 0]}>
-                {props.data.map((item) => (
-                  <Cell key={item.annee} fill="var(--color-pret)" />
-                ))}
-              </Bar>
+            {activeChart == "pret" && (
+              <Bar dataKey="pret" stackId="a" fill={`var(--color-pret)`} />
             )}
-            {activeChart == "depenses" && (
-              <Bar dataKey="ir" stackId="a" radius={[0, 0, 0, 0]}>
-                {props.data.map((item) => (
-                  <Cell key={item.annee} fill="var(--color-ir)" />
-                ))}
-              </Bar>
+            {activeChart == "pret" && (
+              <Bar dataKey="ir" stackId="a" fill={`var(--color-ir)`} />
             )}
-            {activeChart == "depenses" && (
-              <Bar dataKey="ps" stackId="a" radius={[4, 4, 0, 0]}>
-                {props.data.map((item) => (
-                  <Cell key={item.annee} fill="var(--color-ps)" />
-                ))}
-              </Bar>
+            {activeChart == "pret" && (
+              <Bar
+                dataKey="ps"
+                stackId="a"
+                fill={`var(--color-ps)`}
+                radius={[4, 4, 0, 0]}
+              />
             )}
             {activeChart == "cashflow" && (
-              <Bar dataKey="cashflow" stackId="b" radius={[4, 4, 0, 0]}>
-                {props.data.map((item) => (
-                  <Cell
-                    key={item.annee}
-                    fill={
-                      activeChart == "cashflow" && item[activeChart] > 0
-                        ? "hsl(var(--chart-2))"
-                        : "hsl(var(--chart-1))"
-                    }
-                  />
-                ))}
-              </Bar>
+              <Bar
+                dataKey="cashflow"
+                stackId="a"
+                fill={`var(--color-cashflow)`}
+                radius={[4, 4, 0, 0]}
+              />
             )}
           </BarChart>
         </ChartContainer>
