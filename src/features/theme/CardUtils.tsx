@@ -34,7 +34,7 @@ export const CardChild = (props: CardChildProps) => {
 
 // CardChildHeader
 export type CardChildHeaderProps = {
-  icon: ReactNode;
+  icon?: ReactNode;
   title: string;
 };
 

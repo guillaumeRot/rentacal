@@ -8,17 +8,26 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { MontantFormat } from "@/features/MontantFormat";
+import { CardChildHeader } from "@/features/theme/CardUtils";
 import { BsCalendar3 } from "react-icons/bs";
 import { Component } from "./PieDepenses";
 
-// export type DataProps = {
-//   data: {
-//     annee: string;
-//     interet: number;
-//     pret: number;
-//   }[];
-// };
+export type DataProps = {
+  data: {
+    annee: string;
+    interet: number;
+    pret: number;
+  }[];
+};
 
 // const chartConfig = {
 //   visitors: {
@@ -70,7 +79,7 @@ const datas = [
 export function TabAmortissement() {
   return (
     <Card className="m-5">
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
+      <CardContent className="px-2 sm:px-6">
         <Accordion type="single" collapsible className="w-full">
           {datas.map((resultat) => (
             <AccordionItem
@@ -78,10 +87,10 @@ export function TabAmortissement() {
               value={`item-${resultat.annee}`}
             >
               <AccordionTrigger className="hover:no-underline cursor-pointer">
-                <div className="flex flex-raw items-center">
+                <div className="flex flex-raw items-center w-full">
                   <BsCalendar3 size={20} />
-                  <div className="grid grid-cols-2 items-center">
-                    <span className="hover:underline">
+                  <div className="grid grid-cols-2 items-center w-full">
+                    <span className="text-left ml-3 hover:underline">
                       {resultat.annee}ème année
                     </span>
                     <div className="grid grid-cols-2 items-center">
@@ -124,88 +133,54 @@ export function TabAmortissement() {
                     </div>
                   </div>
                   <div className="flex-1 pb-0 grid grid-cols-2 items-center">
-                    <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-3 h-fit text-sm lg:text-md">
-                      <span />
-                      <span className="text-center py-2">Taux annuel</span>
-                      <span className="text-center py-2">Montant</span>
-                      <span className="text-center py-2">
-                        Amortissement immobilier
-                      </span>
-                      <span className="text-center py-2">4 %</span>
-                      <span className="text-center py-2">
-                        {resultat.amortissementImmo}
-                      </span>
-                      <span className="text-center py-2">
-                        Amortissement travaux
-                      </span>
-                      <span className="text-center py-2">5 %</span>
-                      <span className="text-center py-2">
-                        {resultat.amortissementTravaux}
-                      </span>
-                      <span className="text-center py-2">
-                        Amortissement mobilier
-                      </span>
-                      <span className="text-center py-2">10 %</span>
-                      <span className="text-center py-2">
-                        {resultat.amortissementMobilier}
-                      </span>
-                      <span className="text-center pb-2 pt-6 font-semibold">
-                        Amortissement total
-                      </span>
-                      <span />
-                      <span className="text-center pb-2 pt-6 font-semibold">
-                        <MontantFormat
-                          value={
-                            resultat.amortissementImmo +
-                            resultat.amortissementTravaux +
-                            resultat.amortissementMobilier
-                          }
-                        />
-                      </span>
+                    <Card className="rounded-3xl px-4 lg:px-8 m-4 h-fit text-sm lg:text-md">
+                      <CardChildHeader title="Répartition des dépenses" />
+                      <CardContent className="py-6">
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead />
+                            <TableHead className="text-center">
+                              Taux annuel
+                            </TableHead>
+                            <TableHead className="text-center">
+                              Montant
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          <TableRow>
+                            <TableCell className="font-medium">
+                              Amortissement immobilier
+                            </TableCell>
+                            <TableCell className="text-center">4 %</TableCell>
+                            <TableCell className="text-center">500 €</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className="font-medium">
+                              Amortissement travaux
+                            </TableCell>
+                            <TableCell className="text-center">5 %</TableCell>
+                            <TableCell className="text-center">300 €</TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell className="font-medium">
+                              Amortissement mobilier
+                            </TableCell>
+                            <TableCell className="text-center">10 %</TableCell>
+                            <TableCell className="text-center">50 €</TableCell>
+                          </TableRow>
+                        </TableBody>
+                        <TableFooter>
+                          <TableRow>
+                            <TableCell colSpan={2}>Total</TableCell>
+                            <TableCell className="text-center">850 €</TableCell>
+                          </TableRow>
+                        </TableFooter>
+                      </CardContent>
                     </Card>
                     <Component />
-                    {/* <Card className="rounded-3xl p-4 lg:p-10 m-4 h-fit text-sm lg:text-md"> */}
-                    {/* <span className="text-center py-2">Crédit</span>
-                      <span className="text-center py-2">{resultat.pret}</span>
-                      <span className="text-center py-2">
-                        Impots sur le revenu
-                      </span>
-                      <span className="text-center py-2">{resultat.ir}</span>
-                      <span className="text-center py-2">
-                        Prélèvements sociaux
-                      </span>
-                      <span className="text-center py-2">{resultat.ps}</span>
-                      <span className="text-center pb-2 pt-6 font-semibold">
-                        Total des dépenses
-                      </span>
-                      <span className="text-center pb-2 pt-6 font-semibold">
-                        <MontantFormat
-                          value={resultat.pret + resultat.ir + resultat.ps}
-                        />
-                      </span> */}
-                    {/* <Component />
-                    </Card> */}
                   </div>
                 </Card>
-                {/* <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-center">Année</TableHead>
-                      <TableHead className="text-center">Loyers</TableHead>
-                      <TableHead className="text-center">Crédit</TableHead>
-                      <TableHead className="text-center">Crédit</TableHead>
-                      <TableHead className="text-center">Intêrets</TableHead>
-                      <TableHead className="text-center">
-                        Prêt restant
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody className="text-center">
-                    <TableRow key={resultat.annee}>
-                      <TableCell>{resultat.annee}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table> */}
               </AccordionContent>
             </AccordionItem>
           ))}
