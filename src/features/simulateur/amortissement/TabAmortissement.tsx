@@ -9,6 +9,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { MontantFormat } from "@/features/MontantFormat";
+import { BsCalendar3 } from "react-icons/bs";
+import { Component } from "./PieDepenses";
 
 // export type DataProps = {
 //   data: {
@@ -75,7 +77,8 @@ export function TabAmortissement() {
               key={`${resultat.annee}`}
               value={`item-${resultat.annee}`}
             >
-              <AccordionTrigger>
+              <AccordionTrigger className="[&[data-state=open]>svg#calendar]:rotate-0">
+                <BsCalendar3 id="calendar" />
                 <span>{resultat.annee}ème année</span>
                 <span> | Cashflow: {resultat.cashflow} € / an</span>
               </AccordionTrigger>
@@ -104,30 +107,36 @@ export function TabAmortissement() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
-                    <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-2 h-fit text-sm lg:text-md">
-                      {/* TODO: Faire un pie chart */}
+                  <div className="flex-1 pb-0 grid grid-cols-2 items-center">
+                    <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-3 h-fit text-sm lg:text-md">
+                      <span />
+                      <span className="text-center py-2">Taux annuel</span>
+                      <span className="text-center py-2">Montant</span>
                       <span className="text-center py-2">
                         Amortissement immobilier
                       </span>
+                      <span className="text-center py-2">4 %</span>
                       <span className="text-center py-2">
                         {resultat.amortissementImmo}
                       </span>
                       <span className="text-center py-2">
                         Amortissement travaux
                       </span>
+                      <span className="text-center py-2">5 %</span>
                       <span className="text-center py-2">
                         {resultat.amortissementTravaux}
                       </span>
                       <span className="text-center py-2">
                         Amortissement mobilier
                       </span>
+                      <span className="text-center py-2">10 %</span>
                       <span className="text-center py-2">
                         {resultat.amortissementMobilier}
                       </span>
                       <span className="text-center pb-2 pt-6 font-semibold">
                         Amortissement total
                       </span>
+                      <span />
                       <span className="text-center pb-2 pt-6 font-semibold">
                         <MontantFormat
                           value={
@@ -138,8 +147,9 @@ export function TabAmortissement() {
                         />
                       </span>
                     </Card>
-                    <Card className="rounded-3xl p-4 lg:p-10 m-4 grid grid-cols-2 h-fit text-sm lg:text-md">
-                      <span className="text-center py-2">Crédit</span>
+                    <Component />
+                    {/* <Card className="rounded-3xl p-4 lg:p-10 m-4 h-fit text-sm lg:text-md"> */}
+                    {/* <span className="text-center py-2">Crédit</span>
                       <span className="text-center py-2">{resultat.pret}</span>
                       <span className="text-center py-2">
                         Impots sur le revenu
@@ -156,8 +166,9 @@ export function TabAmortissement() {
                         <MontantFormat
                           value={resultat.pret + resultat.ir + resultat.ps}
                         />
-                      </span>
-                    </Card>
+                      </span> */}
+                    {/* <Component />
+                    </Card> */}
                   </div>
                 </Card>
                 {/* <Table>
