@@ -104,10 +104,21 @@ export const FormFieldSchema = z.object({
 export type FormFieldType = z.infer<typeof FormFieldSchema>;
 
 export const AmortissementSchema = z.object({
+  taux: z.number(),
+  montant: z.number(),
+});
+export const AmortissementGlobalSchema = z.object({
   annee: z.string(),
-  pret: z.number(),
+  loyersAnnuel: z.number(),
+  vacanceLocative: z.number(),
+  credit: z.number(),
   ir: z.number(),
   ps: z.number(),
+  foncier: z.number(),
+  copro: z.number(),
+  amortissementImmo: AmortissementSchema,
+  amortissementTravaux: AmortissementSchema,
+  amortissementMobilier: AmortissementSchema,
   cashflow: z.number(),
 });
-export type AmortissementType = z.infer<typeof AmortissementSchema>;
+export type AmortissementGlobalType = z.infer<typeof AmortissementGlobalSchema>;

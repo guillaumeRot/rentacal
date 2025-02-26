@@ -15,6 +15,8 @@ const chartData = [
   { browser: "Crédit", depenses: 750, fill: "var(--color-credit)" },
   { browser: "Imp. Rev.", depenses: 100, fill: "var(--color-ir)" },
   { browser: "Prel. Soc.", depenses: 80, fill: "var(--color-ps)" },
+  { browser: "Foncier", depenses: 80, fill: "var(--color-ps)" },
+  { browser: "Copro", depenses: 80, fill: "var(--color-ps)" },
 ];
 
 const chartConfig = {

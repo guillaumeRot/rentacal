@@ -2,7 +2,7 @@
 
 import { action } from "@/lib/safe-actions";
 import {
-  AmortissementType,
+  AmortissementGlobalType,
   DataSchema,
   DataType,
   ResultatGlobalType,
@@ -25,7 +25,7 @@ const mapMoisByIndex: Record<number, string> = {
 };
 
 let resultatsGlobal: ResultatGlobalType[] = [];
-let resultatsAnnuel: AmortissementType[] = [];
+let resultatsAnnuel: AmortissementGlobalType[] = [];
 let montantPret: number = 0;
 let sommeFraisBancaire: number = 0;
 
@@ -132,31 +132,62 @@ function getRevenuNetImposableMicroBIC(values: DataType, loyersAnnuel: number) {
   return revenuNetImposable;
 }
 
-// Resultat fiscal annuel au réel
-function getRevenuFiscalReel(values: DataType, loyersAnnuel: number) {
+function getTauxAmortissementAnnuel(dureePret: number) {
+  return 1 / dureePret;
+}
+
+// La part immo amortissable est 80% du prix du bien car un enlève la part du terrain (20%)
+function getAmortissementImmo(values: DataType) {
   // La part immobilière amortissable est 80% du bien car on enlève la part du terrain (20%)
-  var partImmoAmortissable = montantPret * 0.8;
+  let partImmoAmortissable = values.prixAchat * 0.8;
 
-  // Le taux annuel amortissable pour l'immobilier et les travaux est calculé en fonction de la durée du prêt
-  var tauxAmortissementAnnuel = 1 / values.dureePret;
-  var amortissementImmoAnnuel = partImmoAmortissable * tauxAmortissementAnnuel;
-  var amortissementTravauxAnnuel =
+  // Le taux annuel amortissable pour l'immobilier est calculé en fonction de la durée du prêt
+  let tauxAmortissementAnnuel = getTauxAmortissementAnnuel(values.dureePret);
+  let amortissementImmoAnnuel = partImmoAmortissable * tauxAmortissementAnnuel;
+  return { taux: tauxAmortissementAnnuel, montant: amortissementImmoAnnuel };
+}
+
+function getAmortissementTravaux(values: DataType) {
+  // Le taux annuel amortissable pour les travaux est calculé en fonction de la durée du prêt
+  let tauxAmortissementAnnuel = getTauxAmortissementAnnuel(values.dureePret);
+  let amortissementTravauxAnnuel =
     values.montantTravaux * tauxAmortissementAnnuel;
+  return { taux: tauxAmortissementAnnuel, montant: amortissementTravauxAnnuel };
+}
 
-  // Le mobilier est amortissable sur 10 ans maximum, soit 10% par an
-  // Si le prêt est inférieur à 10 ans, alors on l'amorti sur la durée du prêt
-  var tauxAmortissementMobilier = 0.1;
-  if (values.dureePret < 10) {
-    tauxAmortissementMobilier = 1 / values.dureePret;
+// Le mobilier est amortissable sur 10 ans maximum, soit 10% par an
+// Si le prêt est inférieur à 10 ans, alors on l'amorti sur la durée du prêt
+function getTauxAmortissementMobilier(dureePret: number) {
+  let tauxAmortissementMobilier = 0.1;
+  if (dureePret < 10) {
+    return 1 / dureePret;
   }
+  return tauxAmortissementMobilier;
+}
+
+function getAmortissementMobilier(values: DataType) {
+  let tauxAmortissementMobilier = getTauxAmortissementMobilier(
+    values.dureePret
+  );
   var amortissementMobilierAnnuel =
     values.montantMobilier * tauxAmortissementMobilier;
+  return {
+    taux: tauxAmortissementMobilier,
+    montant: amortissementMobilierAnnuel,
+  };
+}
+
+// Resultat fiscal annuel au réel
+function getRevenuFiscalReel(values: DataType, loyersAnnuel: number) {
+  let amortissementImmo = getAmortissementImmo(values);
+  let amortissementTravaux = getAmortissementTravaux(values);
+  let amortissementMobilier = getAmortissementMobilier(values);
 
   // Amortissement total déductible
   var amortissementTotal =
-    amortissementImmoAnnuel +
-    amortissementTravauxAnnuel +
-    amortissementMobilierAnnuel;
+    amortissementImmo.montant +
+    amortissementTravaux.montant +
+    amortissementMobilier.montant;
 
   var resultatFiscal =
     loyersAnnuel -
@@ -263,26 +294,25 @@ function getResultatsAnnuel(
   loyersAnnuel: number
 ) {
   resultatsAnnuel = [];
-  let pretRestant = montantPret;
-  let pretRembourse = 0;
+  // let pretRestant = montantPret;
+  // let pretRembourse = 0;
   for (let cptAnnee = 1; cptAnnee <= 30; cptAnnee++) {
     let mensualitesAnnuelles = 0;
 
-    console.log("TEST GUI 30:", cptAnnee);
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
-      if (pretRestant > 0) {
+      if (cptAnnee > values.dureePret) {
         mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
       } else {
         // Passage au micro-BIC après crédit car plus interessant
         revenuImposable = getRevenuNetImposableMicroBIC(values, loyersAnnuel);
       }
-      const interetsMensuel = getMontantInteretsMensuel(
-        pretRestant,
-        getTauxInteretMensuel(values.tauxPret)
-      );
+      // const interetsMensuel = getMontantInteretsMensuel(
+      //   pretRestant,
+      //   getTauxInteretMensuel(values.tauxPret)
+      // );
 
-      pretRembourse = mensualites - interetsMensuel;
-      pretRestant = pretRestant - pretRembourse;
+      // pretRembourse = mensualites - interetsMensuel;
+      // pretRestant = pretRestant - pretRembourse;
     }
 
     let ps = getPS(revenuImposable);
@@ -300,13 +330,20 @@ function getResultatsAnnuel(
 
     resultatsAnnuel.push({
       annee: cptAnnee.toString(),
-      pret: creditAnnuel,
+      loyersAnnuel: loyersAnnuel,
+      vacanceLocative: values.nbMoisLocParAn,
+      credit: creditAnnuel,
       ps: getPS(revenuImposable),
       ir: getIR(revenuImposable, values.tmi),
+      foncier: values.impotsFoncier,
+      copro: values.chargesCopro,
+      amortissementImmo: getAmortissementImmo(values),
+      amortissementTravaux: getAmortissementTravaux(values),
+      amortissementMobilier: getAmortissementMobilier(values),
       cashflow: cashflowNetNet,
     });
   }
-  // console.log("TEST GUI:", resultatsAnnuel);
+  console.log("TEST GUI:", resultatsAnnuel);
   return resultatsAnnuel;
 }
 
