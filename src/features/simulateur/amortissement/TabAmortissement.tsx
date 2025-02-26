@@ -82,7 +82,7 @@ export function TabAmortissement() {
 
               <AccordionContent>
                 <Card className="rounded-3xl p-0 h-fit bg-blue-50">
-                  <div className="text-center mt-6 mx-4 lg:mx-20 grid grid-cols-1 lg:grid-cols-2">
+                  <div className="text-center mt-6 grid grid-cols-1 lg:grid-cols-2">
                     <div className="flex flex-col px-4 lg:px-10">
                       <span className="text-center text-md font-semibold">
                         Loyers annuels
