@@ -77,10 +77,26 @@ export function TabAmortissement() {
               key={`${resultat.annee}`}
               value={`item-${resultat.annee}`}
             >
-              <AccordionTrigger className="[&[data-state=open]>svg#calendar]:rotate-0">
-                <BsCalendar3 id="calendar" />
-                <span>{resultat.annee}ème année</span>
-                <span> | Cashflow: {resultat.cashflow} € / an</span>
+              <AccordionTrigger className="hover:no-underline cursor-pointer">
+                <div className="flex flex-raw items-center">
+                  <BsCalendar3 size={20} />
+                  <div className="grid grid-cols-2 items-center">
+                    <span className="hover:underline">
+                      {resultat.annee}ème année
+                    </span>
+                    <div className="grid grid-cols-2 items-center">
+                      <span className="text-md font-semibold text-right pr-3">
+                        Cashflow:
+                      </span>
+                      <div className="py-2">
+                        <Badge className="text-sm lg:text-md font-medium rounded-3xl px-5 py-1 mt-1 hover:bg-green-200 bg-green-200 text-green-600 border border-green-600">
+                          <MontantFormat value={resultat.cashflow} />
+                          &nbsp;/ an
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </AccordionTrigger>
 
               <AccordionContent>
