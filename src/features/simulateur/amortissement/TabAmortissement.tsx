@@ -50,7 +50,7 @@ export function TabAmortissement(props: DataProps) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 pb-0 grid grid-cols-2 items-center">
+                    <div className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
                       <RepartitionAmortissements data={data} />
                       <PieDepenses data={data} />
                     </div>

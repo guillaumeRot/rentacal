@@ -12,20 +12,22 @@ export type DataProps = {
 
 export function AmortissementTrigger(props: DataProps) {
   return (
-    <AccordionTrigger className="hover:no-underline cursor-pointer">
+    <AccordionTrigger className="hover:no-underline cursor-pointer text-xs lg:text-sm">
       <div className="flex flex-raw items-center w-full">
         <BsCalendar3 size={20} />
-        <div className="grid grid-cols-2 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center w-full py-2">
           <span className="text-left ml-3 hover:underline">
-            {props.data.annee}ème année
+            {props.data.annee == "1"
+              ? "1ère année"
+              : props.data.annee + "ème année"}
           </span>
-          <div className="grid grid-cols-2 items-center">
-            <span className="text-md font-semibold text-right pr-3">
+          <div className="flex flex-raw items-center ml-3">
+            <span className="text-xs lg:text-sm font-semibold text-right pr-3">
               Cashflow:
             </span>
-            <div className="py-2">
+            <div>
               <Badge
-                className={`text-sm lg:text-md font-medium rounded-3xl px-5 py-1 mt-1 
+                className={`text-xs lg:text-base font-medium rounded-3xl px-5 py-1 mt-1 
                           ${
                             props.data.cashflow >= 0
                               ? "hover:bg-green-200 bg-green-200 text-green-600 border border-green-600"
