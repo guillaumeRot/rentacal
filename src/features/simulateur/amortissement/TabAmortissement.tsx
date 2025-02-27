@@ -22,66 +22,15 @@ import { BsCalendar3 } from "react-icons/bs";
 import { AmortissementGlobalType } from "../simulateur.schema";
 import { Component } from "./PieDepenses";
 
-// export type DataProps = {
-//   data: {
-//     annee: string;
-//     interet: number;
-//     pret: number;
-//   }[];
-// };
-
 export type DataProps = {
   data: AmortissementGlobalType[];
 };
 
-// const chartConfig = {
-//   visitors: {
-//     label: "Visitors",
-//   },
-//   pret: {
-//     label: "Prêt",
-//     color: "hsl(var(--chart-2))",
-//   },
-//   interet: {
-//     label: "Intêrets",
-//     color: "hsl(var(--chart-1))",
-//   },
-// } satisfies ChartConfig;
-
-// const datas = [
-//   {
-//     annee: "1",
-//     loyersAnnuel: 8000,
-//     vacanceLocative: 10,
-//     pret: 300,
-//     ir: 100,
-//     ps: 80,
-//     pretRestant: 90000,
-//     foncier: 1000,
-//     copro: 500,
-//     amortissementImmo: 500,
-//     amortissementTravaux: 100,
-//     amortissementMobilier: 50,
-//     cashflow: 500,
-//   },
-//   {
-//     annee: "2",
-//     loyersAnnuel: 8000,
-//     vacanceLocative: 10,
-//     pret: 280,
-//     ir: 100,
-//     ps: 80,
-//     pretRestant: 80000,
-//     foncier: 1000,
-//     copro: 500,
-//     amortissementImmo: 500,
-//     amortissementTravaux: 100,
-//     amortissementMobilier: 50,
-//     cashflow: 500,
-//   },
-// ];
-
 export function TabAmortissement(props: DataProps) {
+  let bgColorCashflow = "bg-green-200";
+  let borderColorCashflow = "border-green-600";
+  let textColorCashflow = "text-green-600";
+
   return (
     <Card className="m-5">
       <CardContent className="px-2 sm:px-6">
@@ -101,7 +50,14 @@ export function TabAmortissement(props: DataProps) {
                           Cashflow:
                         </span>
                         <div className="py-2">
-                          <Badge className="text-sm lg:text-md font-medium rounded-3xl px-5 py-1 mt-1 hover:bg-green-200 bg-green-200 text-green-600 border border-green-600">
+                          <Badge
+                            className={`text-sm lg:text-md font-medium rounded-3xl px-5 py-1 mt-1 
+                          ${
+                            data.cashflow >= 0
+                              ? "hover:bg-green-200 bg-green-200 text-green-600 border border-green-600"
+                              : "hover:bg-red-200 bg-red-200 text-red-600 border border-red-600"
+                          }`}
+                          >
                             <MontantFormat value={data.cashflow} />
                             &nbsp;/ an
                           </Badge>
