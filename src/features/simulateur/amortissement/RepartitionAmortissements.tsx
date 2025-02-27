@@ -19,7 +19,7 @@ export type DataProps = {
   data: AmortissementGlobalType;
 };
 
-export function RepartitoinAmortissements(props: DataProps) {
+export function RepartitionAmortissements(props: DataProps) {
   return (
     <Card className="rounded-3xl px-4 lg:px-6 m-4 h-fit text-sm lg:text-md">
       <CardChildHeader title="Répartition des amortissements" />
