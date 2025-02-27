@@ -1,15 +1,16 @@
 "use client";
 
-import * as React from "react";
 import { Pie, PieChart } from "recharts";
 
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
 } from "@/components/ui/chart";
+import { MontantFormat } from "@/features/MontantFormat";
 import { CardChildHeader } from "@/features/theme/CardUtils";
 import { AmortissementGlobalType } from "../simulateur.schema";
 
@@ -18,9 +19,6 @@ export type DataProps = {
 };
 
 const chartConfig = {
-  depenses: {
-    label: "Dépenses",
-  },
   credit: {
     label: "Crédit",
     color: "hsl(var(--chart-1))",
@@ -34,7 +32,7 @@ const chartConfig = {
     color: "hsl(var(--chart-3))",
   },
   foncier: {
-    label: "Impôts foncier",
+    label: "Impôt foncier",
     color: "hsl(var(--chart-4))",
   },
   copro: {
@@ -45,100 +43,47 @@ const chartConfig = {
 
 export function PieDepenses(props: DataProps) {
   const chartData = [
+    { label: "credit", value: props.data.credit, fill: "var(--color-credit)" },
+    { label: "ir", value: props.data.ir, fill: "var(--color-ir)" },
+    { label: "ps", value: props.data.ps, fill: "var(--color-ps)" },
     {
-      label: "Crédit",
-      depenses: props.data.credit,
-      fill: "var(--color-credit)",
-    },
-    {
-      label: "Impôts revenu",
-      depenses: props.data.ir,
-      fill: "var(--color-ir)",
-    },
-    {
-      label: "Prélèvement sociaux",
-      depenses: props.data.ps,
-      fill: "var(--color-ps)",
-    },
-    {
-      label: "Impôt foncier",
-      depenses: props.data.foncier,
+      label: "foncier",
+      value: props.data.foncier,
       fill: "var(--color-foncier)",
     },
-    {
-      label: "Charges copropriété",
-      depenses: props.data.copro,
-      fill: "var(--color-copro)",
-    },
+    { label: "copro", value: props.data.copro, fill: "var(--color-copro)" },
   ];
 
-  const totalDepenses = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.depenses, 0);
-  }, []);
+  const depensesTotal =
+    props.data.credit +
+    props.data.ir +
+    props.data.ps +
+    props.data.foncier +
+    props.data.copro;
 
   return (
-    <Card className="flex flex-col rounded-3xl m-4">
+    <Card className="flex flex-col rounded-3xl px-4 lg:px-6 m-4 h-fit">
       <CardChildHeader title="Répartition des dépenses" />
-      <CardContent className="flex flex-col pb-0 w-full">
-        {/* <div className="py-2 mt-4 mx-auto">
+      <CardContent className="flex flex-col pb-0">
+        <div className="py-2 mt-4 mx-auto">
           <Badge className="text-lg lg:text-xl font-medium rounded-3xl px-5 py-1 mt-1 hover:bg-white bg-white text-red-600 border border-red-600">
-            <MontantFormat value={totalDepenses} />
+            <MontantFormat value={depensesTotal} />
           </Badge>
-        </div> */}
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Pie
-              data={chartData}
-              dataKey="depenses"
-              nameKey="label"
-              innerRadius={60}
-              strokeWidth={5}
-            >
-              {/* <Label
-                content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) - 24}
-                          className="fill-muted-foreground"
-                        >
-                          Dépenses
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="text-2xl font-bold fill-red-600"
-                        >
-                          {numericFormatter(totalDepenses.toString(), {
-                            decimalScale: 2,
-                            decimalSeparator: ",",
-                            thousandSeparator: " ",
-                            fixedDecimalScale: true,
-                            suffix: " €",
-                          })}
-                        </tspan>
-                      </text>
-                    );
-                  }
-                }}
-              /> */}
-            </Pie>
-          </PieChart>
-        </ChartContainer>
+        </div>
+        <div>
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[300px]"
+          >
+            <PieChart>
+              <Pie data={chartData} dataKey="value" />
+              <ChartLegend
+                content={<ChartLegendContent nameKey="label" />}
+                className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+              />
+            </PieChart>
+          </ChartContainer>
+        </div>
       </CardContent>
     </Card>
   );

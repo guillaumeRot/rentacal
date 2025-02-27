@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MontantFormat } from "@/features/MontantFormat";
 import { AmortissementGlobalType } from "../simulateur.schema";
 import { AmortissementTrigger } from "./AmortissementTrigger";
-import { Component } from "./Component";
+import { PieDepenses } from "./PieDepenses";
 import { RepartitionAmortissements } from "./RepartitionAmortissements";
 
 export type DataProps = {
@@ -52,8 +52,7 @@ export function TabAmortissement(props: DataProps) {
                     </div>
                     <div className="flex-1 pb-0 grid grid-cols-2 items-center">
                       <RepartitionAmortissements data={data} />
-                      {/* <PieDepenses data={data} /> */}
-                      <Component />
+                      <PieDepenses data={data} />
                     </div>
                   </Card>
                 </AccordionContent>
