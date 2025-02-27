@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
 } from "@/components/ui/chart";
 import { MontantFormat } from "@/features/MontantFormat";
 import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
@@ -64,54 +64,59 @@ export function CardBanque(props: CardBanqueProps) {
             className="mx-auto aspect-square max-h-[350px] w-full"
           >
             <PieChart>
-              <ChartLegend content={<ChartLegendContent />} />
+              {/* <ChartLegend content={<ChartLegendContent />} /> */}
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent nameKey="type" />}
+              />
               <Pie
                 data={chartData}
                 dataKey="montant"
-                nameKey="type"
+                // nameKey="type"
                 innerRadius={90}
                 strokeWidth={5}
               >
-                {chartData.map((entry, index) => (
-                  <Label
-                    key={`label-${index}`}
-                    content={({ viewBox }) => {
-                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                        return (
-                          <text
+                {/* {chartData.map((entry, index) => ( */}
+                <Label
+                  key="label"
+                  content={({ viewBox }) => {
+                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                      return (
+                        <text
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                        >
+                          <tspan
                             x={viewBox.cx}
-                            y={viewBox.cy}
-                            textAnchor="middle"
-                            dominantBaseline="middle"
+                            y={(viewBox.cy || 0) - 20}
+                            className="fill-muted-foreground"
                           >
-                            <tspan
-                              x={viewBox.cx}
-                              y={(viewBox.cy || 0) - 20}
-                              className="fill-muted-foreground"
-                            >
-                              Coût du prêt
-                            </tspan>
-                            <tspan
-                              x={viewBox.cx}
-                              y={(viewBox.cy || 0) + 4}
-                              className="fill-foreground text-2xl font-bold"
-                            >
-                              {numericFormatter(props.coutPret.toString(), {
-                                decimalScale: 2,
-                                decimalSeparator: ",",
-                                thousandSeparator: " ",
-                                fixedDecimalScale: true,
-                                suffix: " €",
-                              })}
-                            </tspan>
-                          </text>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
-                ))}
+                            Coût du prêt
+                          </tspan>
+                          <tspan
+                            x={viewBox.cx}
+                            y={(viewBox.cy || 0) + 4}
+                            className="fill-foreground text-2xl font-bold"
+                          >
+                            {numericFormatter(props.coutPret.toString(), {
+                              decimalScale: 2,
+                              decimalSeparator: ",",
+                              thousandSeparator: " ",
+                              fixedDecimalScale: true,
+                              suffix: " €",
+                            })}
+                          </tspan>
+                        </text>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                {/* ))} */}
               </Pie>
+              {/* <ChartLegend content={<ChartLegendContent nameKey="type" />} /> */}
             </PieChart>
           </ChartContainer>
           <Card className="rounded-3xl p-4 lg:p-10 m-4 lg:m-10 grid grid-cols-2 h-fit text-sm lg:text-md">

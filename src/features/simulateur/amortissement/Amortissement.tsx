@@ -28,11 +28,7 @@ export const Amortissement = (props: AmortissementProps) => {
           <GraphAmortissement data={props.data} />
           <TabAmortissement data={props.data} />
           <div className="text-xs font-medium text-gray-400 w-full px-4 lg:px-10 mt-4">
-            <AccordionSeeMore
-              description="Une rentabilité est considérée comme faible si elle est
-                    inférieure à 4%, moyenne si elle est entre 4% et 7%, et
-                    haute si elle est supérieure à 7%."
-            />
+            <AccordionSeeMore description="Le cashflow correspond à la différence entre vos loyers annuels et l’ensemble de vos charges : crédit, impôt sur le revenu, prélèvements sociaux, impôt foncier et charges de copropriété. L’amortissement de l’immobilier et des travaux est basé sur 80 % de leur valeur (hors terrain) et réparti sur la durée du prêt. Pour le mobilier, l’amortissement suit la durée du prêt si elle est inférieure à 10 ans, sinon il est limité à 10 % par an." />
           </div>
         </CardContent>
       </CardChild>
