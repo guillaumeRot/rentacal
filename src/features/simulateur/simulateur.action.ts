@@ -162,6 +162,9 @@ function getAmortissementTravaux(values: DataType, annee: number) {
   );
   let amortissementTravauxAnnuel =
     values.montantTravaux * tauxAmortissementAnnuel;
+  if (values.montantTravaux == 0) {
+    tauxAmortissementAnnuel = 0;
+  }
   return { taux: tauxAmortissementAnnuel, montant: amortissementTravauxAnnuel };
 }
 

@@ -18,39 +18,6 @@ export type DataProps = {
   data: AmortissementGlobalType[];
 };
 
-// const chartData = [
-//   { annee: "1", credit: 300, ps: 50, ir: 50, cashflow: -200 },
-//   { annee: "2", credit: 300, ps: 50, ir: 50, cashflow: -400 },
-//   { annee: "3", credit: 300, ps: 50, ir: 50, cashflow: -400 },
-//   { annee: "4", credit: 300, ps: 50, ir: 50, cashflow: -400 },
-//   { annee: "5", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "6", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "7", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "8", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "9", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "10", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "11", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "12", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "13", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "14", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "15", credit: 300, ps: 50, ir: 50, cashflow: 100 },
-//   { annee: "16", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "17", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "18", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "19", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "20", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "21", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "22", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "23", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "24", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "25", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "26", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "27", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "28", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "29", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-//   { annee: "30", credit: 0, ps: 100, ir: 100, cashflow: 300 },
-// ];
-
 const chartConfig = {
   cashflow: {
     label: "Cashflow",
