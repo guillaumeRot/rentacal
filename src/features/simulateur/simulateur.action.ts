@@ -313,13 +313,11 @@ function getResultatsAnnuel(
   loyersAnnuel: number
 ) {
   resultatsAnnuel = [];
-  // let pretRestant = montantPret;
-  // let pretRembourse = 0;
   for (let cptAnnee = 1; cptAnnee <= 30; cptAnnee++) {
     let mensualitesAnnuelles = 0;
 
     for (let cptMois = 1; cptMois <= 12; cptMois++) {
-      if (cptAnnee < values.dureePret) {
+      if (cptAnnee <= values.dureePret) {
         mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
       } else {
         // Passage au micro-BIC après crédit car plus interessant
@@ -331,17 +329,11 @@ function getResultatsAnnuel(
     let ir = getIR(revenuImposable, values.tmi);
     let cashflowNetNet = loyersAnnuel - mensualitesAnnuelles - ps - ir;
 
-    let creditAnnuel = 0;
-    // On renseigne le montant annuel du crédit pendant la durée du pret
-    if (cptAnnee <= values.dureePret) {
-      creditAnnuel = mensualites * 12;
-    }
-
     resultatsAnnuel.push({
       annee: cptAnnee.toString(),
       loyersAnnuel: loyersAnnuel,
       vacanceLocative: values.nbMoisLocParAn,
-      credit: creditAnnuel,
+      credit: mensualitesAnnuelles,
       ps: getPS(revenuImposable),
       ir: getIR(revenuImposable, values.tmi),
       foncier: values.impotsFoncier,
