@@ -9,6 +9,8 @@ import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
 } from "@/components/ui/chart";
 import { MontantFormat } from "@/features/MontantFormat";
 import { CardChildHeader } from "@/features/theme/CardUtils";
@@ -80,6 +82,10 @@ export function PieDepenses(props: DataProps) {
               <ChartLegend
                 content={<ChartLegendContent nameKey="label" />}
                 className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+              />
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent nameKey="label" />}
               />
             </PieChart>
           </ChartContainer>

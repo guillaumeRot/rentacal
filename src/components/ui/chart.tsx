@@ -276,6 +276,12 @@ const ChartLegendContent = React.forwardRef<
       return null;
     }
 
+    console.log("TEST GUI 100:", nameKey);
+    console.log("TEST GUI 101:", payload);
+    payload.map((item) => {
+      console.log("TEST GUI 102:", item.dataKey);
+    });
+
     return (
       <div
         ref={ref}

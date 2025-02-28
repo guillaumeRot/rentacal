@@ -7,8 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -116,7 +114,7 @@ export function GraphAmortissement(props: DataProps) {
                   />
                 }
               />
-              <ChartLegend content={<ChartLegendContent />} />
+              {/* <ChartLegend content={<ChartLegendContent />} /> */}
               {steps[currentStep].slug == "depenses" && (
                 <Bar
                   dataKey="credit"
