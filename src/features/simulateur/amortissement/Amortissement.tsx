@@ -13,7 +13,8 @@ import { GraphAmortissement } from "./GraphAmortissement";
 import { TabAmortissement } from "./TabAmortissement";
 
 export type AmortissementProps = {
-  data: AmortissementGlobalType[];
+  dataDesktop: AmortissementGlobalType[];
+  dataMobile: AmortissementGlobalType[];
 };
 
 export const Amortissement = (props: AmortissementProps) => {
@@ -25,8 +26,11 @@ export const Amortissement = (props: AmortissementProps) => {
           title="Tableau d'amortissement"
         />
         <CardContent className="flex-1 pb-0">
-          <GraphAmortissement data={props.data} />
-          <TabAmortissement data={props.data} />
+          <GraphAmortissement
+            dataDesktop={props.dataDesktop}
+            dataMobile={props.dataMobile}
+          />
+          <TabAmortissement data={props.dataDesktop} />
           <div className="text-xs font-medium text-gray-400 w-full px-4 lg:px-10 mt-4">
             <AccordionSeeMore description="Le cashflow correspond à la différence entre vos loyers annuels et l’ensemble de vos charges : crédit, impôt sur le revenu, prélèvements sociaux, impôt foncier et charges de copropriété. L’amortissement de l’immobilier et des travaux est basé sur 80 % de leur valeur (hors terrain) et réparti sur la durée du prêt. Pour le mobilier, l’amortissement suit la durée du prêt si elle est inférieure à 10 ans, sinon il est limité à 10 % par an." />
           </div>

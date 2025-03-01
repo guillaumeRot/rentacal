@@ -13,7 +13,13 @@ import {
 import { AmortissementGlobalType } from "../simulateur.schema";
 
 export type DataProps = {
+  dataDesktop: AmortissementGlobalType[];
+  dataMobile: AmortissementGlobalType[];
+};
+
+export type GraphProps = {
   data: AmortissementGlobalType[];
+  currentStep: number;
 };
 
 const chartConfig = {
@@ -35,21 +41,21 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const steps = [
+  {
+    slug: "cashflow",
+    title: "Cashflow",
+  },
+  {
+    slug: "depenses",
+    title: "Dépenses",
+  },
+];
+
 export function GraphAmortissement(props: DataProps) {
   const [state, setState] = React.useState({
     currentStep: 0,
   });
-
-  const steps = [
-    {
-      slug: "cashflow",
-      title: "Cashflow",
-    },
-    {
-      slug: "depenses",
-      title: "Dépenses",
-    },
-  ];
 
   const { currentStep } = state;
   const setCurrentStep = (index: number) => {
@@ -78,72 +84,138 @@ export function GraphAmortissement(props: DataProps) {
       </Card>
       <Card className="mt-2 rounded-3xl">
         <CardContent className="px-2 sm:p-6">
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-[250px] w-full"
-          >
-            <BarChart
-              accessibilityLayer
-              data={props.data}
-              margin={{
-                left: 12,
-                right: 12,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="annee"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                minTickGap={32}
-                tickFormatter={(value) => {
-                  return value + "e année";
-                }}
-              />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    className="w-[150px]"
-                    labelFormatter={(value) => {
-                      if (value == 1) {
-                        return "1ère année";
-                      }
-                      return value + "e année";
-                    }}
-                  />
-                }
-              />
-              {steps[currentStep].slug == "depenses" && (
-                <Bar
-                  dataKey="credit"
-                  stackId="a"
-                  fill={`var(--color-credit)`}
-                />
-              )}
-              {steps[currentStep].slug == "depenses" && (
-                <Bar dataKey="ir" stackId="a" fill={`var(--color-ir)`} />
-              )}
-              {steps[currentStep].slug == "depenses" && (
-                <Bar
-                  dataKey="ps"
-                  stackId="a"
-                  fill={`var(--color-ps)`}
-                  radius={[4, 4, 0, 0]}
-                />
-              )}
-              {steps[currentStep].slug == "cashflow" && (
-                <Bar
-                  dataKey="cashflow"
-                  stackId="b"
-                  fill={`var(--color-cashflow)`}
-                  radius={[4, 4, 0, 0]}
-                />
-              )}
-            </BarChart>
-          </ChartContainer>
+          <DesktopGraph data={props.dataDesktop} currentStep={currentStep} />
+          <MobileGraph data={props.dataMobile} currentStep={currentStep} />
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export function DesktopGraph(props: GraphProps) {
+  return (
+    <ChartContainer
+      config={chartConfig}
+      className="hidden lg:block aspect-auto h-[250px] w-full"
+    >
+      <BarChart
+        accessibilityLayer
+        data={props.data}
+        margin={{
+          left: 12,
+          right: 12,
+        }}
+      >
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="annee"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          minTickGap={32}
+          tickFormatter={(value) => {
+            return value + "e année";
+          }}
+        />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent
+              labelFormatter={(value) => {
+                if (value == 1) {
+                  return "1ère année";
+                }
+                return value + "e année";
+              }}
+            />
+          }
+        />
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar dataKey="credit" stackId="a" fill={`var(--color-credit)`} />
+        )}
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar dataKey="ir" stackId="a" fill={`var(--color-ir)`} />
+        )}
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar
+            dataKey="ps"
+            stackId="a"
+            fill={`var(--color-ps)`}
+            radius={[4, 4, 0, 0]}
+          />
+        )}
+        {steps[props.currentStep].slug == "cashflow" && (
+          <Bar
+            dataKey="cashflow"
+            stackId="b"
+            fill={`var(--color-cashflow)`}
+            radius={[4, 4, 0, 0]}
+          />
+        )}
+      </BarChart>
+    </ChartContainer>
+  );
+}
+
+export function MobileGraph(props: GraphProps) {
+  return (
+    <ChartContainer
+      config={chartConfig}
+      className="block lg:hidden aspect-auto h-[250px] w-full"
+    >
+      <BarChart
+        accessibilityLayer
+        data={props.data}
+        margin={{
+          left: 12,
+          right: 12,
+        }}
+      >
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="annee"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          minTickGap={32}
+          tickFormatter={(value) => {
+            return value + "e année";
+          }}
+        />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent
+              labelFormatter={(value) => {
+                if (value == 1) {
+                  return "A partir de la 1ère année";
+                }
+                return "A partir de la " + value + "e année";
+              }}
+            />
+          }
+        />
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar dataKey="credit" stackId="a" fill={`var(--color-credit)`} />
+        )}
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar dataKey="ir" stackId="a" fill={`var(--color-ir)`} />
+        )}
+        {steps[props.currentStep].slug == "depenses" && (
+          <Bar
+            dataKey="ps"
+            stackId="a"
+            fill={`var(--color-ps)`}
+            radius={[4, 4, 0, 0]}
+          />
+        )}
+        {steps[props.currentStep].slug == "cashflow" && (
+          <Bar
+            dataKey="cashflow"
+            stackId="b"
+            fill={`var(--color-cashflow)`}
+            radius={[4, 4, 0, 0]}
+          />
+        )}
+      </BarChart>
+    </ChartContainer>
   );
 }

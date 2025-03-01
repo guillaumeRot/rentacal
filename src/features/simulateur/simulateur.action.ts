@@ -26,6 +26,7 @@ const mapMoisByIndex: Record<number, string> = {
 
 let resultatsGlobal: ResultatGlobalType[] = [];
 let resultatsAnnuel: AmortissementGlobalType[] = [];
+let resultatsMobile: AmortissementGlobalType[] = [];
 let montantPret: number = 0;
 let sommeFraisBancaire: number = 0;
 
@@ -83,6 +84,13 @@ export const calculRentabilite = action
         montantPret
       ),
       resultatsAnnuel: getResultatsAnnuel(
+        parsedInput.parsedInput,
+        mensualites,
+        montantPret,
+        revenuImposable,
+        loyersAnnuel
+      ),
+      resultatsMobile: getResultatsMobile(
         parsedInput.parsedInput,
         mensualites,
         montantPret,
@@ -344,8 +352,54 @@ function getResultatsAnnuel(
       cashflow: cashflowNetNet,
     });
   }
-  console.log("TEST GUI:", resultatsAnnuel);
   return resultatsAnnuel;
+}
+
+function getResultatsMobile(
+  values: DataType,
+  mensualites: number,
+  montantPret: number,
+  revenuImposable: number,
+  loyersAnnuel: number
+) {
+  resultatsMobile = [];
+  let oldCashflow = 0;
+  for (let cptAnnee = 1; cptAnnee <= 30; cptAnnee++) {
+    let mensualitesAnnuelles = 0;
+
+    for (let cptMois = 1; cptMois <= 12; cptMois++) {
+      if (cptAnnee <= values.dureePret) {
+        mensualitesAnnuelles = mensualitesAnnuelles + mensualites;
+      } else {
+        // Passage au micro-BIC après crédit car plus interessant
+        revenuImposable = getRevenuNetImposableMicroBIC(values, loyersAnnuel);
+      }
+    }
+
+    let ps = getPS(revenuImposable);
+    let ir = getIR(revenuImposable, values.tmi);
+    let cashflowNetNet = loyersAnnuel - mensualitesAnnuelles - ps - ir;
+
+    if (cashflowNetNet != oldCashflow) {
+      resultatsMobile.push({
+        annee: cptAnnee.toString(),
+        loyersAnnuel: loyersAnnuel,
+        vacanceLocative: values.nbMoisLocParAn,
+        credit: mensualitesAnnuelles,
+        ps: getPS(revenuImposable),
+        ir: getIR(revenuImposable, values.tmi),
+        foncier: values.impotsFoncier,
+        copro: values.chargesCopro,
+        amortissementImmo: getAmortissementImmo(values, cptAnnee),
+        amortissementTravaux: getAmortissementTravaux(values, cptAnnee),
+        amortissementMobilier: getAmortissementMobilier(values, cptAnnee),
+        cashflow: cashflowNetNet,
+      });
+    }
+    oldCashflow = cashflowNetNet;
+  }
+  console.log("TEST GUI 10:", resultatsMobile);
+  return resultatsMobile;
 }
 
 function getTauxInteretMensuel(tauxInteretAnnuel: number) {
