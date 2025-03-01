@@ -36,21 +36,16 @@ export const Banque = (props: BanqueProps) => {
   const chartConfig = {
     montantPret: {
       label: "Montant du prêt",
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--chart-2))",
     },
     fraisBancaire: {
       label: "Frais bancaire",
-      color: "hsl(var(--chart-2))",
+      color: "hsl(var(--chart-1))",
     },
   } satisfies ChartConfig;
 
   return (
     <CardParent className="grid grid-cols-1">
-      {/* <CardBanque
-        montantPret={props.montantPret || 0}
-        fraisBancaires={props.fraisBancaires || 0}
-        coutPret={(props.montantPret || 0) + (props.fraisBancaires || 0)}
-      /> */}
       <Card className="flex flex-col rounded-3xl px-4 lg:px-6 m-4 h-fit">
         <CardChildHeader icon={<TbPigMoney size={25} />} title="Coût emprunt" />
         <CardContent className="flex flex-col pb-0">
@@ -62,7 +57,7 @@ export const Banque = (props: BanqueProps) => {
                   className="mx-auto aspect-square max-h-[300px]"
                 >
                   <PieChart>
-                    <Pie data={chartData} dataKey="value" />
+                    <Pie data={chartData} dataKey="value" innerRadius={55} />
                     <ChartLegend
                       content={<ChartLegendContent nameKey="label" />}
                       className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"

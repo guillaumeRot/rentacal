@@ -114,7 +114,6 @@ export function GraphAmortissement(props: DataProps) {
                   />
                 }
               />
-              {/* <ChartLegend content={<ChartLegendContent />} /> */}
               {steps[currentStep].slug == "depenses" && (
                 <Bar
                   dataKey="credit"

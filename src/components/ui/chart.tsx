@@ -4,6 +4,7 @@ import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 
 import { cn } from "@/lib/utils";
+import { numericFormatter } from "react-number-format";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "" } as const;
@@ -228,7 +229,7 @@ const ChartTooltipContent = React.forwardRef<
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none",
+                        "flex flex-1 justify-between leading-none gap-3",
                         nestLabel ? "items-end" : "items-center"
                       )}
                     >
@@ -240,7 +241,13 @@ const ChartTooltipContent = React.forwardRef<
                       </div>
                       {item.value && (
                         <span className="font-mono font-medium tabular-nums text-foreground">
-                          {item.value.toLocaleString()}
+                          {numericFormatter(item.value.toString(), {
+                            decimalScale: 2,
+                            decimalSeparator: ",",
+                            thousandSeparator: " ",
+                            fixedDecimalScale: true,
+                            suffix: " €",
+                          })}
                         </span>
                       )}
                     </div>
