@@ -46,7 +46,7 @@ export const CardChildHeader = (props: CardChildHeaderProps) => {
       <CardTitle>
         <div className="flex text-gray-700">
           {props.icon}
-          <div className="flex items-center">
+          <div className="flex items-center text-center">
             <h1 className="ml-2 text-sm font-medium">{props.title}</h1>
           </div>
         </div>
