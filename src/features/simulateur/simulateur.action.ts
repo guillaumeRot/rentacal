@@ -398,7 +398,6 @@ function getResultatsMobile(
     }
     oldCashflow = cashflowNetNet;
   }
-  console.log("TEST GUI 10:", resultatsMobile);
   return resultatsMobile;
 }
 
