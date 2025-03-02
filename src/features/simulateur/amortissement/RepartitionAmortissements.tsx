@@ -21,7 +21,7 @@ export type DataProps = {
 
 export function RepartitionAmortissements(props: DataProps) {
   return (
-    <Card className="rounded-3xl px-4 lg:px-6 my-4 mx-2 lg:mx-4 h-fit text-sm lg:text-md">
+    <Card className="rounded-3xl px-4 lg:px-6 my-4 mx-2 lg:mx-4 h-fit text-xs lg:text-sm lg:text-md">
       <CardChildHeader title="Répartition des amortissements" />
       <CardContent className="py-6">
         <Table>
