@@ -7,6 +7,7 @@ import {
   DataType,
   ResultatGlobalType,
   ResultSchema,
+  ResultType,
 } from "./simulateur.schema";
 
 const mapMoisByIndex: Record<number, string> = {
@@ -34,6 +35,7 @@ export const calculRentabilite = action
   .schema(DataSchema)
   .outputSchema(ResultSchema)
   .action(async (parsedInput) => {
+    let result: ResultType = {} as ResultType;
     let montantPret = getMontantPret(parsedInput.parsedInput);
     let mensualites = getMensualite(parsedInput.parsedInput, montantPret);
 
@@ -69,7 +71,7 @@ export const calculRentabilite = action
       );
     }
 
-    return {
+    result = {
       rentabiliteBrute: getRentabiliteBrute(loyersAnnuel, montantPret),
       rentabiliteNette: getRentabiliteNette(
         parsedInput.parsedInput,
@@ -78,11 +80,11 @@ export const calculRentabilite = action
       ),
       rentabiliteNetteNette: rentabiliteNetteNette,
       montantPret: montantPret,
-      resultatsMensuel: getResultatsGlobal(
-        parsedInput.parsedInput,
-        mensualites,
-        montantPret
-      ),
+      // resultatsMensuel: getResultatsGlobal(
+      //   parsedInput.parsedInput,
+      //   mensualites,
+      //   montantPret
+      // ),
       resultatsAnnuel: getResultatsAnnuel(
         parsedInput.parsedInput,
         mensualites,
@@ -102,6 +104,7 @@ export const calculRentabilite = action
       fraisBancaires: getSommeFraisBancaires(resultatsGlobal),
       coutPret: getCoutPret(montantPret, sommeFraisBancaire),
     };
+    return result;
   });
 
 function getRentabiliteBrute(loyersAnnuel: number, montantPret: number) {

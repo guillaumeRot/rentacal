@@ -53,17 +53,40 @@ export const ResultatGlobal = z.object({
 });
 export type ResultatGlobalType = z.infer<typeof ResultatGlobal>;
 
+export const AmortissementSchema = z.object({
+  taux: z.number(),
+  montant: z.number(),
+});
+export const AmortissementGlobalSchema = z.object({
+  annee: z.string(),
+  loyersAnnuel: z.number(),
+  vacanceLocative: z.number(),
+  credit: z.number(),
+  ir: z.number(),
+  ps: z.number(),
+  foncier: z.number(),
+  copro: z.number(),
+  amortissementImmo: AmortissementSchema,
+  amortissementTravaux: AmortissementSchema,
+  amortissementMobilier: AmortissementSchema,
+  cashflow: z.number(),
+});
+export type AmortissementGlobalType = z.infer<typeof AmortissementGlobalSchema>;
+
 export const ResultSchema = z.object({
   rentabiliteBrute: z.number(),
   rentabiliteNette: z.number(),
   rentabiliteNetteNette: z.number(),
   montantPret: z.number(),
-  resultatsMensuel: z.array(ResultatMensuel),
+  // resultatsMensuel: z.array(AmortissementGlobalSchema),
+  resultatsAnnuel: z.array(AmortissementGlobalSchema),
+  resultatsMobile: z.array(AmortissementGlobalSchema),
   mensualites: z.number(),
   cashflowBrut: z.number(),
   fraisBancaires: z.number(),
   coutPret: z.number(),
 });
+export type ResultType = z.infer<typeof ResultSchema>;
 
 export const AccessSchema = z.object({
   email: z.string().optional(),
@@ -102,23 +125,3 @@ export const FormFieldSchema = z.object({
     .optional(),
 });
 export type FormFieldType = z.infer<typeof FormFieldSchema>;
-
-export const AmortissementSchema = z.object({
-  taux: z.number(),
-  montant: z.number(),
-});
-export const AmortissementGlobalSchema = z.object({
-  annee: z.string(),
-  loyersAnnuel: z.number(),
-  vacanceLocative: z.number(),
-  credit: z.number(),
-  ir: z.number(),
-  ps: z.number(),
-  foncier: z.number(),
-  copro: z.number(),
-  amortissementImmo: AmortissementSchema,
-  amortissementTravaux: AmortissementSchema,
-  amortissementMobilier: AmortissementSchema,
-  cashflow: z.number(),
-});
-export type AmortissementGlobalType = z.infer<typeof AmortissementGlobalSchema>;
