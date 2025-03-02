@@ -63,7 +63,7 @@ export function GraphAmortissement(props: DataProps) {
   };
 
   return (
-    <div className="m-5">
+    <div className="my-5 mx-2 lg:mx-5">
       <Card className="rounded-3xl w-full border-2 p-1">
         <CardContent className="flex flex-row rounded-3xl">
           {steps.map((step, index) => (

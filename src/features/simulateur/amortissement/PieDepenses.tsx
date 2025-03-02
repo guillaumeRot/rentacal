@@ -64,7 +64,7 @@ export function PieDepenses(props: DataProps) {
     props.data.copro;
 
   return (
-    <Card className="flex flex-col rounded-3xl px-4 lg:px-6 m-4 h-fit">
+    <Card className="flex flex-col rounded-3xl px-4 lg:px-6 my-4 mx-2 lg:mx-4 h-fit">
       <CardChildHeader title="Répartition des dépenses" />
       <CardContent className="flex flex-col pb-0">
         <div className="py-2 mt-4 mx-auto">

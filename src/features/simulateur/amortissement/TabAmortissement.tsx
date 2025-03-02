@@ -19,7 +19,7 @@ export type DataProps = {
 
 export function TabAmortissement(props: DataProps) {
   return (
-    <Card className="m-5">
+    <Card className="my-5 mx-2 lg:mx-5">
       <CardContent className="px-2 sm:px-6">
         <Accordion type="single" collapsible className="w-full">
           {props.data &&
