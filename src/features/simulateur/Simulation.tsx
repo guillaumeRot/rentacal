@@ -3,7 +3,7 @@
 import { LayoutResultWithFilters } from "@/components/layout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineLoading } from "react-icons/ai";
 import { z } from "zod";
@@ -42,13 +42,25 @@ export default function Simulation() {
     enabled: false,
   });
 
+  useEffect(() => {
+    console.log("Données filter values mises à jour : ", filtersValues);
+    result.refetch();
+    setIsLoaded(true);
+  }, [filtersValues]);
+
   const onSubmit = async (values: z.infer<typeof DataSchema>) => {
     setIsLoaded(false);
     console.log("Données du formulaire : ", values);
     await new Promise((r) => setTimeout(r, 400));
     setFiltersValues(values);
-    result.refetch();
-    setIsLoaded(true);
+    // setFiltersValues((prev) => {
+    //   const newValues = { ...values };
+    //   console.log("Données filter values mises à jour : ", newValues);
+    //   return newValues;
+    //   console.log("Données filter values : ", filtersValues);
+    //   result.refetch();
+    //   setIsLoaded(true);
+    // });
   };
 
   const form = useForm<z.infer<typeof DataSchema>>({

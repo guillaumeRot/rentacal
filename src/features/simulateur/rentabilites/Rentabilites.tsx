@@ -25,9 +25,9 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
   var risk = "";
   if (props.pourcentage > 7) {
     risk = "low";
-  } else if (props.pourcentage < 4 && props.pourcentage > 0) {
+  } else if (props.pourcentage < 4) {
     risk = "high";
-  } else if (props.pourcentage < 7 && props.pourcentage > 0) {
+  } else if (props.pourcentage < 7) {
     risk = "middle";
   }
 
