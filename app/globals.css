@@ -159,3 +159,16 @@ html body[data-scroll-locked] {
   overflow: visible !important;
   margin-right: 0 !important;
 }
+
+.loaderIcon {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+}

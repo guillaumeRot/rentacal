@@ -1,7 +1,6 @@
 "use client";
 
 import { Amortissement } from "./amortissement/Amortissement";
-// import { Filters } from "./filters/Filters";
 import { Banque } from "./banque/Banque";
 import { Rentabilites } from "./rentabilites/Rentabilites";
 import { ResultType } from "./simulateur.schema";

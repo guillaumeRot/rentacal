@@ -13,6 +13,7 @@ import { FormFilterTravauxMobilier } from "./FormFilterTravauxMobilier";
 interface FiltersProps {
   handleSubmit: (data: any) => void;
   form: UseFormReturn<z.infer<typeof DataSchema>>;
+  isLoaded: boolean;
 }
 
 export default function Filters(props: FiltersProps) {
@@ -72,6 +73,11 @@ export default function Filters(props: FiltersProps) {
     setState({ currentStep: index });
   };
 
+  let cursor = "cursor-pointer";
+  if (!props.isLoaded) {
+    cursor = "cursor-not-allowed";
+  }
+
   return (
     <div>
       <Card className="rounded-3xl w-full border-2 p-1">
@@ -104,7 +110,8 @@ export default function Filters(props: FiltersProps) {
                 <div className="flex justify-between">
                   <button
                     type="submit"
-                    className="cursor-pointer text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800"
+                    className={`text-white mx-auto py-3 px-8 text-center rounded-full text-md bg-blue-700 mb-5 hover:bg-blue-800 ${cursor}`}
+                    disabled={!props.isLoaded}
                   >
                     Calculer
                   </button>
