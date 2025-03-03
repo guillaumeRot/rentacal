@@ -1,6 +1,7 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -64,11 +65,11 @@ export default function RootLayout({
           name="twitter:image"
           content="https://rentacal.vercel.app/images/logo.png"
         />
-        <script
+        <Script
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="c222e0c9-bdea-4568-aa72-6abf53e949f1"
-        ></script>
+        />
       </head>
       <link
         rel="icon"
