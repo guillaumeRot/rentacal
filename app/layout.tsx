@@ -97,7 +97,6 @@ export default function RootLayout({
       <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
         <body className={`cn(inter.className, "h-full") md:overflow-visible`}>
           <Providers>{children}</Providers>
-          <GoogleAnalytics gaId="G-CJ6SFG2EWQ" />
         </body>
       </html>
     </>

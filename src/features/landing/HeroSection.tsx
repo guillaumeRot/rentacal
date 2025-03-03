@@ -10,7 +10,7 @@ export const HeroSection = () => {
         <div className="space-y-5 max-w-6xl mx-auto text-center">
           <h1 className="text-4xl text-gray-800 font-semibold mx-auto sm:text-6xl">
             Calculez votre{" "}
-            <span className="relative text-blue-800">rentabilité locative</span>
+            <span className="relative text-blue-700">rentabilité locative</span>
           </h1>
           <h1 className="text-4xl text-gray-800 font-semibold mx-auto sm:text-6xl">
             en quelques secondes
@@ -27,7 +27,7 @@ export const HeroSection = () => {
               onClick={() => {
                 redirect(`/simulateur`);
               }}
-              className="py-3 px-6 text-center rounded-full duration-150 text-white text-semibold text-lg bg-blue-900 mb-5 hover:bg-blue-800 hover:ring-3 ring-transparent ring-offset-2 transition"
+              className="py-3 px-6 text-center rounded-full duration-150 text-white text-semibold text-lg bg-blue-600 mb-5 hover:bg-blue-700 hover:ring-3 ring-transparent ring-offset-2 transition"
             >
               Simulez votre rentabilité !
             </Link>
