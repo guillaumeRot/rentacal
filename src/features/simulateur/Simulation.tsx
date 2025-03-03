@@ -53,14 +53,6 @@ export default function Simulation() {
     console.log("Données du formulaire : ", values);
     await new Promise((r) => setTimeout(r, 400));
     setFiltersValues(values);
-    // setFiltersValues((prev) => {
-    //   const newValues = { ...values };
-    //   console.log("Données filter values mises à jour : ", newValues);
-    //   return newValues;
-    //   console.log("Données filter values : ", filtersValues);
-    //   result.refetch();
-    //   setIsLoaded(true);
-    // });
   };
 
   const form = useForm<z.infer<typeof DataSchema>>({
