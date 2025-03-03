@@ -141,7 +141,7 @@ export default function SignIn() {
                       )}
                     />
                     <Button
-                      className="mx-auto block px-6 py-2 rounded-full text-sm text-semibold bg-blue-900 hover:bg-blue-800 hover:ring ring-transparent ring-offset-2 transition"
+                      className="mx-auto block px-6 py-2 rounded-full text-sm text-semibold bg-blue-900 hover:bg-blue-800 hover:ring-3 ring-transparent ring-offset-2 transition"
                       type="submit"
                     >
                       <span className="text-white">Se connecter</span>

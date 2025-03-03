@@ -9,7 +9,7 @@ export const PourcentageFormat = (props: PourcentageFormatProps) => {
   return (
     <NumericFormat
       className={props.className}
-      value={props.value}
+      value={props.value != 0 ? props.value : "-"}
       decimalSeparator=","
       decimalScale={2}
       suffix={" %"}

@@ -11,7 +11,7 @@ export const FeaturesSection = () => {
         Analysez la rentabilité locative instantanément, sans tableurs
         compliqués.
       </p>
-      <div className="custom-screen shadow-sm pt-20">
+      <div className="custom-screen shadow-xs pt-20">
         <div className="items-center gap-x-12 lg:flex">
           <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
             <Image
@@ -56,7 +56,7 @@ export const FeaturesSection = () => {
           </div>
         </div>
       </div>
-      <div className="custom-screen shadow-sm pt-20">
+      <div className="custom-screen shadow-xs pt-20">
         <div className="items-center gap-x-12 lg:flex">
           <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
             <Image

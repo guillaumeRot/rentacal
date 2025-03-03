@@ -4,7 +4,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Footer } from "@/features/Footer";
 import Header from "@/features/Header";
 import { RentaCalSidebar } from "@/features/RentaCalSidebar";
-import SimulationResult from "@/features/simulateur/SimulationResult";
+import Simulation from "@/features/simulateur/Simulation";
 import CookieConsent from "@/features/theme/CookieConsent";
 import { useSession } from "next-auth/react";
 
@@ -16,7 +16,7 @@ export default function Result() {
       <RentaCalSidebar />
       <div className="w-screen">
         <Header />
-        <SimulationResult />
+        <Simulation />
         <CookieConsent variant="small" />
         <Footer />
       </div>
