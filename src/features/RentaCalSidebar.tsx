@@ -62,23 +62,11 @@ export function RentaCalSidebar({
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader
-        className={`mx-auto
-        ${open || openMobile ? "mt-5" : ""}`}
-      >
-        <Image
-          src={
-            open || openMobile
-              ? "/rentacal_icon_title.png"
-              : "/rentacal_icon.png"
-          }
-          width={150}
-          height={150}
-          alt="rentacal logo"
-        />
+      <SidebarHeader className="mx-auto">
+        <Image src="/logo.webp" width={80} height={80} alt="rentacal logo" />
       </SidebarHeader>
       <SidebarContent
-        className={`mt-8
+        className={`mt-5
           ${open || openMobile ? "px-8" : ""}`}
       >
         <SidebarGroup>
