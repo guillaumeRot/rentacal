@@ -26,9 +26,7 @@ export type CardChildProps = PropsWithChildren & {
 
 export const CardChild = (props: CardChildProps) => {
   return (
-    <Card
-      className={cn("rounded-3xl my-2 lg:my-6 mx-2 lg:mx-5", props.className)}
-    >
+    <Card className={cn("rounded-3xl my-2 lg:my-6 border-2", props.className)}>
       {props.children}
     </Card>
   );

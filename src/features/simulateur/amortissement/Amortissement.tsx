@@ -2,11 +2,7 @@
 
 import { CardContent } from "@/components/ui/card";
 import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
-import {
-  CardChild,
-  CardChildHeader,
-  CardParent,
-} from "@/features/theme/CardUtils";
+import { CardChild, CardChildHeader } from "@/features/theme/CardUtils";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { AmortissementGlobalType } from "../simulateur.schema";
 import { GraphAmortissement } from "./GraphAmortissement";
@@ -19,7 +15,7 @@ export type AmortissementProps = {
 
 export const Amortissement = (props: AmortissementProps) => {
   return (
-    <CardParent className="grid grid-cols-1">
+    <div className="grid grid-cols-1">
       <CardChild>
         <CardChildHeader
           icon={<BsGraphUpArrow size={25} />}
@@ -36,6 +32,6 @@ export const Amortissement = (props: AmortissementProps) => {
           </div>
         </CardContent>
       </CardChild>
-    </CardParent>
+    </div>
   );
 };

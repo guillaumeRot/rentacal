@@ -2,11 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { CardContent } from "@/components/ui/card";
 import { PourcentageFormat } from "@/features/PourcentageFormat";
 import { AccordionSeeMore } from "@/features/theme/AccordionUtils";
-import {
-  CardChild,
-  CardChildHeader,
-  CardParent,
-} from "@/features/theme/CardUtils";
+import { CardChild, CardChildHeader } from "@/features/theme/CardUtils";
 import { PiSealPercentLight } from "react-icons/pi";
 
 export type RentabilitesProps = {
@@ -74,7 +70,7 @@ export const CardRentabilite = (props: CardRentabiliteProps) => {
 
 export const Rentabilites = (props: RentabilitesProps) => {
   return (
-    <CardParent className="grid grid-cols-1 lg:grid-cols-3">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-10">
       <CardRentabilite
         label="Rentabilité brute"
         pourcentage={props.rentabiliteBrute || 0}
@@ -90,6 +86,6 @@ export const Rentabilites = (props: RentabilitesProps) => {
         pourcentage={props.rentabiliteNetteNette || 0}
         description="La rentabilité après impôts et prélèvements fiscaux. Un risque est élevé sous 4 %, modéré entre 4 % et 7 %, et faible au-delà de 7 %."
       />
-    </CardParent>
+    </div>
   );
 };

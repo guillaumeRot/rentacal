@@ -10,7 +10,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { MontantFormat } from "@/features/MontantFormat";
-import { CardChildHeader, CardParent } from "@/features/theme/CardUtils";
+import { CardChild, CardChildHeader } from "@/features/theme/CardUtils";
 import { TbPigMoney } from "react-icons/tb";
 import { Pie, PieChart } from "recharts";
 
@@ -45,8 +45,9 @@ export const Banque = (props: BanqueProps) => {
   } satisfies ChartConfig;
 
   return (
-    <CardParent className="grid grid-cols-1">
-      <Card className="flex flex-col rounded-3xl px-4 lg:px-6 m-4 h-fit">
+    <div className="grid grid-cols-1">
+      {/* <Card className="flex flex-col rounded-3xl px-4 lg:px-6 m-4 h-fit"> */}
+      <CardChild className="flex flex-col px-4 lg:px-6 h-fit">
         <CardChildHeader icon={<TbPigMoney size={25} />} title="Coût emprunt" />
         <CardContent className="flex flex-col pb-0">
           <div className="flex-1 pb-0 grid grid-cols-1 lg:grid-cols-2 items-center">
@@ -90,7 +91,7 @@ export const Banque = (props: BanqueProps) => {
             </Card>
           </div>
         </CardContent>
-      </Card>
-    </CardParent>
+      </CardChild>
+    </div>
   );
 };
