@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signInAction } from "../auth/auth.action";
@@ -48,13 +49,14 @@ export const HeaderSection = () => {
       >
         <div className="custom-screen items-center mx-auto md:flex">
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Link href="/">
-              <img
-                src="rentacal_icon_title.png"
-                width={180}
-                height={150}
-                alt="Rentacal logo"
+            <Link href="/" className="flex flex-row items-center">
+              <Image
+                src="/logo.webp"
+                width={60}
+                height={60}
+                alt="rentacal logo"
               />
+              <span className="text-3xl ml-3">Rentacal</span>
             </Link>
             <div className="md:hidden">
               <button

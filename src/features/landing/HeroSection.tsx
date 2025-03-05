@@ -1,13 +1,18 @@
 "use client";
 
+import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const HeroSection = () => {
   return (
     <section>
-      <div className="custom-screen pt-28 text-gray-600 font-poppins">
+      <div className="custom-screen text-gray-600 font-poppins">
         <div className="space-y-5 max-w-6xl mx-auto text-center">
+          <Card className="rounded-3xl border-2 border-blue-500 bg-blue-100 text-blue-500 w-sm mx-auto my-10 text-sm py-2 px-3">
+            Par un investisseur, pour les investisseurs !
+          </Card>
           <h1 className="text-4xl text-gray-800 font-semibold mx-auto sm:text-6xl">
             Calculez votre{" "}
             <span className="relative text-blue-700">rentabilité locative</span>
@@ -33,6 +38,15 @@ export const HeroSection = () => {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+        <Image
+          src="/screen-rentacal.png"
+          width={1000}
+          height={1000}
+          alt="rentacal screenshot"
+          className="mx-auto mt-10"
+        />
       </div>
     </section>
   );

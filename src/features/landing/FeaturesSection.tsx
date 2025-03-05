@@ -3,7 +3,7 @@ import { HiArrowRightCircle } from "react-icons/hi2";
 
 export const FeaturesSection = () => {
   return (
-    <section id="features" className="py-16 pb-0">
+    <section id="features" className="py-16 px-20">
       <h1 className="flex flex-col text-center mx-auto text-2xl lg:text-4xl font-poppins font-semibold px-4 max-w-5xl">
         Simplifiez vos calculs, maximisez vos profits !
       </h1>
@@ -11,15 +11,15 @@ export const FeaturesSection = () => {
         Analysez la rentabilité locative instantanément, sans tableurs
         compliqués.
       </p>
-      <div className="custom-screen shadow-xs pt-20">
+      <div className="mx-auto shadow-xs pt-20">
         <div className="items-center gap-x-12 lg:flex">
           <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
             <Image
-              src="/filtres-rentacal.png"
+              src="/screenshot-filters.png"
               layout="responsive"
               width={100}
               height={75}
-              className="w-full h-auto rounded-lg md:max-w-lg"
+              className="w-full h-auto border-2 border-blue-600 rounded-3xl"
               alt="Analysez la rentabilité locative instantanément"
             />
           </div>
@@ -60,11 +60,11 @@ export const FeaturesSection = () => {
         <div className="items-center gap-x-12 lg:flex">
           <div className="flex-1 sm:hidden lg:block hover:scale-[1.05] transition duration-700 ease-in-out">
             <Image
-              src="/resultats-rentacal.png"
+              src="/screenshot-result.png"
               layout="responsive"
               width={100}
               height={75}
-              className="w-full h-auto rounded-lg md:max-w-lg"
+              className="w-full h-auto border-2 border-blue-600 rounded-3xl"
               alt="Entrez les détails de votre projet immobilier"
             />
           </div>

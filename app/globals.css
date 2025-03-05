@@ -172,3 +172,17 @@ html body[data-scroll-locked] {
     transform: scale(1) rotate(360deg);
   }
 }
+
+.fade-out {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* Ajustez la hauteur selon vos besoins */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
+  pointer-events: none; /* Pour s'assurer que le pseudo-élément n'interfère pas avec les interactions utilisateur */
+}
