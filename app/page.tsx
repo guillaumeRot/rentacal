@@ -19,9 +19,10 @@ export default function Home() {
   } else {
     return (
       <>
-        <Card className="rounded-3xl bg-blue-50 m-5">
+        <Card className="rounded-3xl bg-blue-50 m-5 relative overflow-hidden">
           <HeaderSection />
           <HeroSection />
+          <div className="fade-out" />
         </Card>
         {/* <VideoSection /> */}
         <GradientWrapper>
