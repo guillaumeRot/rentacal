@@ -10,7 +10,7 @@ export const HeroSection = () => {
     <section>
       <div className="custom-screen text-gray-600 font-poppins">
         <div className="space-y-5 max-w-6xl mx-auto text-center">
-          <Card className="rounded-3xl border-2 border-blue-500 bg-blue-100 text-blue-500 w-sm mx-auto my-10 text-sm py-2 px-3">
+          <Card className="rounded-3xl border-2 border-blue-500 bg-blue-100 text-blue-500 max-w-3xs lg:max-w-sm mx-auto my-10 text-xs lg:text-sm py-2 px-3">
             Par un investisseur, pour les investisseurs !
           </Card>
           <h1 className="text-4xl text-gray-800 font-semibold mx-auto sm:text-6xl">
@@ -45,7 +45,7 @@ export const HeroSection = () => {
           width={1000}
           height={1000}
           alt="rentacal screenshot"
-          className="mx-auto mt-10"
+          className="mx-auto mt-10 px-2"
         />
       </div>
     </section>
