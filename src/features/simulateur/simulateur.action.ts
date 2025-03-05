@@ -80,11 +80,6 @@ export const calculRentabilite = action
       ),
       rentabiliteNetteNette: rentabiliteNetteNette,
       montantPret: montantPret,
-      // resultatsMensuel: getResultatsGlobal(
-      //   parsedInput.parsedInput,
-      //   mensualites,
-      //   montantPret
-      // ),
       resultatsAnnuel: getResultatsAnnuel(
         parsedInput.parsedInput,
         mensualites,
@@ -101,7 +96,9 @@ export const calculRentabilite = action
       ),
       mensualites: mensualites,
       cashflowBrut: parsedInput.parsedInput.loyersTotal - mensualites,
-      fraisBancaires: getSommeFraisBancaires(resultatsGlobal),
+      fraisBancaires: getSommeFraisBancaires(
+        getResultatsGlobal(parsedInput.parsedInput, mensualites, montantPret)
+      ),
       coutPret: getCoutPret(montantPret, sommeFraisBancaire),
     };
     return result;
