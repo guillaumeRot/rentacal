@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -33,6 +34,15 @@ export const HeroSection = () => {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+        <Image
+          src="/screen-rentacal.png"
+          width={1000}
+          height={1000}
+          alt="rentacal screenshot"
+          className="mx-auto mt-10"
+        />
       </div>
     </section>
   );
