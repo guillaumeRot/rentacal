@@ -62,7 +62,7 @@ export const HeaderSection = () => {
               <button
                 role="button"
                 aria-label="Open the menu"
-                className="text-gray-500 hover:text-gray-800"
+                className="text-white hover:text-white"
                 onClick={handleNavMenu}
               >
                 {state ? (

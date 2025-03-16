@@ -15,7 +15,7 @@ export const HeroSection = () => {
           </Card>
           <h1 className="text-4xl text-white font-semibold mx-auto sm:text-6xl">
             Calculez votre{" "}
-            <span className="relative text-blue-800">rentabilité locative</span>
+            <span className="relative text-blue-700">rentabilité locative</span>
           </h1>
           <h1 className="text-4xl text-white font-semibold mx-auto sm:text-6xl">
             en quelques secondes
