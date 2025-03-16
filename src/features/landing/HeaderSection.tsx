@@ -56,7 +56,7 @@ export const HeaderSection = () => {
                 height={60}
                 alt="rentacal logo"
               />
-              <span className="text-3xl ml-3">Rentacal</span>
+              <span className="text-3xl ml-3 text-white">Rentacal</span>
             </Link>
             <div className="md:hidden">
               <button
@@ -102,10 +102,10 @@ export const HeaderSection = () => {
               state ? "" : "hidden"
             }`}
           >
-            <ul className="text-gray-700 justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 md:text-gray-600 md:font-medium">
+            <ul className="text-blue-800 justify-end items-center space-y-6 lg:flex lg:space-x-6 lg:space-y-0 md:font-medium">
               {navigation.map((item, idx) => {
                 return (
-                  <li key={idx} className="duration-150 hover:text-gray-900">
+                  <li key={idx} className="duration-150 hover:text-blue-900">
                     <Link href={item.path} className="block">
                       {item.title}
                     </Link>
@@ -119,7 +119,7 @@ export const HeaderSection = () => {
                     onClick={() => {
                       signInAction();
                     }}
-                    className="py-2.5 px-4 text-center rounded-full duration-150 text-white text-bold text-md bg-blue-600 mb-5 hover:bg-blue-700 hover:ring-3 ring-transparent ring-offset-2 transition"
+                    className="py-2.5 px-4 text-center rounded-full duration-150 text-white text-bold text-md bg-blue-700 mb-5 hover:bg-blue-700 hover:ring-3 ring-transparent ring-offset-2 transition"
                   >
                     Se connecter
                   </Link>
