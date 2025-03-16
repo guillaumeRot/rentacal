@@ -18,7 +18,7 @@ export default function Home() {
   } else {
     return (
       <>
-        <Card className="rounded-b-3xl rounded-t-none bg-linear-to-br from-blue-400 to-sky-200 relative overflow-hidden">
+        <Card className="rounded-b-3xl rounded-t-none bg-linear-to-b from-blue-400 to-sky-200 relative overflow-hidden">
           <HeaderSection />
           <HeroSection />
           <div className="fade-out" />

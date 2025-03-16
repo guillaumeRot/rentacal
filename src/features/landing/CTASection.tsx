@@ -7,7 +7,7 @@ import { signInAction } from "../auth/auth.action";
 export default class CTASection extends Component {
   render() {
     return (
-      <section className="py-16 bg-linear-to-r from-blue-900 via-sky-600 to-blue-900">
+      <section className="py-16 bg-linear-to-r from-blue-600 via-sky-500 to-blue-600">
         <div className="custom-screen">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="flex md:flex-row flex-col justify-center text-4xl sm:text-5xl font-poppins font-semibold px-4">

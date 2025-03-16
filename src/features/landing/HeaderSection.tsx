@@ -102,10 +102,10 @@ export const HeaderSection = () => {
               state ? "" : "hidden"
             }`}
           >
-            <ul className="text-blue-800 justify-end items-center space-y-6 lg:flex lg:space-x-6 lg:space-y-0 md:font-medium">
+            <ul className="text-white justify-end items-center space-y-6 lg:flex lg:space-x-6 lg:space-y-0 md:font-medium">
               {navigation.map((item, idx) => {
                 return (
-                  <li key={idx} className="duration-150 hover:text-blue-900">
+                  <li key={idx} className="duration-150 hover:text-blue-800">
                     <Link href={item.path} className="block">
                       {item.title}
                     </Link>
