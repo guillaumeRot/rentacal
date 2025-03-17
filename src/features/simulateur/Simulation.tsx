@@ -62,7 +62,7 @@ export default function Simulation() {
   const { handleSubmit } = form;
 
   return (
-    <div className="bg-white mt-20">
+    <div className="mt-15">
       <LayoutResultWithFilters>
         <h1 className="text-xl lg:text-2xl my-4">
           1 - Renseignez vos informations
