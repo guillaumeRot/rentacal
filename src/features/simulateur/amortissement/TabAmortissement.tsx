@@ -19,7 +19,7 @@ export type DataProps = {
 
 export function TabAmortissement(props: DataProps) {
   return (
-    <Card className="my-5 mx-2 lg:mx-5">
+    <Card className="my-5 mx-2 lg:mx-5 rounded-3xl">
       <CardContent className="px-2 sm:px-6">
         <Accordion type="single" collapsible className="w-full">
           {props.data &&
@@ -27,10 +27,10 @@ export function TabAmortissement(props: DataProps) {
               <AccordionItem key={`${data.annee}`} value={`item-${data.annee}`}>
                 <AmortissementTrigger data={data} />
                 <AccordionContent>
-                  <Card className="rounded-3xl p-0 h-fit bg-blue-50">
+                  <Card className="rounded-3xl p-0 h-fit bg-linear-to-b from-blue-500 to-sky-200">
                     <div className="text-center mt-6 grid grid-cols-1 lg:grid-cols-2">
                       <div className="flex flex-col px-4 lg:px-10">
-                        <span className="text-center text-md font-semibold">
+                        <span className="text-center text-md font-medium text-white">
                           Loyers annuels
                         </span>
                         <div className="py-2">
@@ -40,7 +40,7 @@ export function TabAmortissement(props: DataProps) {
                         </div>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-center text-md font-semibold">
+                        <span className="text-center text-md font-medium text-white">
                           Répartis sur
                         </span>
                         <div className="py-2">
