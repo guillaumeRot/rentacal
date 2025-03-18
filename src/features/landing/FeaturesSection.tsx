@@ -4,7 +4,7 @@ import { HiArrowRightCircle } from "react-icons/hi2";
 
 export const FeaturesSection = () => {
   return (
-    <section id="features" className="py-16 px-20">
+    <section id="features" className="py-16 px-5 lg:px-20">
       <h1 className="flex flex-col text-center mx-auto text-2xl lg:text-4xl font-poppins font-semibold px-4 max-w-5xl">
         Simplifiez vos calculs, maximisez vos profits !
       </h1>
@@ -12,9 +12,9 @@ export const FeaturesSection = () => {
         Analysez la rentabilité locative instantanément, sans tableurs
         compliqués.
       </p>
-      <div className="mx-auto flex flex-col lg:flex-row gap-x-12">
+      <div className="mx-auto flex flex-col lg:flex-row gap-y-10 lg:gap-x-12">
         <Card className="rounded-3xl">
-          <CardContent className="rounded-t-3xl bg-linear-to-b from-blue-400 to-sky-200 p-10">
+          <CardContent className="rounded-t-3xl bg-linear-to-b from-blue-400 to-sky-200 p-3 lg:p-10">
             <Image
               src="/screenshot-filters.png"
               layout="responsive"
@@ -24,7 +24,7 @@ export const FeaturesSection = () => {
               alt="Analysez la rentabilité locative instantanément"
             />
           </CardContent>
-          <CardFooter className="max-h-[250px]">
+          <CardFooter className="lg:max-h-[250px]">
             <div className="max-w-xl mt-6 md:mt-0 lg:max-w-2xl">
               {/* <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
                 Entrez les détails de votre projet immobilier.
@@ -59,7 +59,7 @@ export const FeaturesSection = () => {
           </CardFooter>
         </Card>
         <Card className="rounded-3xl">
-          <CardContent className="rounded-t-3xl bg-linear-to-b from-blue-400 to-sky-200 p-10">
+          <CardContent className="rounded-t-3xl bg-linear-to-b from-blue-400 to-sky-200 p-3 lg:p-10">
             <Image
               src="/screenshot-result.png"
               layout="responsive"
