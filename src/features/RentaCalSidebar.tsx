@@ -33,7 +33,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FeedbackSchema, FeedbackType } from "./simulateur/simulateur.schema";
-import { alertDiscord } from "./theme/Discord";
+import { alertDiscordFeedback } from "./theme/Discord";
 
 export function RentaCalSidebar({
   ...props
@@ -44,7 +44,7 @@ export function RentaCalSidebar({
     let message = ":bust_in_silhouette: **Nom:** " + formData.name + "\n\n";
     message += ":envelope_with_arrow: **E-mail:** " + formData.email + "\n\n";
     message += ":speech_balloon: **Feedback:**\n" + formData.feedback;
-    await alertDiscord(message);
+    await alertDiscordFeedback(message);
   };
 
   const { open, openMobile } = useSidebar();

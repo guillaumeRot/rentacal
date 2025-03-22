@@ -3,6 +3,7 @@
 import { signIn, signOut } from "@/auth/auth";
 import { prisma } from "@/prisma";
 import bcrypt from "bcrypt";
+import { alertDiscordUsers } from "../theme/Discord";
 import { SignupType } from "./auth.schema";
 
 export const signOutAction = async () => {
@@ -39,6 +40,10 @@ export async function registerUser(data: SignupType) {
       password: hashedPassword,
     },
   });
+
+  let message = ":bust_in_silhouette: **Nom:** " + data.name + "\n\n";
+  message += ":envelope_with_arrow: **E-mail:** " + data.email + "\n\n";
+  await alertDiscordUsers(message);
 }
 
 export async function findUserByEmail(email: string) {
